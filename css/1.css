@@ -78,7 +78,7 @@ body {
 	transition: -webkit-filter 0.3s;
 	transition: filter 0.3s;
 	transition: filter 0.3s, -webkit-filter 0.3s;
-	background: url("../bg2.jpg") no-repeat;
+	background: url("../bg1.jpg") no-repeat;
 	background-size: cover;
 }
 .canvas-container canvas {
