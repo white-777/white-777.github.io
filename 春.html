@@ -18,14 +18,9 @@
 
 
 <style type="text/css">
-	@font-face {
-		font-family: myFont;
-		src: url('fonts/日系の可爱少女.TTF');
-	}
-	div{
-		font-family: myFont;
-	}
-*{margin:0;padding:0;list-style-type:none;}
+
+
+*{margin:0;padding:0;}
 a,img{border:0;}
 body{font:12px/180% Arial, Helvetica, sans-serif, "新宋体";}
 body {
@@ -33,11 +28,7 @@ body {
     padding:0;
     margin:0;
     overflow:hidden;
-
-	  background-image:url('花.jpg');
-	  background-position: center center;
-    background-repeat: no-repeat;
-    background-size: cover;
+	height: 100%;
 }
 canvas {
     padding:0;
@@ -50,17 +41,27 @@ div.btnbg {
     top:0;
 }
 
+.canvas-container {
+	width: 100%;
+	height: 100%;
+	background: url("春1.jpg") no-repeat;
+	background-size: cover;
+	background-size: 100% 100% ;
+	background-attachment: fixed;
+}
+
 </style>
 </head>
 <body>
-<div class="topl">
-	<div style="width:1200px;height:200px;position:absolute;top:45%;left:45%">
+<div class="canvas-container">
+<!-- 	<div style="width:1200px;height:200px;position:absolute;top:45%;left:45%">
 		<font size="6" color="white">旦逢良辰，顺颂时宜
-	</font></div>
+	</font></div> -->
+	 <canvas id="sakura"></canvas>
 </div>
 
 
-  <canvas id="sakura"></canvas>
+ 
 <!-- sakura shader -->
 <script id="sakura_point_vsh" type="x-shader/x_vertex">
 uniform mat4 uProjection;
