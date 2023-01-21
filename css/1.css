@@ -1,4 +1,10 @@
-
+@font-face {
+	font-family: myFont;
+	src: url('../fonts/日系の可爱少女.TTF');
+}
+div{
+	font-family: myFont;
+}
 
 * {
 	position: relative;
