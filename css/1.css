@@ -1,4 +1,10 @@
-
+@font-face {
+	font-family: myFont;
+	src: url('../fonts/日系の可爱少女.TTF');
+}
+div{
+	font-family: myFont;
+}
 
 * {
 	position: relative;
@@ -78,7 +84,7 @@ body {
 	transition: -webkit-filter 0.3s;
 	transition: filter 0.3s;
 	transition: filter 0.3s, -webkit-filter 0.3s;
-	background: url("../bg1.jpg") no-repeat;
+	background: url("../bg4.jpg") no-repeat;
 	background-size: cover;
 }
 .canvas-container canvas {
