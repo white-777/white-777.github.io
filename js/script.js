@@ -1,10 +1,8 @@
+'use strict';
+console.clear();
 // This is a prime example of what starts out as a simple project
 // and snowballs way beyond its intended size. It's a little clunky
 // reading/working on this single file, but here it is anyways :)
-
-'use strict';
-console.clear();
-
 
 const IS_MOBILE = window.innerWidth <= 640;
 const IS_DESKTOP = window.innerWidth > 800;
@@ -131,7 +129,7 @@ const store = {
 				: IS_HEADER 
 					? '1.2' // Profile header default (doesn't need to be an int)
 					: '2', // Mobile default
-			autoLaunch: true,
+			autoLaunch: false,
 			finale: false,
 			skyLighting: SKY_LIGHT_NORMAL + '',
 			hideControls: IS_HEADER,
@@ -300,44 +298,44 @@ const scaleFactorSelector = () => store.state.config.scaleFactor;
 // Help Content
 const helpContent = {
 	shellType: {
-		header: 'Shell Type',
-		body: 'The type of firework that will be launched. Select "Random" for a nice assortment!'
+		header: '烟花类型',
+		body: '选择将要发射的烟花类型。 选择“随机”是一个不错的选择！'
 	},
 	shellSize: {
-		header: 'Shell Size',
-		body: 'The size of the fireworks. Modeled after real firework shell sizes, larger shells have bigger bursts with more stars, and sometimes more complex effects. However, larger shells also require more processing power and may cause lag.'
+		header: '烟花大小',
+		body: '烟花的大小：以真实的烟花炮弹尺寸为模型，较大的炮弹具有更大的爆发力，带有更多的星星，有时效果更复杂。 但是，较大的尺寸还需要更多的处理能力，并且可能会导致延迟。'
 	},
 	quality: {
-		header: 'Quality',
-		body: 'Overall graphics quality. If the animation is not running smoothly, try lowering the quality. High quality greatly increases the amount of sparks rendered and may cause lag.'
+		header: '画质',
+		body: '整体图形质量。 如果动画运行不流畅，请尝试降低质量。 高质量会大大增加产生的火花数量，并可能导致滞后。'
 	},
 	skyLighting: {
-		header: 'Sky Lighting',
-		body: 'Illuminates the background as fireworks explode. If the background looks too bright on your screen, try setting it to "Dim" or "None".'
+		header: '天空照明',
+		body: '烟花爆炸时照亮背景。 如果背景在屏幕上看起来太亮，请尝试将其设置为“暗淡”或“无”。'
 	},
 	scaleFactor: {
-		header: 'Scale',
-		body: 'Allows scaling the size of all fireworks, essentially moving you closer or farther away. For larger shell sizes, it can be convenient to decrease the scale a bit, especially on phones or tablets.'
+		header: '规模',
+		body: '允许缩放所有烟花的大小，实质上使您靠近或远离。 对于较大的烟花类型，可以稍微减小比例，尤其是在手机或平板电脑上。'
 	},
 	autoLaunch: {
-		header: 'Auto Fire',
-		body: 'Launches sequences of fireworks automatically. Sit back and enjoy the show, or disable to have full control.'
+		header: '自动发射',
+		body: '启用此选项即可自动启动烟花序列，取消勾选你就可以手动控制烟花的发射'
 	},
 	finaleMode: {
-		header: 'Finale Mode',
-		body: 'Launches intense bursts of fireworks. May cause lag. Requires "Auto Fire" to be enabled.'
+		header: '结局模式',
+		body: '发射强烈的烟花。 可能会导致延迟。 需要同时启用“自动发射”。'
 	},
 	hideControls: {
-		header: 'Hide Controls',
-		body: 'Hides the translucent controls along the top of the screen. Useful for screenshots, or just a more seamless experience. While hidden, you can still tap the top-right corner to re-open this menu.'
+		header: '隐藏控制器',
+		body: '隐藏屏幕顶部的半透明控件。 对于屏幕截图很有用，或者只是更无缝的体验。 隐藏后，您仍然可以点击右上角以重新打开此菜单。'
 	},
 	fullscreen: {
-		header: 'Fullscreen',
-		body: 'Toggles fullscreen mode.'
+		header: '全屏',
+		body: '切换全屏模式。'
 	},
 	longExposure: {
-		header: 'Open Shutter',
-		body: 'Experimental effect that preserves long streaks of light, similar to leaving a camera shutter open.'
+		header: '打开快门',
+		body: '实验效果可以保留长时间的光线，类似于保持相机快门打开。'
 	}
 };
 
@@ -409,13 +407,13 @@ if (!fullscreenEnabled()) {
 
 // First render is called in init()
 function renderApp(state) {
-	const pauseBtnIcon = `#icon-${state.paused ? 'play' : 'pause'}`;
-	const soundBtnIcon = `#icon-sound-${soundEnabledSelector() ? 'on' : 'off'}`;
-	appNodes.pauseBtnSVG.setAttribute('href', pauseBtnIcon);
-	appNodes.pauseBtnSVG.setAttribute('xlink:href', pauseBtnIcon);
-	appNodes.soundBtnSVG.setAttribute('href', soundBtnIcon);
-	appNodes.soundBtnSVG.setAttribute('xlink:href', soundBtnIcon);
-	appNodes.controls.classList.toggle('hide', state.menuOpen || state.config.hideControls);
+	// const pauseBtnIcon = `#icon-${state.paused ? 'play' : 'pause'}`;
+	// const soundBtnIcon = `#icon-sound-${soundEnabledSelector() ? 'on' : 'off'}`;
+	// appNodes.pauseBtnSVG.setAttribute('href', pauseBtnIcon);
+	// appNodes.pauseBtnSVG.setAttribute('xlink:href', pauseBtnIcon);
+	// appNodes.soundBtnSVG.setAttribute('href', soundBtnIcon);
+	// appNodes.soundBtnSVG.setAttribute('xlink:href', soundBtnIcon);
+	// appNodes.controls.classList.toggle('hide', state.menuOpen || state.config.hideControls);
 	appNodes.canvasContainer.classList.toggle('blur', state.menuOpen);
 	appNodes.menu.classList.toggle('hide', !state.menuOpen);
 	appNodes.finaleModeFormOption.style.opacity = state.config.autoLaunch ? 1 : 0.32;
@@ -757,6 +755,9 @@ function randomShellName() {
 }
 
 function randomShell(size) {
+	// Special selection for codepen header.
+	if (IS_HEADER) return randomFastShell()(size);
+	// Normal operation
 	return shellTypes[randomShellName()](size);
 }
 
@@ -817,15 +818,15 @@ function init() {
 	appNodes.shellSize.innerHTML = options;
 	
 	setOptionsForSelect(appNodes.quality, [
-		{ label: 'Low', value: QUALITY_LOW },
-		{ label: 'Normal', value: QUALITY_NORMAL },
-		{ label: 'High', value: QUALITY_HIGH }
+		{ label: '低', value: QUALITY_LOW },
+		{ label: '正常', value: QUALITY_NORMAL },
+		{ label: '高', value: QUALITY_HIGH }
 	]);
 	
 	setOptionsForSelect(appNodes.skyLighting, [
-		{ label: 'None', value: SKY_LIGHT_NONE },
-		{ label: 'Dim', value: SKY_LIGHT_DIM },
-		{ label: 'Normal', value: SKY_LIGHT_NORMAL }
+		{ label: '无', value: SKY_LIGHT_NONE },
+		{ label: '暗淡', value: SKY_LIGHT_DIM },
+		{ label: '正常', value: SKY_LIGHT_NORMAL }
 	]);
 	
 	// 0.9 is mobile default
@@ -1521,7 +1522,21 @@ function createParticleArc(start, arcLength, count, randomness, particleFactory)
 }
 
 
-// Helper used to create a spherical burst of particles
+/**
+ * Helper used to create a spherical burst of particles.
+ *
+ * @param  {Number} count               The desired number of stars/particles. This value is a suggestion, and the
+ *                                      created burst may have more particles. The current algorithm can't perfectly
+ *                                      distribute a specific number of points evenly on a sphere's surface.
+ * @param  {Function} particleFactory   Called once per star/particle generated. Passed two arguments:
+ *                                        `angle`: The direction of the star/particle.
+ *                                        `speed`: A multipler for the particle speed, from 0.0 to 1.0.
+ * @param  {Number} startAngle=0        For segmented bursts, you can generate only a partial arc of particles. This
+ *                                      allows setting the starting arc angle (radians).
+ * @param  {Number} arcLength=TAU       The length of the arc (radians). Defaults to a full circle.
+ *
+ * @return {void}              Returns nothing; it's up to `particleFactory` to use the given data.
+ */
 function createBurst(count, particleFactory, startAngle=0, arcLength=PI_2) {
 	// Assuming sphere with surface area of `count`, calculate various
 	// properties of said sphere (unit is stars).
@@ -2103,6 +2118,7 @@ const soundManager = {
 			playbackRateMin: 0.85,
 			playbackRateMax: 0.95,
 			fileNames: [
+			   
 				'lift1.mp3',
 				'lift2.mp3',
 				'lift3.mp3'
@@ -2276,7 +2292,7 @@ if (IS_HEADER) {
 	init();
 } else {
 	// Allow status to render, then preload assets and start app.
-	setLoadingStatus('Lighting Fuses');
+	// setLoadingStatus('献给你爱的TA ❤');
 	setTimeout(() => {
 		soundManager.preload()
 		.then(
