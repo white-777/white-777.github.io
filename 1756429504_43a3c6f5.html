@@ -1,0 +1,866 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>视频分析报告 | 深度解析</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Font Awesome CDN -->
+  <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  <!-- Framer Motion CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/framer-motion@10.16.4/dist/framer-motion.min.js"></script>
+  
+  <!-- Tailwind 配置 -->
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            'tesla-red': '#E31937',
+            'dark-gray': '#1A1A1A',
+            'medium-gray': '#333333',
+            'light-gray': '#666666'
+          },
+          fontFamily: {
+            sans: ['Inter', 'system-ui', 'sans-serif'],
+          },
+        },
+      }
+    }
+  </script>
+  
+  <style type="text/tailwindcss">
+    @layer utilities {
+      .content-auto {
+        content-visibility: auto;
+      }
+      .text-shadow {
+        text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+      }
+      .gradient-red {
+        background: linear-gradient(90deg, #E31937 0%, rgba(227, 25, 55, 0) 100%);
+      }
+      .gradient-red-reverse {
+        background: linear-gradient(90deg, rgba(227, 25, 55, 0) 0%, #E31937 100%);
+      }
+      .card-hover {
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+      }
+      .card-hover:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 25px -5px rgba(227, 25, 55, 0.1), 0 8px 10px -6px rgba(227, 25, 55, 0.1);
+      }
+    }
+  </style>
+</head>
+
+<body class="bg-black text-white font-sans">
+  <!-- 导航栏 -->
+  <nav class="fixed w-full z-50 bg-black/80 backdrop-blur-md border-b border-tesla-red/30">
+    <div class="container mx-auto px-4 md:px-6 py-4 flex justify-between items-center">
+      <div class="flex items-center space-x-2">
+        <i class="fa fa-bar-chart text-tesla-red text-2xl"></i>
+        <span class="text-xl font-bold tracking-tight">视频分析报告</span>
+      </div>
+      <div class="hidden md:flex space-x-8 text-sm">
+        <a href="#cover-analysis" class="hover:text-tesla-red transition-colors">封面分析</a>
+        <a href="#comment-analysis" class="hover:text-tesla-red transition-colors">评论分析</a>
+        <a href="#" class="hover:text-tesla-red transition-colors">数据导出</a>
+      </div>
+      <button class="md:hidden text-white">
+        <i class="fa fa-bars text-xl"></i>
+      </button>
+    </div>
+  </nav>
+
+  <!-- 头部横幅 -->
+  <header class="pt-24 pb-16 md:pt-32 md:pb-24 px-4 relative overflow-hidden">
+    <div class="absolute top-0 right-0 w-full h-full gradient-red opacity-10"></div>
+    <div class="container mx-auto relative z-10">
+      <div class="max-w-3xl mx-auto text-center">
+        <h1 class="text-[clamp(2rem,5vw,3.5rem)] font-bold leading-tight mb-6">
+          视频内容深度<span class="text-tesla-red">分析</span>报告
+        </h1>
+        <p class="text-light-gray text-lg md:text-xl mb-8 max-w-2xl mx-auto">
+          从封面设计到用户反馈，全方位解析视频传播密码，数据驱动内容优化
+        </p>
+        <div class="flex flex-wrap justify-center gap-4">
+          <div class="bg-dark-gray rounded-full px-6 py-2 flex items-center space-x-2">
+            <i class="fa fa-eye text-tesla-red"></i>
+            <span>1.2M 播放量</span>
+          </div>
+          <div class="bg-dark-gray rounded-full px-6 py-2 flex items-center space-x-2">
+            <i class="fa fa-comment text-tesla-red"></i>
+            <span>1.5K 评论</span>
+          </div>
+          <div class="bg-dark-gray rounded-full px-6 py-2 flex items-center space-x-2">
+            <i class="fa fa-heart text-tesla-red"></i>
+            <span>85K 点赞</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="container mx-auto px-4 md:px-6 pb-24">
+    <!-- 封面分析部分 -->
+    <section id="cover-analysis" class="mb-24">
+      <div class="flex items-center mb-12">
+        <div class="w-10 h-1 bg-tesla-red mr-4"></div>
+        <h2 class="text-3xl md:text-4xl font-bold">视频封面分析</h2>
+      </div>
+
+      <!-- Bento Grid 布局 - 封面分析 -->
+      <div class="grid grid-cols-1 md:grid-cols-12 gap-6">
+        <!-- 封面图片卡片 -->
+        <div class="md:col-span-7 bg-dark-gray rounded-xl overflow-hidden shadow-lg card-hover group">
+          <div class="relative aspect-video overflow-hidden">
+            <img src="https://p26-sign.douyinpic.com/tos-cn-p-0015/oEGWEDYyrBA3CrKZaIixAe0BlAcggBsOITf1xi~tplv-dy-resize-walign-adapt-aq:720:q75.webp?lk3s=138a59ce&x-expires=1757638800&x-signature=FdyhAIAHZgteiY%2FfymOUCVbzAVw%3D&from=327834062&s=PackSourceEnum_DOUYIN_REFLOW&se=false&sc=cover&biz_tag=aweme_video&l=2025082909000104BF4350059D107E3DF9" 
+                 alt="视频封面 - 夜晚热闹街道" 
+                 class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
+            <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent flex items-end">
+              <div class="p-6">
+                <span class="bg-tesla-red text-white text-xs font-bold px-3 py-1 rounded-full mb-3 inline-block">封面评分 8.5/10</span>
+                <h3 class="text-xl font-bold">夜晚热闹街道场景</h3>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 封面亮点卡片 -->
+        <div class="md:col-span-5 bg-dark-gray rounded-xl p-6 card-hover">
+          <div class="flex items-center mb-4">
+            <div class="w-8 h-8 rounded-full bg-tesla-red/20 flex items-center justify-center mr-3">
+              <i class="fa fa-star text-tesla-red"></i>
+            </div>
+            <h3 class="text-xl font-bold">为什么能爆</h3>
+          </div>
+          <ul class="space-y-4 text-light-gray">
+            <li class="flex">
+              <i class="fa fa-check text-tesla-red mt-1 mr-3"></i>
+              <span>画面充满"烟火气"，与用户深夜逛街体验产生共鸣，引发点击欲望</span>
+            </li>
+            <li class="flex">
+              <i class="fa fa-check text-tesla-red mt-1 mr-3"></i>
+              <span>布局有纵深感，人群与店铺形成视觉引导，注意力不易分散</span>
+            </li>
+            <li class="flex">
+              <i class="fa fa-check text-tesla-red mt-1 mr-3"></i>
+              <span>动静元素对比鲜明（行人vs店铺），视觉冲击力强，激发好奇心</span>
+            </li>
+            <li class="flex">
+              <i class="fa fa-check text-tesla-red mt-1 mr-3"></i>
+              <span>符合"人间百态"热点主题，易引发传播，满足用户情感需求</span>
+            </li>
+          </ul>
+        </div>
+
+        <!-- 优化建议卡片 -->
+        <div class="md:col-span-12 bg-dark-gray rounded-xl p-6 md:p-8 card-hover">
+          <div class="flex items-center mb-6">
+            <div class="w-8 h-8 rounded-full bg-tesla-red/20 flex items-center justify-center mr-3">
+              <i class="fa fa-line-chart text-tesla-red"></i>
+            </div>
+            <h3 class="text-xl font-bold">还能不能优化</h3>
+          </div>
+          
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div class="border-l-2 border-tesla-red pl-4">
+              <h4 class="text-white font-bold mb-2">标题优化</h4>
+              <p class="text-light-gray">使用更具吸引力的表达，如"深夜街头！烟火气直接拉满！"，加入感叹号增强语气，提升点击欲望</p>
+            </div>
+            
+            <div class="border-l-2 border-tesla-red pl-4">
+              <h4 class="text-white font-bold mb-2">画面优化</h4>
+              <p class="text-light-gray">调整亮度和对比度，突出店铺招牌和人物细节；裁剪画面聚焦最热闹区域，增强视觉焦点</p>
+            </div>
+            
+            <div class="border-l-2 border-tesla-red pl-4">
+              <h4 class="text-white font-bold mb-2">排版优化</h4>
+              <p class="text-light-gray">添加亮色文字（白色/黄色）于画面上下方，与夜晚灯光呼应；边缘添加轻量装饰元素提升设计感</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 评论分析部分 -->
+    <section id="comment-analysis" class="mb-24">
+      <div class="flex items-center mb-12">
+        <div class="w-10 h-1 bg-tesla-red mr-4"></div>
+        <h2 class="text-3xl md:text-4xl font-bold">视频评论分析</h2>
+      </div>
+
+      <!-- Bento Grid 布局 - 评论分析 -->
+      <div class="grid grid-cols-1 md:grid-cols-12 gap-6">
+        <!-- 评论概览卡片 -->
+        <div class="md:col-span-4 bg-dark-gray rounded-xl p-6 card-hover">
+          <div class="flex items-center mb-6">
+            <div class="w-8 h-8 rounded-full bg-tesla-red/20 flex items-center justify-center mr-3">
+              <i class="fa fa-comments text-tesla-red"></i>
+            </div>
+            <h3 class="text-xl font-bold">评论概览</h3>
+          </div>
+          
+          <div class="space-y-6">
+            <div>
+              <p class="text-light-gray text-sm mb-1">统计时段</p>
+              <p class="text-white font-bold">2025年7月</p>
+            </div>
+            
+            <div class="pt-4 border-t border-medium-gray">
+              <div class="flex justify-between items-center mb-1">
+                <p class="text-light-gray text-sm">总评论数</p>
+                <p class="text-white font-bold">10条</p>
+              </div>
+              <div class="w-full bg-medium-gray rounded-full h-2">
+                <div class="bg-tesla-red h-2 rounded-full" style="width: 100%"></div>
+              </div>
+            </div>
+            
+            <div class="pt-4 border-t border-medium-gray">
+              <div class="flex justify-between items-center mb-1">
+                <p class="text-light-gray text-sm">总点赞数</p>
+                <p class="text-white font-bold">23次</p>
+              </div>
+              <div class="w-full bg-medium-gray rounded-full h-2">
+                <div class="bg-tesla-red h-2 rounded-full" style="width: 75%"></div>
+              </div>
+            </div>
+            
+            <div class="pt-4 border-t border-medium-gray">
+              <div class="flex justify-between items-center mb-1">
+                <p class="text-light-gray text-sm">总回复数</p>
+                <p class="text-white font-bold">12次</p>
+              </div>
+              <div class="w-full bg-medium-gray rounded-full h-2">
+                <div class="bg-tesla-red h-2 rounded-full" style="width: 45%"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 评论预测分析卡片 -->
+        <div class="md:col-span-8 bg-dark-gray rounded-xl p-6 card-hover">
+          <div class="flex items-center mb-6">
+            <div class="w-8 h-8 rounded-full bg-tesla-red/20 flex items-center justify-center mr-3">
+              <i class="fa fa-search text-tesla-red"></i>
+            </div>
+            <h3 class="text-xl font-bold">评论预测分析</h3>
+          </div>
+          
+          <div class="space-y-4">
+            <p class="text-light-gray">评论内容高度集中于对"芜湖明星被打"事件的猜测，其中"芜湖小飞"被提及5次（含昵称变体），占比50%，成为最热门的推测对象。</p>
+            
+            <div class="bg-black/50 p-4 rounded-lg">
+              <h4 class="text-white font-bold mb-3">核心猜测对象分布</h4>
+              <div class="h-64">
+                <canvas id="guessChart"></canvas>
+              </div>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
+              <div class="bg-black/50 p-4 rounded-lg">
+                <h4 class="text-white font-bold mb-2 text-sm">次要猜测对象</h4>
+                <ul class="text-light-gray text-sm space-y-2">
+                  <li class="flex justify-between">
+                    <span>大司马</span>
+                    <span class="text-tesla-red">1次</span>
+                  </li>
+                  <li class="flex justify-between">
+                    <span>董老师</span>
+                    <span class="text-tesla-red">1次</span>
+                  </li>
+                </ul>
+              </div>
+              
+              <div class="bg-black/50 p-4 rounded-lg">
+                <h4 class="text-white font-bold mb-2 text-sm">疑问型评论</h4>
+                <ul class="text-light-gray text-sm space-y-2">
+                  <li class="flex justify-between">
+                    <span>事件真实性</span>
+                    <span class="text-tesla-red">2条</span>
+                  </li>
+                  <li class="flex justify-between">
+                    <span>具体人物询问</span>
+                    <span class="text-tesla-red">1条</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 地域分析卡片 -->
+        <div class="md:col-span-5 bg-dark-gray rounded-xl p-6 card-hover">
+          <div class="flex items-center mb-6">
+            <div class="w-8 h-8 rounded-full bg-tesla-red/20 flex items-center justify-center mr-3">
+              <i class="fa fa-map-marker text-tesla-red"></i>
+            </div>
+            <h3 class="text-xl font-bold">地域分析</h3>
+          </div>
+          
+          <div class="space-y-6">
+            <div class="h-48">
+              <canvas id="regionChart"></canvas>
+            </div>
+            
+            <div class="bg-black/50 p-4 rounded-lg">
+              <h4 class="text-white font-bold mb-2 text-sm">关键发现</h4>
+              <ul class="text-light-gray text-sm space-y-2">
+                <li class="flex">
+                  <i class="fa fa-circle text-tesla-red text-xs mt-1.5 mr-2"></i>
+                  <span>所有评论用户均来自安徽（10/10）</span>
+                </li>
+                <li class="flex">
+                  <i class="fa fa-circle text-tesla-red text-xs mt-1.5 mr-2"></i>
+                  <span>"芜湖"地名在评论中被主动提及3次</span>
+                </li>
+                <li class="flex">
+                  <i class="fa fa-circle text-tesla-red text-xs mt-1.5 mr-2"></i>
+                  <span>内容与地域强相关，符合"芜湖明星"本土化话题特性</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- 情感分析卡片 -->
+        <div class="md:col-span-7 bg-dark-gray rounded-xl p-6 card-hover">
+          <div class="flex items-center mb-6">
+            <div class="w-8 h-8 rounded-full bg-tesla-red/20 flex items-center justify-center mr-3">
+              <i class="fa fa-smile-o text-tesla-red"></i>
+            </div>
+            <h3 class="text-xl font-bold">情感关键词分析</h3>
+          </div>
+          
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div>
+              <h4 class="text-white font-bold mb-3">情感分布</h4>
+              <div class="h-48">
+                <canvas id="emotionChart"></canvas>
+              </div>
+            </div>
+            
+            <div class="space-y-4">
+              <div>
+                <h4 class="text-white font-bold mb-2 text-sm">正向情感</h4>
+                <ul class="text-light-gray text-sm space-y-2">
+                  <li class="flex items-start">
+                    <i class="fa fa-plus-circle text-tesla-red mt-1 mr-2"></i>
+                    <div>
+                      <span class="text-white">玩梗娱乐</span>
+                      <p class="text-xs text-light-gray/70">"算鸟算鸟"、"捂脸"表情</p>
+                    </div>
+                  </li>
+                  <li class="flex items-start">
+                    <i class="fa fa-plus-circle text-tesla-red mt-1 mr-2"></i>
+                    <div>
+                      <span class="text-white">地域认同</span>
+                      <p class="text-xs text-light-gray/70">"芜湖"前缀使用</p>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+              
+              <div>
+                <h4 class="text-white font-bold mb-2 text-sm">负向情感</h4>
+                <ul class="text-light-gray text-sm space-y-2">
+                  <li class="flex items-start">
+                    <i class="fa fa-minus-circle text-tesla-red mt-1 mr-2"></i>
+                    <div>
+                      <span class="text-white">质疑</span>
+                      <p class="text-xs text-light-gray/70">"总不能是""不知道的一律算"</p>
+                    </div>
+                  </li>
+                  <li class="flex items-start">
+                    <i class="fa fa-minus-circle text-tesla-red mt-1 mr-2"></i>
+                    <div>
+                      <span class="text-white">困惑</span>
+                      <p class="text-xs text-light-gray/70">5条疑问句</p>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 高频关键词卡片 -->
+        <div class="md:col-span-12 bg-dark-gray rounded-xl p-6 card-hover">
+          <div class="flex items-center mb-6">
+            <div class="w-8 h-8 rounded-full bg-tesla-red/20 flex items-center justify-center mr-3">
+              <i class="fa fa-tags text-tesla-red"></i>
+            </div>
+            <h3 class="text-xl font-bold">高频关键词分析</h3>
+          </div>
+          
+          <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+            <div class="lg:col-span-2">
+              <div class="bg-black/50 p-4 rounded-lg h-64 flex items-center justify-center">
+                <div id="wordCloud" class="w-full h-full"></div>
+              </div>
+            </div>
+            
+            <div>
+              <div class="bg-black/50 p-4 rounded-lg mb-4">
+                <h4 class="text-white font-bold mb-3">关键词出现频次</h4>
+                <div class="space-y-4">
+                  <div>
+                    <div class="flex justify-between text-sm mb-1">
+                      <span class="text-light-gray">芜湖小飞</span>
+                      <span class="text-white font-bold">5次</span>
+                    </div>
+                    <div class="w-full bg-medium-gray rounded-full h-2">
+                      <div class="bg-tesla-red h-2 rounded-full" style="width: 100%"></div>
+                    </div>
+                  </div>
+                  
+                  <div>
+                    <div class="flex justify-between text-sm mb-1">
+                      <span class="text-light-gray">明星</span>
+                      <span class="text-white font-bold">4次</span>
+                    </div>
+                    <div class="w-full bg-medium-gray rounded-full h-2">
+                      <div class="bg-tesla-red h-2 rounded-full" style="width: 80%"></div>
+                    </div>
+                  </div>
+                  
+                  <div>
+                    <div class="flex justify-between text-sm mb-1">
+                      <span class="text-light-gray">大司马</span>
+                      <span class="text-white font-bold">1次</span>
+                    </div>
+                    <div class="w-full bg-medium-gray rounded-full h-2">
+                      <div class="bg-tesla-red h-2 rounded-full" style="width: 20%"></div>
+                    </div>
+                  </div>
+                  
+                  <div>
+                    <div class="flex justify-between text-sm mb-1">
+                      <span class="text-light-gray">地点</span>
+                      <span class="text-white font-bold">1次</span>
+                    </div>
+                    <div class="w-full bg-medium-gray rounded-full h-2">
+                      <div class="bg-tesla-red h-2 rounded-full" style="width: 20%"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+              <div class="bg-black/50 p-4 rounded-lg">
+                <h4 class="text-white font-bold mb-3 text-sm">需求关键词分析</h4>
+                <ul class="text-light-gray text-sm space-y-2">
+                  <li class="flex justify-between">
+                    <span>明星身份</span>
+                    <span class="text-tesla-red">7次 (70%)</span>
+                  </li>
+                  <li class="flex justify-between">
+                    <span>事件真实性</span>
+                    <span class="text-tesla-red">3次 (30%)</span>
+                  </li>
+                  <li class="flex justify-between">
+                    <span>具体地点</span>
+                    <span class="text-tesla-red">2次 (20%)</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 需求匹配度卡片 -->
+        <div class="md:col-span-12 bg-dark-gray rounded-xl p-6 card-hover">
+          <div class="flex items-center mb-6">
+            <div class="w-8 h-8 rounded-full bg-tesla-red/20 flex items-center justify-center mr-3">
+              <i class="fa fa-bullseye text-tesla-red"></i>
+            </div>
+            <h3 class="text-xl font-bold">评论需求匹配度分析</h3>
+          </div>
+          
+          <div class="grid grid-cols-1 md:grid-cols-5 gap-6">
+            <div class="md:col-span-2 flex flex-col justify-center">
+              <div class="text-center">
+                <div class="inline-flex items-center justify-center w-40 h-40 rounded-full bg-black/50 relative">
+                  <span class="text-5xl font-bold text-tesla-red">83%</span>
+                  <span class="absolute bottom-10 text-light-gray text-sm">匹配度</span>
+                </div>
+                <p class="mt-4 text-light-gray">10条中有8条直接关联明星身份猜测</p>
+              </div>
+            </div>
+            
+            <div class="md:col-span-3">
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div class="bg-black/50 p-4 rounded-lg">
+                  <h4 class="text-white font-bold mb-2 text-sm">匹配内容</h4>
+                  <ul class="text-light-gray text-sm space-y-2">
+                    <li class="flex">
+                      <i class="fa fa-check-circle text-tesla-red mt-1 mr-2"></i>
+                      <span>明星身份猜测（8条）</span>
+                    </li>
+                    <li class="flex">
+                      <i class="fa fa-check-circle text-tesla-red mt-1 mr-2"></i>
+                      <span>事件讨论（5条）</span>
+                    </li>
+                  </ul>
+                </div>
+                
+                <div class="bg-black/50 p-4 rounded-lg">
+                  <h4 class="text-white font-bold mb-2 text-sm">偏差内容</h4>
+                  <ul class="text-light-gray text-sm space-y-2">
+                    <li class="flex">
+                      <i class="fa fa-exclamation-circle text-tesla-red mt-1 mr-2"></i>
+                      <span>地点询问（2条）</span>
+                    </li>
+                    <li class="flex">
+                      <i class="fa fa-exclamation-circle text-tesla-red mt-1 mr-2"></i>
+                      <span>事件真实性质疑（3条）</span>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+              
+              <div class="bg-black/50 p-4 rounded-lg mt-4">
+                <h4 class="text-white font-bold mb-2 text-sm">优化建议</h4>
+                <p class="text-light-gray text-sm">补充事件具体人物/地点标签可提升匹配度至95%+，减少用户困惑，增强内容相关性</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- 页脚 -->
+  <footer class="bg-dark-gray border-t border-tesla-red/30 py-12">
+    <div class="container mx-auto px-4 md:px-6">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div>
+          <div class="flex items-center space-x-2 mb-4">
+            <i class="fa fa-bar-chart text-tesla-red text-2xl"></i>
+            <span class="text-xl font-bold">视频分析报告</span>
+          </div>
+          <p class="text-light-gray text-sm">
+            专业的视频内容分析工具，助力创作者优化内容，提升传播效果。
+          </p>
+        </div>
+        
+        <div>
+          <h4 class="text-white font-bold mb-4">快速链接</h4>
+          <ul class="space-y-2 text-sm">
+            <li><a href="#cover-analysis" class="text-light-gray hover:text-tesla-red transition-colors">封面分析</a></li>
+            <li><a href="#comment-analysis" class="text-light-gray hover:text-tesla-red transition-colors">评论分析</a></li>
+            <li><a href="#" class="text-light-gray hover:text-tesla-red transition-colors">数据导出</a></li>
+            <li><a href="#" class="text-light-gray hover:text-tesla-red transition-colors">帮助中心</a></li>
+          </ul>
+        </div>
+        
+        <div>
+          <h4 class="text-white font-bold mb-4">联系我们</h4>
+          <ul class="space-y-2 text-sm">
+            <li class="flex items-center text-light-gray">
+              <i class="fa fa-envelope text-tesla-red mr-2"></i>
+              <span>support@videoanalysis.com</span>
+            </li>
+            <li class="flex items-center text-light-gray">
+              <i class="fa fa-phone text-tesla-red mr-2"></i>
+              <span>400-123-4567</span>
+            </li>
+          </ul>
+          <div class="flex space-x-4 mt-4">
+            <a href="#" class="w-8 h-8 rounded-full bg-black/50 flex items-center justify-center hover:bg-tesla-red transition-colors">
+              <i class="fa fa-weibo"></i>
+            </a>
+            <a href="#" class="w-8 h-8 rounded-full bg-black/50 flex items-center justify-center hover:bg-tesla-red transition-colors">
+              <i class="fa fa-wechat"></i>
+            </a>
+            <a href="#" class="w-8 h-8 rounded-full bg-black/50 flex items-center justify-center hover:bg-tesla-red transition-colors">
+              <i class="fa fa-twitter"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+      
+      <div class="border-t border-medium-gray mt-8 pt-8 text-center text-light-gray text-sm">
+        <p>© 2025 视频分析报告工具 版权所有</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- 返回顶部按钮 -->
+  <button id="backToTop" class="fixed bottom-6 right-6 w-12 h-12 rounded-full bg-tesla-red flex items-center justify-center opacity-0 invisible transition-all duration-300 z-50">
+    <i class="fa fa-arrow-up"></i>
+  </button>
+
+  <!-- Chart.js CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.8/dist/chart.umd.min.js"></script>
+  <!-- 词云库 -->
+  <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-wordcloud@1.1.0/build/chartjs-plugin-wordcloud.min.js"></script>
+
+  <script>
+    // 页面加载完成后执行
+    document.addEventListener('DOMContentLoaded', function() {
+      // 返回顶部按钮
+      const backToTopButton = document.getElementById('backToTop');
+      
+      window.addEventListener('scroll', function() {
+        if (window.pageYOffset > 300) {
+          backToTopButton.classList.remove('opacity-0', 'invisible');
+          backToTopButton.classList.add('opacity-100', 'visible');
+        } else {
+          backToTopButton.classList.remove('opacity-100', 'visible');
+          backToTopButton.classList.add('opacity-0', 'invisible');
+        }
+      });
+      
+      backToTopButton.addEventListener('click', function() {
+        window.scrollTo({
+          top: 0,
+          behavior: 'smooth'
+        });
+      });
+
+      // 平滑滚动
+      document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+          e.preventDefault();
+          const targetId = this.getAttribute('href');
+          const targetElement = document.querySelector(targetId);
+          
+          if (targetElement) {
+            window.scrollTo({
+              top: targetElement.offsetTop - 80,
+              behavior: 'smooth'
+            });
+          }
+        });
+      });
+
+      // 猜测对象分布图表
+      const guessCtx = document.getElementById('guessChart').getContext('2d');
+      new Chart(guessCtx, {
+        type: 'doughnut',
+        data: {
+          labels: ['芜湖小飞', '大司马', '董老师', '其他猜测'],
+          datasets: [{
+            data: [5, 1, 1, 3],
+            backgroundColor: [
+              '#E31937',
+              '#333333',
+              '#444444',
+              '#555555'
+            ],
+            borderWidth: 0,
+            hoverOffset: 4
+          }]
+        },
+        options: {
+          responsive: true,
+          plugins: {
+            legend: {
+              position: 'right',
+              labels: {
+                color: '#ffffff',
+                font: {
+                  size: 12
+                },
+                padding: 15
+              }
+            },
+            tooltip: {
+              backgroundColor: '#000000',
+              titleColor: '#ffffff',
+              bodyColor: '#cccccc',
+              borderColor: '#E31937',
+              borderWidth: 1,
+              padding: 10,
+              displayColors: true
+            }
+          },
+          cutout: '65%'
+        }
+      });
+
+      // 地域分析图表
+      const regionCtx = document.getElementById('regionChart').getContext('2d');
+      new Chart(regionCtx, {
+        type: 'bar',
+        data: {
+          labels: ['安徽芜湖', '安徽其他地区'],
+          datasets: [{
+            label: '评论数量',
+            data: [8, 2],
+            backgroundColor: '#E31937',
+            borderRadius: 4
+          }]
+        },
+        options: {
+          responsive: true,
+          plugins: {
+            legend: {
+              display: false
+            },
+            tooltip: {
+              backgroundColor: '#000000',
+              titleColor: '#ffffff',
+              bodyColor: '#cccccc',
+              borderColor: '#E31937',
+              borderWidth: 1,
+              padding: 10
+            }
+          },
+          scales: {
+            y: {
+              beginAtZero: true,
+              grid: {
+                color: 'rgba(255, 255, 255, 0.05)'
+              },
+              ticks: {
+                color: '#888888',
+                precision: 0
+              }
+            },
+            x: {
+              grid: {
+                display: false
+              },
+              ticks: {
+                color: '#ffffff'
+              }
+            }
+          }
+        }
+      });
+
+      // 情感分析图表
+      const emotionCtx = document.getElementById('emotionChart').getContext('2d');
+      new Chart(emotionCtx, {
+        type: 'polarArea',
+        data: {
+          labels: ['玩梗娱乐', '地域认同', '质疑', '困惑'],
+          datasets: [{
+            data: [3, 3, 2, 2],
+            backgroundColor: [
+              'rgba(227, 25, 55, 0.8)',
+              'rgba(227, 25, 55, 0.6)',
+              'rgba(227, 25, 55, 0.4)',
+              'rgba(227, 25, 55, 0.2)'
+            ],
+            borderWidth: 0
+          }]
+        },
+        options: {
+          responsive: true,
+          plugins: {
+            legend: {
+              position: 'bottom',
+              labels: {
+                color: '#ffffff',
+                font: {
+                  size: 11
+                },
+                padding: 15
+              }
+            }
+          },
+          scales: {
+            r: {
+              grid: {
+                color: 'rgba(255, 255, 255, 0.05)'
+              },
+              angleLines: {
+                color: 'rgba(255, 255, 255, 0.1)'
+              },
+              ticks: {
+                display: false
+              }
+            }
+          }
+        }
+      });
+
+      // 词云
+      const wordCloudCtx = document.getElementById('wordCloud').getContext('2d');
+      new Chart(wordCloudCtx, {
+        type: 'bar',
+        data: {
+          datasets: [{
+            label: '关键词',
+            data: [
+              { text: '芜湖小飞', value: 5 },
+              { text: '明星', value: 4 },
+              { text: '小飞', value: 3 },
+              { text: '算鸟', value: 2 },
+              { text: '大司马', value: 1 },
+              { text: '董老师', value: 1 },
+              { text: '哪里', value: 1 }
+            ]
+          }]
+        },
+        options: {
+          indexAxis: 'y',
+          plugins: {
+            legend: {
+              display: false
+            },
+            tooltip: {
+              callbacks: {
+                label: function(context) {
+                  return `出现次数: ${context.raw.value}`;
+                }
+              }
+            }
+          },
+          scales: {
+            x: {
+              display: false
+            },
+            y: {
+              display: false
+            }
+          }
+        },
+        plugins: [ChartDataLabels]
+      });
+
+      // Framer Motion 动画效果
+      const animateOnScroll = () => {
+        const elements = document.querySelectorAll('.card-hover');
+        
+        elements.forEach(element => {
+          const elementTop = element.getBoundingClientRect().top;
+          const elementVisible = 150;
+          
+          if (elementTop < window.innerHeight - elementVisible) {
+            element.classList.add('animate-fadeInUp');
+          }
+        });
+      };
+      
+      // 添加CSS动画类
+      const style = document.createElement('style');
+      style.textContent = `
+        @keyframes fadeInUp {
+          from {
+            opacity: 0;
+            transform: translateY(20px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+        .animate-fadeInUp {
+          animation: fadeInUp 0.6s ease forwards;
+        }
+      `;
+      document.head.appendChild(style);
+      
+      // 初始检查和滚动时检查
+      window.addEventListener('scroll', animateOnScroll);
+      animateOnScroll(); // 初始加载时检查
+    });
+  </script>
+</body>
+</html>
