@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>视频深度分析报告</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.8/dist/chart.umd.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/framer-motion@11.0.8/dist/framer-motion.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/wordcloud2.js@1.2.0/src/wordcloud2.min.js"></script>
+  
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            tesla: '#E31937',
+            dark: '#0A0A0A',
+            'dark-gray': '#1A1A1A',
+            'light-gray': '#888888',
+          },
+          fontFamily: {
+            sans: ['Inter', 'system-ui', 'sans-serif'],
+          },
+        },
+      }
+    }
+  </script>
+  
+  <style type="text/tailwindcss">
+    @layer utilities {
+      .content-auto {
+        content-visibility: auto;
+      }
+      .text-shadow {
+        text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+      }
+      .gradient-red {
+        background: linear-gradient(90deg, #E31937 0%, rgba(227, 25, 55, 0) 100%);
+      }
+      .bento-card {
+        @apply rounded-xl bg-dark-gray overflow-hidden border border-gray-800 transition-all duration-300 hover:border-tesla hover:shadow-[0_0_15px_rgba(227,25,55,0.2)];
+      }
+      .stat-number {
+        @apply text-4xl md:text-5xl lg:text-6xl font-bold text-white;
+      }
+      .stat-label {
+        @apply text-light-gray text-sm uppercase tracking-wider;
+      }
+      .section-title {
+        @apply text-2xl md:text-3xl font-bold text-white mb-6 flex items-center gap-2;
+      }
+      .section-title::after {
+        content: '';
+        @apply flex-1 h-px bg-gradient-to-r from-tesla to-transparent;
+      }
+    }
+  </style>
+</head>
+<body class="bg-black text-white min-h-screen font-sans">
+  <!-- 导航栏 -->
+  <nav class="fixed top-0 left-0 right-0 z-50 bg-black/80 backdrop-blur-md border-b border-gray-800">
+    <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+      <div class="flex items-center gap-2">
+        <i class="fa fa-bar-chart text-tesla text-2xl"></i>
+        <h1 class="text-xl font-bold">视频分析报告</h1>
+      </div>
+      <div class="hidden md:flex gap-6 text-sm text-light-gray">
+        <a href="#cover" class="hover:text-tesla transition-colors">封面分析</a>
+        <a href="#comments" class="hover:text-tesla transition-colors">评论分析</a>
+        <a href="#insights" class="hover:text-tesla transition-colors">用户洞察</a>
+      </div>
+      <button class="md:hidden text-light-gray hover:text-tesla">
+        <i class="fa fa-bars text-xl"></i>
+      </button>
+    </div>
+  </nav>
+
+  <!-- 主内容区 -->
+  <main class="container mx-auto px-4 pt-24 pb-16">
+    <!-- 头部概览 -->
+    <div class="mb-16 motion-element">
+      <div class="flex flex-col md:flex-row justify-between items-start md:items-end gap-4 mb-8">
+        <div>
+          <h2 class="text-tesla text-sm uppercase tracking-widest mb-2">抖音视频分析</h2>
+          <h1 class="text-4xl md:text-6xl font-bold">视频表现深度解析</h1>
+        </div>
+        <div class="text-light-gray text-sm">
+          分析时段: <span class="text-white">2025年7月</span>
+        </div>
+      </div>
+      
+      <!-- 核心数据卡片 -->
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+        <div class="bento-card p-6">
+          <div class="stat-label">评论总数</div>
+          <div class="stat-number">10</div>
+          <div class="text-tesla text-xs mt-1">全部来自安徽地区</div>
+        </div>
+        <div class="bento-card p-6">
+          <div class="stat-label">总点赞数</div>
+          <div class="stat-number">23</div>
+          <div class="text-tesla text-xs mt-1">平均2.3/条评论</div>
+        </div>
+        <div class="bento-card p-6">
+          <div class="stat-label">回复总数</div>
+          <div class="stat-number">12</div>
+          <div class="text-tesla text-xs mt-1">用户互动率120%</div>
+        </div>
+        <div class="bento-card p-6">
+          <div class="stat-label">需求匹配度</div>
+          <div class="stat-number">90<span class="text-2xl">%</span></div>
+          <div class="text-tesla text-xs mt-1">高度匹配核心话题</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 封面分析部分 -->
+    <section id="cover" class="mb-16">
+      <h2 class="section-title">封面分析</h2>
+      
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        <!-- 封面图片 -->
+        <div class="lg:col-span-2 bento-card motion-element">
+          <div class="relative aspect-video overflow-hidden">
+            <img src="https://p26-sign.douyinpic.com/tos-cn-p-0015/oEGWEDYyrBA3CrKZaIixAe0BlAcggBsOITf1xi~tplv-dy-resize-walign-adapt-aq:720:q75.webp?lk3s=138a59ce&x-expires=1757847600&x-signature=3fei64Ub1ahOgPjwyNQ8rw9kDkg%3D&from=327834062&s=PackSourceEnum_DOUYIN_REFLOW&se=false&sc=cover&biz_tag=aweme_video&l=20250831191516078C54C8248C102CD931" 
+                 alt="视频封面" 
+                 class="w-full h-full object-cover transition-transform duration-700 hover:scale-105">
+            <div class="absolute bottom-0 left-0 right-0 gradient-red h-24"></div>
+          </div>
+          <div class="p-6">
+            <h3 class="text-xl font-bold mb-4">封面设计解析</h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div>
+                <h4 class="text-tesla font-bold mb-2">为什么能爆</h4>
+                <ul class="space-y-2 text-gray-300">
+                  <li class="flex items-start gap-2">
+                    <i class="fa fa-check text-tesla mt-1"></i>
+                    <span>主体人物居中突出，视觉焦点明确</span>
+                  </li>
+                  <li class="flex items-start gap-2">
+                    <i class="fa fa-check text-tesla mt-1"></i>
+                    <span>红色服饰与背景形成强烈对比，吸引眼球</span>
+                  </li>
+                  <li class="flex items-start gap-2">
+                    <i class="fa fa-check text-tesla mt-1"></i>
+                    <span>表情生动自然，传递情绪价值</span>
+                  </li>
+                  <li class="flex items-start gap-2">
+                    <i class="fa fa-check text-tesla mt-1"></i>
+                    <span>无多余元素干扰，信息层级清晰</span>
+                  </li>
+                </ul>
+              </div>
+              <div>
+                <h4 class="text-tesla font-bold mb-2">优化建议</h4>
+                <ul class="space-y-2 text-gray-300">
+                  <li class="flex items-start gap-2">
+                    <i class="fa fa-arrow-right text-tesla mt-1"></i>
+                    <span>可添加简洁文字标题，强化内容主题</span>
+                  </li>
+                  <li class="flex items-start gap-2">
+                    <i class="fa fa-arrow-right text-tesla mt-1"></i>
+                    <span>适当增加背景环境元素，提供场景暗示</span>
+                  </li>
+                  <li class="flex items-start gap-2">
+                    <i class="fa fa-arrow-right text-tesla mt-1"></i>
+                    <span>考虑添加地域性元素，呼应"芜湖"话题</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- 封面数据指标 -->
+        <div class="space-y-6">
+          <div class="bento-card p-6 motion-element">
+            <h3 class="text-lg font-bold mb-4">视觉吸引力评分</h3>
+            <div class="relative pt-1">
+              <div class="flex mb-2 items-center justify-between">
+                <div>
+                  <span class="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-tesla bg-tesla/10">
+                    综合评分
+                  </span>
+                </div>
+                <div class="text-right">
+                  <span class="text-xs font-semibold inline-block text-white">
+                    7.5/10
+                  </span>
+                </div>
+              </div>
+              <div class="overflow-hidden h-2 text-xs flex rounded bg-gray-700">
+                <div style="width:75%" class="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-tesla"></div>
+              </div>
+            </div>
+            
+            <div class="grid grid-cols-2 gap-4 mt-6">
+              <div>
+                <div class="text-center">
+                  <div class="text-3xl font-bold text-white">8.2</div>
+                  <div class="text-light-gray text-xs">主体突出度</div>
+                </div>
+              </div>
+              <div>
+                <div class="text-center">
+                  <div class="text-3xl font-bold text-white">6.8</div>
+                  <div class="text-light-gray text-xs">信息传达</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="bento-card p-6 motion-element">
+            <h3 class="text-lg font-bold mb-4">设计元素分析</h3>
+            <div class="space-y-3">
+              <div>
+                <div class="flex justify-between text-sm mb-1">
+                  <span class="text-light-gray">色彩对比</span>
+                  <span class="text-white">良好</span>
+                </div>
+                <div class="w-full bg-gray-700 rounded-full h-1.5">
+                  <div class="bg-tesla h-1.5 rounded-full" style="width: 85%"></div>
+                </div>
+              </div>
+              <div>
+                <div class="flex justify-between text-sm mb-1">
+                  <span class="text-light-gray">构图平衡</span>
+                  <span class="text-white">优秀</span>
+                </div>
+                <div class="w-full bg-gray-700 rounded-full h-1.5">
+                  <div class="bg-tesla h-1.5 rounded-full" style="width: 90%"></div>
+                </div>
+              </div>
+              <div>
+                <div class="flex justify-between text-sm mb-1">
+                  <span class="text-light-gray">主题相关性</span>
+                  <span class="text-white">一般</span>
+                </div>
+                <div class="w-full bg-gray-700 rounded-full h-1.5">
+                  <div class="bg-tesla h-1.5 rounded-full" style="width: 60%"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 评论分析部分 -->
+    <section id="comments" class="mb-16">
+      <h2 class="section-title">评论分析</h2>
+      
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        <!-- 互动数据 -->
+        <div class="lg:col-span-2 bento-card p-6 motion-element">
+          <h3 class="text-lg font-bold mb-6">评论互动数据</h3>
+          <div class="h-64">
+            <canvas id="interactionChart"></canvas>
+          </div>
+        </div>
+        
+        <!-- 地域分布 -->
+        <div class="bento-card p-6 motion-element">
+          <h3 class="text-lg font-bold mb-6">评论地域分布</h3>
+          <div class="flex justify-center">
+            <div class="w-48 h-48 relative">
+              <canvas id="regionChart"></canvas>
+              <div class="absolute inset-0 flex items-center justify-center flex-col">
+                <div class="text-3xl font-bold text-white">100%</div>
+                <div class="text-light-gray text-xs">安徽</div>
+              </div>
+            </div>
+          </div>
+          <div class="mt-4 text-center text-sm text-light-gray">
+            评论用户高度集中于话题相关地域
+          </div>
+        </div>
+        
+        <!-- 关键词词云 -->
+        <div class="lg:col-span-2 bento-card p-6 motion-element">
+          <h3 class="text-lg font-bold mb-6">评论关键词词云</h3>
+          <div class="h-64 bg-black/50 rounded-lg flex items-center justify-center" id="wordCloud">
+            <!-- 词云将通过JS生成 -->
+          </div>
+        </div>
+        
+        <!-- 情感分析 -->
+        <div class="bento-card p-6 motion-element">
+          <h3 class="text-lg font-bold mb-6">情感倾向分析</h3>
+          <div class="space-y-8">
+            <div class="text-center">
+              <div class="inline-block p-4 rounded-full bg-gray-800 mb-2">
+                <i class="fa fa-meh-o text-3xl text-gray-400"></i>
+              </div>
+              <div class="text-xl font-bold text-white">中性讨论</div>
+              <div class="text-light-gray text-xs mt-1">无明显情感倾向</div>
+            </div>
+            
+            <div>
+              <div class="flex justify-between text-sm mb-2">
+                <span class="text-light-gray">正面情感</span>
+                <span class="text-white">0%</span>
+              </div>
+              <div class="w-full bg-gray-700 rounded-full h-2">
+                <div class="bg-green-500 h-2 rounded-full" style="width: 0%"></div>
+              </div>
+              
+              <div class="flex justify-between text-sm mb-2 mt-4">
+                <span class="text-light-gray">负面情感</span>
+                <span class="text-white">0%</span>
+              </div>
+              <div class="w-full bg-gray-700 rounded-full h-2">
+                <div class="bg-red-500 h-2 rounded-full" style="width: 0%"></div>
+              </div>
+              
+              <div class="flex justify-between text-sm mb-2 mt-4">
+                <span class="text-light-gray">中性讨论</span>
+                <span class="text-white">100%</span>
+              </div>
+              <div class="w-full bg-gray-700 rounded-full h-2">
+                <div class="bg-blue-500 h-2 rounded-full" style="width: 100%"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 用户洞察部分 -->
+    <section id="insights" class="mb-16">
+      <h2 class="section-title">用户洞察</h2>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <!-- 需求分析 -->
+        <div class="bento-card p-6 motion-element">
+          <h3 class="text-lg font-bold mb-4">用户需求分析</h3>
+          <div class="space-y-4 text-gray-300">
+            <p>评论数据显示，用户核心需求围绕<strong class="text-white">"猜测芜湖明星身份"</strong>展开，10条评论中有9条直接参与猜测讨论，需求匹配度达90%。</p>
+            <p>用户通过提及"小飞"、"大司马"、"董老师"等本地知名人物进行身份猜测，反映出对地域文化和本地网红的高度关注。</p>
+            <div class="p-3 bg-tesla/10 border border-tesla/30 rounded-lg mt-4">
+              <p class="text-sm text-tesla"><i class="fa fa-lightbulb-o mr-2"></i> 洞察：地域化话题能显著提升本地用户参与度，可考虑增加本地化元素强化互动。</p>
+            </div>
+          </div>
+        </div>
+        
+        <!-- 互动行为 -->
+        <div class="bento-card p-6 motion-element">
+          <h3 class="text-lg font-bold mb-4">互动行为分析</h3>
+          <div class="space-y-4 text-gray-300">
+            <p>评论区互动以正向讨论为主，<strong class="text-white">无负面互动行为</strong>，点赞与回复比例健康，表明话题内容未引发争议。</p>
+            <p>单条评论平均获得2.3次点赞，回复总数达12次，显示用户间存在积极讨论氛围，形成良好互动循环。</p>
+            <div class="grid grid-cols-2 gap-4 mt-4">
+              <div class="bg-black/50 p-3 rounded-lg text-center">
+                <div class="text-2xl font-bold text-white">23</div>
+                <div class="text-light-gray text-xs">总点赞</div>
+              </div>
+              <div class="bg-black/50 p-3 rounded-lg text-center">
+                <div class="text-2xl font-bold text-white">12</div>
+                <div class="text-light-gray text-xs">总回复</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- 页脚 -->
+  <footer class="bg-dark-gray border-t border-gray-800 py-8">
+    <div class="container mx-auto px-4">
+      <div class="flex flex-col md:flex-row justify-between items-center">
+        <div class="flex items-center gap-2 mb-4 md:mb-0">
+          <i class="fa fa-bar-chart text-tesla"></i>
+          <span class="text-light-gray text-sm">视频分析报告 © 2025</span>
+        </div>
+        <div class="flex gap-4 text-light-gray">
+          <a href="#" class="hover:text-tesla transition-colors"><i class="fa fa-github"></i></a>
+          <a href="#" class="hover:text-tesla transition-colors"><i class="fa fa-twitter"></i></a>
+          <a href="#" class="hover:text-tesla transition-colors"><i class="fa fa-linkedin"></i></a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // 等待DOM加载完成
+    document.addEventListener('DOMContentLoaded', function() {
+      // 初始化Framer Motion动画
+      const motionElements = document.querySelectorAll('.motion-element');
+      
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.style.opacity = '1';
+            entry.target.style.transform = 'translateY(0)';
+          }
+        });
+      }, { threshold: 0.1 });
+      
+      motionElements.forEach(el => {
+        el.style.opacity = '0';
+        el.style.transform = 'translateY(20px)';
+        el.style.transition = 'opacity 0.6s ease-out, transform 0.6s ease-out';
+        observer.observe(el);
+      });
+      
+      // 初始化互动数据图表
+      const interactionCtx = document.getElementById('interactionChart').getContext('2d');
+      new Chart(interactionCtx, {
+        type: 'bar',
+        data: {
+          labels: ['评论#1', '评论#2', '评论#3', '评论#4', '评论#5', '评论#6', '评论#7', '评论#8', '评论#9', '评论#10'],
+          datasets: [{
+            label: '点赞数',
+            data: [3, 5, 2, 4, 1, 2, 1, 2, 1, 2],
+            backgroundColor: 'rgba(227, 25, 55, 0.7)',
+            borderColor: 'rgba(227, 25, 55, 1)',
+            borderWidth: 1
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          scales: {
+            y: {
+              beginAtZero: true,
+              grid: {
+                color: 'rgba(255, 255, 255, 0.05)'
+              },
+              ticks: {
+                color: 'rgba(255, 255, 255, 0.7)'
+              }
+            },
+            x: {
+              grid: {
+                display: false
+              },
+              ticks: {
+                color: 'rgba(255, 255, 255, 0.7)',
+                maxRotation: 0
+              }
+            }
+          },
+          plugins: {
+            legend: {
+              labels: {
+                color: 'rgba(255, 255, 255, 0.7)'
+              }
+            }
+          }
+        }
+      });
+      
+      // 初始化地域分布图表
+      const regionCtx = document.getElementById('regionChart').getContext('2d');
+      new Chart(regionCtx, {
+        type: 'doughnut',
+        data: {
+          labels: ['安徽', '其他地区'],
+          datasets: [{
+            data: [10, 0],
+            backgroundColor: [
+              'rgba(227, 25, 55, 0.8)',
+              'rgba(255, 255, 255, 0.1)'
+            ],
+            borderColor: [
+              'rgba(227, 25, 55, 1)',
+              'rgba(255, 255, 255, 0.2)'
+            ],
+            borderWidth: 1
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          cutout: '80%',
+          plugins: {
+            legend: {
+              display: false
+            },
+            tooltip: {
+              callbacks: {
+                label: function(context) {
+                  return context.label + ': ' + context.raw + '条评论';
+                }
+              }
+            }
+          }
+        }
+      });
+      
+      // 初始化词云
+      const wordCloudData = [
+        ['小飞', 40],
+        ['芜湖', 30],
+        ['明星', 20],
+        ['大司马', 15],
+        ['董老师', 15],
+        ['猜测', 10],
+        ['哪里', 5]
+      ];
+      
+      const wordCloudElement = document.getElementById('wordCloud');
+      const wordCloudCanvas = document.createElement('canvas');
+      wordCloudCanvas.width = wordCloudElement.offsetWidth;
+      wordCloudCanvas.height = wordCloudElement.offsetHeight;
+      wordCloudElement.appendChild(wordCloudCanvas);
+      
+      WordCloud(wordCloudCanvas, {
+        list: wordCloudData,
+        color: function(word, weight) {
+          return weight > 30 ? '#E31937' : weight > 20 ? '#ff4d6d' : weight > 10 ? '#ff758f' : '#f4acb7';
+        },
+        backgroundColor: 'transparent',
+        fontFamily: 'Inter, sans-serif',
+        rotateRatio: 0,
+        minSize: 12,
+        maxSize: 40
+      });
+    });
+  </script>
+</body>
+</html>
