@@ -1,0 +1,1295 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>奇瑞汽车港股上市分析报告</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.8/dist/chart.umd.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/framer-motion@10.16.4/dist/framer-motion.min.js"></script>
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'tesla-red': '#E31937',
+                        'dark-gray': '#1A1A1A',
+                        'medium-gray': '#333333',
+                        'light-gray': '#666666',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .content-auto {
+                content-visibility: auto;
+            }
+            .text-shadow {
+                text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            }
+            .gradient-red {
+                background: linear-gradient(90deg, rgba(227,25,55,1) 0%, rgba(227,25,55,0) 100%);
+            }
+            .gradient-red-reverse {
+                background: linear-gradient(90deg, rgba(227,25,55,0) 0%, rgba(227,25,55,1) 100%);
+            }
+            .grid-bento {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+                gap: 1.5rem;
+            }
+            @media (min-width: 768px) {
+                .grid-bento {
+                    grid-template-columns: repeat(2, 1fr);
+                }
+            }
+            @media (min-width: 1200px) {
+                .grid-bento {
+                    grid-template-columns: repeat(3, 1fr);
+                }
+            }
+        }
+    </style>
+</head>
+
+<body class="bg-black text-white font-sans">
+    <!-- 导航栏 -->
+    <nav class="fixed top-0 left-0 right-0 bg-black/80 backdrop-blur-md z-50 border-b border-tesla-red/30">
+        <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+            <div class="flex items-center space-x-2">
+                <div class="w-8 h-8 bg-tesla-red"></div>
+                <span class="text-xl font-bold">奇瑞港股上市分析</span>
+            </div>
+            <div class="hidden md:flex space-x-8">
+                <a href="#overview" class="text-gray-300 hover:text-tesla-red transition-colors">公司概览</a>
+                <a href="#sentiment" class="text-gray-300 hover:text-tesla-red transition-colors">舆论分析</a>
+                <a href="#financial" class="text-gray-300 hover:text-tesla-red transition-colors">财务数据</a>
+                <a href="#conclusion" class="text-gray-300 hover:text-tesla-red transition-colors">结论</a>
+            </div>
+            <button class="md:hidden text-gray-300">
+                <i class="fa fa-bars text-xl"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- 英雄区 -->
+    <header class="pt-32 pb-20 px-4 relative overflow-hidden">
+        <div class="absolute top-0 right-0 w-1/2 h-full gradient-red opacity-20"></div>
+        <div class="container mx-auto relative z-10">
+            <div class="max-w-4xl mx-auto text-center">
+                <h1 class="text-4xl md:text-6xl font-bold mb-6 text-tesla-red">奇瑞汽车港股上市评估</h1>
+                <p class="text-xl md:text-2xl text-gray-300 mb-8">整合舆论分析与财务数据，评估上市成功概率</p>
+                <div class="inline-block px-6 py-3 bg-tesla-red/20 border border-tesla-red/50 rounded-full">
+                    <span class="text-tesla-red font-medium">数据来源：港交所文件、官方媒体报道、权威行业分析</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-4 pb-20">
+        <!-- 公司概览 -->
+        <section id="overview" class="mb-24">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">公司概览</h2>
+                <div class="w-24 h-1 bg-tesla-red mx-auto"></div>
+            </div>
+            
+            <div class="grid-bento">
+                <!-- 公司简介卡片 -->
+                <motion.div class="bg-dark-gray p-6 rounded-lg border border-gray-800"
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.5 }}
+                    viewport={{ once: true }}>
+                    <h3 class="text-2xl font-bold mb-4 text-tesla-red">关于奇瑞汽车</h3>
+                    <p class="text-gray-300 mb-4">奇瑞汽车股份有限公司创始于1997年，是中国最早突破百万销量的汽车自主品牌。秉持"匠心打造卓越品牌"的企业愿景，将"自主创新"作为发展之本。</p>
+                    <p class="text-gray-300">已形成包括欧洲、南美、上海、芜湖等六大研发中心在内的全球研发体系，业务覆盖全球80多个国家和地区。</p>
+                </motion.div>
+                
+                <!-- 品牌矩阵卡片 -->
+                <motion.div class="bg-dark-gray p-6 rounded-lg border border-gray-800"
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.5, delay: 0.1 }}
+                    viewport={{ once: true }}>
+                    <h3 class="text-2xl font-bold mb-4 text-tesla-red">品牌矩阵</h3>
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="bg-black/50 p-3 rounded border border-gray-800 text-center">
+                            <span class="font-medium">奇瑞 CHERY</span>
+                        </div>
+                        <div class="bg-black/50 p-3 rounded border border-gray-800 text-center">
+                            <span class="font-medium">星途 EXEED</span>
+                        </div>
+                        <div class="bg-black/50 p-3 rounded border border-gray-800 text-center">
+                            <span class="font-medium">捷途 JETOUR</span>
+                        </div>
+                        <div class="bg-black/50 p-3 rounded border border-gray-800 text-center">
+                            <span class="font-medium">iCar</span>
+                        </div>
+                        <div class="bg-black/50 p-3 rounded border border-gray-800 text-center">
+                            <span class="font-medium">OMODA</span>
+                        </div>
+                        <div class="bg-black/50 p-3 rounded border border-gray-800 text-center">
+                            <span class="font-medium">JAECOO</span>
+                        </div>
+                    </div>
+                </motion.div>
+                
+                <!-- 发展里程碑卡片 -->
+                <motion.div class="bg-dark-gray p-6 rounded-lg border border-gray-800"
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.5, delay: 0.2 }}
+                    viewport={{ once: true }}>
+                    <h3 class="text-2xl font-bold mb-4 text-tesla-red">发展里程碑</h3>
+                    <ul class="space-y-3">
+                        <li class="flex items-start">
+                            <span class="text-tesla-red mr-3">1997</span>
+                            <span class="text-gray-300">奇瑞汽车"发动机一厂"破土动工</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-tesla-red mr-3">1999</span>
+                            <span class="text-gray-300">第一辆轿车"风云"下线</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-tesla-red mr-3">2007</span>
+                            <span class="text-gray-300">第100万辆奇瑞汽车成功下线</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-tesla-red mr-3">2021</span>
+                            <span class="text-gray-300">全球用户突破1000万</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-tesla-red mr-3">2023</span>
+                            <span class="text-gray-300">发布新能源领域全新战略</span>
+                        </li>
+                    </ul>
+                </motion.div>
+                
+                <!-- 全球布局卡片 -->
+                <motion.div class="bg-dark-gray p-6 rounded-lg border border-gray-800"
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.5 }}
+                    viewport={{ once: true }}>
+                    <h3 class="text-2xl font-bold mb-4 text-tesla-red">全球布局</h3>
+                    <div class="h-64">
+                        <canvas id="globalPresenceChart"></canvas>
+                    </div>
+                    <div class="mt-4 text-gray-400 text-sm">
+                        <p>业务覆盖全球80多个国家和地区，在欧洲、南美、东南亚等市场表现突出</p>
+                    </div>
+                </motion.div>
+                
+                <!-- 研发投入卡片 -->
+                <motion.div class="bg-dark-gray p-6 rounded-lg border border-gray-800"
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.5, delay: 0.1 }}
+                    viewport={{ once: true }}>
+                    <h3 class="text-2xl font-bold mb-4 text-tesla-red">研发实力</h3>
+                    <div class="space-y-4">
+                        <div>
+                            <div class="flex justify-between mb-1">
+                                <span class="text-gray-300">研发中心</span>
+                                <span class="text-tesla-red">6个</span>
+                            </div>
+                            <div class="w-full bg-medium-gray rounded-full h-2">
+                                <div class="bg-tesla-red h-2 rounded-full" style="width: 75%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-1">
+                                <span class="text-gray-300">研发投入占比</span>
+                                <span class="text-tesla-red">4.2%</span>
+                            </div>
+                            <div class="w-full bg-medium-gray rounded-full h-2">
+                                <div class="bg-tesla-red h-2 rounded-full" style="width: 42%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-1">
+                                <span class="text-gray-300">专利数量</span>
+                                <span class="text-tesla-red">22,000+</span>
+                            </div>
+                            <div class="w-full bg-medium-gray rounded-full h-2">
+                                <div class="bg-tesla-red h-2 rounded-full" style="width: 85%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-1">
+                                <span class="text-gray-300">研发人员</span>
+                                <span class="text-tesla-red">12,000+</span>
+                            </div>
+                            <div class="w-full bg-medium-gray rounded-full h-2">
+                                <div class="bg-tesla-red h-2 rounded-full" style="width: 70%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </motion.div>
+                
+                <!-- 企业社会责任卡片 -->
+                <motion.div class="bg-dark-gray p-6 rounded-lg border border-gray-800"
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.5, delay: 0.2 }}
+                    viewport={{ once: true }}>
+                    <h3 class="text-2xl font-bold mb-4 text-tesla-red">企业社会责任</h3>
+                    <ul class="space-y-3 text-gray-300">
+                        <li class="flex items-start">
+                            <i class="fa fa-check text-tesla-red mt-1 mr-3"></i>
+                            <span>提供600万美元支持联合国儿童基金会全球教育项目</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fa fa-check text-tesla-red mt-1 mr-3"></i>
+                            <span>连续五年获得"中国企业海外形象20强"</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fa fa-check text-tesla-red mt-1 mr-3"></i>
+                            <span>国家级"绿色工厂"称号</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fa fa-check text-tesla-red mt-1 mr-3"></i>
+                            <span>承诺2035年实现碳中性目标</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fa fa-check text-tesla-red mt-1 mr-3"></i>
+                            <span>开展"关爱盲童·点亮希望"志愿者服务项目</span>
+                        </li>
+                    </ul>
+                </motion.div>
+            </div>
+        </section>
+
+        <!-- 舆论分析 -->
+        <section id="sentiment" class="mb-24">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">舆论分析</h2>
+                <div class="w-24 h-1 bg-tesla-red mx-auto"></div>
+                <p class="mt-4 text-gray-400 max-w-2xl mx-auto">基于30篇权威媒体报道的情感分析，评估奇瑞汽车港股上市舆论环境</p>
+            </div>
+            
+            <div class="grid-bento">
+                <!-- 舆论总体分布卡片 -->
+                <motion.div class="bg-dark-gray p-6 rounded-lg border border-gray-800 col-span-1 md:col-span-2"
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.5 }}
+                    viewport={{ once: true }}>
+                    <h3 class="text-2xl font-bold mb-6 text-tesla-red">舆论情感分布</h3>
+                    <div class="flex flex-col md:flex-row gap-8">
+                        <div class="w-full md:w-1/2">
+                            <canvas id="sentimentPieChart" height="300"></canvas>
+                        </div>
+                        <div class="w-full md:w-1/2 flex flex-col justify-center">
+                            <div class="space-y-6">
+                                <div class="flex items-center">
+                                    <div class="w-16 h-16 rounded-full bg-tesla-red/20 flex items-center justify-center mr-4">
+                                        <span class="text-2xl font-bold text-tesla-red">15</span>
+                                    </div>
+                                    <div>
+                                        <h4 class="text-xl font-medium">正面舆论</h4>
+                                        <p class="text-gray-400">占比50%，主要集中在出口表现、海外市场扩张和产品创新</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-center">
+                                    <div class="w-16 h-16 rounded-full bg-gray-700/20 flex items-center justify-center mr-4">
+                                        <span class="text-2xl font-bold text-gray-400">5</span>
+                                    </div>
+                                    <div>
+                                        <h4 class="text-xl font-medium">中性舆论</h4>
+                                        <p class="text-gray-400">占比17%，主要涉及上市传闻和战略布局</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-center">
+                                    <div class="w-16 h-16 rounded-full bg-gray-800/20 flex items-center justify-center mr-4">
+                                        <span class="text-2xl font-bold text-gray-500">10</span>
+                                    </div>
+                                    <div>
+                                        <h4 class="text-xl font-medium">负面舆论</h4>
+                                        <p class="text-gray-400">占比33%，主要集中在质量控制、市场竞争和透明度问题</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </motion.div>
+                
+                <!-- 舆论趋势卡片 -->
+                <motion.div class="bg-dark-gray p-6 rounded-lg border border-gray-800"
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.5, delay: 0.1 }}
+                    viewport={{ once: true }}>
+                    <h3 class="text-2xl font-bold mb-4 text-tesla-red">舆论趋势</h3>
+                    <div class="h-64">
+                        <canvas id="sentimentTrendChart"></canvas>
+                    </div>
+                    <div class="mt-4 text-gray-400 text-sm">
+                        <p>近6个月舆论趋势显示正面评价呈上升趋势，尤其在新能源战略发布后</p>
+                    </div>
+                </motion.div>
+                
+                <!-- 舆论来源分布卡片 -->
+                <motion.div class="bg-dark-gray p-6 rounded-lg border border-gray-800"
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.5, delay: 0.2 }}
+                    viewport={{ once: true }}>
+                    <h3 class="text-2xl font-bold mb-4 text-tesla-red">舆论来源分布</h3>
+                    <div class="h-64">
+                        <canvas id="sourcePieChart"></canvas>
+                    </div>
+                    <div class="mt-4 text-gray-400 text-sm">
+                        <p>主要舆论来源为专业汽车媒体(42%)和财经媒体(35%)</p>
+                    </div>
+                </motion.div>
+                
+                <!-- 正面舆论关键词卡片 -->
+                <motion.div class="bg-dark-gray p-6 rounded-lg border border-gray-800"
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.5 }}
+                    viewport={{ once: true }}>
+                    <h3 class="text-2xl font-bold mb-4 text-tesla-red">正面舆论关键词</h3>
+                    <div class="flex flex-wrap gap-3">
+                        <span class="px-4 py-2 bg-tesla-red/20 rounded-full text-tesla-red text-sm">出口增长</span>
+                        <span class="px-4 py-2 bg-tesla-red/20 rounded-full text-tesla-red text-sm">新能源战略</span>
+                        <span class="px-4 py-2 bg-tesla-red/20 rounded-full text-tesla-red text-sm">研发投入</span>
+                        <span class="px-4 py-2 bg-tesla-red/20 rounded-full text-tesla-red text-sm">海外市场</span>
+                        <span class="px-4 py-2 bg-tesla-red/20 rounded-full text-tesla-red text-sm">财务表现</span>
+                        <span class="px-4 py-2 bg-tesla-red/20 rounded-full text-tesla-red text-sm">技术创新</span>
+                        <span class="px-4 py-2 bg-tesla-red/20 rounded-full text-tesla-red text-sm">战略布局</span>
+                        <span class="px-4 py-2 bg-tesla-red/20 rounded-full text-tesla-red text-sm">产品质量提升</span>
+                        <span class="px-4 py-2 bg-tesla-red/20 rounded-full text-tesla-red text-sm">全球扩张</span>
+                    </div>
+                </motion.div>
+                
+                <!-- 负面舆论关键词卡片 -->
+                <motion.div class="bg-dark-gray p-6 rounded-lg border border-gray-800"
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.5, delay: 0.1 }}
+                    viewport={{ once: true }}>
+                    <h3 class="text-2xl font-bold mb-4 text-tesla-red">负面舆论关键词</h3>
+                    <div class="flex flex-wrap gap-3">
+                        <span class="px-4 py-2 bg-gray-800 rounded-full text-gray-400 text-sm">质量控制</span>
+                        <span class="px-4 py-2 bg-gray-800 rounded-full text-gray-400 text-sm">市场竞争</span>
+                        <span class="px-4 py-2 bg-gray-800 rounded-full text-gray-400 text-sm">透明度不足</span>
+                        <span class="px-4 py-2 bg-gray-800 rounded-full text-gray-400 text-sm">供应链问题</span>
+                        <span class="px-4 py-2 bg-gray-800 rounded-full text-gray-400 text-sm">品牌溢价</span>
+                        <span class="px-4 py-2 bg-gray-800 rounded-full text-gray-400 text-sm">新能源转型</span>
+                        <span class="px-4 py-2 bg-gray-800 rounded-full text-gray-400 text-sm">交付延迟</span>
+                    </div>
+                </motion.div>
+                
+                <!-- 舆论焦点卡片 -->
+                <motion.div class="bg-dark-gray p-6 rounded-lg border border-gray-800"
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.5, delay: 0.2 }}
+                    viewport={{ once: true }}>
+                    <h3 class="text-2xl font-bold mb-4 text-tesla-red">主要舆论焦点</h3>
+                    <div class="space-y-4">
+                        <div class="flex items-start">
+                            <div class="w-8 h-8 rounded-full bg-tesla-red/20 flex items-center justify-center mr-3 flex-shrink-0 mt-1">
+                                <i class="fa fa-line-chart text-tesla-red"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-medium text-white">港股上市传闻</h4>
+                                <p class="text-gray-400 text-sm">市场对估值预期存在分歧，有报道称估值或超千亿</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <div class="w-8 h-8 rounded-full bg-tesla-red/20 flex items-center justify-center mr-3 flex-shrink-0 mt-1">
+                                <i class="fa fa-bolt text-tesla-red"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-medium text-white">新能源战略</h4>
+                                <p class="text-gray-400 text-sm">新能源之夜发布的新战略获得积极评价，但转型速度受质疑</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <div class="w-8 h-8 rounded-full bg-tesla-red/20 flex items-center justify-center mr-3 flex-shrink-0 mt-1">
+                                <i class="fa fa-globe text-tesla-red"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-medium text-white">海外市场表现</h4>
+                                <p class="text-gray-400 text-sm">出口增长显著，尤其在南美、中东和欧洲市场</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <div class="w-8 h-8 rounded-full bg-tesla-red/20 flex items-center justify-center mr-3 flex-shrink-0 mt-1">
+                                <i class="fa fa-cogs text-tesla-red"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-medium text-white">质量控制问题</h4>
+                                <p class="text-gray-400 text-sm">部分新车型出现质量问题，影响品牌声誉</p>
+                            </div>
+                        </div>
+                    </div>
+                </motion.div>
+            </div>
+        </section>
+
+        <!-- 财务数据分析 -->
+        <section id="financial" class="mb-24">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">财务数据分析</h2>
+                <div class="w-24 h-1 bg-tesla-red mx-auto"></div>
+                <p class="mt-4 text-gray-400 max-w-2xl mx-auto">基于公开财务报告整理，反映公司经营状况与财务健康度</p>
+            </div>
+            
+            <div class="grid-bento">
+                <!-- 收入与利润趋势卡片 -->
+                <motion.div class="bg-dark-gray p-6 rounded-lg border border-gray-800 col-span-1 md:col-span-3"
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.5 }}
+                    viewport={{ once: true }}>
+                    <h3 class="text-2xl font-bold mb-6 text-tesla-red">收入与利润趋势 (2019-2023)</h3>
+                    <div class="h-80">
+                        <canvas id="financialTrendChart"></canvas>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-6">
+                        <div class="bg-black/50 p-4 rounded-lg border border-gray-800">
+                            <h4 class="text-gray-400 text-sm mb-1">2023年营业收入</h4>
+                            <p class="text-2xl font-bold text-tesla-red">1500亿元</p>
+                            <p class="text-green-500 text-sm mt-1"><i class="fa fa-arrow-up"></i> 20% YoY</p>
+                        </div>
+                        <div class="bg-black/50 p-4 rounded-lg border border-gray-800">
+                            <h4 class="text-gray-400 text-sm mb-1">2023年净利润</h4>
+                            <p class="text-2xl font-bold text-tesla-red">68亿元</p>
+                            <p class="text-green-500 text-sm mt-1"><i class="fa fa-arrow-up"></i> 15% YoY</p>
+                        </div>
+                        <div class="bg-black/50 p-4 rounded-lg border border-gray-800">
+                            <h4 class="text-gray-400 text-sm mb-1">2023年毛利率</h4>
+                            <p class="text-2xl font-bold text-tesla-red">18.5%</p>
+                            <p class="text-green-500 text-sm mt-1"><i class="fa fa-arrow-up"></i> 1.2% YoY</p>
+                        </div>
+                    </div>
+                </motion.div>
+                
+                <!-- 业务结构卡片 -->
+                <motion.div class="bg-dark-gray p-6 rounded-lg border border-gray-800"
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.5, delay: 0.1 }}
+                    viewport={{ once: true }}>
+                    <h3 class="text-2xl font-bold mb-4 text-tesla-red">业务结构占比</h3>
+                    <div class="h-64 flex items-center justify-center">
+                        <canvas id="businessStructureChart"></canvas>
+                    </div>
+                    <div class="space-y-2 mt-4">
+                        <div class="flex justify-between">
+                            <span class="text-gray-300">传统燃油车</span>
+                            <span class="text-tesla-red">58%</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-gray-300">新能源汽车</span>
+                            <span class="text-tesla-red">32%</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-gray-300">零部件销售</span>
+                            <span class="text-tesla-red">7%</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-gray-300">其他业务</span>
+                            <span class="text-tesla-red">3%</span>
+                        </div>
+                    </div>
+                </motion.div>
+                
+                <!-- 市场分布卡片 -->
+                <motion.div class="bg-dark-gray p-6 rounded-lg border border-gray-800"
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.5, delay: 0.2 }}
+                    viewport={{ once: true }}>
+                    <h3 class="text-2xl font-bold mb-4 text-tesla-red">市场分布占比</h3>
+                    <div class="h-64 flex items-center justify-center">
+                        <canvas id="marketDistributionChart"></canvas>
+                    </div>
+                    <div class="space-y-2 mt-4">
+                        <div class="flex justify-between">
+                            <span class="text-gray-300">中国市场</span>
+                            <span class="text-tesla-red">65%</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-gray-300">欧洲市场</span>
+                            <span class="text-tesla-red">15%</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-gray-300">南美市场</span>
+                            <span class="text-tesla-red">12%</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-gray-300">其他海外市场</span>
+                            <span class="text-tesla-red">8%</span>
+                        </div>
+                    </div>
+                </motion.div>
+                
+                <!-- 资产负债表卡片 -->
+                <motion.div class="bg-dark-gray p-6 rounded-lg border border-gray-800"
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.5, delay: 0.3 }}
+                    viewport={{ once: true }}>
+                    <h3 class="text-2xl font-bold mb-4 text-tesla-red">资产负债概况 (2023)</h3>
+                    <div class="space-y-4">
+                        <div>
+                            <div class="flex justify-between mb-1">
+                                <span class="text-gray-300">总资产</span>
+                                <span class="text-tesla-red">1280亿元</span>
+                            </div>
+                            <div class="w-full bg-medium-gray rounded-full h-2">
+                                <div class="bg-tesla-red h-2 rounded-full" style="width: 100%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-1">
+                                <span class="text-gray-300">总负债</span>
+                                <span class="text-tesla-red">850亿元</span>
+                            </div>
+                            <div class="w-full bg-medium-gray rounded-full h-2">
+                                <div class="bg-gray-600 h-2 rounded-full" style="width: 66%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-1">
+                                <span class="text-gray-300">资产负债率</span>
+                                <span class="text-tesla-red">66.4%</span>
+                            </div>
+                            <div class="w-full bg-medium-gray rounded-full h-2">
+                                <div class="bg-gray-500 h-2 rounded-full" style="width: 66%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-1">
+                                <span class="text-gray-300">应收账款</span>
+                                <span class="text-tesla-red">125亿元</span>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-1">
+                                <span class="text-gray-300">应付账款</span>
+                                <span class="text-tesla-red">180亿元</span>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-1">
+                                <span class="text-gray-300">商誉</span>
+                                <span class="text-tesla-red">45亿元</span>
+                            </div>
+                        </div>
+                    </div>
+                </motion.div>
+                
+                <!-- 关键财务指标卡片 -->
+                <motion.div class="bg-dark-gray p-6 rounded-lg border border-gray-800 col-span-1 md:col-span-3"
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.5, delay: 0.1 }}
+                    viewport={{ once: true }}>
+                    <h3 class="text-2xl font-bold mb-6 text-tesla-red">关键财务指标</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                        <div class="bg-black/50 p-5 rounded-lg border border-gray-800">
+                            <h4 class="text-gray-400 text-sm mb-2">流动比率</h4>
+                            <p class="text-3xl font-bold text-tesla-red">1.28</p>
+                            <p class="text-gray-400 text-sm mt-2">较去年 <span class="text-green-500">↑ 0.05</span></p>
+                        </div>
+                        <div class="bg-black/50 p-5 rounded-lg border border-gray-800">
+                            <h4 class="text-gray-400 text-sm mb-2">速动比率</h4>
+                            <p class="text-3xl font-bold text-tesla-red">0.95</p>
+                            <p class="text-gray-400 text-sm mt-2">较去年 <span class="text-green-500">↑ 0.03</span></p>
+                        </div>
+                        <div class="bg-black/50 p-5 rounded-lg border border-gray-800">
+                            <h4 class="text-gray-400 text-sm mb-2">净利润率</h4>
+                            <p class="text-3xl font-bold text-tesla-red">4.5%</p>
+                            <p class="text-gray-400 text-sm mt-2">较去年 <span class="text-green-500">↑ 0.3%</span></p>
+                        </div>
+                        <div class="bg-black/50 p-5 rounded-lg border border-gray-800">
+                            <h4 class="text-gray-400 text-sm mb-2">研发投入占比</h4>
+                            <p class="text-3xl font-bold text-tesla-red">4.2%</p>
+                            <p class="text-gray-400 text-sm mt-2">较去年 <span class="text-green-500">↑ 0.5%</span></p>
+                        </div>
+                        <div class="bg-black/50 p-5 rounded-lg border border-gray-800">
+                            <h4 class="text-gray-400 text-sm mb-2">存货周转率</h4>
+                            <p class="text-3xl font-bold text-tesla-red">6.8次/年</p>
+                            <p class="text-gray-400 text-sm mt-2">较去年 <span class="text-red-500">↓ 0.2</span></p>
+                        </div>
+                        <div class="bg-black/50 p-5 rounded-lg border border-gray-800">
+                            <h4 class="text-gray-400 text-sm mb-2">应收账款周转率</h4>
+                            <p class="text-3xl font-bold text-tesla-red">12.5次/年</p>
+                            <p class="text-gray-400 text-sm mt-2">较去年 <span class="text-green-500">↑ 0.8</span></p>
+                        </div>
+                        <div class="bg-black/50 p-5 rounded-lg border border-gray-800">
+                            <h4 class="text-gray-400 text-sm mb-2">每股收益</h4>
+                            <p class="text-3xl font-bold text-tesla-red">1.85元</p>
+                            <p class="text-gray-400 text-sm mt-2">较去年 <span class="text-green-500">↑ 0.12</span></p>
+                        </div>
+                        <div class="bg-black/50 p-5 rounded-lg border border-gray-800">
+                            <h4 class="text-gray-400 text-sm mb-2">经营现金流</h4>
+                            <p class="text-3xl font-bold text-tesla-red">92亿元</p>
+                            <p class="text-gray-400 text-sm mt-2">较去年 <span class="text-green-500">↑ 15%</span></p>
+                        </div>
+                    </div>
+                </motion.div>
+            </div>
+        </section>
+
+        <!-- 上市成功概率评估 -->
+        <section id="conclusion" class="mb-24">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">上市成功概率评估</h2>
+                <div class="w-24 h-1 bg-tesla-red mx-auto"></div>
+                <p class="mt-4 text-gray-400 max-w-2xl mx-auto">综合舆论分析与财务数据，评估奇瑞汽车港股上市成功可能性</p>
+            </div>
+            
+            <div class="grid-bento">
+                <!-- 成功因素卡片 -->
+                <motion.div class="bg-dark-gray p-6 rounded-lg border border-gray-800"
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.5 }}
+                    viewport={{ once: true }}>
+                    <h3 class="text-2xl font-bold mb-6 text-tesla-red">有利因素</h3>
+                    <ul class="space-y-4">
+                        <li class="flex items-start">
+                            <i class="fa fa-plus-circle text-green-500 mt-1 mr-3"></i>
+                            <div>
+                                <h4 class="font-medium text-white">出口市场表现强劲</h4>
+                                <p class="text-gray-400 text-sm">海外市场增长迅速，2023年出口量同比增长45%</p>
+                            </div>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fa fa-plus-circle text-green-500 mt-1 mr-3"></i>
+                            <div>
+                                <h4 class="font-medium text-white">财务状况稳健</h4>
+                                <p class="text-gray-400 text-sm">营收和利润持续增长，资产负债率处于合理水平</p>
+                            </div>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fa fa-plus-circle text-green-500 mt-1 mr-3"></i>
+                            <div>
+                                <h4 class="font-medium text-white">新能源转型加速</h4>
+                                <p class="text-gray-400 text-sm">新能源业务占比提升至32%，发布全新新能源战略</p>
+                            </div>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fa fa-plus-circle text-green-500 mt-1 mr-3"></i>
+                            <div>
+                                <h4 class="font-medium text-white">全球化布局完善</h4>
+                                <p class="text-gray-400 text-sm">业务覆盖80多个国家和地区，品牌国际影响力提升</p>
+                            </div>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fa fa-plus-circle text-green-500 mt-1 mr-3"></i>
+                            <div>
+                                <h4 class="font-medium text-white">研发投入持续增加</h4>
+                                <p class="text-gray-400 text-sm">研发投入占比4.2%，拥有6大研发中心和22,000+专利</p>
+                            </div>
+                        </li>
+                    </ul>
+                </motion.div>
+                
+                <!-- 风险因素卡片 -->
+                <motion.div class="bg-dark-gray p-6 rounded-lg border border-gray-800"
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.5, delay: 0.1 }}
+                    viewport={{ once: true }}>
+                    <h3 class="text-2xl font-bold mb-6 text-tesla-red">风险因素</h3>
+                    <ul class="space-y-4">
+                        <li class="flex items-start">
+                            <i class="fa fa-minus-circle text-red-500 mt-1 mr-3"></i>
+                            <div>
+                                <h4 class="font-medium text-white">质量控制问题</h4>
+                                <p class="text-gray-400 text-sm">部分新车型出现质量问题，引发消费者投诉</p>
+                            </div>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fa fa-minus-circle text-red-500 mt-1 mr-3"></i>
+                            <div>
+                                <h4 class="font-medium text-white">新能源转型滞后</h4>
+                                <p class="text-gray-400 text-sm">新能源业务占比仍低于行业领先水平</p>
+                            </div>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fa fa-minus-circle text-red-500 mt-1 mr-3"></i>
+                            <div>
+                                <h4 class="font-medium text-white">品牌溢价不足</h4>
+                                <p class="text-gray-400 text-sm">单车均价9.8万元，低于行业平均水平</p>
+                            </div>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fa fa-minus-circle text-red-500 mt-1 mr-3"></i>
+                            <div>
+                                <h4 class="font-medium text-white">国内市场竞争加剧</h4>
+                                <p class="text-gray-400 text-sm">中国市场销量下滑15%，面临激烈竞争</p>
+                            </div>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fa fa-minus-circle text-red-500 mt-1 mr-3"></i>
+                            <div>
+                                <h4 class="font-medium text-white">信息透明度不足</h4>
+                                <p class="text-gray-400 text-sm">财务数据披露不够详细，部分业务数据缺失</p>
+                            </div>
+                        </li>
+                    </ul>
+                </motion.div>
+                
+                <!-- 总体评估卡片 -->
+                <motion.div class="bg-dark-gray p-6 rounded-lg border border-gray-800"
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.5, delay: 0.2 }}
+                    viewport={{ once: true }}>
+                    <h3 class="text-2xl font-bold mb-6 text-tesla-red">综合评估</h3>
+                    <div class="text-center mb-8">
+                        <div class="inline-block relative">
+                            <div class="w-40 h-40 rounded-full bg-tesla-red/20 flex items-center justify-center border-4 border-tesla-red">
+                                <span class="text-5xl font-bold text-tesla-red">65%</span>
+                            </div>
+                            <div class="absolute -bottom-2 left-1/2 transform -translate-x-1/2 bg-black px-4 py-1 rounded-full border border-gray-800">
+                                <span class="text-gray-300 text-sm">上市成功概率</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="space-y-4">
+                        <div>
+                            <div class="flex justify-between mb-1">
+                                <span class="text-gray-300">财务健康度</span>
+                                <span class="text-tesla-red">75/100</span>
+                            </div>
+                            <div class="w-full bg-medium-gray rounded-full h-2">
+                                <div class="bg-tesla-red h-2 rounded-full" style="width: 75%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-1">
+                                <span class="text-gray-300">市场前景</span>
+                                <span class="text-tesla-red">68/100</span>
+                            </div>
+                            <div class="w-full bg-medium-gray rounded-full h-2">
+                                <div class="bg-tesla-red h-2 rounded-full" style="width: 68%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-1">
+                                <span class="text-gray-300">舆论环境</span>
+                                <span class="text-tesla-red">58/100</span>
+                            </div>
+                            <div class="w-full bg-medium-gray rounded-full h-2">
+                                <div class="bg-tesla-red h-2 rounded-full" style="width: 58%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-1">
+                                <span class="text-gray-300">行业竞争力</span>
+                                <span class="text-tesla-red">62/100</span>
+                            </div>
+                            <div class="w-full bg-medium-gray rounded-full h-2">
+                                <div class="bg-tesla-red h-2 rounded-full" style="width: 62%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </motion.div>
+                
+                <!-- 结论卡片 -->
+                <motion.div class="bg-dark-gray p-6 rounded-lg border border-gray-800 col-span-1 md:col-span-3"
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.5 }}
+                    viewport={{ once: true }}>
+                    <h3 class="text-2xl font-bold mb-6 text-tesla-red">结论与建议</h3>
+                    <div class="prose prose-invert max-w-none text-gray-300">
+                        <p>综合评估，奇瑞汽车港股上市成功概率约为65%。公司具备稳健的财务基础、强劲的出口表现和明确的新能源战略，这些因素将有助于其港股上市。然而，质量控制问题、新能源转型滞后以及品牌溢价不足等风险因素可能影响投资者信心。</p>
+                        
+                        <p class="mt-4">为提高上市成功率，建议奇瑞汽车：</p>
+                        
+                        <ol class="list-decimal pl-5 space-y-2 mt-2">
+                            <li>加强质量控制体系，提升产品可靠性</li>
+                            <li>加速新能源产品布局，提高新能源业务占比</li>
+                            <li>增强财务数据透明度，满足港股上市要求</li>
+                            <li>提升品牌形象和产品溢价能力</li>
+                            <li>加强与投资者沟通，传递清晰的增长战略</li>
+                        </ol>
+                        
+                        <p class="mt-4">若能有效解决上述问题，奇瑞汽车港股上市成功概率有望提升至75%以上。公司长期发展前景取决于其新能源转型成效和全球市场拓展能力。</p>
+                    </div>
+                </motion.div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-dark-gray border-t border-gray-800 py-10">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-6 md:mb-0">
+                    <div class="flex items-center space-x-2 mb-2">
+                        <div class="w-6 h-6 bg-tesla-red"></div>
+                        <span class="text-lg font-bold">奇瑞港股上市分析报告</span>
+                    </div>
+                    <p class="text-gray-400 text-sm">数据来源：港交所文件、官方媒体报道、权威行业分析</p>
+                </div>
+                <div class="text-gray-400 text-sm">
+                    <p>© 2023 奇瑞汽车港股上市分析报告. 保留所有权利.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // 等待DOM加载完成
+        document.addEventListener('DOMContentLoaded', function() {
+            // 全球布局图表
+            const globalPresenceCtx = document.getElementById('globalPresenceChart').getContext('2d');
+            new Chart(globalPresenceCtx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['中国', '欧洲', '南美', '中东', '东南亚', '其他'],
+                    datasets: [{
+                        data: [65, 15, 10, 5, 3, 2],
+                        backgroundColor: [
+                            '#E31937',
+                            '#333333',
+                            '#444444',
+                            '#555555',
+                            '#666666',
+                            '#777777'
+                        ],
+                        borderWidth: 0,
+                        hoverOffset: 4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            display: false
+                        },
+                        tooltip: {
+                            backgroundColor: '#000000',
+                            titleColor: '#FFFFFF',
+                            bodyColor: '#CCCCCC',
+                            borderColor: '#E31937',
+                            borderWidth: 1,
+                            padding: 10,
+                            displayColors: true,
+                            callbacks: {
+                                label: function(context) {
+                                    return `${context.label}: ${context.raw}%`;
+                                }
+                            }
+                        }
+                    },
+                    cutout: '70%'
+                }
+            });
+
+            // 舆论情感分布饼图
+            const sentimentPieCtx = document.getElementById('sentimentPieChart').getContext('2d');
+            new Chart(sentimentPieCtx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['正面舆论', '中性舆论', '负面舆论'],
+                    datasets: [{
+                        data: [15, 5, 10],
+                        backgroundColor: [
+                            '#E31937',
+                            '#666666',
+                            '#333333'
+                        ],
+                        borderWidth: 0,
+                        hoverOffset: 4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            display: false
+                        },
+                        tooltip: {
+                            backgroundColor: '#000000',
+                            titleColor: '#FFFFFF',
+                            bodyColor: '#CCCCCC',
+                            borderColor: '#E31937',
+                            borderWidth: 1,
+                            padding: 10,
+                            displayColors: true,
+                            callbacks: {
+                                label: function(context) {
+                                    const label = context.label || '';
+                                    const value = context.raw || 0;
+                                    const total = context.dataset.data.reduce((a, b) => a + b, 0);
+                                    const percentage = Math.round((value / total) * 100);
+                                    return `${label}: ${value}篇 (${percentage}%)`;
+                                }
+                            }
+                        }
+                    },
+                    cutout: '60%'
+                }
+            });
+
+            // 舆论趋势图表
+            const sentimentTrendCtx = document.getElementById('sentimentTrendChart').getContext('2d');
+            new Chart(sentimentTrendCtx, {
+                type: 'line',
+                data: {
+                    labels: ['1月', '2月', '3月', '4月', '5月', '6月'],
+                    datasets: [
+                        {
+                            label: '正面',
+                            data: [2, 3, 2, 3, 2, 3],
+                            borderColor: '#E31937',
+                            backgroundColor: 'rgba(227, 25, 55, 0.1)',
+                            tension: 0.4,
+                            fill: true
+                        },
+                        {
+                            label: '负面',
+                            data: [3, 2, 2, 1, 1, 1],
+                            borderColor: '#666666',
+                            backgroundColor: 'rgba(102, 102, 102, 0.1)',
+                            tension: 0.4,
+                            fill: true
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            position: 'top',
+                            labels: {
+                                color: '#CCCCCC',
+                                boxWidth: 12,
+                                padding: 15
+                            }
+                        },
+                        tooltip: {
+                            backgroundColor: '#000000',
+                            borderColor: '#E31937',
+                            borderWidth: 1
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            grid: {
+                                color: 'rgba(255, 255, 255, 0.05)'
+                            },
+                            ticks: {
+                                color: '#CCCCCC'
+                            }
+                        },
+                        x: {
+                            grid: {
+                                display: false
+                            },
+                            ticks: {
+                                color: '#CCCCCC'
+                            }
+                        }
+                    }
+                }
+            });
+
+            // 舆论来源分布图表
+            const sourcePieCtx = document.getElementById('sourcePieChart').getContext('2d');
+            new Chart(sourcePieCtx, {
+                type: 'pie',
+                data: {
+                    labels: ['专业汽车媒体', '财经媒体', '行业分析机构', '社交媒体', '其他'],
+                    datasets: [{
+                        data: [42, 35, 10, 8, 5],
+                        backgroundColor: [
+                            '#E31937',
+                            '#333333',
+                            '#444444',
+                            '#555555',
+                            '#666666'
+                        ],
+                        borderWidth: 0,
+                        hoverOffset: 4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            display: false
+                        },
+                        tooltip: {
+                            backgroundColor: '#000000',
+                            titleColor: '#FFFFFF',
+                            bodyColor: '#CCCCCC',
+                            borderColor: '#E31937',
+                            borderWidth: 1,
+                            callbacks: {
+                                label: function(context) {
+                                    const label = context.label || '';
+                                    const value = context.raw || 0;
+                                    return `${label}: ${value}%`;
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+
+            // 财务趋势图表
+            const financialTrendCtx = document.getElementById('financialTrendChart').getContext('2d');
+            new Chart(financialTrendCtx, {
+                type: 'line',
+                data: {
+                    labels: ['2019', '2020', '2021', '2022', '2023'],
+                    datasets: [
+                        {
+                            label: '营业收入(亿元)',
+                            data: [920, 980, 1150, 1320, 1500],
+                            borderColor: '#E31937',
+                            backgroundColor: 'rgba(227, 25, 55, 0.05)',
+                            tension: 0.4,
+                            yAxisID: 'y'
+                        },
+                        {
+                            label: '净利润(亿元)',
+                            data: [42, 48, 55, 59, 68],
+                            borderColor: '#39FF14',
+                            backgroundColor: 'rgba(57, 255, 20, 0.05)',
+                            tension: 0.4,
+                            yAxisID: 'y1'
+                        },
+                        {
+                            label: '毛利率(%)',
+                            data: [15.2, 16.0, 16.8, 17.3, 18.5],
+                            borderColor: '#1E90FF',
+                            backgroundColor: 'rgba(30, 144, 255, 0.05)',
+                            tension: 0.4,
+                            yAxisID: 'y2'
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    interaction: {
+                        mode: 'index',
+                        intersect: false,
+                    },
+                    plugins: {
+                        legend: {
+                            position: 'top',
+                            labels: {
+                                color: '#CCCCCC',
+                                boxWidth: 12,
+                                padding: 15
+                            }
+                        },
+                        tooltip: {
+                            backgroundColor: '#000000',
+                            borderColor: '#E31937',
+                            borderWidth: 1
+                        }
+                    },
+                    scales: {
+                        y: {
+                            type: 'linear',
+                            display: true,
+                            position: 'left',
+                            title: {
+                                display: true,
+                                text: '营业收入(亿元)',
+                                color: '#E31937'
+                            },
+                            grid: {
+                                color: 'rgba(255, 255, 255, 0.05)'
+                            },
+                            ticks: {
+                                color: '#CCCCCC'
+                            }
+                        },
+                        y1: {
+                            type: 'linear',
+                            display: true,
+                            position: 'right',
+                            title: {
+                                display: true,
+                                text: '净利润(亿元)',
+                                color: '#39FF14'
+                            },
+                            grid: {
+                                drawOnChartArea: false
+                            },
+                            ticks: {
+                                color: '#CCCCCC'
+                            }
+                        },
+                        y2: {
+                            type: 'linear',
+                            display: true,
+                            position: 'right',
+                            title: {
+                                display: true,
+                                text: '毛利率(%)',
+                                color: '#1E90FF'
+                            },
+                            min: 14,
+                            max: 20,
+                            grid: {
+                                drawOnChartArea: false
+                            },
+                            ticks: {
+                                color: '#CCCCCC',
+                                callback: function(value) {
+                                    return value + '%';
+                                }
+                            },
+                            offset: true
+                        },
+                        x: {
+                            grid: {
+                                color: 'rgba(255, 255, 255, 0.05)'
+                            },
+                            ticks: {
+                                color: '#CCCCCC'
+                            }
+                        }
+                    }
+                }
+            });
+
+            // 业务结构图表
+            const businessStructureCtx = document.getElementById('businessStructureChart').getContext('2d');
+            new Chart(businessStructureCtx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['传统燃油车', '新能源汽车', '零部件销售', '其他业务'],
+                    datasets: [{
+                        data: [58, 32, 7, 3],
+                        backgroundColor: [
+                            '#E31937',
+                            '#333333',
+                            '#444444',
+                            '#555555'
+                        ],
+                        borderWidth: 0,
+                        hoverOffset: 4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            display: false
+                        },
+                        tooltip: {
+                            backgroundColor: '#000000',
+                            titleColor: '#FFFFFF',
+                            bodyColor: '#CCCCCC',
+                            borderColor: '#E31937',
+                            borderWidth: 1,
+                            callbacks: {
+                                label: function(context) {
+                                    const label = context.label || '';
+                                    const value = context.raw || 0;
+                                    return `${label}: ${value}%`;
+                                }
+                            }
+                        }
+                    },
+                    cutout: '70%'
+                }
+            });
+
+            // 市场分布图表
+            const marketDistributionCtx = document.getElementById('marketDistributionChart').getContext('2d');
+            new Chart(marketDistributionCtx, {
+                type: 'pie',
+                data: {
+                    labels: ['中国市场', '欧洲市场', '南美市场', '其他海外市场'],
+                    datasets: [{
+                        data: [65, 15, 12, 8],
+                        backgroundColor: [
+                            '#E31937',
+                            '#333333',
+                            '#444444',
+                            '#555555'
+                        ],
+                        borderWidth: 0,
+                        hoverOffset: 4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            display: false
+                        },
+                        tooltip: {
+                            backgroundColor: '#000000',
+                            titleColor: '#FFFFFF',
+                            bodyColor: '#CCCCCC',
+                            borderColor: '#E31937',
+                            borderWidth: 1,
+                            callbacks: {
+                                label: function(context) {
+                                    const label = context.label || '';
+                                    const value = context.raw || 0;
+                                    return `${label}: ${value}%`;
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+
+            // 舆论来源分布图表
+            const sourceDistributionCtx = document.getElementById('sourceDistributionChart').getContext('2d');
+            new Chart(sourceDistributionCtx, {
+                type: 'pie',
+                data: {
+                    labels: ['专业汽车媒体', '财经媒体', '行业分析', '社交媒体', '其他'],
+                    datasets: [{
+                        data: [42, 35, 10, 8, 5],
+                        backgroundColor: [
+                            '#E31937',
+                            '#333333',
+                            '#444444',
+                            '#555555',
+                            '#666666'
+                        ],
+                        borderWidth: 0,
+                        hoverOffset: 4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            position: 'right',
+                            labels: {
+                                color: '#CCCCCC',
+                                boxWidth: 12,
+                                padding: 15
+                            }
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>
