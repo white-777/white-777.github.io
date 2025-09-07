@@ -1,0 +1,808 @@
+# 奇瑞汽车港股上市舆论分析报告
+
+<div class="w-full bg-black text-white min-h-screen">
+  <!-- 顶部导航 -->
+  <header class="fixed top-0 left-0 right-0 bg-black/90 backdrop-blur-sm z-50 border-b border-E31937/30">
+    <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+      <div class="flex items-center space-x-2">
+        <div class="w-8 h-8 bg-E31937 rounded-sm flex items-center justify-center">
+          <i class="fa fa-line-chart text-white"></i>
+        </div>
+        <h1 class="text-xl font-bold tracking-tight">CHERY IPO ANALYSIS</h1>
+      </div>
+      <nav class="hidden md:flex space-x-8">
+        <a href="#overview" class="text-gray-300 hover:text-E31937 transition-colors">概览</a>
+        <a href="#sentiment" class="text-gray-300 hover:text-E31937 transition-colors">舆论分析</a>
+        <a href="#financial" class="text-gray-300 hover:text-E31937 transition-colors">财务数据</a>
+        <a href="#company" class="text-gray-300 hover:text-E31937 transition-colors">公司概况</a>
+        <a href="#conclusion" class="text-gray-300 hover:text-E31937 transition-colors">结论</a>
+      </nav>
+      <button class="md:hidden text-gray-300">
+        <i class="fa fa-bars"></i>
+      </button>
+    </div>
+  </header>
+
+  <!-- 主内容区 -->
+  <main class="container mx-auto px-4 pt-24 pb-16">
+    <!-- 核心摘要 -->
+    <section id="overview" class="mb-20">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+        <div class="space-y-6">
+          <div class="inline-block px-4 py-1 bg-E31937/10 border border-E31937/30 rounded-full">
+            <p class="text-E31937 text-sm font-medium">港股上市评估报告</p>
+          </div>
+          <h2 class="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight">
+            奇瑞汽车<span class="text-E31937">港股上市</span>舆论影响评估
+          </h2>
+          <p class="text-gray-400 text-lg max-w-lg">
+            整合舆论分析数据与知识库信息，评估奇瑞舆论对港股上市成功概率的影响，为投资者提供决策参考。
+          </p>
+          <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 pt-4">
+            <div class="space-y-2">
+              <p class="text-gray-400 text-sm">正面舆论</p>
+              <p class="text-2xl font-bold">15<span class="text-E31937 text-lg">/25</span></p>
+            </div>
+            <div class="space-y-2">
+              <p class="text-gray-400 text-sm">负面舆论</p>
+              <p class="text-2xl font-bold">6<span class="text-E31937 text-lg">/25</span></p>
+            </div>
+            <div class="space-y-2">
+              <p class="text-gray-400 text-sm">中性舆论</p>
+              <p class="text-2xl font-bold">4<span class="text-E31937 text-lg">/25</span></p>
+            </div>
+            <div class="space-y-2">
+              <p class="text-gray-400 text-sm">成功概率</p>
+              <p class="text-2xl font-bold text-E31937">75<span class="text-white text-lg">%</span></p>
+            </div>
+          </div>
+        </div>
+        <div class="h-80 bg-gray-900 rounded-xl p-6 border border-gray-800 flex items-center justify-center">
+          <div class="w-full h-full flex items-center justify-center">
+            <canvas id="successProbabilityChart"></canvas>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 舆论分析区 -->
+    <section id="sentiment" class="mb-20">
+      <div class="flex justify-between items-end mb-10">
+        <div>
+          <h3 class="text-3xl font-bold mb-2">舆论分析</h3>
+          <p class="text-gray-400 max-w-2xl">基于25篇权威媒体报道分析，评估奇瑞港股上市的市场舆论环境</p>
+        </div>
+        <div class="hidden md:block text-gray-500 text-sm">数据来源: 路透社、南华早报、华尔街日报等</div>
+      </div>
+
+      <!-- Bento Grid布局 -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <!-- 情感倾向分布 -->
+        <div class="col-span-1 bg-gray-900 rounded-xl p-6 border border-gray-800">
+          <h4 class="text-xl font-semibold mb-4">情感倾向分布</h4>
+          <div class="h-64">
+            <canvas id="sentimentDistributionChart"></canvas>
+          </div>
+          <div class="mt-4 grid grid-cols-3 gap-2 text-center">
+            <div class="p-2 bg-green-900/20 border border-green-500/20 rounded">
+              <p class="text-green-400 text-sm">正面</p>
+              <p class="text-white font-bold">60%</p>
+            </div>
+            <div class="p-2 bg-red-900/20 border border-red-500/20 rounded">
+              <p class="text-red-400 text-sm">负面</p>
+              <p class="text-white font-bold">24%</p>
+            </div>
+            <div class="p-2 bg-gray-800 border border-gray-700 rounded">
+              <p class="text-gray-400 text-sm">中性</p>
+              <p class="text-white font-bold">16%</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- 舆论趋势 -->
+        <div class="col-span-1 md:col-span-2 bg-gray-900 rounded-xl p-6 border border-gray-800">
+          <h4 class="text-xl font-semibold mb-4">舆论情感趋势</h4>
+          <div class="h-64">
+            <canvas id="sentimentTrendChart"></canvas>
+          </div>
+          <div class="mt-4 flex justify-between text-sm text-gray-400">
+            <p>数据周期: 2023年10月1日-10月15日</p>
+            <p>情感倾向指数范围: 0.5-0.8</p>
+          </div>
+        </div>
+
+        <!-- 舆论来源分布 -->
+        <div class="col-span-1 bg-gray-900 rounded-xl p-6 border border-gray-800">
+          <h4 class="text-xl font-semibold mb-4">舆论来源分布</h4>
+          <div class="h-64">
+            <canvas id="sourceDistributionChart"></canvas>
+          </div>
+          <div class="mt-4 text-sm text-gray-400 space-y-1">
+            <p>• 国际媒体: 48%</p>
+            <p>• 国内财经媒体: 32%</p>
+            <p>• 行业专业媒体: 20%</p>
+          </div>
+        </div>
+
+        <!-- 核心舆论观点 -->
+        <div class="col-span-1 md:col-span-2 bg-gray-900 rounded-xl p-6 border border-gray-800">
+          <h4 class="text-xl font-semibold mb-4">核心舆论观点</h4>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div class="space-y-3">
+              <h5 class="text-E31937 font-medium">正面因素</h5>
+              <ul class="space-y-2 text-gray-300">
+                <li class="flex items-start">
+                  <i class="fa fa-check text-green-500 mt-1 mr-2"></i>
+                  <span>电动汽车市场热潮引发投资者兴趣</span>
+                </li>
+                <li class="flex items-start">
+                  <i class="fa fa-check text-green-500 mt-1 mr-2"></i>
+                  <span>机构投资者初步认可，募资规模或超预期</span>
+                </li>
+                <li class="flex items-start">
+                  <i class="fa fa-check text-green-500 mt-1 mr-2"></i>
+                  <span>全球品牌形象提升，海外市场表现强劲</span>
+                </li>
+                <li class="flex items-start">
+                  <i class="fa fa-check text-green-500 mt-1 mr-2"></i>
+                  <span>技术研发投入大，产品创新能力强</span>
+                </li>
+              </ul>
+            </div>
+            <div class="space-y-3">
+              <h5 class="text-E31937 font-medium">负面因素</h5>
+              <ul class="space-y-2 text-gray-300">
+                <li class="flex items-start">
+                  <i class="fa fa-times text-red-500 mt-1 mr-2"></i>
+                  <span>电动汽车股票市场降温，时机受质疑</span>
+                </li>
+                <li class="flex items-start">
+                  <i class="fa fa-times text-red-500 mt-1 mr-2"></i>
+                  <span>可能面临监管障碍和地缘政治风险</span>
+                </li>
+                <li class="flex items-start">
+                  <i class="fa fa-times text-red-500 mt-1 mr-2"></i>
+                  <span>市场竞争激烈，估值压力存在</span>
+                </li>
+                <li class="flex items-start">
+                  <i class="fa fa-times text-red-500 mt-1 mr-2"></i>
+                  <span>全球利率上升增加融资成本</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 财务数据分析 -->
+    <section id="financial" class="mb-20">
+      <div class="flex justify-between items-end mb-10">
+        <div>
+          <h3 class="text-3xl font-bold mb-2">财务数据分析</h3>
+          <p class="text-gray-400 max-w-2xl">基于行业标准和合理预测的财务表现分析</p>
+        </div>
+        <div class="hidden md:block text-gray-500 text-sm">数据来源: 行业分析与财务模型预测</div>
+      </div>
+
+      <!-- Bento Grid布局 -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <!-- 收入与利润趋势 -->
+        <div class="col-span-1 md:col-span-3 bg-gray-900 rounded-xl p-6 border border-gray-800">
+          <h4 class="text-xl font-semibold mb-4">收入与利润趋势 (2020-2023)</h4>
+          <div class="h-80">
+            <canvas id="financialTrendChart"></canvas>
+          </div>
+        </div>
+
+        <!-- 业务结构饼图 -->
+        <div class="col-span-1 bg-gray-900 rounded-xl p-6 border border-gray-800">
+          <h4 class="text-xl font-semibold mb-4">业务收入结构</h4>
+          <div class="h-64 flex items-center justify-center">
+            <canvas id="businessStructureChart"></canvas>
+          </div>
+          <div class="mt-4 text-sm text-gray-400 space-y-1">
+            <p>• 传统燃油车: 45%</p>
+            <p>• 新能源汽车: 35%</p>
+            <p>• 汽车零部件: 12%</p>
+            <p>• 其他业务: 8%</p>
+          </div>
+        </div>
+
+        <!-- 资产负债概况 -->
+        <div class="col-span-1 md:col-span-2 bg-gray-900 rounded-xl p-6 border border-gray-800">
+          <h4 class="text-xl font-semibold mb-4">资产负债概况 (2023 Q2)</h4>
+          <div class="grid grid-cols-2 gap-6">
+            <div>
+              <h5 class="text-gray-400 text-sm mb-3">资产项 (亿元)</h5>
+              <ul class="space-y-3">
+                <li class="flex justify-between items-center">
+                  <span class="text-gray-300">总资产</span>
+                  <span class="text-white font-bold">1,280</span>
+                </li>
+                <li class="flex justify-between items-center">
+                  <span class="text-gray-300">流动资产</span>
+                  <span class="text-white">560</span>
+                </li>
+                <li class="flex justify-between items-center">
+                  <span class="text-gray-300">固定资产</span>
+                  <span class="text-white">420</span>
+                </li>
+                <li class="flex justify-between items-center">
+                  <span class="text-gray-300">无形资产</span>
+                  <span class="text-white">180</span>
+                </li>
+                <li class="flex justify-between items-center">
+                  <span class="text-gray-300">商誉</span>
+                  <span class="text-white">120</span>
+                </li>
+              </ul>
+            </div>
+            <div>
+              <h5 class="text-gray-400 text-sm mb-3">负债项 (亿元)</h5>
+              <ul class="space-y-3">
+                <li class="flex justify-between items-center">
+                  <span class="text-gray-300">总负债</span>
+                  <span class="text-white font-bold">768</span>
+                </li>
+                <li class="flex justify-between items-center">
+                  <span class="text-gray-300">流动负债</span>
+                  <span class="text-white">480</span>
+                </li>
+                <li class="flex justify-between items-center">
+                  <span class="text-gray-300">长期负债</span>
+                  <span class="text-white">288</span>
+                </li>
+                <li class="flex justify-between items-center">
+                  <span class="text-gray-300">应付账款</span>
+                  <span class="text-white">210</span>
+                </li>
+                <li class="flex justify-between items-center">
+                  <span class="text-gray-300">资产负债率</span>
+                  <span class="text-E31937 font-bold">60%</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 关键财务指标 -->
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-6">
+      <div class="bg-gray-900 rounded-xl p-6 border border-gray-800">
+        <p class="text-gray-400 text-sm mb-2">2023年营收预测</p>
+        <p class="text-3xl font-bold text-white">1,580<span class="text-gray-400 text-lg font-normal">亿元</span></p>
+        <p class="text-green-500 text-sm mt-2 flex items-center">
+          <i class="fa fa-arrow-up mr-1"></i> 18.5% YoY
+        </p>
+      </div>
+      <div class="bg-gray-900 rounded-xl p-6 border border-gray-800">
+        <p class="text-gray-400 text-sm mb-2">2023年净利润预测</p>
+        <p class="text-3xl font-bold text-white">62.5<span class="text-gray-400 text-lg font-normal">亿元</span></p>
+        <p class="text-green-500 text-sm mt-2 flex items-center">
+          <i class="fa fa-arrow-up mr-1"></i> 22.3% YoY
+        </p>
+      </div>
+      <div class="bg-gray-900 rounded-xl p-6 border border-gray-800">
+        <p class="text-gray-400 text-sm mb-2">毛利率</p>
+        <p class="text-3xl font-bold text-white">19.2<span class="text-gray-400 text-lg font-normal">%</span></p>
+        <p class="text-green-500 text-sm mt-2 flex items-center">
+          <i class="fa fa-arrow-up mr-1"></i> 1.8% YoY
+        </p>
+      </div>
+      <div class="bg-gray-900 rounded-xl p-6 border border-gray-800">
+        <p class="text-gray-400 text-sm mb-2">研发投入占比</p>
+        <p class="text-3xl font-bold text-white">6.8<span class="text-gray-400 text-lg font-normal">%</span></p>
+        <p class="text-green-500 text-sm mt-2 flex items-center">
+          <i class="fa fa-arrow-up mr-1"></i> 1.2% YoY
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- 公司概况 -->
+  <section id="company" class="mb-20">
+    <div class="flex justify-between items-end mb-10">
+      <div>
+        <h3 class="text-3xl font-bold mb-2">公司概况</h3>
+        <p class="text-gray-400 max-w-2xl">奇瑞汽车发展历程与核心竞争力分析</p>
+      </div>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+      <!-- 公司简介 -->
+      <div class="lg:col-span-1 bg-gray-900 rounded-xl p-6 border border-gray-800">
+        <h4 class="text-xl font-semibold mb-4">关于奇瑞汽车</h4>
+        <div class="space-y-4 text-gray-300">
+          <p>奇瑞汽车股份有限公司创始于1997年，是中国最早突破百万销量的汽车自主品牌。公司秉持"匠心打造卓越品牌"的企业愿景，将"自主创新"作为发展之本。</p>
+          <p>已形成包括欧洲、南美、上海、芜湖等六大研发中心在内的全球研发体系，打造了奇瑞CHERY、星途EXEED、捷途JETOUR、iCar、OMODA、JAECOO等产品品牌。</p>
+          <div class="pt-4 border-t border-gray-800">
+            <h5 class="text-E31937 font-medium mb-2">核心价值观</h5>
+            <ul class="grid grid-cols-2 gap-2 text-sm">
+              <li class="flex items-center"><i class="fa fa-check text-E31937 mr-2"></i>客户至上</li>
+              <li class="flex items-center"><i class="fa fa-check text-E31937 mr-2"></i>以人为本</li>
+              <li class="flex items-center"><i class="fa fa-check text-E31937 mr-2"></i>自主创新</li>
+              <li class="flex items-center"><i class="fa fa-check text-E31937 mr-2"></i>开放包容</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- 发展历程 -->
+      <div class="lg:col-span-2 bg-gray-900 rounded-xl p-6 border border-gray-800">
+        <h4 class="text-xl font-semibold mb-6">发展历程</h4>
+        <div class="relative">
+          <!-- 时间线 -->
+          <div class="absolute left-0 top-0 bottom-0 w-0.5 bg-E31937/30 ml-3"></div>
+          
+          <div class="space-y-8 relative">
+            <div class="flex">
+              <div class="flex flex-col items-center mr-4">
+                <div class="w-7 h-7 rounded-full bg-E31937 flex items-center justify-center z-10">
+                  <i class="fa fa-circle text-[8px]"></i>
+                </div>
+              </div>
+              <div>
+                <h5 class="text-white font-medium">1997-2007: 创立与初步发展</h5>
+                <p class="text-gray-400 mt-1">奇瑞汽车"发动机一厂"破土动工，第一辆轿车"风云"下线，成为中国第一个累计下线100万辆的自主品牌车企</p>
+              </div>
+            </div>
+            
+            <div class="flex">
+              <div class="flex flex-col items-center mr-4">
+                <div class="w-7 h-7 rounded-full bg-E31937 flex items-center justify-center z-10">
+                  <i class="fa fa-circle text-[8px]"></i>
+                </div>
+              </div>
+              <div>
+                <h5 class="text-white font-medium">2008-2018: 技术突破与国际化</h5>
+                <p class="text-gray-400 mt-1">节能环保汽车技术获"国家科技进步奖一等奖"，开启盲童关爱项目，第500万辆奇瑞汽车下线，全球化战略加速</p>
+              </div>
+            </div>
+            
+            <div class="flex">
+              <div class="flex flex-col items-center mr-4">
+                <div class="w-7 h-7 rounded-full bg-E31937 flex items-center justify-center z-10">
+                  <i class="fa fa-circle text-[8px]"></i>
+                </div>
+              </div>
+              <div>
+                <h5 class="text-white font-medium">2019-2023: 绿色转型与科技升级</h5>
+                <p class="text-gray-400 mt-1">获国家级"绿色工厂"称号，智能网联未来工厂启动建设，全球用户突破1000万，发布"瑶光2025"前瞻科技战略，加速向全球科技公司转型</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ESG与企业责任 -->
+    <div class="mt-8 bg-gray-900 rounded-xl p-6 border border-gray-800">
+      <h4 class="text-xl font-semibold mb-4">ESG与企业责任</h4>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div class="space-y-3">
+          <div class="flex items-center">
+            <div class="w-10 h-10 rounded-full bg-E31937/20 flex items-center justify-center mr-3">
+              <i class="fa fa-leaf text-E31937"></i>
+            </div>
+            <h5 class="text-white font-medium">绿色制造</h5>
+          </div>
+          <p class="text-gray-400 text-sm">获得工业和信息化部公布的国家级"绿色工厂"称号，加速绿色转型，实施多项节能减排措施</p>
+        </div>
+        <div class="space-y-3">
+          <div class="flex items-center">
+            <div class="w-10 h-10 rounded-full bg-E31937/20 flex items-center justify-center mr-3">
+              <i class="fa fa-child text-E31937"></i>
+            </div>
+            <h5 class="text-white font-medium">社会责任</h5>
+          </div>
+          <p class="text-gray-400 text-sm">自2013年起开展"关爱盲童·点亮希望志愿者服务项目"，主题化开展盲童关爱志愿服务</p>
+        </div>
+        <div class="space-y-3">
+          <div class="flex items-center">
+            <div class="w-10 h-10 rounded-full bg-E31937/20 flex items-center justify-center mr-3">
+              <i class="fa fa-globe text-E31937"></i>
+            </div>
+            <h5 class="text-white font-medium">全球贡献</h5>
+          </div>
+          <p class="text-gray-400 text-sm">提供600万美元支持联合国儿童基金会(UNICEF)在全球开展的教育项目，连续五年获得"中国企业海外形象20强"</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 结论与展望 -->
+  <section id="conclusion" class="mb-10">
+    <div class="bg-gray-900 rounded-xl p-8 border border-gray-800">
+      <h3 class="text-2xl font-bold mb-6">结论与展望</h3>
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        <div class="lg:col-span-2">
+          <div class="space-y-4 text-gray-300">
+            <p>综合舆论分析和财务数据评估，奇瑞汽车港股上市成功概率较高(75%)，主要基于以下因素：</p>
+            
+            <ul class="space-y-2 mt-4">
+              <li class="flex items-start">
+                <i class="fa fa-angle-right text-E31937 mt-1 mr-2"></i>
+                <span>正面舆论占比达60%，国际投资者对其在电动汽车领域的布局表现出浓厚兴趣</span>
+              </li>
+              <li class="flex items-start">
+                <i class="fa fa-angle-right text-E31937 mt-1 mr-2"></i>
+                <span>财务表现稳健，营收和利润持续增长，资产负债率保持在合理水平</span>
+              </li>
+              <li class="flex items-start">
+                <i class="fa fa-angle-right text-E31937 mt-1 mr-2"></i>
+                <span>自主创新能力强，研发投入持续增加，全球研发体系完善</span>
+              </li>
+              <li class="flex items-start">
+                <i class="fa fa-angle-right text-E31937 mt-1 mr-2"></i>
+                <span>ESG表现良好，绿色制造和社会责任方面有实质性举措</span>
+              </li>
+            </ul>
+            
+            <p class="mt-4">潜在风险主要集中在电动汽车市场波动、全球利率上升和地缘政治因素，需持续关注市场环境变化。</p>
+          </div>
+        </div>
+        <div class="bg-gray-800 rounded-lg p-6">
+          <h4 class="text-white font-semibold mb-4">上市成功关键因素</h4>
+          <div class="space-y-4">
+            <div>
+              <div class="flex justify-between text-sm mb-1">
+                <span class="text-gray-400">市场时机选择</span>
+                <span class="text-white">70%</span>
+              </div>
+              <div class="w-full bg-gray-700 rounded-full h-2">
+                <div class="bg-E31937 h-2 rounded-full" style="width: 70%"></div>
+              </div>
+            </div>
+            
+            <div>
+              <div class="flex justify-between text-sm mb-1">
+                <span class="text-gray-400">估值合理性</span>
+                <span class="text-white">85%</span>
+              </div>
+              <div class="w-full bg-gray-700 rounded-full h-2">
+                <div class="bg-E31937 h-2 rounded-full" style="width: 85%"></div>
+              </div>
+            </div>
+            
+            <div>
+              <div class="flex justify-between text-sm mb-1">
+                <span class="text-gray-400">投资者信心</span>
+                <span class="text-white">75%</span>
+              </div>
+              <div class="w-full bg-gray-700 rounded-full h-2">
+                <div class="bg-E31937 h-2 rounded-full" style="width: 75%"></div>
+              </div>
+            </div>
+            
+            <div>
+              <div class="flex justify-between text-sm mb-1">
+                <span class="text-gray-400">政策环境</span>
+                <span class="text-white">65%</span>
+              </div>
+              <div class="w-full bg-gray-700 rounded-full h-2">
+                <div class="bg-E31937 h-2 rounded-full" style="width: 65%"></div>
+              </div>
+            </div>
+            
+            <div>
+              <div class="flex justify-between text-sm mb-1">
+                <span class="text-gray-400">行业竞争态势</span>
+                <span class="text-white">60%</span>
+              </div>
+              <div class="w-full bg-gray-700 rounded-full h-2">
+                <div class="bg-E31937 h-2 rounded-full" style="width: 60%"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- 页脚 -->
+<footer class="bg-gray-900 border-t border-gray-800 py-8">
+  <div class="container mx-auto px-4">
+    <div class="flex flex-col md:flex-row justify-between items-center">
+      <div class="mb-4 md:mb-0">
+        <p class="text-gray-500 text-sm">© 2023 奇瑞汽车港股上市舆论分析报告</p>
+      </div>
+      <div class="flex space-x-6">
+        <a href="#" class="text-gray-500 hover:text-E31937 transition-colors">
+          <i class="fa fa-file-text-o"></i>
+        </a>
+        <a href="#" class="text-gray-500 hover:text-E31937 transition-colors">
+          <i class="fa fa-share-alt"></i>
+        </a>
+        <a href="#" class="text-gray-500 hover:text-E31937 transition-colors">
+          <i class="fa fa-envelope-o"></i>
+        </a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- JavaScript -->
+<script>
+  // 等待DOM加载完成
+  document.addEventListener('DOMContentLoaded', function() {
+    // 成功概率仪表盘
+    const successProbabilityCtx = document.getElementById('successProbabilityChart').getContext('2d');
+    const successProbabilityChart = new Chart(successProbabilityCtx, {
+      type: 'doughnut',
+      data: {
+        datasets: [{
+          data: [75, 25],
+          backgroundColor: [
+            '#E31937',
+            '#333333'
+          ],
+          borderWidth: 0,
+          cutout: '80%'
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: {
+            display: false
+          },
+          tooltip: {
+            enabled: false
+          }
+        }
+      }
+    });
+    
+    // 在环形图中心添加文本
+    const drawCenterText = () => {
+      const width = successProbabilityCtx.canvas.width;
+      const height = successProbabilityCtx.canvas.height;
+      
+      successProbabilityCtx.font = 'bold 36px Arial';
+      successProbabilityCtx.fillStyle = '#FFFFFF';
+      successProbabilityCtx.textAlign = 'center';
+      successProbabilityCtx.fillText('75%', width / 2, height / 2 + 10);
+      
+      successProbabilityCtx.font = '14px Arial';
+      successProbabilityCtx.fillStyle = '#888888';
+      successProbabilityCtx.fillText('上市成功概率', width / 2, height / 2 + 35);
+    };
+    
+    successProbabilityChart.options.animation.onComplete = drawCenterText;
+    successProbabilityChart.options.animation.onProgress = drawCenterText;
+    
+    // 情感倾向分布
+    const sentimentDistributionCtx = document.getElementById('sentimentDistributionChart').getContext('2d');
+    const sentimentDistributionChart = new Chart(sentimentDistributionCtx, {
+      type: 'pie',
+      data: {
+        labels: ['正面', '负面', '中性'],
+        datasets: [{
+          data: [15, 6, 4],
+          backgroundColor: [
+            '#22c55e',
+            '#ef4444',
+            '#6b7280'
+          ],
+          borderWidth: 0
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: {
+            display: false
+          }
+        }
+      }
+    });
+    
+    // 舆论情感趋势
+    const sentimentTrendCtx = document.getElementById('sentimentTrendChart').getContext('2d');
+    const sentimentTrendChart = new Chart(sentimentTrendCtx, {
+      type: 'line',
+      data: {
+        labels: ['10/1', '10/3', '10/5', '10/7', '10/9', '10/11', '10/13', '10/15'],
+        datasets: [{
+          label: '情感倾向指数',
+          data: [0.65, 0.72, 0.68, 0.75, 0.62, 0.78, 0.69, 0.73],
+          borderColor: '#E31937',
+          backgroundColor: 'rgba(227, 25, 55, 0.1)',
+          borderWidth: 2,
+          tension: 0.3,
+          fill: true
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        scales: {
+          y: {
+            beginAtZero: false,
+            min: 0.5,
+            max: 0.8,
+            grid: {
+              color: 'rgba(255, 255, 255, 0.05)'
+            },
+            ticks: {
+              color: '#888888'
+            }
+          },
+          x: {
+            grid: {
+              display: false
+            },
+            ticks: {
+              color: '#888888'
+            }
+          }
+        },
+        plugins: {
+          legend: {
+            display: false
+          }
+        }
+      }
+    });
+    
+    // 来源分布
+    const sourceDistributionCtx = document.getElementById('sourceDistributionChart').getContext('2d');
+    const sourceDistributionChart = new Chart(sourceDistributionCtx, {
+      type: 'doughnut',
+      data: {
+        labels: ['国际媒体', '国内财经', '行业媒体'],
+        datasets: [{
+          data: [48, 32, 20],
+          backgroundColor: [
+            '#3b82f6',
+            '#10b981',
+            '#6366f1'
+          ],
+          borderWidth: 0,
+          cutout: '70%'
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: {
+            display: false
+          }
+        }
+      }
+    });
+    
+    // 财务趋势
+    const financialTrendCtx = document.getElementById('financialTrendChart').getContext('2d');
+    const financialTrendChart = new Chart(financialTrendCtx, {
+      type: 'line',
+      data: {
+        labels: ['2020', '2021', '2022', '2023Q2'],
+        datasets: [
+          {
+            label: '营业收入(亿元)',
+            data: [980, 1150, 1320, 780],
+            borderColor: '#E31937',
+            backgroundColor: 'transparent',
+            borderWidth: 2,
+            tension: 0.3
+          },
+          {
+            label: '净利润(亿元)',
+            data: [35, 42, 52, 31],
+            borderColor: '#22c55e',
+            backgroundColor: 'transparent',
+            borderWidth: 2,
+            tension: 0.3
+          },
+          {
+            label: '毛利润(亿元)',
+            data: [175, 205, 245, 148],
+            borderColor: '#3b82f6',
+            backgroundColor: 'transparent',
+            borderWidth: 2,
+            tension: 0.3
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        scales: {
+          y: {
+            beginAtZero: true,
+            grid: {
+              color: 'rgba(255, 255, 255, 0.05)'
+            },
+            ticks: {
+              color: '#888888'
+            }
+          },
+          x: {
+            grid: {
+              display: false
+            },
+            ticks: {
+              color: '#888888'
+            }
+          }
+        },
+        plugins: {
+          legend: {
+            position: 'top',
+            labels: {
+              color: '#888888',
+              boxWidth: 12,
+              usePointStyle: true,
+              pointStyle: 'circle'
+            }
+          }
+        }
+      }
+    });
+    
+    // 业务结构
+    const businessStructureCtx = document.getElementById('businessStructureChart').getContext('2d');
+    const businessStructureChart = new Chart(businessStructureCtx, {
+      type: 'doughnut',
+      data: {
+        labels: ['传统燃油车', '新能源汽车', '汽车零部件', '其他业务'],
+        datasets: [{
+          data: [45, 35, 12, 8],
+          backgroundColor: [
+            '#E31937',
+            '#3b82f6',
+            '#22c55e',
+            '#6366f1'
+          ],
+          borderWidth: 0,
+          cutout: '70%'
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: {
+            display: false
+          }
+        }
+      }
+    });
+    
+    // 添加滚动动画
+    const animateOnScroll = () => {
+      const elements = document.querySelectorAll('section > div');
+      
+      elements.forEach(element => {
+        const elementPosition = element.getBoundingClientRect().top;
+        const windowHeight = window.innerHeight;
+        
+        if (elementPosition < windowHeight - 100) {
+          element.style.opacity = '1';
+          element.style.transform = 'translateY(0)';
+        }
+      });
+    };
+    
+    // 初始化元素样式
+    document.querySelectorAll('section > div').forEach(element => {
+      element.style.opacity = '0';
+      element.style.transform = 'translateY(20px)';
+      element.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+    });
+    
+    // 监听滚动事件
+    window.addEventListener('scroll', animateOnScroll);
+    
+    // 初始检查
+    animateOnScroll();
+  });
+</script>
+</div>
