@@ -1,0 +1,971 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>奇瑞汽车港股上市舆论分析报告</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.8/dist/chart.umd.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/framer-motion@10.16.4/dist/framer-motion.min.js"></script>
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'tesla-red': '#E31937',
+                        'dark-gray': '#1A1A1A',
+                        'medium-gray': '#333333',
+                        'light-gray': '#666666',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .content-auto {
+                content-visibility: auto;
+            }
+            .text-shadow {
+                text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            }
+            .gradient-red {
+                background: linear-gradient(90deg, #E31937 0%, rgba(227, 25, 55, 0) 100%);
+            }
+            .gradient-red-reverse {
+                background: linear-gradient(90deg, rgba(227, 25, 55, 0) 0%, #E31937 100%);
+            }
+            .bento-card {
+                @apply bg-dark-gray rounded-lg overflow-hidden border border-medium-gray transition-all duration-300 hover:border-tesla-red;
+            }
+            .bento-title {
+                @apply text-white text-lg font-bold mb-3 flex items-center;
+            }
+            .bento-title i {
+                @apply text-tesla-red mr-2;
+            }
+            .stat-number {
+                @apply text-white text-3xl md:text-4xl font-bold;
+            }
+            .stat-label {
+                @apply text-light-gray text-sm uppercase tracking-wider;
+            }
+        }
+    </style>
+</head>
+<body class="bg-black text-white font-sans">
+    <!-- 导航栏 -->
+    <nav class="fixed top-0 left-0 right-0 bg-black/80 backdrop-blur-md z-50 border-b border-medium-gray">
+        <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+            <div class="flex items-center">
+                <div class="w-10 h-10 bg-tesla-red rounded mr-3 flex items-center justify-center">
+                    <i class="fa fa-car text-white"></i>
+                </div>
+                <h1 class="text-xl font-bold">奇瑞港股上市分析</h1>
+            </div>
+            <div class="hidden md:flex space-x-6">
+                <a href="#overview" class="text-light-gray hover:text-tesla-red transition-colors">概览</a>
+                <a href="#sentiment" class="text-light-gray hover:text-tesla-red transition-colors">舆论分析</a>
+                <a href="#financial" class="text-light-gray hover:text-tesla-red transition-colors">财务数据</a>
+                <a href="#company" class="text-light-gray hover:text-tesla-red transition-colors">公司概况</a>
+                <a href="#conclusion" class="text-light-gray hover:text-tesla-red transition-colors">结论</a>
+            </div>
+            <button class="md:hidden text-white">
+                <i class="fa fa-bars"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- 英雄区域 -->
+    <header class="pt-32 pb-20 px-4 md:pt-40 md:pb-32 relative overflow-hidden">
+        <div class="absolute top-0 right-0 w-full h-full gradient-red opacity-20 -z-10"></div>
+        <div class="container mx-auto max-w-6xl">
+            <div class="motion-element">
+                <h1 class="text-4xl md:text-6xl font-bold mb-6 text-shadow">奇瑞汽车港股上市<br><span class="text-tesla-red">舆论影响评估</span></h1>
+                <p class="text-light-gray text-lg md:text-xl max-w-3xl mb-8">整合舆论分析数据与知识库信息，评估奇瑞汽车港股上市成功概率及潜在风险因素</p>
+                <div class="flex flex-wrap gap-4">
+                    <a href="#overview" class="px-6 py-3 bg-tesla-red text-white font-bold rounded hover:bg-opacity-90 transition-all transform hover:-translate-y-1">查看分析报告</a>
+                    <a href="#conclusion" class="px-6 py-3 bg-transparent border border-tesla-red text-white font-bold rounded hover:bg-tesla-red/10 transition-all">直接查看结论</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="container mx-auto max-w-6xl px-4 pb-20">
+        <!-- 概览部分 -->
+        <section id="overview" class="mb-20">
+            <div class="mb-12 motion-element">
+                <h2 class="text-3xl font-bold mb-2">上市前景<span class="text-tesla-red">概览</span></h2>
+                <div class="w-20 h-1 bg-tesla-red mb-8"></div>
+                <p class="text-light-gray max-w-3xl">奇瑞汽车作为中国最早突破百万销量的自主品牌，正计划在香港联交所上市。本部分通过关键指标概览，快速了解奇瑞上市的核心优势与挑战。</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+                <div class="bento-card p-6 motion-element">
+                    <div class="stat-label mb-1">上市成功概率</div>
+                    <div class="stat-number text-tesla-red">65<span class="text-sm font-normal text-light-gray">%</span></div>
+                    <p class="text-light-gray text-sm mt-2">基于舆论分析与财务数据综合评估</p>
+                </div>
+                
+                <div class="bento-card p-6 motion-element">
+                    <div class="stat-label mb-1">正面舆论占比</div>
+                    <div class="stat-number">58<span class="text-sm font-normal text-light-gray">%</span></div>
+                    <p class="text-light-gray text-sm mt-2">34篇分析文章中的正面比例</p>
+                </div>
+                
+                <div class="bento-card p-6 motion-element">
+                    <div class="stat-label mb-1">潜在估值</div>
+                    <div class="stat-number">¥1,050<span class="text-sm font-normal text-light-gray">亿</span></div>
+                    <p class="text-light-gray text-sm mt-2">市场预测估值区间上限</p>
+                </div>
+                
+                <div class="bento-card p-6 motion-element">
+                    <div class="stat-label mb-1">全球市场覆盖</div>
+                    <div class="stat-number">80+<span class="text-sm font-normal text-light-gray">国家</span></div>
+                    <p class="text-light-gray text-sm mt-2">业务覆盖范围与国际影响力</p>
+                </div>
+            </div>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                <div class="bento-card p-6 lg:col-span-2 motion-element">
+                    <h3 class="bento-title"><i class="fa fa-line-chart"></i>核心优势</h3>
+                    <ul class="space-y-3">
+                        <li class="flex items-start">
+                            <i class="fa fa-check text-tesla-red mt-1 mr-3"></i>
+                            <span>新能源领域布局完善，获多家国际投行看好</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fa fa-check text-tesla-red mt-1 mr-3"></i>
+                            <span>全球市场覆盖广泛，海外销量增长强劲</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fa fa-check text-tesla-red mt-1 mr-3"></i>
+                            <span>上市前获腾讯、红杉资本等知名机构投资</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fa fa-check text-tesla-red mt-1 mr-3"></i>
+                            <span>政府政策支持与国家战略契合度高</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fa fa-check text-tesla-red mt-1 mr-3"></i>
+                            <span>多元化品牌矩阵与完整产品线布局</span>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="bento-card p-6 motion-element">
+                    <h3 class="bento-title"><i class="fa fa-exclamation-triangle"></i>主要风险</h3>
+                    <ul class="space-y-3">
+                        <li class="flex items-start">
+                            <i class="fa fa-times text-tesla-red mt-1 mr-3"></i>
+                            <span>估值争议与市场环境不确定性</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fa fa-times text-tesla-red mt-1 mr-3"></i>
+                            <span>行业竞争加剧与流动性风险</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fa fa-times text-tesla-red mt-1 mr-3"></i>
+                            <span>高管变动引发的管理层稳定性担忧</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fa fa-times text-tesla-red mt-1 mr-3"></i>
+                            <span>严格的监管审查与上市进程延迟</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- 舆论分析部分 -->
+        <section id="sentiment" class="mb-20">
+            <div class="mb-12 motion-element">
+                <h2 class="text-3xl font-bold mb-2">舆论<span class="text-tesla-red">分析</span></h2>
+                <div class="w-20 h-1 bg-tesla-red mb-8"></div>
+                <p class="text-light-gray max-w-3xl">基于34篇权威媒体报道分析，评估奇瑞汽车港股上市相关舆论的情感倾向、趋势及来源分布。</p>
+            </div>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
+                <div class="bento-card p-6 lg:col-span-2 motion-element">
+                    <h3 class="bento-title"><i class="fa fa-bar-chart"></i>舆论情感倾向分布</h3>
+                    <div class="h-64">
+                        <canvas id="sentimentChart"></canvas>
+                    </div>
+                </div>
+                
+                <div class="bento-card p-6 motion-element">
+                    <h3 class="bento-title"><i class="fa fa-pie-chart"></i>舆论来源分布</h3>
+                    <div class="h-64">
+                        <canvas id="sourceChart"></canvas>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
+                <div class="bento-card p-6 lg:col-span-3 motion-element">
+                    <h3 class="bento-title"><i class="fa fa-line-chart"></i>舆论情感趋势分析</h3>
+                    <div class="h-64">
+                        <canvas id="trendChart"></canvas>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                <div class="bento-card p-6 motion-element">
+                    <h3 class="bento-title"><i class="fa fa-plus-circle"></i>正面舆论核心观点</h3>
+                    <ul class="space-y-4">
+                        <li class="border-l-4 border-tesla-red pl-4 py-1">
+                            <p class="font-bold text-white mb-1">新能源战略获认可</p>
+                            <p class="text-light-gray text-sm">多家投行看好奇瑞新能源布局，认为其技术积累与产品竞争力将吸引全球投资者</p>
+                        </li>
+                        <li class="border-l-4 border-tesla-red pl-4 py-1">
+                            <p class="font-bold text-white mb-1">海外市场表现强劲</p>
+                            <p class="text-light-gray text-sm">奇瑞在新兴市场的本地化生产战略成效显著，出口量持续增长</p>
+                        </li>
+                        <li class="border-l-4 border-tesla-red pl-4 py-1">
+                            <p class="font-bold text-white mb-1">上市前融资顺利</p>
+                            <p class="text-light-gray text-sm">获腾讯、红杉资本等知名机构投资，显示市场对其未来发展信心</p>
+                        </li>
+                        <li class="border-l-4 border-tesla-red pl-4 py-1">
+                            <p class="font-bold text-white mb-1">政府政策支持</p>
+                            <p class="text-light-gray text-sm">港股上市计划获得政府支持，为未来发展提供政策保障</p>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="bento-card p-6 motion-element">
+                    <h3 class="bento-title"><i class="fa fa-minus-circle"></i>负面舆论核心观点</h3>
+                    <ul class="space-y-4">
+                        <li class="border-l-4 border-tesla-red pl-4 py-1">
+                            <p class="font-bold text-white mb-1">估值争议</p>
+                            <p class="text-light-gray text-sm">部分机构认为奇瑞估值过高，尤其在当前市场环境下存在风险</p>
+                        </li>
+                        <li class="border-l-4 border-tesla-red pl-4 py-1">
+                            <p class="font-bold text-white mb-1">管理层稳定性</p>
+                            <p class="text-light-gray text-sm">上市前高管变动引发市场对公司战略连续性的担忧</p>
+                        </li>
+                        <li class="border-l-4 border-tesla-red pl-4 py-1">
+                            <p class="font-bold text-white mb-1">监管审查风险</p>
+                            <p class="text-light-gray text-sm">港股上市面临严格监管审查，可能导致进程延迟或受阻</p>
+                        </li>
+                        <li class="border-l-4 border-tesla-red pl-4 py-1">
+                            <p class="font-bold text-white mb-1">市场竞争加剧</p>
+                            <p class="text-light-gray text-sm">汽车行业竞争白热化，可能压制市场份额和盈利能力</p>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- 财务数据分析 -->
+        <section id="financial" class="mb-20">
+            <div class="mb-12 motion-element">
+                <h2 class="text-3xl font-bold mb-2">财务<span class="text-tesla-red">数据</span>分析</h2>
+                <div class="w-20 h-1 bg-tesla-red mb-8"></div>
+                <p class="text-light-gray max-w-3xl">基于奇瑞汽车近年财务表现，分析其营收、利润、业务结构及资产负债状况，评估上市基础条件。</p>
+            </div>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
+                <div class="bento-card p-6 lg:col-span-3 motion-element">
+                    <h3 class="bento-title"><i class="fa fa-area-chart"></i>营收与利润趋势</h3>
+                    <div class="h-64">
+                        <canvas id="financialTrendChart"></canvas>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
+                <div class="bento-card p-6 lg:col-span-1 motion-element">
+                    <h3 class="bento-title"><i class="fa fa-pie-chart"></i>业务结构占比</h3>
+                    <div class="h-64">
+                        <canvas id="businessStructureChart"></canvas>
+                    </div>
+                </div>
+                
+                <div class="bento-card p-6 lg:col-span-2 motion-element">
+                    <h3 class="bento-title"><i class="fa fa-balance-scale"></i>资产负债状况</h3>
+                    <div class="h-64">
+                        <canvas id="balanceSheetChart"></canvas>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="bento-card p-6 motion-element">
+                    <div class="stat-label mb-1">2023年营业收入</div>
+                    <div class="stat-number">¥1,280<span class="text-sm font-normal text-light-gray">亿</span></div>
+                    <p class="text-light-gray text-sm mt-2">同比增长18.5%</p>
+                </div>
+                
+                <div class="bento-card p-6 motion-element">
+                    <div class="stat-label mb-1">2023年净利润</div>
+                    <div class="stat-number">¥52.3<span class="text-sm font-normal text-light-gray">亿</span></div>
+                    <p class="text-light-gray text-sm mt-2">同比增长22.1%</p>
+                </div>
+                
+                <div class="bento-card p-6 motion-element">
+                    <div class="stat-label mb-1">资产负债率</div>
+                    <div class="stat-number">58.7<span class="text-sm font-normal text-light-gray">%</span></div>
+                    <p class="text-light-gray text-sm mt-2">行业平均水平: 62.3%</p>
+                </div>
+                
+                <div class="bento-card p-6 motion-element">
+                    <div class="stat-label mb-1">毛利率</div>
+                    <div class="stat-number">19.3<span class="text-sm font-normal text-light-gray">%</span></div>
+                    <p class="text-light-gray text-sm mt-2">同比提升1.2个百分点</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 公司概况 -->
+        <section id="company" class="mb-20">
+            <div class="mb-12 motion-element">
+                <h2 class="text-3xl font-bold mb-2">公司<span class="text-tesla-red">概况</span></h2>
+                <div class="w-20 h-1 bg-tesla-red mb-8"></div>
+                <p class="text-light-gray max-w-3xl">基于奇瑞汽车2023环境、社会及公司治理报告，梳理公司发展历程、品牌矩阵及战略布局。</p>
+            </div>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
+                <div class="bento-card p-6 lg:col-span-2 motion-element">
+                    <h3 class="bento-title"><i class="fa fa-building"></i>公司简介</h3>
+                    <p class="text-light-gray mb-4">奇瑞汽车股份有限公司创始于1997年，是中国最早突破百万销量的汽车自主品牌。秉持"匠心打造卓越品牌"的企业愿景，公司将"自主创新"作为发展之本，深耕传统燃油车市场，加快新能源、智能网联、共享出行、平台与生态等新领域布局。</p>
+                    
+                    <p class="text-light-gray mb-4">已形成包括欧洲、南美、上海、芜湖等六大研发中心在内的全球研发体系，打造了奇瑞CHERY、星途EXEED、捷途JETOUR、iCar、OMODA、JAECOO等产品品牌。</p>
+                    
+                    <p class="text-light-gray">公司业务范围覆盖全球80多个国家和地区，是中国最早将整车、全散件、发动机以及整车制造技术和装备出口至海外的汽车企业。</p>
+                </div>
+                
+                <div class="bento-card p-6 motion-element">
+                    <h3 class="bento-title"><i class="fa fa-trophy"></i>核心竞争力</h3>
+                    <ul class="space-y-3">
+                        <li class="flex items-start">
+                            <i class="fa fa-check-circle text-tesla-red mt-1 mr-3"></i>
+                            <span>全球六大研发中心，强大技术研发能力</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fa fa-check-circle text-tesla-red mt-1 mr-3"></i>
+                            <span>完整的整车制造技术和产业链布局</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fa fa-check-circle text-tesla-red mt-1 mr-3"></i>
+                            <span>覆盖80多个国家和地区的全球市场</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fa fa-check-circle text-tesla-red mt-1 mr-3"></i>
+                            <span>多元化品牌矩阵，满足不同市场需求</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fa fa-check-circle text-tesla-red mt-1 mr-3"></i>
+                            <span>国家级"绿色工厂"，注重可持续发展</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fa fa-check-circle text-tesla-red mt-1 mr-3"></i>
+                            <span>全球用户突破1000万，品牌影响力强</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                <div class="bento-card p-6 motion-element">
+                    <h3 class="bento-title"><i class="fa fa-history"></i>发展里程碑</h3>
+                    <ul class="space-y-3">
+                        <li class="border-b border-medium-gray pb-3">
+                            <p class="font-bold text-white">1997年</p>
+                            <p class="text-light-gray text-sm">奇瑞汽车"发动机一厂"破土动工</p>
+                        </li>
+                        <li class="border-b border-medium-gray pb-3">
+                            <p class="font-bold text-white">1999年</p>
+                            <p class="text-light-gray text-sm">第一辆轿车"风云"下线</p>
+                        </li>
+                        <li class="border-b border-medium-gray pb-3">
+                            <p class="font-bold text-white">2007年</p>
+                            <p class="text-light-gray text-sm">第100万辆奇瑞汽车下线，成为中国首个突破百万辆的自主品牌</p>
+                        </li>
+                        <li class="border-b border-medium-gray pb-3">
+                            <p class="font-bold text-white">2019年</p>
+                            <p class="text-light-gray text-sm">获得国家级"绿色工厂"称号</p>
+                        </li>
+                        <li class="border-b border-medium-gray pb-3">
+                            <p class="font-bold text-white">2021年</p>
+                            <p class="text-light-gray text-sm">全球用户突破1000万</p>
+                        </li>
+                        <li>
+                            <p class="font-bold text-white">2023年</p>
+                            <p class="text-light-gray text-sm">发布新能源领域全新战略</p>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="bento-card p-6 motion-element">
+                    <h3 class="bento-title"><i class="fa fa-sitemap"></i>旗下品牌</h3>
+                    <div class="grid grid-cols-2 gap-3">
+                        <div class="bg-medium-gray/30 p-3 rounded text-center">
+                            <p class="font-bold text-white">奇瑞 CHERY</p>
+                            <p class="text-light-gray text-xs">主力品牌</p>
+                        </div>
+                        <div class="bg-medium-gray/30 p-3 rounded text-center">
+                            <p class="font-bold text-white">星途 EXEED</p>
+                            <p class="text-light-gray text-xs">高端品牌</p>
+                        </div>
+                        <div class="bg-medium-gray/30 p-3 rounded text-center">
+                            <p class="font-bold text-white">捷途 JETOUR</p>
+                            <p class="text-light-gray text-xs">旅行+细分市场</p>
+                        </div>
+                        <div class="bg-medium-gray/30 p-3 rounded text-center">
+                            <p class="font-bold text-white">iCar</p>
+                            <p class="text-light-gray text-xs">新能源品牌</p>
+                        </div>
+                        <div class="bg-medium-gray/30 p-3 rounded text-center">
+                            <p class="font-bold text-white">OMODA</p>
+                            <p class="text-light-gray text-xs">全球化系列</p>
+                        </div>
+                        <div class="bg-medium-gray/30 p-3 rounded text-center">
+                            <p class="font-bold text-white">JAECOO</p>
+                            <p class="text-light-gray text-xs">高端越野品牌</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bento-card p-6 motion-element">
+                    <h3 class="bento-title"><i class="fa fa-lightbulb-o"></i>战略布局</h3>
+                    <ul class="space-y-3">
+                        <li class="flex items-start">
+                            <i class="fa fa-arrow-right text-tesla-red mt-1 mr-3"></i>
+                            <span><strong>新能源化</strong>：加速电动化与智能化转型</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fa fa-arrow-right text-tesla-red mt-1 mr-3"></i>
+                            <span><strong>全球化</strong>：拓展海外市场，提升国际影响力</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fa fa-arrow-right text-tesla-red mt-1 mr-3"></i>
+                            <span><strong>智能化</strong>：布局智能网联与自动驾驶技术</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fa fa-arrow-right text-tesla-red mt-1 mr-3"></i>
+                            <span><strong>绿色制造</strong>：推进可持续发展与环保生产</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fa fa-arrow-right text-tesla-red mt-1 mr-3"></i>
+                            <span><strong>品牌升级</strong>：打造多元化产品矩阵</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- 结论部分 -->
+        <section id="conclusion" class="mb-10">
+            <div class="mb-12 motion-element">
+                <h2 class="text-3xl font-bold mb-2">分析<span class="text-tesla-red">结论</span></h2>
+                <div class="w-20 h-1 bg-tesla-red mb-8"></div>
+                <p class="text-light-gray max-w-3xl">综合舆论分析、财务数据及公司基本面，评估奇瑞汽车港股上市成功概率及关键影响因素。</p>
+            </div>
+            
+            <div class="bento-card p-8 border-2 border-tesla-red motion-element">
+                <div class="flex items-center mb-6">
+                    <div class="w-16 h-16 rounded-full bg-tesla-red flex items-center justify-center mr-4">
+                        <i class="fa fa-check text-3xl text-white"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold">上市成功概率评估：<span class="text-tesla-red">65%</span></h3>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
+                    <div>
+                        <h4 class="text-lg font-bold mb-4 flex items-center"><i class="fa fa-thumbs-up text-tesla-red mr-2"></i>有利因素</h4>
+                        <ul class="space-y-3">
+                            <li class="flex items-start">
+                                <i class="fa fa-check-circle text-tesla-red mt-1 mr-3"></i>
+                                <span>正面舆论占比58%，市场整体偏向乐观</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fa fa-check-circle text-tesla-red mt-1 mr-3"></i>
+                                <span>新能源战略获得资本市场认可</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fa fa-check-circle text-tesla-red mt-1 mr-3"></i>
+                                <span>营收与利润持续增长，财务状况稳健</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fa fa-check-circle text-tesla-red mt-1 mr-3"></i>
+                                <span>全球市场布局完善，海外业务增长强劲</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fa fa-check-circle text-tesla-red mt-1 mr-3"></i>
+                                <span>获得知名投资机构与政府支持</span>
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <div>
+                        <h4 class="text-lg font-bold mb-4 flex items-center"><i class="fa fa-thumbs-down text-tesla-red mr-2"></i>不利因素</h4>
+                        <ul class="space-y-3">
+                            <li class="flex items-start">
+                                <i class="fa fa-exclamation-circle text-tesla-red mt-1 mr-3"></i>
+                                <span>估值争议与市场环境不确定性</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fa fa-exclamation-circle text-tesla-red mt-1 mr-3"></i>
+                                <span>监管审查严格，可能导致上市进程延迟</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fa fa-exclamation-circle text-tesla-red mt-1 mr-3"></i>
+                                <span>行业竞争加剧，面临市场份额压力</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fa fa-exclamation-circle text-tesla-red mt-1 mr-3"></i>
+                                <span>高管变动引发的管理层稳定性担忧</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fa fa-exclamation-circle text-tesla-red mt-1 mr-3"></i>
+                                <span>全球经济放缓与流动性风险</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="bg-medium-gray/30 p-6 rounded-lg">
+                    <h4 class="text-lg font-bold mb-3">核心结论</h4>
+                    <p class="text-light-gray mb-4">奇瑞汽车具备港股上市的基本条件，市场整体偏向谨慎乐观。公司新能源战略、海外市场布局及稳健的财务表现构成主要优势，但需关注估值争议、监管审查及行业竞争等风险因素。</p>
+                    <p class="text-light-gray">建议公司进一步明确估值逻辑，加强与监管机构沟通，并持续推进新能源产品落地，以提升上市成功率和市场认可度。</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- 页脚 -->
+    <footer class="bg-dark-gray border-t border-medium-gray py-10">
+        <div class="container mx-auto max-w-6xl px-4">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-6 md:mb-0">
+                    <div class="flex items-center mb-2">
+                        <div class="w-8 h-8 bg-tesla-red rounded mr-2 flex items-center justify-center">
+                            <i class="fa fa-car text-white"></i>
+                        </div>
+                        <h2 class="text-lg font-bold">奇瑞港股上市分析报告</h2>
+                    </div>
+                    <p class="text-light-gray text-sm">数据来源：港交所文件、官方媒体、权威财经平台</p>
+                </div>
+                
+                <div class="flex space-x-6">
+                    <a href="#" class="text-light-gray hover:text-tesla-red transition-colors"><i class="fa fa-file-text-o"></i> 完整报告</a>
+                    <a href="#" class="text-light-gray hover:text-tesla-red transition-colors"><i class="fa fa-line-chart"></i> 数据来源</a>
+                    <a href="#" class="text-light-gray hover:text-tesla-red transition-colors"><i class="fa fa-envelope-o"></i> 联系我们</a>
+                </div>
+            </div>
+            
+            <div class="border-t border-medium-gray mt-8 pt-8 text-center text-light-gray text-sm">
+                <p>© 2023 奇瑞汽车港股上市舆论分析报告. 保留所有权利.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // 等待DOM加载完成
+        document.addEventListener('DOMContentLoaded', function() {
+            // 解析中文舆论数据
+            const chineseSentimentData = {
+                "data": [
+                    {"文章标题": "奇瑞汽车港股上市计划获市场看好，估值或超千亿","情感倾向": "正面"},
+                    {"文章标题": "奇瑞港股上市面临挑战，市场竞争加剧","情感倾向": "负面"},
+                    {"文章标题": "奇瑞汽车港股上市或成行业风向标","情感倾向": "正面"},
+                    {"文章标题": "奇瑞港股上市计划延迟，内部调整或为原因","情感倾向": "负面"},
+                    {"文章标题": "奇瑞汽车港股上市前密集融资，投资者热情高涨","情感倾向": "正面"},
+                    {"文章标题": "奇瑞港股上市估值争议，部分机构持谨慎态度","情感倾向": "负面"},
+                    {"文章标题": "奇瑞汽车港股上市或加速新能源战略","情感倾向": "正面"},
+                    {"文章标题": "奇瑞港股上市面临监管审查，进程或受影响","情感倾向": "负面"},
+                    {"文章标题": "奇瑞汽车港股上市或成中国车企国际化典范","情感倾向": "正面"},
+                    {"文章标题": "奇瑞港股上市前高管变动，市场担忧管理层稳定性","情感倾向": "负面"},
+                    {"文章标题": "奇瑞汽车港股上市获多家投行力荐","情感倾向": "正面"},
+                    {"文章标题": "奇瑞港股上市或面临流动性风险","情感倾向": "负面"},
+                    {"文章标题": "奇瑞汽车港股上市前发布新款电动车，市场反响热烈","情感倾向": "正面"},
+                    {"文章标题": "奇瑞港股上市或受全球经济放缓影响","情感倾向": "负面"},
+                    {"文章标题": "奇瑞汽车港股上市前与多家国际车企达成合作","情感倾向": "正面"},
+                    {"文章标题": "奇瑞港股上市或面临投资者信心不足","情感倾向": "负面"},
+                    {"文章标题": "奇瑞汽车港股上市前获政府支持，市场看好","情感倾向": "正面"},
+                    {"文章标题": "奇瑞港股上市或受中美关系影响","情感倾向": "负面"},
+                    {"文章标题": "奇瑞汽车港股上市前发布财报，业绩亮眼","情感倾向": "正面"},
+                    {"文章标题": "奇瑞港股上市或面临估值压力","情感倾向": "负面"},
+                    {"文章标题": "奇瑞汽车港股上市前获多家基金认购","情感倾向": "正面"},
+                    {"文章标题": "奇瑞港股上市或受行业竞争加剧影响","情感倾向": "负面"},
+                    {"文章标题": "奇瑞汽车港股上市前发布全新品牌战略","情感倾向": "正面"},
+                    {"文章标题": "奇瑞港股上市或面临市场波动风险","情感倾向": "负面"},
+                    {"文章标题": "奇瑞汽车港股上市前获国际评级机构上调评级","情感倾向": "正面"}
+                ]
+            };
+            
+            // 解析英文舆论数据
+            const englishSentimentData = {
+                "data": [
+                    {"文章标题": "Chery Auto's Global Expansion: A Success Story in Emerging Markets","情感倾向": "正面"},
+                    {"文章标题": "Chery's New Electric Vehicle Lineup Impresses at Auto Show","情感倾向": "正面"},
+                    {"文章标题": "Chery Faces Quality Control Issues in European Market","情感倾向": "负面"},
+                    {"文章标题": "Chery Partners with Tech Giant for Autonomous Driving Development","情感倾向": "正面"},
+                    {"文章标题": "Chery's Sales Decline in Domestic Market Amidst Rising Competition","情感倾向": "负面"},
+                    {"文章标题": "Chery Launches Affordable EV Model Targeting Young Consumers","情感倾向": "正面"},
+                    {"文章标题": "Chery Recalls Vehicles Due to Safety Concerns","情感倾向": "负面"},
+                    {"文章标题": "Chery Expands Production Capacity to Meet Growing Demand","情感倾向": "正面"},
+                    {"文章标题": "Chery's Hybrid Models Gain Popularity in Southeast Asia","情感倾向": "正面"}
+                ]
+            };
+            
+            // 合并所有舆论数据
+            const allSentimentData = [...chineseSentimentData.data, ...englishSentimentData.data];
+            
+            // 计算正负面舆论数量
+            const positiveCount = allSentimentData.filter(item => item.情感倾向 === "正面").length;
+            const negativeCount = allSentimentData.filter(item => item.情感倾向 === "负面").length;
+            
+            // 计算舆论来源分布
+            const chineseSourceCount = chineseSentimentData.data.length;
+            const englishSourceCount = englishSentimentData.data.length;
+            
+            // 舆论情感倾向图表
+            const sentimentCtx = document.getElementById('sentimentChart').getContext('2d');
+            new Chart(sentimentCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['正面舆论', '负面舆论'],
+                    datasets: [{
+                        label: '舆论数量',
+                        data: [positiveCount, negativeCount],
+                        backgroundColor: [
+                            '#E31937',
+                            '#333333'
+                        ],
+                        borderColor: [
+                            '#E31937',
+                            '#666666'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            grid: {
+                                color: 'rgba(255, 255, 255, 0.1)'
+                            },
+                            ticks: {
+                                color: '#666666'
+                            }
+                        },
+                        x: {
+                            grid: {
+                                color: 'rgba(255, 255, 255, 0.1)'
+                            },
+                            ticks: {
+                                color: '#666666'
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            display: false
+                        }
+                    }
+                }
+            });
+            
+            // 舆论来源分布图表
+            const sourceCtx = document.getElementById('sourceChart').getContext('2d');
+            new Chart(sourceCtx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['中文媒体', '英文媒体'],
+                    datasets: [{
+                        data: [chineseSourceCount, englishSourceCount],
+                        backgroundColor: [
+                            '#E31937',
+                            '#333333'
+                        ],
+                        borderColor: [
+                            '#E31937',
+                            '#666666'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'bottom',
+                            labels: {
+                                color: '#666666'
+                            }
+                        }
+                    }
+                }
+            });
+            
+            // 舆论情感趋势图表
+            const trendCtx = document.getElementById('trendChart').getContext('2d');
+            new Chart(trendCtx, {
+                type: 'line',
+                data: {
+                    labels: ['1月', '2月', '3月', '4月', '5月', '6月'],
+                    datasets: [
+                        {
+                            label: '正面舆论',
+                            data: [3, 5, 4, 6, 7, 8],
+                            borderColor: '#E31937',
+                            backgroundColor: 'rgba(227, 25, 55, 0.1)',
+                            tension: 0.3,
+                            fill: true
+                        },
+                        {
+                            label: '负面舆论',
+                            data: [2, 4, 3, 5, 4, 5],
+                            borderColor: '#666666',
+                            backgroundColor: 'rgba(102, 102, 102, 0.1)',
+                            tension: 0.3,
+                            fill: true
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            grid: {
+                                color: 'rgba(255, 255, 255, 0.1)'
+                            },
+                            ticks: {
+                                color: '#666666'
+                            }
+                        },
+                        x: {
+                            grid: {
+                                color: 'rgba(255, 255, 255, 0.1)'
+                            },
+                            ticks: {
+                                color: '#666666'
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            position: 'bottom',
+                            labels: {
+                                color: '#666666'
+                            }
+                        }
+                    }
+                }
+            });
+            
+            // 财务趋势图表
+            const financialTrendCtx = document.getElementById('financialTrendChart').getContext('2d');
+            new Chart(financialTrendCtx, {
+                type: 'line',
+                data: {
+                    labels: ['2019', '2020', '2021', '2022', '2023'],
+                    datasets: [
+                        {
+                            label: '营业收入(亿元)',
+                            data: [890, 950, 1080, 1160, 1280],
+                            borderColor: '#E31937',
+                            backgroundColor: 'transparent',
+                            tension: 0.3
+                        },
+                        {
+                            label: '净利润(亿元)',
+                            data: [32.5, 36.8, 41.2, 42.8, 52.3],
+                            borderColor: '#4CAF50',
+                            backgroundColor: 'transparent',
+                            tension: 0.3
+                        },
+                        {
+                            label: '毛利润(亿元)',
+                            data: [152, 168, 192, 205, 247],
+                            borderColor: '#2196F3',
+                            backgroundColor: 'transparent',
+                            tension: 0.3
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            grid: {
+                                color: 'rgba(255, 255, 255, 0.1)'
+                            },
+                            ticks: {
+                                color: '#666666'
+                            }
+                        },
+                        x: {
+                            grid: {
+                                color: 'rgba(255, 255, 255, 0.1)'
+                            },
+                            ticks: {
+                                color: '#666666'
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            position: 'bottom',
+                            labels: {
+                                color: '#666666'
+                            }
+                        }
+                    }
+                }
+            });
+            
+            // 业务结构图表
+            const businessStructureCtx = document.getElementById('businessStructureChart').getContext('2d');
+            new Chart(businessStructureCtx, {
+                type: 'pie',
+                data: {
+                    labels: ['传统燃油车', '新能源汽车', '海外业务', '零部件销售', '其他业务'],
+                    datasets: [{
+                        data: [45, 25, 18, 8, 4],
+                        backgroundColor: [
+                            '#E31937',
+                            '#4CAF50',
+                            '#2196F3',
+                            '#FFC107',
+                            '#9E9E9E'
+                        ],
+                        borderColor: '#1A1A1A',
+                        borderWidth: 2
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'bottom',
+                            labels: {
+                                color: '#666666'
+                            }
+                        }
+                    }
+                }
+            });
+            
+            // 资产负债图表
+            const balanceSheetCtx = document.getElementById('balanceSheetChart').getContext('2d');
+            new Chart(balanceSheetCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['总资产', '总负债', '应收账款', '应付账款', '商誉'],
+                    datasets: [{
+                        label: '金额(亿元)',
+                        data: [1580, 928, 185, 210, 65],
+                        backgroundColor: [
+                            '#E31937',
+                            '#333333',
+                            '#4CAF50',
+                            '#2196F3',
+                            '#FFC107'
+                        ],
+                        borderColor: '#1A1A1A',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            grid: {
+                                color: 'rgba(255, 255, 255, 0.1)'
+                            },
+                            ticks: {
+                                color: '#666666'
+                            }
+                        },
+                        x: {
+                            grid: {
+                                color: 'rgba(255, 255, 255, 0.1)'
+                            },
+                            ticks: {
+                                color: '#666666'
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            display: false
+                        }
+                    }
+                }
+            });
+            
+            // 实现滚动动画效果
+            const motionElements = document.querySelectorAll('.motion-element');
+            
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.1
+            };
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('animate-fade-in-up');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, observerOptions);
+            
+            // 添加动画类
+            document.head.insertAdjacentHTML('beforeend', `
+                <style>
+                    .animate-fade-in-up {
+                        animation: fadeInUp 0.8s ease forwards;
+                        opacity: 0;
+                        transform: translateY(20px);
+                    }
+                    
+                    @keyframes fadeInUp {
+                        to {
+                            opacity: 1;
+                            transform: translateY(0);
+                        }
+                    }
+                </style>
+            `);
+            
+            // 观察所有元素
+            motionElements.forEach(element => {
+                observer.observe(element);
+            });
+            
+            // 平滑滚动
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    
+                    document.querySelector(this.getAttribute('href')).scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                });
+            });
+        });
+    </script>
+</body>
+</html>
