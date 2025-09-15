@@ -1,0 +1,1030 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>视频内容安全分析平台</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Font Awesome CDN -->
+  <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  <!-- Framer Motion CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/framer-motion@10.16.4/dist/framer-motion.min.js"></script>
+  <!-- Chart.js CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.8/dist/chart.umd.min.js"></script>
+  
+  <!-- Tailwind 配置 -->
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            'tesla-red': '#E31937',
+            'dark-bg': '#000000',
+            'gray-light': '#f3f4f6',
+            'gray-medium': '#9ca3af',
+            'gray-dark': '#4b5563'
+          },
+          fontFamily: {
+            sans: ['Inter', 'system-ui', 'sans-serif'],
+          },
+        },
+      }
+    }
+  </script>
+  
+  <style type="text/tailwindcss">
+    @layer utilities {
+      .content-auto {
+        content-visibility: auto;
+      }
+      .gradient-red {
+        background: linear-gradient(90deg, #E31937 0%, rgba(227, 25, 55, 0) 100%);
+      }
+      .gradient-red-reverse {
+        background: linear-gradient(90deg, rgba(227, 25, 55, 0) 0%, #E31937 100%);
+      }
+      .text-shadow {
+        text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+      }
+      .border-gradient {
+        border-image: linear-gradient(to right, #E31937, rgba(227, 25, 55, 0)) 1;
+      }
+    }
+  </style>
+</head>
+<body class="bg-dark-bg text-white font-sans min-h-screen">
+  <!-- 导航栏 -->
+  <nav class="fixed top-0 left-0 w-full z-50 bg-dark-bg/80 backdrop-blur-md border-b border-tesla-red/30">
+    <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+      <div class="flex items-center space-x-2">
+        <i class="fa fa-shield text-tesla-red text-2xl"></i>
+        <h1 class="text-xl md:text-2xl font-bold tracking-tight">视频安全分析平台</h1>
+      </div>
+      <div class="hidden md:flex space-x-8">
+        <a href="#cover-analysis" class="hover:text-tesla-red transition-colors duration-300">封面分析</a>
+        <a href="#content-analysis" class="hover:text-tesla-red transition-colors duration-300">内容分析</a>
+        <a href="#comment-analysis" class="hover:text-tesla-red transition-colors duration-300">评论分析</a>
+      </div>
+      <button class="md:hidden text-white">
+        <i class="fa fa-bars text-xl"></i>
+      </button>
+    </div>
+  </nav>
+
+  <!-- 英雄区域 -->
+  <header class="pt-32 pb-20 px-4 relative overflow-hidden">
+    <div class="absolute top-0 right-0 w-full h-full gradient-red opacity-10"></div>
+    <div class="container mx-auto relative z-10">
+      <div class="max-w-3xl mx-auto text-center">
+        <h1 class="text-4xl md:text-6xl font-bold mb-6 leading-tight">
+          视频内容<span class="text-tesla-red">安全分析</span>报告
+        </h1>
+        <p class="text-gray-medium text-lg md:text-xl mb-8">
+          全面评估视频封面、内容及评论的安全风险，提供专业合规建议
+        </p>
+        <div class="flex flex-col sm:flex-row justify-center gap-4">
+          <a href="#cover-analysis" class="bg-tesla-red hover:bg-tesla-red/80 text-white font-bold py-3 px-8 rounded-sm transition-all duration-300 transform hover:scale-105">
+            查看分析报告
+          </a>
+          <a href="#risk-summary" class="border border-tesla-red text-tesla-red hover:bg-tesla-red/10 font-bold py-3 px-8 rounded-sm transition-all duration-300">
+            风险概览
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="absolute bottom-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-tesla-red/50 to-transparent"></div>
+  </header>
+
+  <!-- 主要内容区域 -->
+  <main class="container mx-auto px-4 py-12">
+    <!-- 风险概览卡片 -->
+    <section id="risk-summary" class="mb-20">
+      <div class="flex items-center mb-8">
+        <div class="w-10 h-10 rounded-full bg-tesla-red/20 flex items-center justify-center mr-4">
+          <i class="fa fa-exclamation-triangle text-tesla-red"></i>
+        </div>
+        <h2 class="text-3xl font-bold">风险评估概览</h2>
+      </div>
+      
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <!-- 总体风险卡片 -->
+        <div class="bg-gray-dark/20 backdrop-blur-sm p-6 border border-tesla-red/30 rounded-sm relative overflow-hidden group">
+          <div class="absolute top-0 right-0 w-32 h-32 gradient-red opacity-0 group-hover:opacity-20 transition-opacity duration-500"></div>
+          <div class="relative z-10">
+            <div class="flex justify-between items-start mb-4">
+              <h3 class="text-xl font-bold">总体风险等级</h3>
+              <span class="bg-tesla-red text-white text-xs font-bold px-3 py-1">高风险</span>
+            </div>
+            <div class="mb-4">
+              <div class="flex justify-between text-sm mb-1">
+                <span>风险评分</span>
+                <span class="text-tesla-red font-bold">7.8/10</span>
+              </div>
+              <div class="w-full bg-gray-dark/50 h-2">
+                <div class="bg-tesla-red h-2" style="width: 78%"></div>
+              </div>
+            </div>
+            <p class="text-gray-medium text-sm">该视频内容存在多项安全风险，包括数据收集合规性、重要数据出境安全及数据安全管理缺失等问题。</p>
+          </div>
+        </div>
+        
+        <!-- 风险分布卡片 -->
+        <div class="bg-gray-dark/20 backdrop-blur-sm p-6 border border-tesla-red/30 rounded-sm relative overflow-hidden group">
+          <div class="absolute top-0 right-0 w-32 h-32 gradient-red opacity-0 group-hover:opacity-20 transition-opacity duration-500"></div>
+          <div class="relative z-10">
+            <h3 class="text-xl font-bold mb-4">风险分布</h3>
+            <div class="h-40">
+              <canvas id="riskDistributionChart"></canvas>
+            </div>
+            <div class="grid grid-cols-3 gap-2 mt-4 text-center text-sm">
+              <div>
+                <div class="text-tesla-red font-bold">35%</div>
+                <div class="text-gray-medium">数据收集</div>
+              </div>
+              <div>
+                <div class="text-tesla-red font-bold">40%</div>
+                <div class="text-gray-medium">数据出境</div>
+              </div>
+              <div>
+                <div class="text-tesla-red font-bold">25%</div>
+                <div class="text-gray-medium">安全管理</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- 影响范围卡片 -->
+        <div class="bg-gray-dark/20 backdrop-blur-sm p-6 border border-tesla-red/30 rounded-sm relative overflow-hidden group">
+          <div class="absolute top-0 right-0 w-32 h-32 gradient-red opacity-0 group-hover:opacity-20 transition-opacity duration-500"></div>
+          <div class="relative z-10">
+            <h3 class="text-xl font-bold mb-4">影响范围</h3>
+            <ul class="space-y-3">
+              <li class="flex items-start">
+                <i class="fa fa-user text-tesla-red mt-1 mr-3"></i>
+                <div>
+                  <div class="font-medium">用户层面</div>
+                  <div class="text-gray-medium text-sm">个人隐私数据可能被非法获取、滥用</div>
+                </div>
+              </li>
+              <li class="flex items-start">
+                <i class="fa fa-building text-tesla-red mt-1 mr-3"></i>
+                <div>
+                  <div class="font-medium">平台层面</div>
+                  <div class="text-gray-medium text-sm">面临监管处罚，影响合规形象</div>
+                </div>
+              </li>
+              <li class="flex items-start">
+                <i class="fa fa-users text-tesla-red mt-1 mr-3"></i>
+                <div>
+                  <div class="font-medium">社会层面</div>
+                  <div class="text-gray-medium text-sm">破坏数据安全管理秩序，降低公众信任</div>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    <!-- Bento Grid 主要分析内容 -->
+    <section class="grid grid-cols-1 md:grid-cols-12 gap-6 mb-20">
+      <!-- 视频封面分析 -->
+      <section id="cover-analysis" class="md:col-span-8 bg-gray-dark/20 backdrop-blur-sm border border-tesla-red/30 p-6 rounded-sm overflow-hidden group">
+        <div class="absolute top-0 right-0 w-40 h-40 gradient-red opacity-0 group-hover:opacity-20 transition-opacity duration-500"></div>
+        <div class="relative z-10">
+          <div class="flex items-center mb-6">
+            <div class="w-8 h-8 rounded-full bg-tesla-red/20 flex items-center justify-center mr-3">
+              <i class="fa fa-image text-tesla-red"></i>
+            </div>
+            <h2 class="text-2xl font-bold">视频封面分析</h2>
+          </div>
+          
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div class="relative overflow-hidden border border-gray-dark/50 group">
+              <img src="https://p26-sign.douyinpic.com/tos-cn-i-dy/ba76a3cc06444bc297aa370000c4b0bd~tplv-dy-resize-walign-adapt-aq:540:q75.webp?lk3s=138a59ce&x-expires=1759136400&x-signature=LmUs2Sw%2B0iDzg%2BH4WCYYl3T%2BRqY%3D&from=327834062&s=PackSourceEnum_DOUYIN_REFLOW&se=false&sc=cover&biz_tag=aweme_video&l=20250915173420D52ED2CE5AD7751C48E0" 
+                   alt="视频封面" 
+                   class="w-full h-auto object-cover transition-transform duration-700 group-hover:scale-105">
+              <div class="absolute bottom-0 left-0 w-full p-4 bg-gradient-to-t from-black/80 to-transparent">
+                <div class="flex justify-between items-center">
+                  <span class="font-medium">视频封面</span>
+                  <span class="bg-tesla-red/80 text-white text-xs px-2 py-1">待审核</span>
+                </div>
+              </div>
+            </div>
+            
+            <div>
+              <h3 class="text-lg font-bold mb-3">封面内容安全风险评估</h3>
+              <div class="space-y-4">
+                <div>
+                  <div class="flex justify-between text-sm mb-1">
+                    <span>合规性评分</span>
+                    <span class="text-tesla-red font-bold">6.5/10</span>
+                  </div>
+                  <div class="w-full bg-gray-dark/50 h-2">
+                    <div class="bg-tesla-red h-2" style="width: 65%"></div>
+                  </div>
+                </div>
+                
+                <div class="bg-gray-dark/30 p-3 rounded-sm">
+                  <h4 class="font-medium mb-2 flex items-center">
+                    <i class="fa fa-exclamation-circle text-tesla-red mr-2"></i>
+                    潜在风险点
+                  </h4>
+                  <ul class="text-sm text-gray-medium space-y-1">
+                    <li>• 封面文字涉及产品功能宣传，需确认是否符合广告法</li>
+                    <li>• 可能包含未经证实的产品功效描述</li>
+                    <li>• 缺少必要的免责声明和风险提示</li>
+                  </ul>
+                </div>
+                
+                <div>
+                  <h4 class="font-medium mb-2">审核建议</h4>
+                  <p class="text-sm text-gray-medium">建议添加明确的数据收集授权提示，删除或修改可能涉及违规的功能宣传内容，增加必要的合规声明。</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      
+      <!-- 审核状态卡片 -->
+      <div class="md:col-span-4 bg-gray-dark/20 backdrop-blur-sm border border-tesla-red/30 p-6 rounded-sm relative overflow-hidden group">
+        <div class="absolute top-0 right-0 w-32 h-32 gradient-red opacity-0 group-hover:opacity-20 transition-opacity duration-500"></div>
+        <div class="relative z-10">
+          <h3 class="text-xl font-bold mb-4">审核状态</h3>
+          <div class="flex items-center justify-between mb-6">
+            <span class="text-lg font-medium">内容安全审核</span>
+            <span class="bg-red-900/50 text-tesla-red font-bold px-3 py-1">未通过</span>
+          </div>
+          
+          <div class="space-y-4">
+            <div>
+              <div class="flex justify-between text-sm mb-1">
+                <span>封面审核</span>
+                <span class="text-tesla-red">需修改</span>
+              </div>
+              <div class="w-full bg-gray-dark/50 h-2">
+                <div class="bg-tesla-red h-2" style="width: 60%"></div>
+              </div>
+            </div>
+            
+            <div>
+              <div class="flex justify-between text-sm mb-1">
+                <span>内容审核</span>
+                <span class="text-tesla-red">未通过</span>
+              </div>
+              <div class="w-full bg-gray-dark/50 h-2">
+                <div class="bg-tesla-red h-2" style="width: 30%"></div>
+              </div>
+            </div>
+            
+            <div>
+              <div class="flex justify-between text-sm mb-1">
+                <span>评论审核</span>
+                <span class="text-tesla-red">高风险</span>
+              </div>
+              <div class="w-full bg-gray-dark/50 h-2">
+                <div class="bg-tesla-red h-2" style="width: 85%"></div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="mt-6 pt-4 border-t border-gray-dark/50">
+            <div class="flex justify-between items-center">
+              <span class="text-sm text-gray-medium">上次审核时间</span>
+              <span class="text-sm font-medium">2023-10-27 14:30</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- 视频内容分析 -->
+      <section id="content-analysis" class="md:col-span-12 bg-gray-dark/20 backdrop-blur-sm border border-tesla-red/30 p-6 rounded-sm overflow-hidden group">
+        <div class="absolute top-0 right-0 w-64 h-64 gradient-red opacity-0 group-hover:opacity-20 transition-opacity duration-500"></div>
+        <div class="relative z-10">
+          <div class="flex items-center mb-6">
+            <div class="w-8 h-8 rounded-full bg-tesla-red/20 flex items-center justify-center mr-3">
+              <i class="fa fa-film text-tesla-red"></i>
+            </div>
+            <h2 class="text-2xl font-bold">视频内容分析</h2>
+          </div>
+          
+          <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+            <div class="lg:col-span-2">
+              <h3 class="text-lg font-bold mb-4">内容安全匹配度分析</h3>
+              <div class="space-y-6">
+                <div class="bg-gray-dark/30 p-4 rounded-sm">
+                  <h4 class="font-medium mb-3">政策法规合规性</h4>
+                  <div class="space-y-3">
+                    <div class="flex items-start">
+                      <div class="mt-1 mr-3 text-tesla-red">
+                        <i class="fa fa-times-circle"></i>
+                      </div>
+                      <div>
+                        <div class="font-medium">《数据安全法》第三十二条</div>
+                        <div class="text-sm text-gray-medium">任何组织、个人收集数据，应当采取合法、正当的方式，不得窃取或者以其他非法方式获取数据。</div>
+                      </div>
+                    </div>
+                    
+                    <div class="flex items-start">
+                      <div class="mt-1 mr-3 text-tesla-red">
+                        <i class="fa fa-times-circle"></i>
+                      </div>
+                      <div>
+                        <div class="font-medium">《数据安全法》第三十一条</div>
+                        <div class="text-sm text-gray-medium">关键信息基础设施的运营者在中华人民共和国境内运营中收集和产生的重要数据的出境安全管理...</div>
+                      </div>
+                    </div>
+                    
+                    <div class="flex items-start">
+                      <div class="mt-1 mr-3 text-tesla-red">
+                        <i class="fa fa-times-circle"></i>
+                      </div>
+                      <div>
+                        <div class="font-medium">《数据安全法》第二十七条</div>
+                        <div class="text-sm text-gray-medium">开展数据处理活动应当依照法律、法规的规定，建立健全全流程数据安全管理制度...</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                
+                <div>
+                  <h4 class="font-medium mb-3">违规内容识别</h4>
+                  <div class="space-y-3">
+                    <div class="flex items-start">
+                      <div class="flex-shrink-0 w-24 text-sm text-gray-medium">数据收集方式</div>
+                      <div class="flex-1">
+                        <div class="font-medium">不合规</div>
+                        <div class="text-sm text-gray-medium">视频中"自动获取位置信息、通讯录好友数据"未明确说明收集目的、范围及获得用户明确授权，涉嫌违反"合法、正当收集数据"的要求。</div>
+                      </div>
+                    </div>
+                    
+                    <div class="flex items-start">
+                      <div class="flex-shrink-0 w-24 text-sm text-gray-medium">数据出境管理</div>
+                      <div class="flex-1">
+                        <div class="font-medium">违规</div>
+                        <div class="text-sm text-gray-medium">声称"同步至境外云服务器"，若涉及重要数据且未按规定履行出境安全管理程序，违反第三十一条关于重要数据出境的规定。</div>
+                      </div>
+                    </div>
+                    
+                    <div class="flex items-start">
+                      <div class="flex-shrink-0 w-24 text-sm text-gray-medium">安全管理制度</div>
+                      <div class="flex-1">
+                        <div class="font-medium">缺失</div>
+                        <div class="text-sm text-gray-medium">未提及已建立全流程数据安全管理制度及技术保障措施，不符合第二十七条要求。</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <div>
+              <h3 class="text-lg font-bold mb-4">内容安全风险评估</h3>
+              
+              <div class="h-60 mb-6">
+                <canvas id="contentRiskChart"></canvas>
+              </div>
+              
+              <div class="bg-gray-dark/30 p-4 rounded-sm mb-6">
+                <h4 class="font-medium mb-3">风险等级：<span class="text-tesla-red">高风险</span></h4>
+                <p class="text-sm text-gray-medium">该视频内容涉及用户核心隐私数据（位置信息、通讯录）的收集与跨境传输，可能导致用户数据泄露风险，属于数据安全敏感内容。</p>
+              </div>
+              
+              <div>
+                <h4 class="font-medium mb-3">风险影响分析</h4>
+                <ul class="space-y-2 text-sm">
+                  <li class="flex items-start">
+                    <i class="fa fa-user-o text-tesla-red mt-1 mr-2"></i>
+                    <span>用户隐私数据可能被非法获取、滥用</span>
+                  </li>
+                  <li class="flex items-start">
+                    <i class="fa fa-building-o text-tesla-red mt-1 mr-2"></i>
+                    <span>平台面临监管处罚，影响合规形象</span>
+                  </li>
+                  <li class="flex items-start">
+                    <i class="fa fa-users text-tesla-red mt-1 mr-2"></i>
+                    <span>破坏数据安全管理秩序，降低公众信任</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      
+      <!-- 优化建议 -->
+      <section class="md:col-span-4 bg-gray-dark/20 backdrop-blur-sm border border-tesla-red/30 p-6 rounded-sm overflow-hidden group">
+        <div class="absolute top-0 right-0 w-40 h-40 gradient-red opacity-0 group-hover:opacity-20 transition-opacity duration-500"></div>
+        <div class="relative z-10">
+          <div class="flex items-center mb-4">
+            <div class="w-8 h-8 rounded-full bg-tesla-red/20 flex items-center justify-center mr-3">
+              <i class="fa fa-lightbulb-o text-tesla-red"></i>
+            </div>
+            <h2 class="text-xl font-bold">优化建议</h2>
+          </div>
+          
+          <div class="space-y-4">
+            <div class="bg-gray-dark/30 p-3 rounded-sm">
+              <h3 class="font-medium mb-2 flex items-center">
+                <span class="bg-tesla-red text-white text-xs px-2 py-1 mr-2">立即整改</span>
+                删除违规表述
+              </h3>
+              <p class="text-sm text-gray-medium">删除"自动获取位置信息、通讯录数据"及"传输至境外服务器"的违规表述，暂停该内容在平台的传播。</p>
+            </div>
+            
+            <div class="bg-gray-dark/30 p-3 rounded-sm">
+              <h3 class="font-medium mb-2 flex items-center">
+                <span class="bg-tesla-red text-white text-xs px-2 py-1 mr-2">合规修改</span>
+                完善授权流程
+              </h3>
+              <p class="text-sm text-gray-medium">明确数据收集的合法授权流程："将在获得用户明确同意后，仅为[具体目的]收集必要数据"。</p>
+            </div>
+            
+            <div class="bg-gray-dark/30 p-3 rounded-sm">
+              <h3 class="font-medium mb-2 flex items-center">
+                <span class="bg-tesla-red text-white text-xs px-2 py-1 mr-2">安全措施</span>
+                补充保障说明
+              </h3>
+              <p class="text-sm text-gray-medium">补充数据安全保障措施："已建立全流程数据安全管理制度，采用加密技术保护用户信息"。</p>
+            </div>
+            
+            <div class="bg-gray-dark/30 p-3 rounded-sm">
+              <h3 class="font-medium mb-2 flex items-center">
+                <span class="bg-tesla-red text-white text-xs px-2 py-1 mr-2">出境合规</span>
+                数据出境标注
+              </h3>
+              <p class="text-sm text-gray-medium">若涉及数据出境，需标注："已按国家规定完成重要数据出境安全评估"。</p>
+            </div>
+          </div>
+        </div>
+      </section>
+      
+      <!-- 评论分析 -->
+      <section id="comment-analysis" class="md:col-span-8 bg-gray-dark/20 backdrop-blur-sm border border-tesla-red/30 p-6 rounded-sm overflow-hidden group">
+        <div class="absolute top-0 right-0 w-64 h-64 gradient-red opacity-0 group-hover:opacity-20 transition-opacity duration-500"></div>
+        <div class="relative z-10">
+          <div class="flex items-center mb-6">
+            <div class="w-8 h-8 rounded-full bg-tesla-red/20 flex items-center justify-center mr-3">
+              <i class="fa fa-comments text-tesla-red"></i>
+            </div>
+            <h2 class="text-2xl font-bold">评论分析</h2>
+          </div>
+          
+          <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+            <div class="lg:col-span-2">
+              <div class="flex justify-between items-center mb-4">
+                <h3 class="text-lg font-bold">评论内容安全分析</h3>
+                <div class="text-sm bg-gray-dark/30 px-3 py-1">统计时段: 2025/09/01 - 2025/09/30</div>
+              </div>
+              
+              <div class="mb-6">
+                <div class="flex justify-between text-sm mb-1">
+                  <span>内容安全风险匹配度</span>
+                  <span class="text-tesla-red font-bold">70%</span>
+                </div>
+                <div class="w-full bg-gray-dark/50 h-2">
+                  <div class="bg-tesla-red h-2" style="width: 70%"></div>
+                </div>
+              </div>
+              
+              <div class="mb-6">
+                <h4 class="font-medium mb-3">不健康关键词识别</h4>
+                <div class="flex flex-wrap gap-2">
+                  <span class="bg-tesla-red/20 text-tesla-red text-xs px-3 py-1 rounded-full">整死我</span>
+                  <span class="bg-tesla-red/20 text-tesla-red text-xs px-3 py-1 rounded-full">转基</span>
+                  <span class="bg-tesla-red/20 text-tesla-red text-xs px-3 py-1 rounded-full">杀马特</span>
+                  <span class="bg-tesla-red/20 text-tesla-red text-xs px-3 py-1 rounded-full">人品问题</span>
+                  <span class="bg-tesla-red/20 text-tesla-red text-xs px-3 py-1 rounded-full">冻龄2年</span>
+                  <span class="bg-tesla-red/20 text-tesla-red text-xs px-3 py-1 rounded-full">小资后妈</span>
+                  <span class="bg-tesla-red/20 text-tesla-red text-xs px-3 py-1 rounded-full">挥刀自宫</span>
+                </div>
+              </div>
+              
+              <div>
+                <h4 class="font-medium mb-3">风险评论示例</h4>
+                <div class="space-y-3">
+                  <div class="bg-gray-dark/30 p-3 rounded-sm">
+                    <div class="flex justify-between items-center mb-1">
+                      <span class="text-sm font-medium">用户ID: 123***789</span>
+                      <span class="bg-tesla-red/80 text-white text-xs px-2 py-0.5">暴力威胁</span>
+                    </div>
+                    <p class="text-sm text-gray-medium">"必须整死我才能证明西贝的清白，我就想知道老罗敢不敢"</p>
+                  </div>
+                  
+                  <div class="bg-gray-dark/30 p-3 rounded-sm">
+                    <div class="flex justify-between items-center mb-1">
+                      <span class="text-sm font-medium">用户ID: 456***123</span>
+                      <span class="bg-tesla-red/80 text-white text-xs px-2 py-0.5">人身攻击</span>
+                    </div>
+                    <p class="text-sm text-gray-medium">"西贝连承认都做不到，这已经涉及到人品的问题了，支持老罗维权"</p>
+                  </div>
+                  
+                  <div class="bg-gray-dark/30 p-3 rounded-sm">
+                    <div class="flex justify-between items-center mb-1">
+                      <span class="text-sm font-medium">用户ID: 789***456</span>
+                      <span class="bg-tesla-red/80 text-white text-xs px-2 py-0.5">低俗隐喻</span>
+                    </div>
+                    <p class="text-sm text-gray-medium">"建议西贝老板直播挥刀自宫，这样全国人民就原谅你们用冻龄2年的西蓝花了"</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <div>
+              <div class="mb-6">
+                <h3 class="text-lg font-bold mb-4">评论风险分布</h3>
+                <div class="h-48">
+                  <canvas id="commentRiskChart"></canvas>
+                </div>
+              </div>
+              
+              <div class="mb-6">
+                <h3 class="text-lg font-bold mb-4">评论情感分析</h3>
+                <div class="h-48">
+                  <canvas id="sentimentAnalysisChart"></canvas>
+                </div>
+              </div>
+              
+              <div class="bg-gray-dark/30 p-4 rounded-sm">
+                <h4 class="font-medium mb-3">风险高频词汇</h4>
+                <div class="flex flex-wrap gap-2 mb-4">
+                  <span class="text-2xl text-tesla-red font-bold">西贝</span>
+                  <span class="text-xl text-tesla-red/80 font-bold">老罗</span>
+                  <span class="text-lg text-tesla-red/60 font-bold">西兰花</span>
+                  <span class="text-base text-tesla-red/40 font-bold">整死</span>
+                  <span class="text-base text-tesla-red/40 font-bold">人品</span>
+                </div>
+                <p class="text-sm text-gray-medium">统计显示风险高频词汇中西贝作为争议主体，被高频关联负面标签，老罗作为事件另一方被部分评论塑造成"正义方"，可能引发对立方情绪对立。</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </section>
+    
+    <!-- 整改方案 -->
+    <section id="rectification-plan" class="mb-20">
+      <div class="flex items-center mb-6">
+        <div class="w-8 h-8 rounded-full bg-tesla-red/20 flex items-center justify-center mr-3">
+          <i class="fa fa-wrench text-tesla-red"></i>
+        </div>
+        <h2 class="text-2xl font-bold">整改方案与预防措施</h2>
+      </div>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div class="bg-gray-dark/20 backdrop-blur-sm border border-tesla-red/30 p-6 rounded-sm">
+          <h3 class="text-xl font-bold mb-4">整改时间表</h3>
+          <div class="space-y-4">
+            <div class="flex">
+              <div class="flex-shrink-0 w-24 text-sm font-medium">立即</div>
+              <div class="flex-1">
+                <div class="font-medium mb-1">删除违规内容</div>
+                <div class="text-sm text-gray-medium">删除视频中"自动获取位置信息、通讯录数据"及"传输至境外服务器"的违规表述</div>
+              </div>
+            </div>
+            
+            <div class="flex">
+              <div class="flex-shrink-0 w-24 text-sm font-medium">24小时内</div>
+              <div class="flex-1">
+                <div class="font-medium mb-1">暂停内容传播</div>
+                <div class="text-sm text-gray-medium">暂停该内容在平台的传播，待合规修改后重新审核</div>
+              </div>
+            </div>
+            
+            <div class="flex">
+              <div class="flex-shrink-0 w-24 text-sm font-medium">3天内</div>
+              <div class="flex-1">
+                <div class="font-medium mb-1">内容合规修改</div>
+                <div class="text-sm text-gray-medium">按审核建议完成内容修改，明确数据收集授权流程，补充安全保障措施</div>
+              </div>
+            </div>
+            
+            <div class="flex">
+              <div class="flex-shrink-0 w-24 text-sm font-medium">7天内</div>
+              <div class="flex-1">
+                <div class="font-medium mb-1">重新提交审核</div>
+                <div class="text-sm text-gray-medium">完成全部整改项后重新提交平台审核，确保符合内容安全要求</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="bg-gray-dark/20 backdrop-blur-sm border border-tesla-red/30 p-6 rounded-sm">
+          <h3 class="text-xl font-bold mb-4">预防措施</h3>
+          <div class="space-y-4">
+            <div class="bg-gray-dark/30 p-3 rounded-sm">
+              <h4 class="font-medium mb-2 flex items-center">
+                <i class="fa fa-shield text-tesla-red mr-2"></i>
+                建立审核机制
+              </h4>
+              <p class="text-sm text-gray-medium">建立数据安全内容审核机制，重点筛查涉及数据收集、处理的内容，建立"数据安全内容负面清单"。</p>
+            </div>
+            
+            <div class="bg-gray-dark/30 p-3 rounded-sm">
+              <h4 class="font-medium mb-2 flex items-center">
+                <i class="fa fa-graduation-cap text-tesla-red mr-2"></i>
+                创作者培训
+              </h4>
+              <p class="text-sm text-gray-medium">开展创作者数据安全法规培训，明确合法数据实践边界，系统学习《数据安全法》中数据处理活动的合规要求。</p>
+            </div>
+            
+            <div class="bg-gray-dark/30 p-3 rounded-sm">
+              <h4 class="font-medium mb-2 flex items-center">
+                <i class="fa fa-line-chart text-tesla-red mr-2"></i>
+                风险监测系统
+              </h4>
+              <p class="text-sm text-gray-medium">部署内容风险智能监测系统，实时识别违规数据收集、处理相关内容，自动拦截高风险内容。</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    <!-- 审核结论 -->
+    <section id="audit-conclusion" class="mb-20">
+      <div class="bg-gray-dark/20 backdrop-blur-sm border border-tesla-red/30 p-6 rounded-sm relative overflow-hidden">
+        <div class="absolute top-0 right-0 w-64 h-64 gradient-red opacity-10"></div>
+        <div class="relative z-10">
+          <div class="flex items-center mb-6">
+            <div class="w-8 h-8 rounded-full bg-tesla-red/20 flex items-center justify-center mr-3">
+              <i class="fa fa-gavel text-tesla-red"></i>
+            </div>
+            <h2 class="text-2xl font-bold">审核结论</h2>
+          </div>
+          
+          <div class="grid grid-cols-1 md:grid-cols-5 gap-6">
+            <div class="md:col-span-3">
+              <div class="mb-4">
+                <h3 class="text-lg font-bold mb-3">审核结果：<span class="text-tesla-red">不通过</span></h3>
+                <p class="text-gray-medium">该视频内容在封面、内容及评论三个维度均存在多项安全风险，不符合《数据安全法》相关规定及平台内容安全标准，需按整改方案完成修改后重新提交审核。</p>
+              </div>
+              
+              <div class="space-y-3">
+                <h4 class="font-medium">后续要求：</h4>
+                <ul class="space-y-2 text-gray-medium">
+                  <li class="flex items-start">
+                    <i class="fa fa-check-circle text-tesla-red mt-1 mr-2"></i>
+                    <span>完成全部整改项后重新提交审核，确保内容符合数据安全法规要求</span>
+                  </li>
+                  <li class="flex items-start">
+                    <i class="fa fa-check-circle text-tesla-red mt-1 mr-2"></i>
+                    <span>平台应对同类数据收集相关内容加强合规审查，建立"数据安全内容负面清单"</span>
+                  </li>
+                  <li class="flex items-start">
+                    <i class="fa fa-check-circle text-tesla-red mt-1 mr-2"></i>
+                    <span>内容创作者需系统学习《数据安全法》中数据处理活动的合规要求，避免再次发布违规内容</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+            
+            <div class="md:col-span-2 bg-gray-dark/30 p-5 rounded-sm">
+              <h3 class="text-lg font-bold mb-4">合规建议总结</h3>
+              <div class="space-y-4">
+                <div class="flex items-start">
+                  <div class="w-8 h-8 rounded-full bg-tesla-red/20 flex items-center justify-center flex-shrink-0 mr-3">
+                    <i class="fa fa-file-text-o text-tesla-red"></i>
+                  </div>
+                  <div>
+                    <h4 class="font-medium">明确授权流程</h4>
+                    <p class="text-sm text-gray-medium">在获得用户明确同意后，仅为具体目的收集必要数据</p>
+                  </div>
+                </div>
+                
+                <div class="flex items-start">
+                  <div class="w-8 h-8 rounded-full bg-tesla-red/20 flex items-center justify-center flex-shrink-0 mr-3">
+                    <i class="fa fa-lock text-tesla-red"></i>
+                  </div>
+                  <div>
+                    <h4 class="font-medium">完善安全措施</h4>
+                    <p class="text-sm text-gray-medium">建立全流程数据安全管理制度，采用加密技术保护用户信息</p>
+                  </div>
+                </div>
+                
+                <div class="flex items-start">
+                  <div class="w-8 h-8 rounded-full bg-tesla-red/20 flex items-center justify-center flex-shrink-0 mr-3">
+                    <i class="fa fa-globe text-tesla-red"></i>
+                  </div>
+                  <div>
+                    <h4 class="font-medium">合规处理出境</h4>
+                    <p class="text-sm text-gray-medium">按国家规定完成重要数据出境安全评估并明确标注</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- 页脚 -->
+  <footer class="bg-gray-dark/30 border-t border-tesla-red/30 py-10 px-4">
+    <div class="container mx-auto">
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+        <div class="md:col-span-2">
+          <div class="flex items-center space-x-2 mb-4">
+            <i class="fa fa-shield text-tesla-red text-2xl"></i>
+            <h2 class="text-xl font-bold tracking-tight">视频安全分析平台</h2>
+          </div>
+          <p class="text-gray-medium mb-4 max-w-md">
+            专业的视频内容安全分析工具，基于最新法律法规和平台规则，提供全面的内容审核和风险评估服务。
+          </p>
+          <div class="flex space-x-4">
+            <a href="#" class="text-gray-medium hover:text-tesla-red transition-colors">
+              <i class="fa fa-weibo text-xl"></i>
+            </a>
+            <a href="#" class="text-gray-medium hover:text-tesla-red transition-colors">
+              <i class="fa fa-wechat text-xl"></i>
+            </a>
+            <a href="#" class="text-gray-medium hover:text-tesla-red transition-colors">
+              <i class="fa fa-linkedin text-xl"></i>
+            </a>
+          </div>
+        </div>
+        
+        <div>
+          <h3 class="font-bold mb-4">快速链接</h3>
+          <ul class="space-y-2">
+            <li><a href="#cover-analysis" class="text-gray-medium hover:text-tesla-red transition-colors">封面分析</a></li>
+            <li><a href="#content-analysis" class="text-gray-medium hover:text-tesla-red transition-colors">内容分析</a></li>
+            <li><a href="#comment-analysis" class="text-gray-medium hover:text-tesla-red transition-colors">评论分析</a></li>
+            <li><a href="#risk-summary" class="text-gray-medium hover:text-tesla-red transition-colors">风险概览</a></li>
+            <li><a href="#rectification-plan" class="text-gray-medium hover:text-tesla-red transition-colors">整改方案</a></li>
+          </ul>
+        </div>
+        
+        <div>
+          <h3 class="font-bold mb-4">联系我们</h3>
+          <ul class="space-y-2 text-gray-medium">
+            <li class="flex items-start">
+              <i class="fa fa-envelope-o mt-1 mr-2 text-tesla-red"></i>
+              <span>support@videosecurity.com</span>
+            </li>
+            <li class="flex items-start">
+              <i class="fa fa-phone mt-1 mr-2 text-tesla-red"></i>
+              <span>400-123-4567</span>
+            </li>
+            <li class="flex items-start">
+              <i class="fa fa-map-marker mt-1 mr-2 text-tesla-red"></i>
+              <span>北京市海淀区数据安全大厦15层</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+      
+      <div class="border-t border-gray-dark/50 mt-8 pt-6 text-center text-gray-medium text-sm">
+        <p>© 2023 视频安全分析平台 版权所有 | 京ICP备12345678号</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- 返回顶部按钮 -->
+  <button id="back-to-top" class="fixed bottom-6 right-6 w-12 h-12 bg-tesla-red rounded-full flex items-center justify-center opacity-0 invisible transition-all duration-300 z-50 hover:bg-tesla-red/80">
+    <i class="fa fa-arrow-up"></i>
+  </button>
+
+  <!-- JavaScript -->
+  <script>
+    // 初始化图表
+    document.addEventListener('DOMContentLoaded', function() {
+      // 风险分布图表
+      const riskDistributionCtx = document.getElementById('riskDistributionChart').getContext('2d');
+      new Chart(riskDistributionCtx, {
+        type: 'doughnut',
+        data: {
+          labels: ['数据收集', '数据出境', '安全管理'],
+          datasets: [{
+            data: [35, 40, 25],
+            backgroundColor: [
+              '#E31937',
+              '#E3193780',
+              '#E3193740'
+            ],
+            borderWidth: 0,
+            cutout: '70%'
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: {
+              display: false
+            },
+            tooltip: {
+              backgroundColor: '#000000',
+              titleColor: '#ffffff',
+              bodyColor: '#ffffff',
+              borderColor: '#E31937',
+              borderWidth: 1,
+              padding: 10,
+              displayColors: false
+            }
+          }
+        }
+      });
+      
+      // 内容风险图表
+      const contentRiskCtx = document.getElementById('contentRiskChart').getContext('2d');
+      new Chart(contentRiskCtx, {
+        type: 'bar',
+        data: {
+          labels: ['数据收集', '数据出境', '安全管理'],
+          datasets: [{
+            label: '风险指数',
+            data: [85, 90, 75],
+            backgroundColor: '#E31937',
+            borderWidth: 0,
+            borderRadius: 2
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          scales: {
+            y: {
+              beginAtZero: true,
+              max: 100,
+              grid: {
+                color: 'rgba(255, 255, 255, 0.05)'
+              },
+              ticks: {
+                color: 'rgba(255, 255, 255, 0.5)'
+              }
+            },
+            x: {
+              grid: {
+                display: false
+              },
+              ticks: {
+                color: 'rgba(255, 255, 255, 0.7)'
+              }
+            }
+          },
+          plugins: {
+            legend: {
+              display: false
+            }
+          }
+        }
+      });
+      
+      // 评论风险图表
+      const commentRiskCtx = document.getElementById('commentRiskChart').getContext('2d');
+      new Chart(commentRiskCtx, {
+        type: 'polarArea',
+        data: {
+          labels: ['暴力威胁', '人身攻击', '低俗隐喻', '虚假信息', '其他风险'],
+          datasets: [{
+            data: [25, 30, 20, 15, 10],
+            backgroundColor: [
+              '#E31937',
+              '#E3193780',
+              '#E3193760',
+              '#E3193740',
+              '#E3193720'
+            ],
+            borderWidth: 0
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          scales: {
+            r: {
+              grid: {
+                color: 'rgba(255, 255, 255, 0.05)'
+              },
+              angleLines: {
+                color: 'rgba(255, 255, 255, 0.1)'
+              },
+              ticks: {
+                display: false
+              },
+              pointLabels: {
+                color: 'rgba(255, 255, 255, 0.7)',
+                font: {
+                  size: 10
+                }
+              }
+            }
+          },
+          plugins: {
+            legend: {
+              display: false
+            }
+          }
+        }
+      });
+      
+      // 情感分析图表
+      const sentimentCtx = document.getElementById('sentimentAnalysisChart').getContext('2d');
+      new Chart(sentimentCtx, {
+        type: 'line',
+        data: {
+          labels: ['9/1', '9/5', '9/10', '9/15', '9/20', '9/25', '9/30'],
+          datasets: [{
+            label: '负面情绪指数',
+            data: [65, 72, 85, 90, 88, 75, 70],
+            borderColor: '#E31937',
+            backgroundColor: 'rgba(227, 25, 55, 0.1)',
+            borderWidth: 2,
+            fill: true,
+            tension: 0.4
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          scales: {
+            y: {
+              beginAtZero: true,
+              max: 100,
+              grid: {
+                color: 'rgba(255, 255, 255, 0.05)'
+              },
+              ticks: {
+                color: 'rgba(255, 255, 255, 0.5)'
+              }
+            },
+            x: {
+              grid: {
+                display: false
+              },
+              ticks: {
+                color: 'rgba(255, 255, 255, 0.7)',
+                font: {
+                  size: 10
+                }
+              }
+            }
+          },
+          plugins: {
+            legend: {
+              display: false
+            }
+          }
+        }
+      });
+      
+      // 平滑滚动
+      document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+          e.preventDefault();
+          
+          const targetId = this.getAttribute('href');
+          const targetElement = document.querySelector(targetId);
+          
+          if (targetElement) {
+            window.scrollTo({
+              top: targetElement.offsetTop - 80,
+              behavior: 'smooth'
+            });
+          }
+        });
+      });
+      
+      // 返回顶部按钮
+      const backToTopButton = document.getElementById('back-to-top');
+      
+      window.addEventListener('scroll', () => {
+        if (window.pageYOffset > 300) {
+          backToTopButton.classList.remove('opacity-0', 'invisible');
+          backToTopButton.classList.add('opacity-100', 'visible');
+        } else {
+          backToTopButton.classList.remove('opacity-100', 'visible');
+          backToTopButton.classList.add('opacity-0', 'invisible');
+        }
+      });
+      
+      backToTopButton.addEventListener('click', () => {
+        window.scrollTo({
+          top: 0,
+          behavior: 'smooth'
+        });
+      });
+      
+      // Framer Motion 动画
+      if (typeof motion !== 'undefined') {
+        const animateElements = document.querySelectorAll('.bg-gray-dark\\/20, .bg-gray-dark\\/30');
+        
+        animateElements.forEach(el => {
+          motion.animate(el, {
+            opacity: [0, 1],
+            y: [20, 0]
+          }, {
+            duration: 0.5,
+            scrollTrigger: {
+              trigger: el,
+              start: 'top 80%'
+            }
+          });
+        });
+      }
+    });
+  </script>
+</body>
+</html>
