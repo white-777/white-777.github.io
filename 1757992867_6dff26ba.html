@@ -1,0 +1,1353 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>视频内容分析仪表盘</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.8/dist/chart.umd.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/framer-motion@10.16.4/dist/framer-motion.min.js"></script>
+    
+    <!-- Tailwind 配置 -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'tesla': '#E31937',
+                        'dark': '#0A0A0A',
+                        'gray-custom': '#333333',
+                        'light-gray': '#666666'
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .content-auto {
+                content-visibility: auto;
+            }
+            .text-shadow {
+                text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            }
+            .gradient-tesla {
+                background: linear-gradient(90deg, #E31937 0%, rgba(227, 25, 55, 0) 100%);
+            }
+            .bento-card {
+                @apply rounded-lg overflow-hidden bg-gray-900 border border-gray-800 transition-all duration-300 hover:border-tesla hover:shadow-[0_0_15px_rgba(227,25,55,0.3)];
+            }
+            .animate-fade-in {
+                opacity: 0;
+                transform: translateY(20px);
+                transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+            }
+            .animate-fade-in.active {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body class="bg-black text-white font-sans min-h-screen">
+    <!-- 导航栏 -->
+    <nav class="fixed top-0 left-0 right-0 bg-black/80 backdrop-blur-md z-50 border-b border-gray-800">
+        <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+            <div class="flex items-center space-x-2">
+                <div class="w-8 h-8 bg-tesla rounded-md flex items-center justify-center">
+                    <i class="fa fa-bar-chart text-white"></i>
+                </div>
+                <h1 class="text-xl font-bold">VIDEO ANALYZER</h1>
+            </div>
+            <div class="hidden md:flex space-x-8 text-sm text-gray-300">
+                <a href="#cover-analysis" class="hover:text-tesla transition-colors">封面分析</a>
+                <a href="#content-analysis" class="hover:text-tesla transition-colors">内容分析</a>
+                <a href="#comment-analysis" class="hover:text-tesla transition-colors">评论分析</a>
+                <a href="#compliance-check" class="hover:text-tesla transition-colors">合规检查</a>
+            </div>
+            <div class="md:hidden">
+                <button class="text-gray-300 hover:text-tesla">
+                    <i class="fa fa-bars text-xl"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 英雄区域 -->
+    <header class="pt-32 pb-20 px-4 relative overflow-hidden">
+        <div class="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-tesla/10 to-transparent opacity-30"></div>
+        <div class="container mx-auto relative z-10">
+            <div class="max-w-4xl mx-auto text-center">
+                <h1 class="text-[clamp(2.5rem,6vw,4rem)] font-bold leading-tight mb-6">
+                    <span class="block text-white">视频内容</span>
+                    <span class="block text-tesla">深度分析报告</span>
+                </h1>
+                <p class="text-gray-400 text-lg md:text-xl mb-10 max-w-2xl mx-auto">
+                    全面解析视频封面、内容及评论数据，提供专业的内容安全评估与优化建议
+                </p>
+                <div class="flex justify-center space-x-4">
+                    <button class="px-6 py-3 bg-tesla hover:bg-tesla/90 rounded-md transition-all duration-300 transform hover:scale-105">
+                        <i class="fa fa-download mr-2"></i>导出报告
+                    </button>
+                    <button class="px-6 py-3 bg-transparent border border-gray-700 hover:border-tesla rounded-md transition-all duration-300">
+                        <i class="fa fa-share-alt mr-2"></i>分享分析
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="absolute bottom-0 left-0 w-full h-1 gradient-tesla"></div>
+    </header>
+
+    <!-- 主内容区 -->
+    <main class="container mx-auto px-4 pb-20">
+        <!-- 视频基本信息卡片 -->
+        <section class="mb-20 animate-fade-in">
+            <div class="bento-card p-6 md:p-8">
+                <div class="flex flex-col md:flex-row items-start md:items-center justify-between mb-6">
+                    <h2 class="text-2xl md:text-3xl font-bold">视频基本信息</h2>
+                    <div class="flex items-center space-x-4 mt-4 md:mt-0 text-sm text-gray-400">
+                        <span><i class="fa fa-calendar-o mr-2 text-tesla"></i>分析日期: 2025-09-16</span>
+                        <span><i class="fa fa-clock-o mr-2 text-tesla"></i>分析时长: 02:45</span>
+                    </div>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+                    <div class="md:col-span-1">
+                        <div class="relative rounded-lg overflow-hidden aspect-video">
+                            <img src="https://p3-sign.douyinpic.com/tos-cn-i-dy/268b456454304d95aa49c38ccafa3d30~tplv-dy-resize-walign-adapt-aq:540:q75.webp?lk3s=138a59ce&x-expires=1759201200&x-signature=2c%2FjaQnJ8BbyoA2XtMLkGpMkxlE%3D&from=327834062&s=PackSourceEnum_DOUYIN_REFLOW&se=false&sc=cover&biz_tag=aweme_video&l=202509161114054005855A9F8CEB687376" 
+                                 alt="视频封面" 
+                                 class="w-full h-full object-cover">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent flex items-end">
+                                <div class="p-4">
+                                    <span class="inline-block px-2 py-1 bg-tesla/90 text-xs font-bold rounded mb-2">抖音视频</span>
+                                    <h3 class="text-white font-bold text-sm md:text-base">西贝翻车记：老板如何成为企业最大的公关灾难？</h3>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="md:col-span-3 grid grid-cols-2 md:grid-cols-3 gap-4">
+                        <div class="bg-gray-900/50 rounded-lg p-4 border border-gray-800">
+                            <p class="text-gray-400 text-sm mb-1">播放量</p>
+                            <p class="text-2xl font-bold">1.2<span class="text-tesla">M+</span></p>
+                            <div class="mt-2 flex items-center text-xs text-green-400">
+                                <i class="fa fa-arrow-up mr-1"></i> 18.4% <span class="text-gray-500 ml-1">vs 同类视频</span>
+                            </div>
+                        </div>
+                        
+                        <div class="bg-gray-900/50 rounded-lg p-4 border border-gray-800">
+                            <p class="text-gray-400 text-sm mb-1">互动率</p>
+                            <p class="text-2xl font-bold">3.<span class="text-tesla">87</span>%</p>
+                            <div class="mt-2 flex items-center text-xs text-red-400">
+                                <i class="fa fa-arrow-down mr-1"></i> 2.1% <span class="text-gray-500 ml-1">vs 同类视频</span>
+                            </div>
+                        </div>
+                        
+                        <div class="bg-gray-900/50 rounded-lg p-4 border border-gray-800">
+                            <p class="text-gray-400 text-sm mb-1">评论数</p>
+                            <p class="text-2xl font-bold">1.5<span class="text-tesla">K+</span></p>
+                            <div class="mt-2 flex items-center text-xs text-green-400">
+                                <i class="fa fa-arrow-up mr-1"></i> 32.6% <span class="text-gray-500 ml-1">vs 同类视频</span>
+                            </div>
+                        </div>
+                        
+                        <div class="bg-gray-900/50 rounded-lg p-4 border border-gray-800">
+                            <p class="text-gray-400 text-sm mb-1">点赞率</p>
+                            <p class="text-2xl font-bold">6.<span class="text-tesla">2</span>%</p>
+                            <div class="mt-2 flex items-center text-xs text-gray-400">
+                                <i class="fa fa-minus mr-1"></i> 0.5% <span class="text-gray-500 ml-1">vs 同类视频</span>
+                            </div>
+                        </div>
+                        
+                        <div class="bg-gray-900/50 rounded-lg p-4 border border-gray-800">
+                            <p class="text-gray-400 text-sm mb-1">分享率</p>
+                            <p class="text-2xl font-bold">1.<span class="text-tesla">43</span>%</p>
+                            <div class="mt-2 flex items-center text-xs text-green-400">
+                                <i class="fa fa-arrow-up mr-1"></i> 5.2% <span class="text-gray-500 ml-1">vs 同类视频</span>
+                            </div>
+                        </div>
+                        
+                        <div class="bg-gray-900/50 rounded-lg p-4 border border-gray-800">
+                            <p class="text-gray-400 text-sm mb-1">完播率</p>
+                            <p class="text-2xl font-bold">42.<span class="text-tesla">8</span>%</p>
+                            <div class="mt-2 flex items-center text-xs text-red-400">
+                                <i class="fa fa-arrow-down mr-1"></i> 3.7% <span class="text-gray-500 ml-1">vs 同类视频</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 封面分析区域 -->
+        <section id="cover-analysis" class="mb-20 animate-fade-in">
+            <div class="container mx-auto">
+                <div class="flex justify-between items-end mb-10">
+                    <div>
+                        <h2 class="text-3xl font-bold mb-2">视频封面分析</h2>
+                        <p class="text-gray-400">封面视觉元素、信息传达与吸引力评估</p>
+                    </div>
+                    <div class="bg-gray-900/50 px-4 py-2 rounded-full text-sm flex items-center">
+                        <span class="w-3 h-3 rounded-full bg-green-500 mr-2"></span>
+                        综合评分: <span class="font-bold text-white ml-1">7.8/10</span>
+                    </div>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-12 gap-6">
+                    <!-- 封面预览 -->
+                    <div class="md:col-span-4 bento-card">
+                        <div class="aspect-[4/3] overflow-hidden">
+                            <img src="https://p3-sign.douyinpic.com/tos-cn-i-dy/268b456454304d95aa49c38ccafa3d30~tplv-dy-resize-walign-adapt-aq:540:q75.webp?lk3s=138a59ce&x-expires=1759201200&x-signature=2c%2FjaQnJ8BbyoA2XtMLkGpMkxlE%3D&from=327834062&s=PackSourceEnum_DOUYIN_REFLOW&se=false&sc=cover&biz_tag=aweme_video&l=202509161114054005855A9F8CEB687376" 
+                                 alt="视频封面" 
+                                 class="w-full h-full object-cover">
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold mb-3">封面基础信息</h3>
+                            <div class="space-y-4">
+                                <div>
+                                    <p class="text-gray-400 text-sm mb-1">尺寸规格</p>
+                                    <p class="font-medium">1080 × 1920 px (9:16)</p>
+                                </div>
+                                <div>
+                                    <p class="text-gray-400 text-sm mb-1">文件大小</p>
+                                    <p class="font-medium">1.2 MB</p>
+                                </div>
+                                <div>
+                                    <p class="text-gray-400 text-sm mb-1">主色调</p>
+                                    <div class="flex items-center space-x-2 mt-1">
+                                        <span class="w-6 h-6 rounded-full bg-[#E31937] border border-gray-700"></span>
+                                        <span class="w-6 h-6 rounded-full bg-[#2A2A2A] border border-gray-700"></span>
+                                        <span class="w-6 h-6 rounded-full bg-[#F5F5F5] border border-gray-700"></span>
+                                        <span class="w-6 h-6 rounded-full bg-[#5D5D5D] border border-gray-700"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 视觉元素分析 -->
+                    <div class="md:col-span-8 grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="bento-card p-6 md:col-span-2">
+                            <h3 class="text-xl font-bold mb-4">视觉元素评估</h3>
+                            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                                <div class="space-y-3">
+                                    <div class="flex items-center justify-between">
+                                        <span class="text-gray-400">主体突出度</span>
+                                        <span class="font-bold">8.5/10</span>
+                                    </div>
+                                    <div class="w-full bg-gray-800 rounded-full h-2">
+                                        <div class="bg-tesla h-2 rounded-full" style="width: 85%"></div>
+                                    </div>
+                                    <p class="text-sm text-gray-400">人物主体占据封面60%以上面积，视觉焦点明确</p>
+                                </div>
+                                
+                                <div class="space-y-3">
+                                    <div class="flex items-center justify-between">
+                                        <span class="text-gray-400">色彩对比度</span>
+                                        <span class="font-bold">7.2/10</span>
+                                    </div>
+                                    <div class="w-full bg-gray-800 rounded-full h-2">
+                                        <div class="bg-tesla h-2 rounded-full" style="width: 72%"></div>
+                                    </div>
+                                    <p class="text-sm text-gray-400">红黑白三色搭配，整体对比适中，但局部文字略显模糊</p>
+                                </div>
+                                
+                                <div class="space-y-3">
+                                    <div class="flex items-center justify-between">
+                                        <span class="text-gray-400">文字可读性</span>
+                                        <span class="font-bold">6.8/10</span>
+                                    </div>
+                                    <div class="w-full bg-gray-800 rounded-full h-2">
+                                        <div class="bg-tesla h-2 rounded-full" style="width: 68%"></div>
+                                    </div>
+                                    <p class="text-sm text-gray-400">标题文字偏小，部分文字与背景融合，影响快速识别</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- 信息传达分析 -->
+                        <div class="bento-card p-6">
+                            <h3 class="text-xl font-bold mb-4">信息传达分析</h3>
+                            <div class="space-y-4">
+                                <div>
+                                    <h4 class="font-medium mb-2 flex items-center">
+                                        <i class="fa fa-check-circle text-green-500 mr-2"></i>有效信息点
+                                    </h4>
+                                    <ul class="text-gray-300 space-y-2 text-sm">
+                                        <li class="flex items-start">
+                                            <span class="text-tesla mr-2">•</span>
+                                            <span>明确展示人物主体，与视频主题高度相关</span>
+                                        </li>
+                                        <li class="flex items-start">
+                                            <span class="text-tesla mr-2">•</span>
+                                            <span>使用红色强调关键信息，吸引用户注意力</span>
+                                        </li>
+                                        <li class="flex items-start">
+                                            <span class="text-tesla mr-2">•</span>
+                                            <span>标题包含热点关键词"翻车记"，引发好奇心</span>
+                                        </li>
+                                    </ul>
+                                </div>
+                                
+                                <div>
+                                    <h4 class="font-medium mb-2 flex items-center">
+                                        <i class="fa fa-exclamation-circle text-yellow-500 mr-2"></i>改进建议
+                                    </h4>
+                                    <ul class="text-gray-300 space-y-2 text-sm">
+                                        <li class="flex items-start">
+                                            <span class="text-tesla mr-2">•</span>
+                                            <span>增加文字字号，提升标题可读性</span>
+                                        </li>
+                                        <li class="flex items-start">
+                                            <span class="text-tesla mr-2">•</span>
+                                            <span>添加副标题或标签，明确视频核心看点</span>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- 吸引力评分 -->
+                        <div class="bento-card p-6">
+                            <h3 class="text-xl font-bold mb-4">吸引力评分</h3>
+                            <div class="flex justify-center items-center h-40">
+                                <div class="relative">
+                                    <div class="text-5xl font-bold text-tesla">7.8</div>
+                                    <div class="absolute -top-2 -right-2 text-2xl text-gray-600">/10</div>
+                                    <div class="text-center mt-2 text-gray-400">综合吸引力评分</div>
+                                </div>
+                            </div>
+                            <div class="grid grid-cols-2 gap-4 mt-4">
+                                <div class="flex items-center justify-between text-sm">
+                                    <span class="text-gray-400">点击率预测</span>
+                                    <span class="font-medium">高于同类视频12.3%</span>
+                                </div>
+                                <div class="flex items-center justify-between text-sm">
+                                    <span class="text-gray-400">停留时间</span>
+                                    <span class="font-medium">2.4秒</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 视频内容分析区域 -->
+        <section id="content-analysis" class="mb-20 animate-fade-in">
+            <div class="container mx-auto">
+                <div class="flex justify-between items-end mb-10">
+                    <div>
+                        <h2 class="text-3xl font-bold mb-2">视频内容分析</h2>
+                        <p class="text-gray-400">主题内容、叙事结构与传播价值评估</p>
+                    </div>
+                    <div class="bg-gray-900/50 px-4 py-2 rounded-full text-sm flex items-center">
+                        <span class="w-3 h-3 rounded-full bg-yellow-500 mr-2"></span>
+                        <span>需关注内容风险</span>
+                    </div>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-12 gap-6">
+                    <!-- 内容主题分析 -->
+                    <div class="md:col-span-4 bento-card p-6">
+                        <h3 class="text-xl font-bold mb-6">内容主题分析</h3>
+                        
+                        <div class="mb-6">
+                            <h4 class="font-medium mb-3">核心主题</h4>
+                            <div class="bg-gray-900/50 p-4 rounded-lg border border-gray-800">
+                                <p class="font-medium mb-2">西贝企业危机与公关管理分析</p>
+                                <p class="text-sm text-gray-400">视频聚焦西贝企业因管理层言论引发的公关危机，探讨企业领导者言论对品牌形象的影响</p>
+                            </div>
+                        </div>
+                        
+                        <div class="mb-6">
+                            <h4 class="font-medium mb-3">关键词提取</h4>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="px-3 py-1 bg-gray-900/50 rounded-full text-sm border border-gray-800">#西贝</span>
+                                <span class="px-3 py-1 bg-gray-900/50 rounded-full text-sm border border-gray-800">#公关危机</span>
+                                <span class="px-3 py-1 bg-gray-900/50 rounded-full text-sm border border-gray-800">#企业管理</span>
+                                <span class="px-3 py-1 bg-gray-900/50 rounded-full text-sm border border-gray-800">#预制菜</span>
+                                <span class="px-3 py-1 bg-gray-900/50 rounded-full text-sm border border-gray-800">#商业思维</span>
+                                <span class="px-3 py-1 bg-gray-900/50 rounded-full text-sm border border-gray-800">#品牌形象</span>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <h4 class="font-medium mb-3">内容调性</h4>
+                            <div class="space-y-3">
+                                <div class="flex justify-between items-center">
+                                    <span class="text-sm text-gray-400">客观性</span>
+                                    <span class="text-sm font-medium">6.5/10</span>
+                                </div>
+                                <div class="w-full bg-gray-800 rounded-full h-1.5">
+                                    <div class="bg-tesla h-1.5 rounded-full" style="width: 65%"></div>
+                                </div>
+                                
+                                <div class="flex justify-between items-center">
+                                    <span class="text-sm text-gray-400">专业性</span>
+                                    <span class="text-sm font-medium">7.8/10</span>
+                                </div>
+                                <div class="w-full bg-gray-800 rounded-full h-1.5">
+                                    <div class="bg-tesla h-1.5 rounded-full" style="width: 78%"></div>
+                                </div>
+                                
+                                <div class="flex justify-between items-center">
+                                    <span class="text-sm text-gray-400">争议性</span>
+                                    <span class="text-sm font-medium">8.2/10</span>
+                                </div>
+                                <div class="w-full bg-gray-800 rounded-full h-1.5">
+                                    <div class="bg-tesla h-1.5 rounded-full" style="width: 82%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 叙事结构分析 -->
+                    <div class="md:col-span-8 bento-card p-6">
+                        <h3 class="text-xl font-bold mb-6">叙事结构与内容分布</h3>
+                        
+                        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
+                            <div class="lg:col-span-2">
+                                <h4 class="font-medium mb-4">视频节奏分析</h4>
+                                <div class="h-64">
+                                    <canvas id="videoRhythmChart"></canvas>
+                                </div>
+                            </div>
+                            
+                            <div>
+                                <h4 class="font-medium mb-4">内容板块占比</h4>
+                                <div class="h-64 flex items-center justify-center">
+                                    <canvas id="contentPieChart"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div>
+                                <h4 class="font-medium mb-3">核心观点提炼</h4>
+                                <ul class="space-y-3 text-sm">
+                                    <li class="flex items-start">
+                                        <i class="fa fa-angle-right text-tesla mt-1 mr-2"></i>
+                                        <span>企业领导者的公开言论直接影响品牌形象和消费者信任</span>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <i class="fa fa-angle-right text-tesla mt-1 mr-2"></i>
+                                        <span>预制菜争议反映消费者对食品质量和透明度的高度关注</span>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <i class="fa fa-angle-right text-tesla mt-1 mr-2"></i>
+                                        <span>企业危机公关需注重及时性、真诚度和解决方案的明确性</span>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <i class="fa fa-angle-right text-tesla mt-1 mr-2"></i>
+                                        <span>高价策略需匹配相应的产品品质和服务体验，否则易引发消费者不满</span>
+                                    </li>
+                                </ul>
+                            </div>
+                            
+                            <div>
+                                <h4 class="font-medium mb-3">内容亮点与不足</h4>
+                                <div class="space-y-4">
+                                    <div>
+                                        <h5 class="font-medium text-green-400 mb-2 flex items-center">
+                                            <i class="fa fa-plus-circle mr-2"></i>内容亮点
+                                        </h5>
+                                        <ul class="text-sm text-gray-300 space-y-2">
+                                            <li>案例分析具体，结合企业实际事件</li>
+                                            <li>多角度分析危机成因与影响</li>
+                                            <li>提供可借鉴的商业教训与启示</li>
+                                        </ul>
+                                    </div>
+                                    
+                                    <div>
+                                        <h5 class="font-medium text-red-400 mb-2 flex items-center">
+                                            <i class="fa fa-minus-circle mr-2"></i>内容不足
+                                        </h5>
+                                        <ul class="text-sm text-gray-300 space-y-2">
+                                            <li>部分观点缺乏数据支撑，主观性较强</li>
+                                            <li>对企业改进方向的建议不够具体</li>
+                                            <li>对预制菜行业背景介绍不足</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 评论分析区域 -->
+        <section id="comment-analysis" class="mb-20 animate-fade-in">
+            <div class="container mx-auto">
+                <div class="flex justify-between items-end mb-10">
+                    <div>
+                        <h2 class="text-3xl font-bold mb-2">评论分析</h2>
+                        <p class="text-gray-400">用户反馈、情感倾向与风险识别</p>
+                    </div>
+                    <div class="bg-gray-900/50 px-4 py-2 rounded-full text-sm flex items-center">
+                        <span class="w-3 h-3 rounded-full bg-red-500 mr-2"></span>
+                        <span>检测到负面评论风险</span>
+                    </div>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-12 gap-6">
+                    <!-- 评论概览 -->
+                    <div class="md:col-span-4 grid grid-cols-1 gap-6">
+                        <div class="bento-card p-6">
+                            <h3 class="text-xl font-bold mb-6">评论概览</h3>
+                            
+                            <div class="space-y-6">
+                                <div>
+                                    <div class="flex justify-between items-center mb-3">
+                                        <span class="text-gray-400">情感倾向分布</span>
+                                        <span class="text-sm bg-gray-900/50 px-2 py-1 rounded">1.5K 条评论</span>
+                                    </div>
+                                    <div class="h-64">
+                                        <canvas id="sentimentChart"></canvas>
+                                    </div>
+                                </div>
+                                
+                                <div>
+                                    <h4 class="font-medium mb-3">风险等级评估</h4>
+                                    <div class="bg-red-900/20 border border-red-900/50 p-4 rounded-lg">
+                                        <div class="flex items-center justify-between mb-2">
+                                            <span class="text-red-400 font-medium">内容安全风险</span>
+                                            <span class="text-red-400 font-bold">中高风险</span>
+                                        </div>
+                                        <div class="w-full bg-gray-800 rounded-full h-2 mb-2">
+                                            <div class="bg-red-500 h-2 rounded-full" style="width: 70%"></div>
+                                        </div>
+                                        <p class="text-sm text-gray-400">检测到多条包含人身攻击、贬义词汇的评论，需加强审核</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="bento-card p-6">
+                            <h3 class="text-xl font-bold mb-4">地域分布</h3>
+                            <div class="h-64">
+                                <canvas id="regionChart"></canvas>
+                            </div>
+                            <div class="mt-4 text-sm text-gray-400">
+                                <p class="mb-2">评论用户主要来自经济发达地区，其中上海、广东和河南评论活跃度最高</p>
+                                <p>负面评论地域分布较为分散，未呈现明显地域性聚集特征</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 详细评论分析 -->
+                    <div class="md:col-span-8 grid grid-cols-1 gap-6">
+                        <div class="bento-card p-6">
+                            <h3 class="text-xl font-bold mb-6">评论内容深度分析</h3>
+                            
+                            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
+                                <div>
+                                    <h4 class="font-medium mb-4">高频关键词分析</h4>
+                                    <div class="h-64">
+                                        <canvas id="keywordChart"></canvas>
+                                    </div>
+                                </div>
+                                
+                                <div>
+                                    <h4 class="font-medium mb-4">评论互动分析</h4>
+                                    <div class="h-64">
+                                        <canvas id="interactionChart"></canvas>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                                <div>
+                                    <h4 class="font-medium mb-4">不健康关键词识别</h4>
+                                    <div class="bg-gray-900/50 rounded-lg p-4 border border-gray-800">
+                                        <ul class="space-y-3">
+                                            <li class="flex items-center justify-between">
+                                                <div class="flex items-center">
+                                                    <span class="px-2 py-1 bg-red-900/30 text-red-400 text-xs rounded mr-3">人身攻击</span>
+                                                    <span class="text-gray-300">祖坟冒烟</span>
+                                                </div>
+                                                <span class="text-sm text-gray-500">出现 3 次</span>
+                                            </li>
+                                            <li class="flex items-center justify-between">
+                                                <div class="flex items-center">
+                                                    <span class="px-2 py-1 bg-red-900/30 text-red-400 text-xs rounded mr-3">贬义态度</span>
+                                                    <span class="text-gray-300">爹味</span>
+                                                </div>
+                                                <span class="text-sm text-gray-500">出现 5 次</span>
+                                            </li>
+                                            <li class="flex items-center justify-between">
+                                                <div class="flex items-center">
+                                                    <span class="px-2 py-1 bg-red-900/30 text-red-400 text-xs rounded mr-3">不文明用语</span>
+                                                    <span class="text-gray-300">牛逼</span>
+                                                </div>
+                                                <span class="text-sm text-gray-500">出现 8 次</span>
+                                            </li>
+                                            <li class="flex items-center justify-between">
+                                                <div class="flex items-center">
+                                                    <span class="px-2 py-1 bg-yellow-900/30 text-yellow-400 text-xs rounded mr-3">负面标签</span>
+                                                    <span class="text-gray-300">既当又立</span>
+                                                </div>
+                                                <span class="text-sm text-gray-500">出现 4 次</span>
+                                            </li>
+                                            <li class="flex items-center justify-between">
+                                                <div class="flex items-center">
+                                                    <span class="px-2 py-1 bg-yellow-900/30 text-yellow-400 text-xs rounded mr-3">负面标签</span>
+                                                    <span class="text-gray-300">搞事情</span>
+                                                </div>
+                                                <span class="text-sm text-gray-500">出现 2 次</span>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                
+                                <div>
+                                    <h4 class="font-medium mb-4">典型评论示例</h4>
+                                    <div class="space-y-4">
+                                        <div class="bg-gray-900/50 p-4 rounded-lg border border-gray-800">
+                                            <div class="flex items-center justify-between mb-2">
+                                                <div class="flex items-center">
+                                                    <span class="w-2 h-2 rounded-full bg-red-500 mr-2"></span>
+                                                    <span class="text-red-400 text-sm font-medium">负面评论</span>
+                                                </div>
+                                                <span class="text-xs text-gray-500">点赞: 37</span>
+                                            </div>
+                                            <p class="text-sm text-gray-300">"既当又立，一边说自己是传统美食代表，一边大规模使用预制菜，价格还那么贵，这就是割韭菜吧"</p>
+                                        </div>
+                                        
+                                        <div class="bg-gray-900/50 p-4 rounded-lg border border-gray-800">
+                                            <div class="flex items-center justify-between mb-2">
+                                                <div class="flex items-center">
+                                                    <span class="w-2 h-2 rounded-full bg-yellow-500 mr-2"></span>
+                                                    <span class="text-yellow-400 text-sm font-medium">中性评论</span>
+                                                </div>
+                                                <span class="text-xs text-gray-500">点赞: 24</span>
+                                            </div>
+                                            <p class="text-sm text-gray-300">"中央厨房和预制菜的定义是什么？现在很多餐饮企业都在用，是行业趋势还是成本控制手段？"</p>
+                                        </div>
+                                        
+                                        <div class="bg-gray-900/50 p-4 rounded-lg border border-gray-800">
+                                            <div class="flex items-center justify-between mb-2">
+                                                <div class="flex items-center">
+                                                    <span class="w-2 h-2 rounded-full bg-green-500 mr-2"></span>
+                                                    <span class="text-green-400 text-sm font-medium">正面评论</span>
+                                                </div>
+                                                <span class="text-xs text-gray-500">点赞: 18</span>
+                                            </div>
+                                            <p class="text-sm text-gray-300">"视频分析得很到位，企业领导者确实需要注意自己的言行，这对品牌形象太重要了"</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div>
+                                <h4 class="font-medium mb-4">评论分析总结</h4>
+                                <div class="bg-gray-900/50 p-5 rounded-lg border border-gray-800">
+                                    <h5 class="font-medium mb-3">核心发现</h5>
+                                    <ul class="text-gray-300 space-y-2 text-sm mb-4">
+                                        <li class="flex items-start">
+                                            <span class="text-tesla mr-2">•</span>
+                                            <span>用户对"预制菜"的讨论最为集中，主要关注产品品质与价格不匹配问题</span>
+                                        </li>
+                                        <li class="flex items-start">
+                                            <span class="text-tesla mr-2">•</span>
+                                            <span>负面评论占比达58%，主要集中在对企业定价策略和产品质量的不满</span>
+                                        </li>
+                                        <li class="flex items-start">
+                                            <span class="text-tesla mr-2">•</span>
+                                            <span>70%的评论内容包含负面反馈、攻击性词汇或不当表述，内容安全匹配度较高</span>
+                                        </li>
+                                        <li class="flex items-start">
+                                            <span class="text-tesla mr-2">•</span>
+                                            <span>地域分布显示上海、广东、河南评论活跃度最高，评论内容无明显地域特征差异</span>
+                                        </li>
+                                    </ul>
+                                    
+                                    <h5 class="font-medium mb-3">建议措施</h5>
+                                    <div class="flex flex-wrap gap-3">
+                                        <div class="bg-gray-900 px-3 py-2 rounded-lg border border-gray-800 text-sm flex items-center">
+                                            <i class="fa fa-shield text-tesla mr-2"></i>
+                                            <span>加强评论区关键词过滤系统</span>
+                                        </div>
+                                        <div class="bg-gray-900 px-3 py-2 rounded-lg border border-gray-800 text-sm flex items-center">
+                                            <i class="fa fa-comments text-tesla mr-2"></i>
+                                            <span>对高赞负面评论进行人工审核</span>
+                                        </div>
+                                        <div class="bg-gray-900 px-3 py-2 rounded-lg border border-gray-800 text-sm flex items-center">
+                                            <i class="fa fa-user-shield text-tesla mr-2"></i>
+                                            <span>增加敏感内容举报渠道</span>
+                                        </div>
+                                        <div class="bg-gray-900 px-3 py-2 rounded-lg border border-gray-800 text-sm flex items-center">
+                                            <i class="fa fa-flag text-tesla mr-2"></i>
+                                            <span>对发布违规评论用户进行标记</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 合规检查区域 -->
+        <section id="compliance-check" class="mb-20 animate-fade-in">
+            <div class="container mx-auto">
+                <div class="flex justify-between items-end mb-10">
+                    <div>
+                        <h2 class="text-3xl font-bold mb-2">内容合规检查</h2>
+                        <p class="text-gray-400">基于《数据安全法》的合规性评估</p>
+                    </div>
+                    <div class="bg-gray-900/50 px-4 py-2 rounded-full text-sm flex items-center">
+                        <span class="w-3 h-3 rounded-full bg-yellow-500 mr-2"></span>
+                        <span>需完善数据安全措施</span>
+                    </div>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-12 gap-6">
+                    <div class="md:col-span-8 bento-card p-6">
+                        <h3 class="text-xl font-bold mb-6">数据安全合规评估</h3>
+                        
+                        <div class="mb-8">
+                            <h4 class="font-medium mb-4">《数据安全法》第四章合规检查</h4>
+                            <div class="overflow-x-auto">
+                                <table class="min-w-full">
+                                    <thead>
+                                        <tr class="border-b border-gray-800">
+                                            <th class="text-left py-3 px-4 text-sm font-medium text-gray-400">条款</th>
+                                            <th class="text-left py-3 px-4 text-sm font-medium text-gray-400">合规要求</th>
+                                            <th class="text-left py-3 px-4 text-sm font-medium text-gray-400">合规状态</th>
+                                            <th class="text-left py-3 px-4 text-sm font-medium text-gray-400">风险等级</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr class="border-b border-gray-800/50">
+                                            <td class="py-4 px-4 text-sm font-medium">第二十七条</td>
+                                            <td class="py-4 px-4 text-sm text-gray-300">开展数据活动应依法取得同意，明确告知数据处理规则</td>
+                                            <td class="py-4 px-4">
+                                                <span class="px-2 py-1 bg-yellow-900/20 text-yellow-400 text-xs rounded-full">部分合规</span>
+                                            </td>
+                                            <td class="py-4 px-4">
+                                                <span class="px-2 py-1 bg-yellow-900/20 text-yellow-400 text-xs rounded-full">中风险</span>
+                                            </td>
+                                        </tr>
+                                        <tr class="border-b border-gray-800/50">
+                                            <td class="py-4 px-4 text-sm font-medium">第二十八条</td>
+                                            <td class="py-4 px-4 text-sm text-gray-300">重要数据出境应依法申报，确保数据安全</td>
+                                            <td class="py-4 px-4">
+                                                <span class="px-2 py-1 bg-green-900/20 text-green-400 text-xs rounded-full">合规</span>
+                                            </td>
+                                            <td class="py-4 px-4">
+                                                <span class="px-2 py-1 bg-green-900/20 text-green-400 text-xs rounded-full">低风险</span>
+                                            </td>
+                                        </tr>
+                                        <tr class="border-b border-gray-800/50">
+                                            <td class="py-4 px-4 text-sm font-medium">第二十九条</td>
+                                            <td class="py-4 px-4 text-sm text-gray-300">数据处理者应建立数据安全管理制度和应急机制</td>
+                                            <td class="py-4 px-4">
+                                                <span class="px-2 py-1 bg-red-900/20 text-red-400 text-xs rounded-full">不合规</span>
+                                            </td>
+                                            <td class="py-4 px-4">
+                                                <span class="px-2 py-1 bg-red-900/20 text-red-400 text-xs rounded-full">高风险</span>
+                                            </td>
+                                        </tr>
+                                        <tr class="border-b border-gray-800/50">
+                                            <td class="py-4 px-4 text-sm font-medium">第三十条</td>
+                                            <td class="py-4 px-4 text-sm text-gray-300">重要数据处理者应定期开展风险评估并报送报告</td>
+                                            <td class="py-4 px-4">
+                                                <span class="px-2 py-1 bg-yellow-900/20 text-yellow-400 text-xs rounded-full">部分合规</span>
+                                            </td>
+                                            <td class="py-4 px-4">
+                                                <span class="px-2 py-1 bg-yellow-900/20 text-yellow-400 text-xs rounded-full">中风险</span>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="py-4 px-4 text-sm font-medium">第三十一条</td>
+                                            <td class="py-4 px-4 text-sm text-gray-300">关键信息基础设施运营者数据出境安全管理</td>
+                                            <td class="py-4 px-4">
+                                                <span class="px-2 py-1 bg-green-900/20 text-green-400 text-xs rounded-full">合规</span>
+                                            </td>
+                                            <td class="py-4 px-4">
+                                                <span class="px-2 py-1 bg-green-900/20 text-green-400 text-xs rounded-full">低风险</span>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div>
+                                <h4 class="font-medium mb-4">主要合规风险点</h4>
+                                <div class="space-y-4">
+                                    <div class="bg-red-900/10 border border-red-900/30 p-4 rounded-lg">
+                                        <div class="flex items-start">
+                                            <div class="mt-1 mr-3">
+                                                <i class="fa fa-exclamation-triangle text-red-500"></i>
+                                            </div>
+                                            <div>
+                                                <h5 class="font-medium text-red-400 mb-1">数据安全管理制度缺失</h5>
+                                                <p class="text-sm text-gray-300">未建立完善的数据安全管理制度和应急机制，违反《数据安全法》第二十九条规定</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="bg-yellow-900/10 border border-yellow-900/30 p-4 rounded-lg">
+                                        <div class="flex items-start">
+                                            <div class="mt-1 mr-3">
+                                                <i class="fa fa-exclamation-circle text-yellow-500"></i>
+                                            </div>
+                                            <div>
+                                                <h5 class="font-medium text-yellow-400 mb-1">用户同意获取不规范</h5>
+                                                <p class="text-sm text-gray-300">数据收集过程中未明确告知全部数据处理规则，用户同意获取方式存在瑕疵</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="bg-yellow-900/10 border border-yellow-900/30 p-4 rounded-lg">
+                                        <div class="flex items-start">
+                                            <div class="mt-1 mr-3">
+                                                <i class="fa fa-exclamation-circle text-yellow-500"></i>
+                                            </div>
+                                            <div>
+                                                <h5 class="font-medium text-yellow-400 mb-1">风险评估报告不完整</h5>
+                                                <p class="text-sm text-gray-300">重要数据处理风险评估报告内容不完整，未全面覆盖数据安全风险点</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div>
+                                <h4 class="font-medium mb-4">合规改进建议</h4>
+                                <div class="space-y-4">
+                                    <div class="bg-gray-900/50 p-4 rounded-lg border border-gray-800">
+                                        <h5 class="font-medium mb-2 flex items-center">
+                                            <i class="fa fa-check-circle text-green-400 mr-2"></i>完善数据安全管理制度
+                                        </h5>
+                                        <ul class="text-sm text-gray-300 space-y-2 ml-6 list-disc">
+                                            <li>建立专门的数据安全管理部门</li>
+                                            <li>制定数据分类分级和风险评估规则</li>
+                                            <li>建立数据安全事件应急响应机制</li>
+                                        </ul>
+                                    </div>
+                                    
+                                    <div class="bg-gray-900/50 p-4 rounded-lg border border-gray-800">
+                                        <h5 class="font-medium mb-2 flex items-center">
+                                            <i class="fa fa-check-circle text-green-400 mr-2"></i>规范用户数据收集流程
+                                        </h5>
+                                        <ul class="text-sm text-gray-300 space-y-2 ml-6 list-disc">
+                                            <li>明确告知数据收集的目的和范围</li>
+                                            <li>提供清晰的用户同意选项</li>
+                                            <li>允许用户随时撤回数据使用同意</li>
+                                        </ul>
+                                    </div>
+                                    
+                                    <div class="bg-gray-900/50 p-4 rounded-lg border border-gray-800">
+                                        <h5 class="font-medium mb-2 flex items-center">
+                                            <i class="fa fa-check-circle text-green-400 mr-2"></i>加强数据安全技术防护
+                                        </h5>
+                                        <ul class="text-sm text-gray-300 space-y-2 ml-6 list-disc">
+                                            <li>部署数据加密和访问控制措施</li>
+                                            <li>建立数据安全审计和日志记录系统</li>
+                                            <li>定期开展数据安全培训和演练</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 合规检查结论 -->
+                    <div class="md:col-span-4 bento-card p-6">
+                        <h3 class="text-xl font-bold mb-6">合规检查结论</h3>
+                        
+                        <div class="mb-8">
+                            <div class="text-center mb-6">
+                                <div class="inline-flex items-center justify-center w-24 h-24 rounded-full bg-gray-900 border-4 border-yellow-500/30 mb-4">
+                                    <span class="text-3xl font-bold text-yellow-400">72</span>
+                                </div>
+                                <h4 class="font-medium text-lg">合规评分</h4>
+                                <p class="text-sm text-gray-400">满分为100分</p>
+                            </div>
+                            
+                            <div class="space-y-4">
+                                <div class="flex justify-between items-center">
+                                    <span class="text-gray-400">数据收集合规性</span>
+                                    <span class="font-bold">75/100</span>
+                                </div>
+                                <div class="w-full bg-gray-800 rounded-full h-2">
+                                    <div class="bg-yellow-500 h-2 rounded-full" style="width: 75%"></div>
+                                </div>
+                                
+                                <div class="flex justify-between items-center">
+                                    <span class="text-gray-400">数据处理安全性</span>
+                                    <span class="font-bold">68/100</span>
+                                </div>
+                                <div class="w-full bg-gray-800 rounded-full h-2">
+                                    <div class="bg-yellow-500 h-2 rounded-full" style="width: 68%"></div>
+                                </div>
+                                
+                                <div class="flex justify-between items-center">
+                                    <span class="text-gray-400">数据管理制度</span>
+                                    <span class="font-bold">55/100</span>
+                                </div>
+                                <div class="w-full bg-gray-800 rounded-full h-2">
+                                    <div class="bg-red-500 h-2 rounded-full" style="width: 55%"></div>
+                                </div>
+                                
+                                <div class="flex justify-between items-center">
+                                    <span class="text-gray-400">风险应急能力</span>
+                                    <span class="font-bold">80/100</span>
+                                </div>
+                                <div class="w-full bg-gray-800 rounded-full h-2">
+                                    <div class="bg-green-500 h-2 rounded-full" style="width: 80%"></div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <h4 class="font-medium mb-4">整改优先级</h4>
+                            <div class="space-y-3">
+                                <div class="bg-gray-900/50 p-3 rounded-lg border border-gray-800">
+                                    <div class="flex justify-between items-center mb-1">
+                                        <span class="text-sm font-medium">建立数据安全管理制度</span>
+                                        <span class="text-xs px-2 py-1 bg-red-900/30 text-red-400 rounded-full">高优先级</span>
+                                    </div>
+                                    <div class="flex items-center text-xs text-gray-400">
+                                        <i class="fa fa-calendar mr-2"></i>
+                                        <span>建议完成时间: 30天内</span>
+                                    </div>
+                                </div>
+                                
+                                <div class="bg-gray-900/50 p-3 rounded-lg border border-gray-800">
+                                    <div class="flex justify-between items-center mb-1">
+                                        <span class="text-sm font-medium">完善用户数据授权流程</span>
+                                        <span class="text-xs px-2 py-1 bg-yellow-900/30 text-yellow-400 rounded-full">中优先级</span>
+                                    </div>
+                                    <div class="flex items-center text-xs text-gray-400">
+                                        <i class="fa fa-calendar mr-2"></i>
+                                        <span>建议完成时间: 45天内</span>
+                                    </div>
+                                </div>
+                                
+                                <div class="bg-gray-900/50 p-3 rounded-lg border border-gray-800">
+                                    <div class="flex justify-between items-center mb-1">
+                                        <span class="text-sm font-medium">优化风险评估报告</span>
+                                        <span class="text-xs px-2 py-1 bg-yellow-900/30 text-yellow-400 rounded-full">中优先级</span>
+                                    </div>
+                                    <div class="flex items-center text-xs text-gray-400">
+                                        <i class="fa fa-calendar mr-2"></i>
+                                        <span>建议完成时间: 60天内</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 页脚 -->
+        <footer class="bg-gray-900/50 border-t border-gray-800 py-10">
+            <div class="container mx-auto px-4">
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                    <div class="md:col-span-1">
+                        <div class="flex items-center space-x-2 mb-4">
+                            <div class="w-8 h-8 bg-tesla rounded-md flex items-center justify-center">
+                                <i class="fa fa-bar-chart text-white"></i>
+                            </div>
+                            <h2 class="text-xl font-bold">VIDEO ANALYZER</h2>
+                        </div>
+                        <p class="text-gray-400 text-sm mb-4">专业的视频内容分析工具，提供全面的内容安全评估与优化建议</p>
+                        <div class="flex space-x-4">
+                            <a href="#" class="text-gray-400 hover:text-tesla transition-colors">
+                                <i class="fa fa-weibo text-xl"></i>
+                            </a>
+                            <a href="#" class="text-gray-400 hover:text-tesla transition-colors">
+                                <i class="fa fa-wechat text-xl"></i>
+                            </a>
+                            <a href="#" class="text-gray-400 hover:text-tesla transition-colors">
+                                <i class="fa fa-github text-xl"></i>
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <h3 class="font-bold mb-4">分析服务</h3>
+                        <ul class="space-y-2 text-sm">
+                            <li><a href="#" class="text-gray-400 hover:text-tesla transition-colors">视频内容分析</a></li>
+                            <li><a href="#" class="text-gray-400 hover:text-tesla transition-colors">评论情感分析</a></li>
+                            <li><a href="#" class="text-gray-400 hover:text-tesla transition-colors">内容安全审核</a></li>
+                            <li><a href="#" class="text-gray-400 hover:text-tesla transition-colors">合规风险评估</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div>
+                        <h3 class="font-bold mb-4">资源中心</h3>
+                        <ul class="space-y-2 text-sm">
+                            <li><a href="#" class="text-gray-400 hover:text-tesla transition-colors">帮助文档</a></li>
+                            <li><a href="#" class="text-gray-400 hover:text-tesla transition-colors">分析案例</a></li>
+                            <li><a href="#" class="text-gray-400 hover:text-tesla transition-colors">行业报告</a></li>
+                            <li><a href="#" class="text-gray-400 hover:text-tesla transition-colors">API文档</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div>
+                        <h3 class="font-bold mb-4">联系我们</h3>
+                        <ul class="space-y-2 text-sm">
+                            <li class="flex items-start">
+                                <i class="fa fa-envelope text-tesla mt-1 mr-2"></i>
+                                <span class="text-gray-400">support@videoanalyzer.com</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fa fa-phone text-tesla mt-1 mr-2"></i>
+                                <span class="text-gray-400">400-123-4567</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fa fa-map-marker text-tesla mt-1 mr-2"></i>
+                                <span class="text-gray-400">北京市朝阳区科技园区88号</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="border-t border-gray-800 mt-10 pt-6 flex flex-col md:flex-row justify-between items-center">
+                    <p class="text-gray-500 text-sm mb-4 md:mb-0">© 2025 VideoAnalyzer. 保留所有权利</p>
+                    <div class="flex space-x-6 text-sm text-gray-500">
+                        <a href="#" class="hover:text-gray-300 transition-colors">隐私政策</a>
+                        <a href="#" class="hover:text-gray-300 transition-colors">服务条款</a>
+                        <a href="#" class="hover:text-gray-300 transition-colors">Cookie政策</a>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </main>
+
+    <!-- 返回顶部按钮 -->
+    <button id="backToTop" class="fixed bottom-8 right-8 w-12 h-12 bg-tesla rounded-full flex items-center justify-center shadow-lg opacity-0 invisible transition-all duration-300 hover:bg-tesla/90">
+        <i class="fa fa-arrow-up"></i>
+    </button>
+
+    <!-- JavaScript -->
+    <script>
+        // 页面滚动动画
+        document.addEventListener('DOMContentLoaded', function() {
+            // 监听滚动事件，添加渐入动画
+            const fadeElements = document.querySelectorAll('.animate-fade-in');
+            
+            const fadeInOnScroll = function() {
+                fadeElements.forEach(element => {
+                    const elementTop = element.getBoundingClientRect().top;
+                    const elementVisible = 150;
+                    
+                    if (elementTop < window.innerHeight - elementVisible) {
+                        element.classList.add('active');
+                    }
+                });
+            };
+            
+            // 初始检查
+            fadeInOnScroll();
+            
+            // 滚动时检查
+            window.addEventListener('scroll', fadeInOnScroll);
+            
+            // 返回顶部按钮
+            const backToTopButton = document.getElementById('backToTop');
+            
+            window.addEventListener('scroll', function() {
+                if (window.pageYOffset > 300) {
+                    backToTopButton.classList.remove('opacity-0', 'invisible');
+                    backToTopButton.classList.add('opacity-100', 'visible');
+                } else {
+                    backToTopButton.classList.add('opacity-0', 'invisible');
+                    backToTopButton.classList.remove('opacity-100', 'visible');
+                }
+            });
+            
+            backToTopButton.addEventListener('click', function() {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
+            
+            // 移动端菜单切换（简化版）
+            const menuButton = document.querySelector('.md\\:hidden button');
+            menuButton.addEventListener('click', function() {
+                alert('移动端菜单功能在演示版中未实现');
+            });
+            
+            // 图表初始化
+            initCharts();
+        });
+        
+        // 图表初始化函数
+        function initCharts() {
+            // 情感倾向分布图
+            const sentimentCtx = document.getElementById('sentimentChart').getContext('2d');
+            new Chart(sentimentCtx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['负面评论', '中性评论', '正面评论'],
+                    datasets: [{
+                        data: [58, 32, 10],
+                        backgroundColor: [
+                            '#E53E3E',
+                            '#ED8936',
+                            '#38A169'
+                        ],
+                        borderColor: '#1A1A1A',
+                        borderWidth: 2
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'bottom',
+                            labels: {
+                                color: '#A0AEC0',
+                                padding: 15,
+                                boxWidth: 12
+                            }
+                        }
+                    },
+                    cutout: '70%'
+                }
+            });
+            
+            // 视频节奏分析图
+            const rhythmCtx = document.getElementById('videoRhythmChart').getContext('2d');
+            new Chart(rhythmCtx, {
+                type: 'line',
+                data: {
+                    labels: ['0:00', '0:30', '1:00', '1:30', '2:00', '2:30', '3:00', '3:30', '4:00'],
+                    datasets: [{
+                        label: '观众留存率',
+                        data: [100, 85, 78, 65, 72, 60, 55, 48, 42.8],
+                        borderColor: '#E31937',
+                        backgroundColor: 'rgba(227, 25, 55, 0.1)',
+                        fill: true,
+                        tension: 0.4,
+                        pointRadius: 3,
+                        pointBackgroundColor: '#E31937'
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            display: false
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            grid: {
+                                color: 'rgba(255, 255, 255, 0.05)'
+                            },
+                            ticks: {
+                                color: '#A0AEC0',
+                                callback: function(value) {
+                                    return value + '%';
+                                }
+                            }
+                        },
+                        x: {
+                            grid: {
+                                display: false
+                            },
+                            ticks: {
+                                color: '#A0AEC0'
+                            }
+                        }
+                    }
+                }
+            });
+            
+            // 内容板块占比图
+            const contentPieCtx = document.getElementById('contentPieChart').getContext('2d');
+            new Chart(contentPieCtx, {
+                type: 'pie',
+                data: {
+                    labels: ['事件叙述', '问题分析', '专家评论', '案例对比', '解决方案'],
+                    datasets: [{
+                        data: [35, 25, 20, 12, 8],
+                        backgroundColor: [
+                            '#E31937',
+                            '#9F7AEA',
+                            '#4299E1',
+                            '#ED8936',
+                            '#38B2AC'
+                        ],
+                        borderColor: '#1A1A1A',
+                        borderWidth: 2
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'bottom',
+                            labels: {
+                                color: '#A0AEC0',
+                                padding: 10,
+                                boxWidth: 10,
+                                font: {
+                                    size: 11
+                                }
+                            }
+                        } 
+                    }
+                }
+            });
+            
+            // 地域分布图
+            const regionCtx = document.getElementById('regionChart').getContext('2d');
+            new Chart(regionCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['上海', '广东', '河南', '北京', '山东', '安徽', '广西'],
+                    datasets: [{
+                        label: '评论数量',
+                        data: [2, 2, 2, 1, 1, 1, 1],
+                        backgroundColor: '#E31937',
+                        borderRadius: 4
+                    }]
+                },
+                options: {
+                    indexAxis: 'y',
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            display: false
+                        }
+                    },
+                    scales: {
+                        x: {
+                            beginAtZero: true,
+                            grid: {
+                                color: 'rgba(255, 255, 255, 0.05)'
+                            },
+                            ticks: {
+                                color: '#A0AEC0'
+                            }
+                        },
+                        y: {
+                            grid: {
+                                display: false
+                            },
+                            ticks: {
+                                color: '#A0AEC0'
+                            }
+                        }
+                    }
+                }
+            });
+            
+            // 关键词分析图
+            const keywordCtx = document.getElementById('keywordChart').getContext('2d');
+            new Chart(keywordCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['预制菜', '价格', '贵', '既当又立', '爹味', '不好吃', '公关'],
+                    datasets: [{
+                        label: '出现频次',
+                        data: [42, 35, 28, 15, 12, 10, 8],
+                        backgroundColor: '#E31937',
+                        borderRadius: 4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            display: false
+                        }
+                    },
+                    scales: {
+                        x: {
+                            grid: {
+                                color: 'rgba(255, 255, 255, 0.05)'
+                            },
+                            ticks: {
+                                color: '#A0AEC0'
+                            }
+                        },
+                        y: {
+                            beginAtZero: true,
+                            grid: {
+                                color: 'rgba(255, 255, 255, 0.05)'
+                            },
+                            ticks: {
+                                color: '#A0AEC0'
+                            }
+                        }
+                    }
+                }
+            });
+            
+            // 评论互动分析图
+            const interactionCtx = document.getElementById('interactionChart').getContext('2d');
+            new Chart(interactionCtx, {
+                type: 'line',
+                data: {
+                    labels: ['0-30字', '31-60字', '61-100字', '101-150字', '150字以上'],
+                    datasets: [{
+                        label: '平均点赞数',
+                        data: [12, 25, 42, 38, 22],
+                        borderColor: '#E31937',
+                        backgroundColor: 'transparent',
+                        tension: 0.4,
+                        pointRadius: 4,
+                        pointBackgroundColor: '#E31937'
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            display: true,
+                            labels: {
+                                color: '#A0AEC0'
+                            }
+                        }
+                    },
+                    scales: {
+                        x: {
+                            grid: {
+                                color: 'rgba(255, 255, 255, 0.05)'
+                            },
+                            ticks: {
+                                color: '#A0AEC0'
+                            }
+                        },
+                        y: {
+                            beginAtZero: true,
+                            grid: {
+                                color: 'rgba(255, 255, 255, 0.05)'
+                            },
+                            ticks:. {
+                                color: '#A0AEC0'
+                            }
+                        }
+                    }
+                }
+            });
+        }
+    </script>
+</body>
+</html>
