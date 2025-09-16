@@ -1,0 +1,1429 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>视频分析仪表盘 | 西贝品牌舆情解析</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.8/dist/chart.umd.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/framer-motion@10.16.4/dist/framer-motion.min.js"></script>
+  
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            'tesla-red': '#E31937',
+            'dark-gray': '#1A1A1A',
+            'medium-gray': '#333333',
+            'light-gray': '#999999'
+          },
+          fontFamily: {
+            sans: ['Inter', 'system-ui', 'sans-serif'],
+          },
+        },
+      }
+    }
+  </script>
+  
+  <style type="text/tailwindcss">
+    @layer utilities {
+      .content-auto {
+        content-visibility: auto;
+      }
+      .gradient-red {
+        background: linear-gradient(90deg, #E31937 0%, rgba(227, 25, 55, 0) 100%);
+      }
+      .gradient-red-reverse {
+        background: linear-gradient(90deg, rgba(227, 25, 55, 0) 0%, #E31937 100%);
+      }
+      .text-shadow {
+        text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+      }
+      .bento-card {
+        @apply bg-dark-gray rounded-lg overflow-hidden border border-medium-gray transition-all duration-300 hover:border-tesla-red hover:shadow-[0_0_15px_rgba(227,25,55,0.3)];
+      }
+      .stat-number {
+        @apply font-bold text-white text-4xl md:text-5xl lg:text-6xl leading-none;
+      }
+      .stat-label {
+        @apply text-light-gray text-sm uppercase tracking-wider;
+      }
+    }
+  </style>
+</head>
+<body class="bg-black text-white min-h-screen">
+  <!-- 导航栏 -->
+  <nav class="fixed top-0 left-0 right-0 bg-black/80 backdrop-blur-md z-50 border-b border-medium-gray">
+    <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+      <div class="flex items-center space-x-2">
+        <i class="fa fa-bar-chart text-tesla-red text-2xl"></i>
+        <h1 class="text-xl font-bold tracking-tight">VIDEO<span class="text-tesla-red">ANALYTICS</span></h1>
+      </div>
+      <div class="hidden md:flex space-x-8 items-center">
+        <a href="#cover" class="text-light-gray hover:text-white transition-colors">封面分析</a>
+        <a href="#content" class="text-light-gray hover:text-white transition-colors">内容评估</a>
+        <a href="#comments" class="text-light-gray hover:text-white transition-colors">评论解析</a>
+        <a href="#risk" class="text-light-gray hover:text-white transition-colors">风险报告</a>
+      </div>
+      <button class="md:hidden text-light-gray">
+        <i class="fa fa-bars text-xl"></i>
+      </button>
+    </div>
+  </nav>
+
+  <!-- 头部横幅 -->
+  <header class="pt-24 pb-16 px-4 relative overflow-hidden">
+    <div class="absolute top-0 right-0 w-full h-full gradient-red opacity-10 -z-10"></div>
+    <div class="container mx-auto max-w-6xl">
+      <motion.div 
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8 }}
+        class="mb-6 inline-block"
+      >
+        <span class="text-tesla-red text-sm font-medium px-3 py-1 border border-tesla-red/30 rounded-full">
+          品牌舆情分析 #2025-09
+        </span>
+      </motion.div>
+      
+      <motion.h1 
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8, delay: 0.2 }}
+        class="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-4"
+      >
+        西贝品牌危机<br>
+        <span class="text-tesla-red">舆情分析报告</span>
+      </motion.h1>
+      
+      <motion.p 
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8, delay: 0.4 }}
+        class="text-light-gray text-lg md:text-xl max-w-3xl mb-8"
+      >
+        针对"西贝翻车记：老板如何成为企业最大的公关灾难？"视频内容进行多维度分析，包含封面评估、内容安全风险及用户评论情感解析。
+      </motion.p>
+      
+      <motion.div 
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8, delay: 0.6 }}
+        class="flex flex-wrap gap-4"
+      >
+        <div class="flex items-center space-x-2 bg-dark-gray/50 px-4 py-2 rounded-lg border border-medium-gray">
+          <i class="fa fa-eye text-tesla-red"></i>
+          <span>曝光量: <span class="text-white font-medium">1.2M+</span></span>
+        </div>
+        <div class="flex items-center space-x-2 bg-dark-gray/50 px-4 py-2 rounded-lg border border-medium-gray">
+          <i class="fa fa-clock-o text-tesla-red"></i>
+          <span>发布日期: <span class="text-white font-medium">2025-09-16</span></span>
+        </div>
+        <div class="flex items-center space-x-2 bg-dark-gray/50 px-4 py-2 rounded-lg border border-medium-gray">
+          <i class="fa fa-tags text-tesla-red"></i>
+          <span>标签: <span class="text-white font-medium">#西贝 #预制菜</span></span>
+        </div>
+      </motion.div>
+    </div>
+  </header>
+
+  <!-- 主要内容区 - Bento Grid -->
+  <main class="container mx-auto max-w-6xl px-4 pb-20">
+    <!-- 封面分析部分 -->
+    <section id="cover" class="mb-20">
+      <div class="flex items-center justify-between mb-8">
+        <h2 class="text-3xl font-bold">视频封面分析</h2>
+        <div class="h-px gradient-red w-24"></div>
+      </div>
+      
+      <div class="grid grid-cols-1 md:grid-cols-12 gap-6">
+        <!-- 封面预览 -->
+        <motion.div 
+          class="md:col-span-5 bento-card"
+          whileHover={{ scale: 1.02 }}
+          transition={{ duration: 0.3 }}
+        >
+          <div class="relative h-64 md:h-full">
+            <img 
+              src="https://p3-sign.douyinpic.com/tos-cn-i-dy/268b456454304d95aa49c38ccafa3d30~tplv-dy-resize-walign-adapt-aq:540:q75.webp?lk3s=138a59ce&x-expires=1759201200&x-signature=2c%2FjaQnJ8BbyoA2XtMLkGpMkxlE%3D&from=327834062&s=PackSourceEnum_DOUYIN_REFLOW&se=false&sc=cover&biz_tag=aweme_video&l=202509161100206937A696D790D16B7ADA" 
+              alt="视频封面" 
+              class="w-full h-full object-cover"
+            >
+            <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent flex flex-col justify-end p-6">
+              <h3 class="text-xl font-bold mb-2 text-shadow">西贝翻车记</h3>
+              <p class="text-light-gray text-sm text-shadow">老板如何成为企业最大的公关灾难？</p>
+            </div>
+          </div>
+        </motion.div>
+        
+        <!-- 视觉吸引力评分 -->
+        <motion.div 
+          class="md:col-span-3 bento-card p-6 flex flex-col justify-center"
+          initial={{ opacity: 0, x: -20 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+        >
+          <div class="flex justify-between items-start mb-4">
+            <div>
+              <p class="stat-label">视觉吸引力</p>
+              <p class="stat-number text-tesla-red">7.8<span class="text-2xl text-light-gray font-normal">/10</span></p>
+            </div>
+            <div class="bg-medium-gray/30 p-2 rounded-full">
+              <i class="fa fa-star text-tesla-red"></i>
+            </div>
+          </div>
+          <div class="space-y-3">
+            <div>
+              <div class="flex justify-between text-sm mb-1">
+                <span>构图</span>
+                <span>8.2/10</span>
+              </div>
+              <div class="h-2 bg-medium-gray rounded-full overflow-hidden">
+                <div class="h-full bg-tesla-red" style="width: 82%"></div>
+              </div>
+            </div>
+            <div>
+              <div class="flex justify-between text-sm mb-1">
+                <span>色彩对比</span>
+                <span>9.0/10</span>
+              </div>
+              <div class="h-2 bg-medium-gray rounded-full overflow-hidden">
+                <div class="h-full bg-tesla-red" style="width: 90%"></div>
+              </div>
+            </div>
+            <div>
+              <div class="flex justify-between text-sm mb-1">
+                <span>文字可读性</span>
+                <span>6.5/10</span>
+              </div>
+              <div class="h-2 bg-medium-gray rounded-full overflow-hidden">
+                <div class="h-full bg-tesla-red" style="width: 65%"></div>
+              </div>
+            </div>
+          </div>
+        </motion.div>
+        
+        <!-- 情感基调分析 -->
+        <motion.div 
+          class="md:col-span-4 bento-card p-6"
+          initial={{ opacity: 0, x: 20 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+        >
+          <h3 class="text-xl font-bold mb-4">情感基调分析</h3>
+          <div class="h-48">
+            <canvas id="emotionChart"></canvas>
+          </div>
+          <div class="mt-4 grid grid-cols-3 gap-2 text-center text-sm">
+            <div class="bg-medium-gray/20 p-2 rounded">
+              <p class="text-tesla-red font-bold">负面</p>
+              <p class="text-light-gray">42%</p>
+            </div>
+            <div class="bg-medium-gray/20 p-2 rounded">
+              <p class="text-white font-bold">中性</p>
+              <p class="text-light-gray">38%</p>
+            </div>
+            <div class="bg-medium-gray/20 p-2 rounded">
+              <p class="text-light-gray font-bold">正面</p>
+              <p class="text-light-gray">20%</p>
+            </div>
+          </div>
+        </motion.div>
+        
+        <!-- 封面元素分析 -->
+        <motion.div 
+          class="md:col-span-7 bento-card p-6"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+        >
+          <h3 class="text-xl font-bold mb-4">封面元素分析</h3>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div class="flex items-start space-x-3">
+              <div class="bg-tesla-red/20 p-2 rounded-md mt-1">
+                <i class="fa fa-user text-tesla-red"></i>
+              </div>
+              <div>
+                <h4 class="font-medium mb-1">人物元素</h4>
+                <p class="text-light-gray text-sm">封面包含企业创始人面部特写，表情严肃，传达争议性人物焦点</p>
+              </div>
+            </div>
+            <div class="flex items-start space-x-3">
+              <div class="bg-tesla-red/20 p-2 rounded-md mt-1">
+                <i class="fa fa-font text-tesla-red"></i>
+              </div>
+              <div>
+                <h4 class="font-medium mb-1">文字元素</h4>
+                <p class="text-light-gray text-sm">主标题"西贝翻车记"使用红色加粗字体，副标题突出"公关灾难"关键词</p>
+              </div>
+            </div>
+            <div class="flex items-start space-x-3">
+              <div class="bg-tesla-red/20 p-2 rounded-md mt-1">
+                <i class="fa fa-balance-scale text-tesla-red"></i>
+              </div>
+              <div>
+                <h4 class="font-medium mb-1">品牌元素</h4>
+                <p class="text-light-gray text-sm">西贝品牌LOGO位于右下角，尺寸较小但清晰可辨</p>
+              </div>
+            </div>
+            <div class="flex items-start space-x-3">
+              <div class="bg-tesla-red/20 p-2 rounded-md mt-1">
+                <i class="fa fa-exclamation-triangle text-tesla-red"></i>
+              </div>
+              <div>
+                <h4 class="font-medium mb-1">风险元素</h4>
+                <p class="text-light-gray text-sm">红色感叹号图标增强负面情绪暗示，强化危机事件属性</p>
+              </div>
+            </div>
+          </div>
+        </motion.div>
+        
+        <!-- 点击率预测 -->
+        <motion.div 
+          class="md:col-span-5 bento-card p-6 flex flex-col justify-center"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5, delay: 0.2 }}
+        >
+          <div class="flex justify-between items-start mb-6">
+            <div>
+              <p class="stat-label">点击率预测</p>
+              <p class="stat-number">6.2<span class="text-2xl text-light-gray font-normal">%</span></p>
+            </div>
+            <div class="px-3 py-1 bg-tesla-red/20 text-tesla-red text-sm rounded-full">
+              高于行业均值 23%
+            </div>
+          </div>
+          <p class="text-light-gray text-sm mb-6">封面设计成功利用争议性话题和人物形象吸引点击，但过度负面的基调可能降低部分用户的互动意愿。</p>
+          <div class="grid grid-cols-2 gap-4">
+            <div class="bg-medium-gray/20 p-3 rounded-lg">
+              <p class="text-xs text-light-gray mb-1">目标受众匹配度</p>
+              <p class="text-white font-bold">87%</p>
+            </div>
+            <div class="bg-medium-gray/20 p-3 rounded-lg">
+              <p class="text-xs text-light-gray mb-1">品牌识别度</p>
+              <p class="text-white font-bold">92%</p>
+            </div>
+            <div class="bg-medium-gray/20 p-3 rounded-lg">
+              <p class="text-xs text-light-gray mb-1">话题吸引力</p>
+              <p class="text-white font-bold">76%</p>
+            </div>
+            <div class="bg-medium-gray/20 p-3 rounded-lg">
+              <p class="text-xs text-light-gray mb-1">情感共鸣度</p>
+              <p class="text-white font-bold">63%</p>
+            </div>
+          </div>
+        </motion.div>
+      </div>
+    </section>
+    
+    <!-- 内容分析部分 -->
+    <section id="content" class="mb-20">
+      <div class="flex items-center justify-between mb-8">
+        <h2 class="text-3xl font-bold">视频内容评估</h2>
+        <div class="h-px gradient-red-reverse w-24"></div>
+      </div>
+      
+      <div class="grid grid-cols-1 md:grid-cols-12 gap-6">
+        <!-- 内容安全风险评估 -->
+        <motion.div 
+          class="md:col-span-8 bento-card p-6"
+          initial={{ opacity: 0, x: -20 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+        >
+          <div class="flex justify-between items-start mb-6">
+            <h3 class="text-xl font-bold">内容安全风险评估</h3>
+            <div class="px-3 py-1 bg-tesla-red text-white text-sm font-medium rounded-full">
+              高风险
+            </div>
+          </div>
+          
+          <div class="mb-6">
+            <h4 class="font-medium mb-2 text-light-gray">视频标题</h4>
+            <p class="text-white">"西贝翻车记：老板如何成为企业最大的公关灾难？ #看懂中国 #商业思维 #西贝 #预制菜 #掘金计划2025"</p>
+          </div>
+          
+          <div class="space-y-4 mb-6">
+            <div class="flex items-start space-x-3">
+              <div class="bg-tesla-red/20 p-2 rounded-md mt-0.5">
+                <i class="fa fa-exclamation-circle text-tesla-red"></i>
+              </div>
+              <div>
+                <h4 class="font-medium mb-1">企业负面事件放大</h4>
+                <p class="text-light-gray text-sm">标题直接定性"老板成为最大公关灾难"，可能激化消费者对西贝品牌的负面情绪</p>
+              </div>
+            </div>
+            <div class="flex items-start space-x-3">
+              <div class="bg-tesla-red/20 p-2 rounded-md mt-0.5">
+                <i class="fa fa-exclamation-circle text-tesla-red"></i>
+              </div>
+              <div>
+                <h4 class="font-medium mb-1">敏感商业话题关联</h4>
+                <p class="text-light-gray text-sm">涉及企业经营问题、预制菜争议等敏感话题，易引发行业信任危机</p>
+              </div>
+            </div>
+            <div class="flex items-start space-x-3">
+              <div class="bg-medium-gray/30 p-2 rounded-md mt-0.5">
+                <i class="fa fa-info-circle text-light-gray"></i>
+              </div>
+              <div>
+                <h4 class="font-medium mb-1">合法合规边界</h4>
+                <p class="text-light-gray text-sm">商业评论内容未发现明显违法违规信息，但存在引发企业名誉权纠纷的潜在风险</p>
+              </div>
+            </div>
+          </div>
+          
+          <div class="flex flex-wrap gap-2">
+            <span class="px-3 py-1 bg-medium-gray/20 text-light-gray text-sm rounded-full">#西贝</span>
+            <span class="px-3 py-1 bg-medium-gray/20 text-light-gray text-sm rounded-full">#预制菜</span>
+            <span class="px-3 py-1 bg-medium-gray/20 text-light-gray text-sm rounded-full">#商业思维</span>
+            <span class="px-3 py-1 bg-medium-gray/20 text-light-gray text-sm rounded-full">#看懂中国</span>
+            <span class="px-3 py-1 bg-medium-gray/20 text-light-gray text-sm rounded-full">#掘金计划2025</span>
+          </div>
+        </motion.div>
+        
+        <!-- 内容分类与标签分析 -->
+        <motion.div 
+          class="md:col-span-4 bento-card p-6"
+          initial={{ opacity: 0, x: 20 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+        >
+          <h3 class="text-xl font-bold mb-6">内容分类与标签</h3>
+          
+          <div class="mb-6">
+            <p class="text-sm text-light-gray mb-2">主要内容类别</p>
+            <div class="flex items-center space-x-2">
+              <div class="w-3 h-3 bg-tesla-red rounded-full"></div>
+              <p class="font-medium">商业评论</p>
+            </div>
+            <div class="h-20 mt-4">
+              <canvas id="categoryChart"></canvas>
+            </div>
+          </div>
+          
+          <div>
+            <p class="text-sm text-light-gray mb-3">标签相关性评分</p>
+            <div class="space-y-3">
+              <div>
+                <div class="flex justify-between text-xs mb-1">
+                  <span>#西贝</span>
+                  <span>95%</span>
+                </div>
+                <div class="h-1.5 bg-medium-gray rounded-full overflow-hidden">
+                  <div class="h-full bg-tesla-red" style="width: 95%"></div>
+                </div>
+              </div>
+              <div>
+                <div class="flex justify-between text-xs mb-1">
+                  <span>#预制菜</span>
+                  <span>88%</span>
+                </div>
+                <div class="h-1.5 bg-medium-gray rounded-full overflow-hidden">
+                  <div class="h-full bg-tesla-red" style="width: 88%"></div>
+                </div>
+              </div>
+              <div>
+                <div class="flex justify-between text-xs mb-1">
+                  <span>#商业思维</span>
+                  <span>76%</span>
+                </div>
+                <div class="h-1.5 bg-medium-gray rounded-full overflow-hidden">
+                  <div class="h-full bg-tesla-red" style="width: 76%"></div>
+                </div>
+              </div>
+              <div>
+                <div class="flex justify-between text-xs mb-1">
+                  <span>#看懂中国</span>
+                  <span>42%</span>
+                </div>
+                <div class="h-1.5 bg-medium-gray rounded-full overflow-hidden">
+                  <div class="h-full bg-tesla-red" style="width: 42%"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </motion.div>
+        
+        <!-- 内容质量评分 -->
+        <motion.div 
+          class="md:col-span-4 bento-card p-6"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+        >
+          <div class="flex justify-between items-start mb-6">
+            <div>
+              <p class="stat-label">内容质量评分</p>
+              <p class="stat-number text-tesla-red">7.4<span class="text-2xl text-light-gray font-normal">/10</span></p>
+            </div>
+            <div class="bg-medium-gray/30 p-2 rounded-full">
+              <i class="fa fa-check text-light-gray"></i>
+            </div>
+          </div>
+          
+          <div class="space-y-4">
+            <div>
+              <div class="flex justify-between text-sm mb-1">
+                <span>信息准确性</span>
+                <span>8.1/10</span>
+              </div>
+              <div class="h-2 bg-medium-gray rounded-full overflow-hidden">
+                <div class="h-full bg-tesla-red" style="width: 81%"></div>
+              </div>
+            </div>
+            <div>
+              <div class="flex justify-between text-sm mb-1">
+                <span>叙事连贯性</span>
+                <span>7.6/10</span>
+              </div>
+              <div class="h-2 bg-medium-gray rounded-full overflow-hidden">
+                <div class="h-full bg-tesla-red" style="width: 76%"></div>
+              </div>
+            </div>
+            <div>
+              <div class="flex justify-between text-sm mb-1">
+                <span>观点客观性</span>
+                <span>6.3/10</span>
+              </div>
+              <div class="h-2 bg-medium-gray rounded-full overflow-hidden">
+                <div class="h-full bg-tesla-red" style="width: 63%"></div>
+              </div>
+            </div>
+            <div>
+              <div class="flex justify-between text-sm mb-1">
+                <span>制作专业性</span>
+                <span>7.9/10</span>
+              </div>
+              <div class="h-2 bg-medium-gray rounded-full overflow-hidden">
+                <div class="h-full bg-tesla-red" style="width: 79%"></div>
+              </div>
+            </div>
+          </div>
+        </motion.div>
+        
+        <!-- 受众匹配度 -->
+        <motion.div 
+          class="md:col-span-4 bento-card p-6"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5, delay: 0.1 }}
+        >
+          <h3 class="text-xl font-bold mb-6">受众匹配度</h3>
+          
+          <div class="space-y-4">
+            <div class="flex items-center justify-between">
+              <div class="flex items-center space-x-2">
+                <div class="w-8 h-8 rounded-full bg-tesla-red/20 flex items-center justify-center">
+                  <i class="fa fa-briefcase text-tesla-red text-sm"></i>
+                </div>
+                <span class="text-sm">商业人士</span>
+              </div>
+              <div class="text-right">
+                <p class="font-bold">89%</p>
+                <p class="text-xs text-light-gray">匹配度</p>
+              </div>
+            </div>
+            
+            <div class="flex items-center justify-between">
+              <div class="flex items-center space-x-2">
+                <div class="w-8 h-8 rounded-full bg-medium-gray/20 flex items-center justify-center">
+                  <i class="fa fa-shopping-bag text-light-gray text-sm"></i>
+                </div>
+                <span class="text-sm">消费者</span>
+              </div>
+              <div class="text-right">
+                <p class="font-bold">76%</p>
+                <p class="text-xs text-light-gray">匹配度</p>
+              </div>
+            </div>
+            
+            <div class="flex items-center justify-between">
+              <div class="flex items-center space-x-2">
+                <div class="w-8 h-8 rounded-full bg-medium-gray/20 flex items-center justify-center">
+                  <i class="fa fa-graduation-cap text-light-gray text-sm"></i>
+                </div>
+                <span class="text-sm">学生群体</span>
+              </div>
+              <div class="text-right">
+                <p class="font-bold">42%</p>
+                <p class="text-xs text-light-gray">匹配度</p>
+              </div>
+            </div>
+            
+            <div class="flex items-center justify-between">
+              <div class="flex items-center space-x-2">
+                <div class="w-8 h-8 rounded-full bg-medium-gray/20 flex items-center justify-center">
+                  <i class="fa fa-cutlery text-light-gray text-sm"></i>
+                </div>
+                <span class="text-sm">餐饮从业者</span>
+              </div>
+              <div class="text-right">
+                <p class="font-bold">81%</p>
+                <p class="text-xs text-light-gray">匹配度</p>
+              </div>
+            </div>
+          </div>
+          
+          <div class="mt-6 pt-6 border-t border-medium-gray/30">
+            <p class="text-sm text-light-gray mb-3">主要受众年龄段</p>
+            <div class="h-24">
+              <canvas id="ageChart"></canvas>
+            </div>
+          </div>
+        </motion.div>
+        
+        <!-- 互动预期 -->
+        <motion.div 
+          class="md:col-span-4 bento-card p-6"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5, delay: 0.2 }}
+        >
+          <h3 class="text-xl font-bold mb-6">互动预期分析</h3>
+          
+          <div class="space-y-6">
+            <div class="flex items-center justify-between">
+              <div class="flex items-center space-x-3">
+                <div class="w-10 h-10 rounded-full bg-tesla-red/20 flex items-center justify-center">
+                  <i class="fa fa-comment text-tesla-red"></i>
+                </div>
+                <div>
+                  <p class="text-sm text-light-gray">评论预期</p>
+                  <p class="font-bold">高</p>
+                </div>
+              </div>
+              <div class="w-24 h-2 bg-medium-gray rounded-full overflow-hidden">
+                <div class="h-full bg-tesla-red" style="width: 85%"></div>
+              </div>
+            </div>
+            
+            <div class="flex items-center justify-between">
+              <div class="flex items-center space-x-3">
+                <div class="w-10 h-10 rounded-full bg-medium-gray/20 flex items-center justify-center">
+                  <i class="fa fa-share text-light-gray"></i>
+                </div>
+                <div>
+                  <p class="text-sm text-light-gray">分享预期</p>
+                  <p class="font-bold">中</p>
+                </div>
+              </div>
+              <div class="w-24 h-2 bg-medium-gray rounded-full overflow-hidden">
+                <div class="h-full bg-tesla-red" style="width: 55%"></div>
+              </div>
+            </div>
+            
+            <div class="flex items-center justify-between">
+              <div class="flex items-center space-x-3">
+                <div class="w-10 h-10 rounded-full bg-medium-gray/20 flex items-center justify-center">
+                  <i class="fa fa-heart text-light-gray"></i>
+                </div>
+                <div>
+                  <p class="text-sm text-light-gray">点赞预期</p>
+                  <p class="font-bold">中</p>
+                </div>
+              </div>
+              <div class="w-24 h-2 bg-medium-gray rounded-full overflow-hidden">
+                <div class="h-full bg-tesla-red" style="width: 62%"></div>
+              </div>
+            </div>
+            
+            <div class="flex items-center justify-between">
+              <div class="flex items-center space-x-3">
+                <div class="w-10 h-10 rounded-full bg-medium-gray/20 flex items-center justify-center">
+                  <i class="fa fa-bookmark text-light-gray"></i>
+                </div>
+                <div>
+                  <p class="text-sm text-light-gray">收藏预期</p>
+                  <p class="font-bold">低</p>
+                </div>
+              </div>
+              <div class="w-24 h-2 bg-medium-gray rounded-full overflow-hidden">
+                <div class="h-full bg-tesla-red" style="width: 38%"></div>
+              </div>
+            </div>
+          </div>
+        </motion.div>
+      </div>
+    </section>
+    
+    <!-- 评论分析部分 -->
+    <section id="comments" class="mb-20">
+      <div class="flex items-center justify-between mb-8">
+        <h2 class="text-3xl font-bold">评论分析</h2>
+        <div class="h-px gradient-red w-24"></div>
+      </div>
+      
+      <div class="grid grid-cols-1 md:grid-cols-12 gap-6">
+        <!-- 评论概览 -->
+        <motion.div 
+          class="md:col-span-4 bento-card p-6"
+          initial={{ opacity: 0, x: -20 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+        >
+          <div class="flex justify-between items-start mb-6">
+            <h3 class="text-xl font-bold">评论概览</h3>
+            <span class="text-xs bg-medium-gray/30 text-light-gray px-2 py-1 rounded">
+              2025/09/01 - 2025/09/30
+            </span>
+          </div>
+          
+          <div class="space-y-6">
+            <div class="text-center">
+              <p class="stat-label">总评论数</p>
+              <p class="stat-number">10</p>
+              <p class="text-xs text-light-gray mt-1">样本量较小，分析结果仅供参考</p>
+            </div>
+            
+            <div class="grid grid-cols-2 gap-4">
+              <div class="bg-medium-gray/20 p-4 rounded-lg text-center">
+                <p class="stat-label">点赞总数</p>
+                <p class="stat-number text-tesla-red">22</p>
+              </div>
+              <div class="bg-medium-gray/20 p-4 rounded-lg text-center">
+                <p class="stat-label">回复总数</p>
+                <p class="stat-number">1</p>
+              </div>
+            </div>
+            
+            <div class="bg-medium-gray/20 p-4 rounded-lg">
+              <p class="text-sm text-light-gray mb-2">平均互动率</p>
+              <div class="flex items-end space-x-2">
+                <div class="w-full h-20 bg-dark-gray rounded-sm relative overflow-hidden">
+                  <div class="absolute bottom-0 left-0 right-0 bg-tesla-red" style="height: 65%"></div>
+                  <div class="absolute bottom-0 left-0 right-0 flex justify-center">
+                    <span class="text-xs font-bold">65%</span>
+                  </div>
+                </div>
+                <div class="w-full h-20 bg-dark-gray rounded-sm relative overflow-hidden">
+                  <div class="absolute bottom-0 left-0 right-0 bg-medium-gray" style="height: 42%"></div>
+                  <div class="absolute bottom-0 left-0 right-0 flex justify-center">
+                    <span class="text-xs font-bold">42%</span>
+                  </div>
+                </div>
+              </div>
+              <div class="flex justify-between text-xs text-light-gray mt-1">
+                <span>本视频</span>
+                <span>行业平均</span>
+              </div>
+            </div>
+          </div>
+        </motion.div>
+        
+        <!-- 地域分布 -->
+        <motion.div 
+          class="md:col-span-4 bento-card p-6"
+          initial={{ opacity: 0, x: -20 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5, delay: 0.1 }}
+        >
+          <h3 class="text-xl font-bold mb-6">地域分布</h3>
+          
+          <div class="space-y-3 max-h-64 overflow-y-auto pr-2">
+            <div class="flex items-center justify-between">
+              <div class="flex items-center space-x-2">
+                <div class="w-2 h-2 bg-tesla-red rounded-full"></div>
+                <span class="text-sm">广东</span>
+              </div>
+              <div class="flex items-center space-x-2">
+                <span class="text-sm text-light-gray">2</span>
+                <div class="w-16 h-1.5 bg-medium-gray rounded-full overflow-hidden">
+                  <div class="h-full bg-tesla-red" style="width: 20%"></div>
+                </div>
+              </div>
+            </div>
+            
+            <div class="flex items-center justify-between">
+              <div class="flex items-center space-x-2">
+                <div class="w-2 h-2 bg-tesla-red rounded-full"></div>
+                <span class="text-sm">上海</span>
+              </div>
+              <div class="flex items-center space-x-2">
+                <span class="text-sm text-light-gray">2</span>
+                <div class="w-16 h-1.5 bg-medium-gray rounded-full overflow-hidden">
+                  <div class="h-full bg-tesla-red" style="width: 20%"></div>
+                </div>
+              </div>
+            </div>
+            
+            <div class="flex items-center justify-between">
+              <div class="flex items-center space-x-2">
+                <div class="w-2 h-2 bg-tesla-red rounded-full"></div>
+                <span class="text-sm">河南</span>
+              </div>
+              <div class="flex items-center space-x-2">
+                <span class="text-sm text-light-gray">2</span>
+                <div class="w-16 h-1.5 bg-medium-gray rounded-full overflow-hidden">
+                  <div class="h-full bg-tesla-red" style="width: 20%"></div>
+                </div>
+              </div>
+            </div>
+            
+            <div class="flex items-center justify-between">
+              <div class="flex items-center space-x-2">
+                <div class="w-2 h-2 bg-medium-gray rounded-full"></div>
+                <span class="text-sm">广西</span>
+              </div>
+              <div class="flex items-center space-x-2">
+                <span class="text-sm text-light-gray">1</span>
+                <div class="w-16 h-1.5 bg-medium-gray rounded-full overflow-hidden">
+                  <div class="h-full bg-medium-gray" style="width: 10%"></div>
+                </div>
+              </div>
+            </div>
+            
+            <div class="flex items-center justify-between">
+              <div class="flex items-center space-x-2">
+                <div class="w-2 h-2 bg-medium-gray rounded-full"></div>
+                <span class="text-sm">安徽</span>
+              </div>
+              <div class="flex items-center space-x-2">
+                <span class="text-sm text-light-gray">1</span>
+                <div class="w-16 h-1.5 bg-medium-gray rounded-full overflow-hidden">
+                  <div class="h-full bg-medium-gray" style="width: 10%"></div>
+                </div>
+              </div>
+            </div>
+            
+            <div class="flex items-center justify-between">
+              <div class="flex items-center space-x-2">
+                <div class="w-2 h-2 bg-medium-gray rounded-full"></div>
+                <span class="text-sm">山东</span>
+              </div>
+              <div class="flex items-center space-x-2">
+                <span class="text-sm text-light-gray">1</span>
+                <div class="w-16 h-1.5 bg-medium-gray rounded-full overflow-hidden">
+                  <div class="h-full bg-medium-gray" style="width: 10%"></div>
+                </div>
+              </div>
+            </div>
+            
+            <div class="flex items-center justify-between">
+              <div class="flex items-center space-x-2">
+                <div class="w-2 h-2 bg-medium-gray rounded-full"></div>
+                <span class="text-sm">福建</span>
+              </div>
+              <div class="flex items-center space-x-2">
+                <span class="text-sm text-light-gray">1</span>
+                <div class="w-16 h-1.5 bg-medium-gray rounded-full overflow-hidden">
+                  <div class="h-full bg-medium-gray" style="width: 10%"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </motion.div>
+        
+        <!-- 情感分析 -->
+        <motion.div 
+          class="md:col-span-4 bento-card p-6"
+          initial={{ opacity: 0, x: -20 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5, delay: 0.2 }}
+        >
+          <h3 class="text-xl font-bold mb-6">情感分析</h3>
+          
+          <div class="h-40 mb-6">
+            <canvas id="sentimentChart"></canvas>
+          </div>
+          
+          <div class="space-y-3">
+            <div class="flex justify-between items-center">
+              <div class="flex items-center space-x-2">
+                <div class="w-3 h-3 bg-tesla-red rounded-full"></div>
+                <span class="text-sm">负面情感</span>
+              </div>
+              <span class="text-sm font-bold">60%</span>
+            </div>
+            
+            <div class="flex justify-between items-center">
+              <div class="flex items-center space-x-2">
+                <div class="w-3 h-3 bg-medium-gray rounded-full"></div>
+                <span class="text-sm">中性情感</span>
+              </div>
+              <span class="text-sm font-bold">30%</span>
+            </div>
+            
+            <div class="flex justify-between items-center">
+              <div class="flex items-center space-x-2">
+                <div class="w-3 h-3 bg-light-gray rounded-full"></div>
+                <span class="text-sm">正面情感</span>
+              </div>
+              <span class="text-sm font-bold">10%</span>
+            </div>
+          </div>
+          
+          <div class="mt-6 pt-6 border-t border-medium-gray/30">
+            <p class="text-xs text-light-gray mb-2">风险情感值</p>
+            <p class="text-3xl font-bold text-tesla-red">13</p>
+            <p class="text-xs text-light-gray mt-1">负面/攻击性情感关键词出现次数</p>
+          </div>
+        </motion.div>
+        
+        <!-- 关键词分析 -->
+        <motion.div 
+          class="md:col-span-8 bento-card p-6"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+        >
+          <h3 class="text-xl font-bold mb-6">关键词分析</h3>
+          
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div>
+              <h4 class="text-sm font-medium mb-4">高频讨论话题</h4>
+              <div class="flex flex-wrap gap-3">
+                <div class="px-3 py-2 bg-tesla-red/20 text-tesla-red text-sm rounded-full flex items-center space-x-1">
+                  <span>预制菜</span>
+                  <span class="bg-tesla-red text-white text-xs px-1.5 py-0.5 rounded-full">2</span>
+                </div>
+                <div class="px-3 py-2 bg-medium-gray/20 text-light-gray text-sm rounded-full flex items-center space-x-1">
+                  <span>价格</span>
+                  <span class="bg-medium-gray text-white text-xs px-1.5 py-0.5 rounded-full">1</span>
+                </div>
+                <div class="px-3 py-2 bg-medium-gray/20 text-light-gray text-sm rounded-full flex items-center space-x-1">
+                  <span>老板</span>
+                  <span class="bg-medium-gray text-white text-xs px-1.5 py-0.5 rounded-full">1</span>
+                </div>
+                <div class="px-3 py-2 bg-medium-gray/20 text-light-gray text-sm rounded-full flex items-center space-x-1">
+                  <span>商业思维</span>
+                  <span class="bg-medium-gray text-white text-xs px-1.5 py-0.5 rounded-full">1</span>
+                </div>
+                <div class="px-3 py-2 bg-medium-gray/20 text-light-gray text-sm rounded-full flex items-center space-x-1">
+                  <span>公关</span>
+                  <span class="bg-medium-gray text-white text-xs px-1.5 py-0.5 rounded-full">1</span>
+                </div>
+                <div class="px-3 py-2 bg-medium-gray/20 text-light-gray text-sm rounded-full flex items-center space-x-1">
+                  <span>企业管理</span>
+                  <span class="bg-medium-gray text-white text-xs px-1.5 py-0.5 rounded-full">1</span>
+                </div>
+              </div>
+            </div>
+            
+            <div>
+              <h4 class="text-sm font-medium mb-4">不健康关键词</h4>
+              <div class="space-y-2">
+                <div class="flex items-center justify-between bg-medium-gray/20 px-3 py-2 rounded-lg">
+                  <div class="flex items-center space-x-2">
+                    <i class="fa fa-exclamation-circle text-tesla-red text-xs"></i>
+                    <span class="text-sm">祖坟冒烟</span>
+                  </div>
+                  <span class="text-xs text-light-gray">人身攻击</span>
+                </div>
+                
+                <div class="flex items-center justify-between bg-medium-gray/20 px-3 py-2 rounded-lg">
+                  <div class="flex items-center space-x-2">
+                    <i class="fa fa-exclamation-circle text-tesla-red text-xs"></i>
+                    <span class="text-sm">睿智</span>
+                  </div>
+                  <span class="text-xs text-light-gray">隐性辱骂</span>
+                </div>
+                
+                <div class="flex items-center justify-between bg-medium-gray/20 px-3 py-2 rounded-lg">
+                  <div class="flex items-center space-x-2">
+                    <i class="fa fa-exclamation-circle text-tesla-red text-xs"></i>
+                    <span class="text-sm">土皇帝</span>
+                  </div>
+                  <span class="text-xs text-light-gray">人身攻击</span>
+                </div>
+                
+                <div class="flex items-center justify-between bg-medium-gray/20 px-3 py-2 rounded-lg">
+                  <div class="flex items-center space-x-2">
+                    <i class="fa fa-exclamation-circle text-tesla-red text-xs"></i>
+                    <span class="text-sm">爹味</span>
+                  </div>
+                  <span class="text-xs text-light-gray">负面态度</span>
+                </div>
+                
+                <div class="flex items-center justify-between bg-medium-gray/20 px-3 py-2 rounded-lg">
+                  <div class="flex items-center space-x-2">
+                    <i class="fa fa-exclamation-circle text-tesla-red text-xs"></i>
+                    <span class="text-sm">既当又立</span>
+                  </div>
+                  <span class="text-xs text-light-gray">负面评价</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="mt-6 pt-6 border-t border-medium-gray/30">
+            <h4 class="text-sm font-medium mb-4">内容安全匹配度</h4>
+            <div class="flex items-center space-x-4">
+              <div class="w-full bg-medium-gray rounded-full h-2 overflow-hidden">
+                <div class="h-full bg-tesla-red" style="width: 50%"></div>
+              </div>
+              <span class="text-sm font-bold text-tesla-red">50%</span>
+            </div>
+            <p class="text-xs text-light-gray mt-2">10条评论中，5条含不健康关键词，存在明显负面及攻击性表达</p>
+          </div>
+        </motion.div>
+        
+        <!-- 热门评论 -->
+        <motion.div 
+          class="md:col-span-4 bento-card p-6"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5, delay: 0.2 }}
+        >
+          <h3 class="text-xl font-bold mb-6">热门评论</h3>
+          
+          <div class="space-y-4 max-h-80 overflow-y-auto pr-2">
+            <div class="bg-medium-gray/20 p-3 rounded-lg">
+              <div class="flex justify-between items-start mb-2">
+                <span class="text-xs text-light-gray">广东 · 2天前</span>
+                <span class="text-xs bg-tesla-red/20 text-tesla-red px-1 rounded">热门</span>
+              </div>
+              <p class="text-sm mb-2">说了一万遍了，那一代很多人发财全靠祖坟冒烟，现代眼光看那些人就跟睿智没区别</p>
+              <div class="flex items-center justify-between text-xs text-light-gray">
+                <div class="flex items-center space-x-3">
+                  <span><i class="fa fa-heart-o mr-1"></i> 8</span>
+                  <span><i class="fa fa-comment-o mr-1"></i> 0</span>
+                </div>
+                <span>风险等级: 高</span>
+              </div>
+            </div>
+            
+            <div class="bg-medium-gray/20 p-3 rounded-lg">
+              <div class="flex justify-between items-start mb-2">
+                <span class="text-xs text-light-gray">上海 · 3天前</span>
+                <span class="text-xs bg-medium-gray/30 text-light-gray px-1 rounded">一般</span>
+              </div>
+              <p class="text-sm mb-2">其实就是爹味太重，总想着教育对方，而不是理解消费者需求</p>
+              <div class="flex items-center justify-between text-xs text-light-gray">
+                <div class="flex items-center space-x-3">
+                  <span><i class="fa fa-heart-o mr-1"></i> 5</span>
+                  <span><i class="fa fa-comment-o mr-1"></i> 0</span>
+                </div>
+                <span>风险等级: 中</span>
+              </div>
+            </div>
+            
+            <div class="bg-medium-gray/20 p-3 rounded-lg">
+              <div class="flex justify-between items-start mb-2">
+                <span class="text-xs text-light-gray">河南 · 4天前</span>
+                <span class="text-xs bg-medium-gray/30 text-light-gray px-1 rounded">一般</span>
+              </div>
+              <p class="text-sm mb-2">假老板当土皇帝久了，真以为自己说什么都是对的，完全不明民间疾苦，杀马特审美</p>
+              <div class="flex items-center justify-between text-xs text-light-gray">
+                <div class="flex items-center space-x-3">
+                  <span><i class="fa fa-heart-o mr-1"></i> 4</span>
+                  <span><i class="fa fa-comment-o mr-1"></i> 1</span>
+                </div>
+                <span>风险等级: 高</span>
+              </div>
+            </div>
+          </div>
+        </motion.div>
+      </div>
+    </section>
+    
+    <!-- 风险评估部分 -->
+    <section id="risk" class="mb-20">
+      <div class="flex items-center justify-between mb-8">
+        <h2 class="text-3xl font-bold">风险评估报告</h2>
+        <div class="h-px gradient-red w-24"></div>
+      </div>
+      
+      <div class="grid grid-cols-1 md:grid-cols-12 gap-6">
+        <!-- 整体风险评估 -->
+        <motion.div 
+          class="md:col-span-4 bento-card p-6"
+          initial={{ opacity: 0, x: -20 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+        >
+          <div class="flex justify-between items-start mb-6">
+            <h3 class="text-xl font-bold">整体风险评估</h3>
+            <span class="px-3 py-1 bg-tesla-red text-white text-sm font-medium rounded-full">
+              高风险
+            </span>
+          </div>
+          
+          <div class="text-center mb-6">
+            <div class="inline-flex items-center justify-center w-20 h-20 rounded-full bg-tesla-red/20 mb-3">
+              <i class="fa fa-exclamation-triangle text-tesla-red text-3xl"></i>
+            </div>
+            <p class="text-sm text-light-gray">内容安全风险匹配度</p>
+            <p class="text-3xl font-bold text-tesla-red">50%</p>
+          </div>
+          
+          <div class="space-y-3">
+            <div class="flex justify-between items-center">
+              <span class="text-sm">内容合规风险</span>
+              <div class="flex items-center">
+                <i class="fa fa-circle text-xs text-tesla-red mr-1"></i>
+                <i class="fa fa-circle text-xs text-tesla-red mr-1"></i>
+                <i class="fa fa-circle text-xs text-tesla-red mr-1"></i>
+                <i class="fa fa-circle text-xs text-tesla-red mr-1"></i>
+                <i class="fa fa-circle text-xs text-medium-gray"></i>
+              </div>
+            </div>
+            
+            <div class="flex justify-between items-center">
+              <span class="text-sm">品牌声誉风险</span>
+              <div class="flex items-center">
+                <i class="fa fa-circle text-xs text-tesla-red mr-1"></i>
+                <i class="fa fa-circle text-xs text-tesla-red mr-1"></i>
+                <i class="fa fa-circle text-xs text-tesla-red mr-1"></i>
+                <i class="fa fa-circle text-xs text-medium-gray mr-1"></i>
+                <i class="fa fa-circle text-xs text-medium-gray"></i>
+              </div>
+            </div>
+            
+            <div class="flex justify-between items-center">
+              <span class="text-sm">法律纠纷风险</span>
+              <div class="flex items-center">
+                <i class="fa fa-circle text-xs text-tesla-red mr-1"></i>>
+                <i class="fa fa-circle text-xs text-tesla-red mr-1"></i>
+                <i class="fa fa-circle text-xs text-medium-gray mr-1"></i>
+                <i class="fa fa-circle text-xs text-medium-gray mr-1"></i>
+                <i class="fa fa-circle text-xs text-medium-gray"></i>
+              </div>
+            </div>
+            
+            <div class="flex justify-between items-center">
+              <span class="text-sm">用户投诉风险</span>
+              <div class="flex items-center">
+                <i class="fa fa-circle text-xs text-tesla-red mr-1"></i>
+                <i class="fa fa-circle text-xs text-tesla-red mr-1"></i>
+                <i class="fa fa-circle text-xs text-tesla-red mr-1"></i>
+                <i class="fa fa-circle text-xs text-medium-gray mr-1"></i>
+                <i class="fa fa-circle text-xs text-medium-gray"></i>
+              </div>
+            </div>
+          </div>
+        </motion.div>
+        
+        <!-- 风险类型分析 -->
+        <motion.div 
+          class="md:col-span-8 bento-card p-6"
+          initial={{ opacity: 0, x: 20 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+        >
+          <h3 class="text-xl font-bold mb-6">风险类型分析</h3>
+          
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+            <div>
+              <h4 class="text-sm font-medium mb-4">主要风险类型</h4>
+              <div class="space-y-4">
+                <div class="flex items-start space-x-3">
+                  <div class="bg-tesla-red/20 p-2 rounded-md mt-0.5">
+                    <i class="fa fa-user-times text-tesla-red text-sm"></i>
+                  </div>
+                  <div>
+                    <h5 class="font-medium text-sm mb-1">人身攻击风险</h5>
+                    <p class="text-xs text-light-gray">评论中出现"祖坟冒烟"、"睿智"、"土皇帝"等针对企业负责人的攻击性词汇，存在名誉侵权风险</p>
+                  </div>
+                </div>
+                
+                <div class="flex items-start space-x-3">
+                  <div class="bg-tesla-red/20 p-2 rounded-md mt-0.5">
+                    <i class="fa fa-comments-o text-tesla-red text-sm"></i>
+                  </div>
+                  <div>
+                    <h5 class="font-medium text-sm mb-1">负面情绪扩散风险</h5>
+                    <p class="text-xs text-light-gray">60%的评论带有负面情感，负面情绪可能通过社交传播进一步放大，对品牌形象造成损害</p>
+                  </div>
+                </div>
+                
+                <div class="flex items-start space-x-3">
+                  <div class="bg-tesla-red/20 p-2 rounded-md mt-0.5">
+                    <i class="fa fa-shopping-cart text-tesla-red text-sm"></i>
+                  </div>
+                  <div>
+                    <h5 class="font-medium text-sm mb-1">产品信任危机风险</h5>
+                    <p class="text-xs text-light-gray">"预制菜"成为高频争议话题，评论中涉及价格问题和产品质量质疑，可能影响消费者购买决策</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <div>
+              <h4 class="text-sm font-medium mb-4">风险分布</h4>
+              <div class="h-40">
+                <canvas id="riskTypeChart"></canvas>
+              </div>
+              
+              <div class="mt-4 space-y-2">
+                <div class="flex justify-between text-xs">
+                  <span class="text-light-gray">人身攻击风险</span>
+                  <span class="font-medium">45%</span>
+                </div>
+                <div class="flex justify-between text-xs">
+                  <span class="text-light-gray">负面情绪扩散风险</span>
+                  <span class="font-medium">30%</span>
+                </div>
+                <div class="flex justify-between text-xs">
+                  <span class="text-light-gray">产品信任危机风险</span>
+                  <span class="font-medium">25%</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="pt-6 border-t border-medium-gray/30">
+            <h4 class="text-sm font-medium mb-4">整改建议</h4>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
+              <div class="bg-medium-gray/20 p-3 rounded-lg">
+                <div class="flex items-center space-x-2 mb-2">
+                  <i class="fa fa-ban text-tesla-red text-xs"></i>
+                  <h5 class="font-medium text-sm">违规内容处理</h5>
+                </div>
+                <p class="text-xs text-light-gray">删除含"祖坟冒烟"、"睿智"等攻击性词汇的评论，对发布账号进行合规警示</p>
+              </div>
+              
+              <div class="bg-medium-gray/20 p-3 rounded-lg">
+                <div class="flex items-center space-x-2 mb-2">
+                  <i class="fa fa-filter text-tesla-red text-xs"></i>
+                  <h5 class="font-medium text-sm">评论审核强化</h5>
+                </div>
+                <p class="text-xs text-light-gray">对"西贝"、"预制菜"等关键词相关评论增加人工审核环节，过滤攻击性内容</p>
+              </div>
+              
+              <div class="bg-medium-gray/20 p-3 rounded-lg">
+                <div class="flex items-center space-x-2 mb-2">
+                  <i class="fa fa-exclamation-circle text-tesla-red text-xs"></i>
+                  <h5 class="font-medium text-sm">风险预警机制</h5>
+                </div>
+                <p class="text-xs text-light-gray">建立品牌舆情监测机制，实时跟踪负面话题扩散情况，及时介入引导</p>
+              </div>
+            </div>
+          </div>
+        </motion.div>
+      </div>
+    </section>
+  </main>
+  
+  <!-- 页脚 -->
+  <footer class="bg-dark-gray border-t border-medium-gray py-8">
+    <div class="container mx-auto max-w-6xl px-4">
+      <div class="flex flex-col md:flex-row justify-between items-center">
+        <div class="flex items-center space-x-2 mb-4 md:mb-0">
+          <i class="fa fa-bar-chart text-tesla-red text-2xl"></i>
+          <h1 class="text-xl font-bold tracking-tight">VIDEO<span class="text-tesla-red">ANALYTICS</span></h1>
+        </div>
+        
+        <div class="flex space-x-6 mb-4 md:mb-0">
+          <a href="#" class="text-light-gray hover:text-tesla-red transition-colors">
+            <i class="fa fa-twitter"></i>
+          </a>
+          <a href="#" class="text-light-gray hover:text-tesla-red transition-colors">
+            <i class="fa fa-linkedin"></i>
+          </a>
+          <a href="#" class="text-light-gray hover:text-tesla-red transition-colors">
+            <i class="fa fa-github"></i>
+          </a>
+        </div>
+        
+        <div class="text-light-gray text-sm">
+          © 2025 VideoAnalytics. 保留所有权利
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // 等待DOM加载完成
+    document.addEventListener('DOMContentLoaded', function() {
+      // 情感基调分析图表
+      const emotionCtx = document.getElementById('emotionChart').getContext('2d');
+      new Chart(emotionCtx, {
+        type: 'doughnut',
+        data: {
+          labels: ['负面', '中性', '正面'],
+          datasets: [{
+            data: [42, 38, 20],
+            backgroundColor: [
+              '#E31937',
+              '#333333',
+              '#999999'
+            ],
+            borderWidth: 0,
+            cutout: '70%'
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: {
+              display: false
+            }
+          }
+        }
+      });
+      
+      // 内容类别图表
+      const categoryCtx = document.getElementById('categoryChart').getContext('2d');
+      new Chart(categoryCtx, {
+        type: 'doughnut',
+        data: {
+          labels: ['商业评论', '其他'],
+          datasets: [{
+            data: [75, 25],
+            backgroundColor: [
+              '#E31937',
+              '#333333'
+            ],
+            borderWidth: 0,
+            cutout: '80%'
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: {
+              display: false
+            }
+          }
+        }
+      });
+      
+      // 年龄分布图表
+      const ageCtx = document.getElementById('ageChart').getContext('2d');
+      new Chart(ageCtx, {
+        type: 'bar',
+        data: {
+          labels: ['18-24', '25-34', '35-44', '45+'],
+          datasets: [{
+            data: [15, 45, 30, 10],
+            backgroundColor: '#E31937',
+            borderRadius: 2,
+            barThickness: 8
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: {
+              display: false
+            }
+          },
+          scales: {
+            x: {
+              display: false
+            },
+            y: {
+              display: false
+            }
+          }
+        }
+      });
+      
+      // 情感分析图表
+      const sentimentCtx = document.getElementById('sentimentChart').getContext('2d');
+      new Chart(sentimentCtx, {
+        type: 'polarArea',
+        data: {
+          labels: ['负面', '中性', '正面'],
+          datasets: [{
+            data: [60, 30, 10],
+            backgroundColor: [
+              '#E31937',
+              '#333333',
+              '#999999'
+            ],
+            borderWidth: 0
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: {
+              display: false
+            }
+          },
+          scales: {
+            r: {
+              display: false
+            }
+          }
+        }
+      });
+      
+      // 风险类型图表
+      const riskTypeCtx = document.getElementById('riskTypeChart').getContext('2d');
+      new Chart(riskTypeCtx, {
+        type: 'doughnut',
+        data: {
+          labels: ['人身攻击', '负面情绪', '产品信任'],
+          datasets: [{
+            data: [45, 30, 25],
+            backgroundColor: [
+              '#E31937',
+              '#555555',
+              '#777777'
+            ],
+            borderWidth: 0,
+            cutout: '70%'
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: {
+              display: false
+            }
+          }
+        }
+      });
+      
+      // 添加滚动动画
+      const observerOptions = { threshold: 0.1 };
+      
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('animate-fade-in');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, observerOptions);
+      
+      document.querySelectorAll('.bento-card').forEach(card => {
+        observer.observe(card);
+      });
+      
+      // 平滑滚动
+      document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+          e.preventDefault();
+          const targetId = this.getAttribute('href');
+          const targetElement = document.querySelector(targetId);
+          
+          if (targetElement) {
+            window.scrollTo({
+              top: targetElement.offsetTop - 80,
+              behavior: 'smooth'
+            });
+          }
+        });
+      });
+    });
+  </script>
+</body>
+</html>
