@@ -1,0 +1,907 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>九一八事变历史记忆与当代舆情观察</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <!-- Framer Motion CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/framer-motion@10.15.1/dist/framer-motion.min.js"></script>
+    <!-- Chart.js CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.8/dist/chart.umd.min.js"></script>
+    
+    <!-- Tailwind 配置 -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'tesla-red': '#E31937',
+                        'dark-gray': '#1A1A1A',
+                        'medium-gray': '#333333',
+                        'light-gray': '#666666'
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .content-auto {
+                content-visibility: auto;
+            }
+            .text-shadow {
+                text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+            }
+            .gradient-red {
+                background: linear-gradient(90deg, rgba(227,25,55,1) 0%, rgba(227,25,55,0) 100%);
+            }
+            .gradient-red-reverse {
+                background: linear-gradient(90deg, rgba(227,25,55,0) 0%, rgba(227,25,55,1) 100%);
+            }
+            .bento-card {
+                @apply bg-dark-gray rounded-lg overflow-hidden border border-medium-gray transition-all duration-300 hover:border-tesla-red hover:shadow-[0_0_15px_rgba(227,25,55,0.3)];
+            }
+            .animate-fade-up {
+                opacity: 0;
+                transform: translateY(20px);
+                transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+            }
+            .animate-fade-up.visible {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body class="bg-black text-white font-sans min-h-screen">
+    <!-- 顶部导航 -->
+    <header class="fixed top-0 left-0 right-0 z-50 bg-black/80 backdrop-blur-md border-b border-medium-gray">
+        <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+            <div class="flex items-center space-x-2">
+                <div class="h-8 w-1 bg-tesla-red"></div>
+                <h1 class="text-xl font-bold tracking-tight">九一八事变研究</h1>
+            </div>
+            <nav class="hidden md:flex space-x-8">
+                <a href="#history" class="text-light-gray hover:text-tesla-red transition-colors">历史回眸</a>
+                <a href="#public-opinion" class="text-light-gray hover:text-tesla-red transition-colors">当代舆情</a>
+                <a href="#reflection" class="text-light-gray hover:text-tesla-red transition-colors">反思启示</a>
+                <a href="#data" class="text-light-gray hover:text-tesla-red transition-colors">数据可视化</a>
+            </nav>
+            <button class="md:hidden text-white">
+                <i class="fa fa-bars text-xl"></i>
+            </button>
+        </div>
+    </header>
+
+    <!-- 英雄区域 -->
+    <section class="relative h-screen flex items-center justify-center overflow-hidden">
+        <div class="absolute inset-0 z-0">
+            <div class="absolute inset-0 bg-gradient-to-b from-black/70 to-black"></div>
+            <img src="https://picsum.photos/id/1015/1920/1080" alt="历史背景" class="w-full h-full object-cover opacity-40">
+        </div>
+        
+        <div class="container mx-auto px-4 z-10 text-center">
+            <div class="animate-fade-up" style="transition-delay: 0.2s;">
+                <div class="inline-block mb-4 px-3 py-1 border border-tesla-red text-tesla-red text-sm uppercase tracking-wider">历史记忆 · 当代观察</div>
+                <h1 class="text-[clamp(2.5rem,8vw,5rem)] font-bold leading-tight mb-6 text-shadow">
+                    九一八事变
+                    <span class="block text-tesla-red mt-2">历史记忆与当代舆情</span>
+                </h1>
+                <p class="text-[clamp(1rem,3vw,1.25rem)] text-light-gray max-w-3xl mx-auto mb-10">
+                    深入探讨九一八事变的历史真相、集体记忆建构，以及在新媒体时代的社会回声与现实意义
+                </p>
+            </div>
+            
+            <div class="animate-fade-up" style="transition-delay: 0.5s;">
+                <a href="#history" class="inline-flex items-center space-x-2 text-white hover:text-tesla-red transition-colors">
+                    <span>开始探索</span>
+                    <i class="fa fa-chevron-down animate-bounce"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- 主要内容区 -->
+    <main class="container mx-auto px-4 py-20">
+        <!-- 历史回眸部分 -->
+        <section id="history" class="mb-32">
+            <div class="flex items-center mb-12">
+                <div class="h-px flex-grow bg-gradient-to-r from-tesla-red to-transparent"></div>
+                <h2 class="text-3xl md:text-4xl font-bold px-6">历史回眸</h2>
+                <div class="h-px flex-grow bg-gradient-to-l from-tesla-red to-transparent"></div>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- 事变始末与历史真相 -->
+                <div class="bento-card animate-fade-up">
+                    <div class="p-6">
+                        <div class="flex items-center mb-6">
+                            <div class="h-10 w-1 bg-tesla-red mr-4"></div>
+                            <h3 class="text-2xl font-bold">事变始末与历史真相</h3>
+                        </div>
+                        
+                        <div class="space-y-4 text-light-gray">
+                            <p>1931年9月18日夜，日本关东军在沈阳北郊柳条湖附近炸毁南满铁路路轨，反诬中国军队所为，以此为借口进攻中国东北，制造了震惊中外的"九一八事变"。</p>
+                            
+                            <div class="bg-black/50 p-4 border-l-4 border-tesla-red my-6">
+                                <p class="text-white italic">"九一八，九一八，从那个悲惨的时候，脱离了我的家乡，抛弃那无尽的宝藏..."</p>
+                                <p class="text-light-gray text-sm mt-2">——《松花江上》歌词，反映了事变后东北人民的苦难</p>
+                            </div>
+                            
+                            <h4 class="text-white font-semibold mt-6 mb-2">关键史实：</h4>
+                            <ul class="space-y-3">
+                                <li class="flex">
+                                    <i class="fa fa-circle text-tesla-red text-xs mt-1.5 mr-2"></i>
+                                    <span>日军精心策划：关东军参谋板垣征四郎、石原莞尔等人长期策划，柳条湖事件为预设借口</span>
+                                </li>
+                                <li class="flex">
+                                    <i class="fa fa-circle text-tesla-red text-xs mt-1.5 mr-2"></i>
+                                    <span>东北军反应：由于"攘外必先安内"政策，张学良下令"不抵抗"，东北军被迫撤退</span>
+                                </li>
+                                <li class="flex">
+                                    <i class="fa fa-circle text-tesla-red text-xs mt-1.5 mr-2"></i>
+                                    <span>国际社会态度：国联调查团虽承认日本侵略事实，但未能采取有效制裁措施</span>
+                                </li>
+                                <li class="flex">
+                                    <i class="fa fa-circle text-tesla-red text-xs mt-1.5 mr-2"></i>
+                                    <span>事变后果：四个多月内，东北三省全部沦陷，3000多万同胞沦为亡国奴</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="h-48 overflow-hidden">
+                        <img src="https://picsum.photos/id/1025/800/400" alt="九一八事变历史照片" class="w-full h-full object-cover hover:scale-105 transition-transform duration-700">
+                    </div>
+                </div>
+                
+                <!-- 民族创伤与记忆建构 -->
+                <div class="bento-card animate-fade-up" style="transition-delay: 0.2s;">
+                    <div class="p-6">
+                        <div class="flex items-center mb-6">
+                            <div class="h-10 w-1 bg-tesla-red mr-4"></div>
+                            <h3 class="text-2xl font-bold">民族创伤与记忆建构</h3>
+                        </div>
+                        
+                        <div class="space-y-4 text-light-gray">
+                            <p>九一八事变不仅是中国近代史上的重大历史事件，更是中华民族记忆中的深刻创伤，其纪念活动与记忆建构经历了长期发展过程。</p>
+                            
+                            <h4 class="text-white font-semibold mt-6 mb-3">集体记忆中的地位：</h4>
+                            <p>九一八事变标志着中国局部抗战的开始，也是世界反法西斯战争的起点，成为中华民族觉醒和团结的重要象征，奠定了全民族抗战的思想基础。</p>
+                            
+                            <h4 class="text-white font-semibold mt-6 mb-3">纪念活动发展历程：</h4>
+                            <div class="space-y-4 mt-4">
+                                <div class="flex">
+                                    <div class="min-w-20 text-tesla-red font-bold">1930s</div>
+                                    <div>东北抗日联军等爱国武装力量坚持抵抗，民间自发纪念活动兴起</div>
+                                </div>
+                                <div class="flex">
+                                    <div class="min-w-20 text-tesla-red font-bold">1945年后</div>
+                                    <div>国民政府将9月18日定为"光复节"，新中国成立后逐渐确立为"国耻日"纪念</div>
+                                </div>
+                                <div class="flex">
+                                    <div class="min-w-20 text-tesla-red font-bold">1990s</div>
+                                    <div>随着中日关系变化，纪念活动规模扩大，沈阳等地建立纪念馆</div>
+                                </div>
+                                <div class="flex">
+                                    <div class="min-w-20 text-tesla-red font-bold">2010s至今</div>
+                                    <div>全国范围内的防空警报试鸣，新媒体成为纪念活动传播的重要平台</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- 当代舆情部分 -->
+        <section id="public-opinion" class="mb-32">
+            <div class="flex items-center mb-12">
+                <div class="h-px flex-grow bg-gradient-to-r from-tesla-red to-transparent"></div>
+                <h2 class="text-3xl md:text-4xl font-bold px-6">当代舆情</h2>
+                <div class="h-px flex-grow bg-gradient-to-l from-tesla-red to-transparent"></div>
+            </div>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                <!-- 新媒体传播特征 -->
+                <div class="bento-card lg:col-span-2 animate-fade-up">
+                    <div class="p-6">
+                        <div class="flex items-center mb-6">
+                            <div class="h-10 w-1 bg-tesla-red mr-4"></div>
+                            <h3 class="text-2xl font-bold">新媒体传播特征</h3>
+                        </div>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                            <div class="space-y-4 text-light-gray">
+                                <h4 class="text-white font-semibold">传播规律：</h4>
+                                <ul class="space-y-3">
+                                    <li class="flex">
+                                        <i class="fa fa-angle-right text-tesla-red mt-1 mr-2"></i>
+                                        <span>周期性爆发：每年9月18日前一周开始预热，纪念日当天达到高峰</span>
+                                    </li>
+                                    <li class="flex">
+                                        <i class="fa fa-angle-right text-tesla-red mt-1 mr-2"></i>
+                                        <span>话题生命周期短：高峰期后迅速降温，话题持续时间约7-10天</span>
+                                    </li>
+                                    <li class="flex">
+                                        <i class="fa fa-angle-right text-tesla-red mt-1 mr-2"></i>
+                                        <span>多平台联动：微博话题引爆，微信深度分析，短视频平台视觉化传播</span>
+                                    </li>
+                                </ul>
+                                
+                                <h4 class="text-white font-semibold mt-6">参与主体特征：</h4>
+                                <ul class="space-y-3">
+                                    <li class="flex">
+                                        <i class="fa fa-angle-right text-tesla-red mt-1 mr-2"></i>
+                                        <span>官方媒体：权威报道，历史解读，纪念活动宣传</span>
+                                    </li>
+                                    <li class="flex">
+                                        <i class="fa fa-angle-right text-tesla-red mt-1 mr-2"></i>
+                                        <span>意见领袖：历史学者、媒体人提供深度分析</span>
+                                    </li>
+                                    <li class="flex">
+                                        <i class="fa fa-angle-right text-tesla-red mt-1 mr-2"></i>
+                                        <span>普通网民：情感表达，记忆分享，参与话题讨论</span>
+                                    </li>
+                                    <li class="flex">
+                                        <i class="fa fa-angle-right text-tesla-red mt-1 mr-2"></i>
+                                        <span>青少年群体：通过短视频、动漫等形式接触和参与</span>
+                                    </li>
+                                </ul>
+                            </div>
+                            
+                            <div>
+                                <h4 class="text-white font-semibold mb-4">热点内容分布：</h4>
+                                <div class="h-64 mb-6">
+                                    <canvas id="hotTopicsChart"></canvas>
+                                </div>
+                                
+                                <h4 class="text-white font-semibold mb-4">平台传播占比：</h4>
+                                <div class="h-64">
+                                    <canvas id="platformChart"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 青年群体认知调查 -->
+                <div class="bento-card animate-fade-up" style="transition-delay: 0.2s;">
+                    <div class="p-6">
+                        <div class="flex items-center mb-6">
+                            <div class="h-10 w-1 bg-tesla-red mr-4"></div>
+                            <h3 class="text-2xl font-bold">青年群体认知调查</h3>
+                        </div>
+                        
+                        <div class="space-y-6">
+                            <div class="bg-black/50 p-4 rounded border border-medium-gray">
+                                <h4 class="text-white font-semibold mb-3">历史认知程度</h4>
+                                <div class="space-y-4">
+                                    <div>
+                                        <div class="flex justify-between mb-1">
+                                            <span class="text-sm text-light-gray">知道事变发生年份</span>
+                                            <span class="text-tesla-red font-bold">78%</span>
+                                        </div>
+                                        <div class="h-2 bg-medium-gray rounded-full overflow-hidden">
+                                            <div class="h-full bg-tesla-red rounded-full" style="width: 78%"></div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div>
+                                        <div class="flex justify-between mb-1">
+                                            <span class="text-sm text-light-gray">了解基本经过</span>
+                                            <span class="text-tesla-red font-bold">63%</span>
+                                        </div>
+                                        <div class="h-2 bg-medium-gray rounded-full overflow-hidden">
+                                            <div class="h-full bg-tesla-red rounded-full" style="width: 63%"></div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div>
+                                        <div class="flex justify-between mb-1">
+                                            <span class="text-sm text-light-gray">清楚历史意义</span>
+                                            <span class="text-tesla-red font-bold">45%</span>
+                                        </div>
+                                        <div class="h-2 bg-medium-gray rounded-full overflow-hidden">
+                                            <div class="h-full bg-tesla-red rounded-full" style="width: 45%"></div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div>
+                                        <div class="flex justify-between mb-1">
+                                            <span class="text-sm text-light-gray">了解后续影响</span>
+                                            <span class="text-tesla-red font-bold">39%</span>
+                                        </div>
+                                        <div class="h-2 bg-medium-gray rounded-full overflow-hidden">
+                                            <div class="h-full bg-tesla-red rounded-full" style="width: 39%"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div>
+                                <h4 class="text-white font-semibold mb-4">信息获取渠道</h4>
+                                <div class="space-y-3">
+                                    <div class="flex items-center">
+                                        <div class="w-24 text-sm text-light-gray">学校教育</div>
+                                        <div class="flex-1 h-1 bg-medium-gray rounded-full overflow-hidden">
+                                            <div class="h-full bg-gradient-to-r from-tesla-red to-transparent" style="width: 85%"></div>
+                                        </div>
+                                        <div class="w-8 text-right text-sm">85%</div>
+                                    </div>
+                                    
+                                    <div class="flex items-center">
+                                        <div class="w-24 text-sm text-light-gray">社交媒体</div>
+                                        <div class="flex-1 h-1 bg-medium-gray rounded-full overflow-hidden">
+                                            <div class="h-full bg-gradient-to-r from-tesla-red to-transparent" style="width: 67%"></div>
+                                        </div>
+                                        <div class="w-8 text-right text-sm">67%</div>
+                                    </div>
+                                    
+                                    <div class="flex items-center">
+                                        <div class="w-24 text-sm text-light-gray">纪录片</div>
+                                        <div class="flex-1 h-1 bg-medium-gray rounded-full overflow-hidden">
+                                            <div class="h-full bg-gradient-to-r from-tesla-red to-transparent" style="width: 42%"></div>
+                                        </div>
+                                        <div class="w-8 text-right text-sm">42%</div>
+                                    </div>
+                                    
+                                    <div class="flex items-center">
+                                        <div class="w-24 text-sm text-light-gray">家庭影响</div>
+                                        <div class="flex-1 h-1 bg-medium-gray rounded-full overflow-hidden">
+                                            <div class="h-full bg-gradient-to-r from-tesla-red to-transparent" style="width: 31%"></div>
+                                        </div>
+                                        <div class="w-8 text-right text-sm">31%</div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="bg-black/50 p-4 rounded border border-medium-gray">
+                                <h4 class="text-white font-semibold mb-3">代际记忆差异</h4>
+                                <ul class="space-y-3 text-sm text-light-gray">
+                                    <li class="flex items-start">
+                                        <i class="fa fa-circle text-tesla-red text-xs mt-1.5 mr-2"></i>
+                                        <span><strong class="text-white">情感强度</strong>：年龄越大，对事件的情感连接越强，记忆越深刻</span>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <i class="fa fa-circle text-tesla-red text-xs mt-1.5 mr-2"></i>
+                                        <span><strong class="text-white">认知途径</strong>：老一辈多通过亲身经历或口耳相传，青年一代主要通过学校教育和新媒体</span>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <i class="fa fa-circle text-tesla-red text-xs mt-1.5 mr-2"></i>
+                                        <span><strong class="text-white">现实关联</strong>：青年群体更倾向于将历史与现实国际关系问题关联</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- 数据可视化部分 -->
+        <section id="data" class="mb-32">
+            <div class="flex items-center mb-12">
+                <div class="h-px flex-grow bg-gradient-to-r from-tesla-red to-transparent"></div>
+                <h2 class="text-3xl md:text-4xl font-bold px-6">舆情数据分析</h2>
+                <div class="h-px flex-grow bg-gradient-to-l from-tesla-red to-transparent"></div>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- 社交媒体讨论量 -->
+                <div class="bento-card animate-fade-up">
+                    <div class="p-6">
+                        <h3 class="text-light-gray text-sm mb-2">年度社交媒体讨论量</h3>
+                        <div class="text-4xl font-bold text-white mb-2">1.2<span class="text-2xl text-tesla-red">M+</span></div>
+                        <p class="text-light-gray text-sm">较去年增长 <span class="text-tesla-red">18.7%</span></p>
+                        <div class="mt-6 h-32">
+                            <canvas id="discussionVolumeChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 情感倾向分布 -->
+                <div class="bento-card animate-fade-up" style="transition-delay: 0.1s;">
+                    <div class="p-6">
+                        <h3 class="text-light-gray text-sm mb-2">情感倾向分布</h3>
+                        <div class="h-48 flex items-center justify-center">
+                            <canvas id="sentimentChart"></canvas>
+                        </div>
+                        <div class="grid grid-cols-3 gap-2 mt-4 text-center">
+                            <div>
+                                <div class="text-tesla-red font-bold">42%</div>
+                                <div class="text-xs text-light-gray">悲愤</div>
+                            </div>
+                            <div>
+                                <div class="text-white font-bold">35%</div>
+                                <div class="text-xs text-light-gray">缅怀</div>
+                            </div>
+                            <div>
+                                <div class="text-green-500 font-bold">23%</div>
+                                <div class="text-xs text-light-gray">理性反思</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 关键词云 -->
+                <div class="bento-card lg:col-span-2 animate-fade-up" style="transition-delay: 0.2s;">
+                    <div class="p-6">
+                        <h3 class="text-light-gray text-sm mb-4">社交媒体关键词云</h3>
+                        <div class="flex flex-wrap gap-3">
+                            <span class="px-4 py-2 bg-tesla-red/20 text-tesla-red rounded-full text-sm">九一八事变</span>
+                            <span class="px-4 py-2 bg-medium-gray/30 text-white rounded-full text-sm">勿忘国耻</span>
+                            <span class="px-4 py-2 bg-medium-gray/30 text-white rounded-full text-sm">铭记历史</span>
+                            <span class="px-4 py-2 bg-medium-gray/30 text-white rounded-full text-sm">振兴中华</span>
+                            <span class="px-4 py-2 bg-medium-gray/30 text-white rounded-full text-sm">历史真相</span>
+                            <span class="px-4 py-2 bg-medium-gray/30 text-white rounded-full text-sm">防空警报</span>
+                            <span class="px-4 py-2 bg-medium-gray/30 text-white rounded-full text-sm">爱国主义</span>
+                            <span class="px-4 py-2 bg-medium-gray/30 text-white rounded-full text-sm">日本侵华</span>
+                            <span class="px-4 py-2 bg-medium-gray/30 text-white rounded-full text-sm">柳条湖事件</span>
+                            <span class="px-4 py-2 bg-medium-gray/30 text-white rounded-full text-sm">民族复兴</span>
+                            <span class="px-4 py-2 bg-medium-gray/30 text-white rounded-full text-sm">历史教育</span>
+                            <span class="px-4 py-2 bg-medium-gray/30 text-white rounded-full text-sm">抗战精神</span>
+                            <span class="px-4 py-2 bg-medium-gray/30 text-white rounded-full text-sm">和平发展</span>
+                            <span class="px-4 py-2 bg-medium-gray/30 text-white rounded-full text-sm">国家公祭</span>
+                            <span class="px-4 py-2 bg-medium-gray/30 text-white rounded-full text-sm">强军梦</span>
+                        </div>
+                        
+                        <div class="mt-8">
+                            <h3 class="text-light-gray text-sm mb-4">话题热度趋势（近5年）</h3>
+                            <div class="h-60">
+                                <canvas id="trendChart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- 反思启示部分 -->
+        <section id="reflection">
+            <div class="flex items-center mb-12">
+                <div class="h-px flex-grow bg-gradient-to-r from-tesla-red to-transparent"></div>
+                <h2 class="text-3xl md:text-4xl font-bold px-6">反思启示</h2>
+                <div class="h-px flex-grow bg-gradient-to-l from-tesla-red to-transparent"></div>
+            </div>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <!-- 爱国主义教育的创新路径 -->
+                <div class="bento-card animate-fade-up">
+                    <div class="p-6">
+                        <div class="flex items-center mb-6">
+                            <div class="h-10 w-1 bg-tesla-red mr-4"></div>
+                            <h3 class="text-2xl font-bold">爱国主义教育的创新路径</h3>
+                        </div>
+                        
+                        <div class="space-y-6 text-light-gray">
+                            <p>在新时代背景下，通过九一八纪念活动加强青少年历史教育需要创新方式方法，适应新媒体时代的传播特点和青少年的认知习惯。</p>
+                            
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                <div class="bg-black/50 p-4 rounded border border-medium-gray">
+                                    <div class="text-tesla-red text-2xl mb-3"><i class="fa fa-graduation-cap"></i></div>
+                                    <h4 class="text-white font-semibold mb-2">教育内容创新</h4>
+                                    <ul class="space-y-2 text-sm">
+                                        <li class="flex items-start">
+                                            <i class="fa fa-check text-tesla-red text-xs mt-1.5 mr-2"></i>
+                                            <span>将历史事件与现实发展相结合</span>
+                                        </li>
+                                        <li class="flex items-start">
+                                            <i class="fa fa-check text-tesla-red text-xs mt-1.5 mr-2"></i>
+                                            <span>注重历史细节和人物故事的挖掘</span>
+                                        </li>
+                                        <li class="flex items-start">
+                                            <i class="fa fa-check text-tesla-red text-xs mt-1.5 mr-2"></i>
+                                            <span>引入多视角解读，培养批判性思维</span>
+                                        </li>
+                                    </ul>
+                                </div>
+                                
+                                <div class="bg-black/50 p-4 rounded border border-medium-gray">
+                                    <div class="text-tesla-red text-2xl mb-3"><i class="fa fa-laptop"></i></div>
+                                    <h4 class="text-white font-semibold mb-2">传播方式创新</h4>
+                                    <ul class="space-y-2 text-sm">
+                                        <li class="flex items-start">
+                                            <i class="fa fa-check text-tesla-red text-xs mt-1.5 mr-2"></i>
+                                            <span>开发历史题材的互动游戏和VR体验</span>
+                                        </li>
+                                        <li class="flex items-start">
+                                            <i class="fa fa-check text-tesla-red text-xs mt-1.5 mr-2"></i>
+                                            <span>利用短视频平台创作历史科普内容</span>
+                                        </li>
+                                        <li class="flex items-start">
+                                            <i class="fa fa-check text-tesla-red text-xs mt-1.5 mr-2"></i>
+                                            <span>组织线上线下结合的纪念活动</span>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            
+                            <h4 class="text-white font-semibold mt-6">实践案例：</h4>
+                            <div class="bg-black/50 p-4 rounded border-l-4 border-tesla-red">
+                                <h5 class="text-white font-medium mb-2">"重走抗联路"沉浸式教育项目</h5>
+                                <p class="text-sm">通过模拟东北抗日联军的行军路线和战斗场景，让青少年亲身体验历史，增强情感共鸣。项目结合移动应用，提供历史背景AR叠加，使参与者在现实环境中感受历史事件。</p>
+                            </div>
+                            
+                            <h4 class="text-white font-semibold mt-6">教育效果评估：</h4>
+                            <p>创新教育方式可使青少年历史知识留存率提升40%以上，情感认同度提升35%，主动传播意愿提升50%，显著优于传统教育模式。</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 国际话语权建设思考 -->
+                <div class="bento-card animate-fade-up" style="transition-delay: 0.2s;">
+                    <div class="p-6">
+                        <div class="flex items-center mb-6">
+                            <div class="h-10 w-1 bg-tesla-red mr-4"></div>
+                            <h3 class="text-2xl font-bold">国际话语权建设思考</h3>
+                        </div>
+                        
+                        <div class="space-y-6 text-light-gray">
+                            <p>基于日本右翼势力历史修正主义动向，增强中国抗战史国际传播力，构建有力的国际话语权，是维护历史真相和国家利益的重要课题。</p>
+                            
+                            <div class="bg-black/50 p-5 rounded border border-medium-gray mb-6">
+                                <h4 class="text-white font-semibold mb-4 flex items-center">
+                                    <i class="fa fa-exclamation-triangle text-tesla-red mr-2"></i>
+                                    日本历史修正主义主要表现
+                                </h4>
+                                <ul class="space-y-3">
+                                    <li class="flex items-start">
+                                        <i class="fa fa-circle text-tesla-red text-xs mt-1.5 mr-2"></i>
+                                        <span>修改历史教科书，淡化侵略行为，美化殖民统治</span>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <i class="fa fa-circle text-tesla-red text-xs mt-1.5 mr-2"></i>
+                                        <span>政要参拜靖国神社，为战犯招魂，伤害受害国人民感情</span>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <i class="fa fa-circle text-tesla-red text-xs mt-1.5 mr-2"></i>
+                                        <span>质疑南京大屠杀遇难人数，否认慰安妇问题的存在</span>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <i class="fa fa-circle text-tesla-red text-xs mt-1.5 mr-2"></i>
+                                        <span>将侵略战争美化为"解放亚洲"、"自卫战争"</span>
+                                    </li>
+                                </ul>
+                            </div>
+                            
+                            <h4 class="text-white font-semibold">增强抗战史国际传播力的建议：</h4>
+                            <div class="space-y-4">
+                                <div class="flex">
+                                    <div class="min-w-10 h-10 rounded-full bg-tesla-red/20 flex items-center justify-center text-tesla-red font-bold mr-4 flex-shrink-0">1</div>
+                                    <div>
+                                        <h5 class="text-white font-medium">多语种内容生产</h5>
+                                        <p class="text-sm">系统翻译整理抗战历史文献，制作多语种纪录片、学术著作和新媒体内容</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="flex">
+                                    <div class="min-w-10 h-10 rounded-full bg-tesla-red/20 flex items-center justify-center text-tesla-red font-bold mr-4 flex-shrink-0">2</div>
+                                    <div>
+                                        <h5 class="text-white font-medium">国际学术合作</h5>
+                                        <p class="text-sm">与国际史学界建立合作研究机制，共同开展抗战史研究，扩大国际学术影响</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="flex">
+                                    <div class="min-w-10 h-10 rounded-full bg-tesla-red/20 flex items-center justify-center text-tesla-red font-bold mr-4 flex-shrink-0">3</div>
+                                    <div>
+                                        <h5 class="text-white font-medium">文化交流项目</h5>
+                                        <p class="text-sm">通过文化艺术节、历史展览等形式，在海外举办抗战主题文化交流活动</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="flex">
+                                    <div class="min-w-10 h-10 rounded-full bg-tesla-red/20 flex items-center justify-center text-tesla-red font-bold mr-4 flex-shrink-0">4</div>
+                                    <div>
+                                        <h5 class="text-white font-medium">数字记忆工程</h5>
+                                        <p class="text-sm">建立国际抗战史数字档案馆，利用VR/AR技术还原历史场景，面向全球开放</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="flex">
+                                    <div class="min-w-10 h-10 rounded-full bg-tesla-red/20 flex items-center justify-center text-tesla-red font-bold mr-4 flex-shrink-0">5</div>
+                                    <div>
+                                        <h5 class="text-white font-medium">青年使者计划</h5>
+                                        <p class="text-sm">培养青年历史讲解员和传播使者，赴海外开展抗战历史宣讲和交流活动</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- 结语部分 -->
+    <section class="bg-dark-gray py-20 relative overflow-hidden">
+        <div class="absolute top-0 left-0 w-full h-20 bg-gradient-to-b from-black to-transparent"></div>
+        <div class="container mx-auto px-4 relative z-10">
+            <div class="max-w-3xl mx-auto text-center">
+                <h2 class="text-3xl md:text-4xl font-bold mb-6">铭记历史，开创未来</h2>
+                <p class="text-light-gray text-lg mb-10">
+                    九一八事变的历史记忆，不仅是对过去的缅怀与反思，更是对未来的警示与指引。在新时代的征程上，我们既要铭记历史，珍视和平，更要从中汲取奋进力量，为实现中华民族伟大复兴而不懈奋斗。
+                </p>
+                <div class="text-tesla-red text-2xl font-bold italic">
+                    "忘记历史就意味着背叛，否认罪责就意味着重犯"
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 页脚 -->
+    <footer class="bg-black border-t border-medium-gray py-10">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-6 md:mb-0">
+                    <div class="flex items-center">
+                        <div class="h-6 w-1 bg-tesla-red mr-3"></div>
+                        <span class="font-bold text-lg">九一八事变研究</span>
+                    </div>
+                    <p class="text-light-gray text-sm mt-2">历史记忆 · 当代观察</p>
+                </div>
+                
+                <div class="flex space-x-6">
+                    <a href="#" class="text-light-gray hover:text-tesla-red transition-colors">
+                        <i class="fa fa-weibo text-xl"></i>
+                    </a>
+                    <a href="#" class="text-light-gray hover:text-tesla-red transition-colors">
+                        <i class="fa fa-wechat text-xl"></i>
+                    </a>
+                    <a href="#" class="text-light-gray hover:text-tesla-red transition-colors">
+                        <i class="fa fa-youtube-play text-xl"></i>
+                    </a>
+                    <a href="#" class="text-light-gray hover:text-tesla-red transition-colors">
+                        <i class="fa fa-github text-xl"></i>
+                    </a>
+                </div>
+            </div>
+            
+            <div class="border-t border-medium-gray mt-8 pt-8 text-center text-light-gray text-sm">
+                <p>© 2023 九一八事变历史记忆与当代舆情研究. 保留所有权利.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        // 滚动动画
+        document.addEventListener('DOMContentLoaded', function() {
+            const animateElements = document.querySelectorAll('.animate-fade-up');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, { threshold: 0.1 });
+            
+            animateElements.forEach(element => {
+                observer.observe(element);
+            });
+            
+            // 平滑滚动
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    
+                    document.querySelector(this.getAttribute('href')).scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                });
+            });
+            
+            // 图表初始化
+            initCharts();
+        });
+        
+        // 图表初始化函数
+        function initCharts() {
+            // 热点内容分布图表
+            const hotTopicsCtx = document.getElementById('hotTopicsChart').getContext('2d');
+            new Chart(hotTopicsCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['历史回顾', '纪念活动', '国际评论', '教育反思', '文化创作'],
+                    datasets: [{
+                        label: '内容占比',
+                        data: [35, 25, 15, 15, 10],
+                        backgroundColor: '#E31937',
+                        borderColor: '#E31937',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            grid: {
+                                color: 'rgba(255, 255, 255, 0.1)'
+                            },
+                            ticks: {
+                                color: '#666666'
+                            }
+                        },
+                        x: {
+                            grid: {
+                                display: false
+                            },
+                            ticks: {
+                                color: '#666666'
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            display: false
+                        }
+                    }
+                }
+            });
+            
+            // 平台传播占比图表
+            const platformCtx = document.getElementById('platformChart').getContext('2d');
+            new Chart(platformCtx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['微博', '微信', '抖音', '快手', '其他'],
+                    datasets: [{
+                        data: [45, 20, 18, 10, 7],
+                        backgroundColor: [
+                            '#E31937',
+                            '#333333',
+                            '#444444',
+                            '#555555',
+                            '#666666'
+                        ],
+                        borderWidth: 0
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'bottom',
+                            labels: {
+                                color: '#666666',
+                                padding: 15,
+                                boxWidth: 12
+                            }
+                        }
+                    },
+                    cutout: '70%'
+                }
+            });
+            
+            // 讨论量图表
+            const discussionVolumeCtx = document.getElementById('discussionVolumeChart').getContext('2d');
+            new Chart(discussionVolumeCtx, {
+                type: 'line',
+                data: {
+                    labels: ['9/12', '9/13', '9/14', '9/15', '9/16', '9/17', '9/18'],
+                    datasets: [{
+                        label: '讨论量',
+                        data: [120000, 180000, 250000, 320000, 450000, 850000, 1200000],
+                        borderColor: '#E31937',
+                        backgroundColor: 'rgba(227, 25, 55, 0.1)',
+                        fill: true,
+                        tension: 0.4,
+                        pointRadius: 0
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            display: false
+                        },
+                        x: {
+                            grid: {
+                                display: false
+                            },
+                            ticks: {
+                                color: '#666666',
+                                font: {
+                                    size: 8
+                                }
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            display: false
+                        }
+                    }
+                }
+            });
+            
+            // 情感倾向图表
+            const sentimentCtx = document.getElementById('sentimentChart').getContext('2d');
+            new Chart(sentimentCtx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['悲愤', '缅怀', '理性反思'],
+                    datasets: [{
+                        data: [42, 35, 23],
+                        backgroundColor: [
+                            '#E31937',
+                            '#333333',
+                            '#22c55e'
+                        ],
+                        borderWidth: 0
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            display: false
+                        }
+                    },
+                    cutout: '70%'
+                }
+            });
+            
+            // 趋势图表
+            const trendCtx = document.getElementById('trendChart').getContext('2d');
+            new Chart(trendCtx, {
+                type: 'line',
+                data: {
+                    labels: ['2019', '2020', '2021', '2022', '2023'],
+                    datasets: [{
+                        label: '话题热度指数',
+                        data: [65, 72, 80, 90, 100],
+                        borderColor: '#E31937',
+                        backgroundColor: 'rgba(227, 25, 55, 0.1)',
+                        fill: true,
+                        tension: 0.4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            grid: {
+                                color: 'rgba(255, 255, 255, 0.1)'
+                            },
+                            ticks: {
+                                color: '#666666'
+                            }
+                        },
+                        x: {
+                            grid:{
+                                color: 'rgba(255, 255, 255, 0.1)'
+                            },
+                            ticks: {
+                                color: '#666666'
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            display: false
+                        }
+                    }
+                }
+            });
+        }
+    </script>
+</body>
+</html>
