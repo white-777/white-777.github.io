@@ -1,0 +1,1153 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>9.3阅兵舆情综述：国内外的多维观察与解读</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.8/dist/chart.umd.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/framer-motion@11.2.10/dist/framer-motion.min.js"></script>
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        tesla: '#E31937',
+                        dark: '#0A0A0A',
+                        'dark-gray': '#1A1A1A',
+                        'medium-gray': '#333333',
+                        'light-gray': '#666666'
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .content-auto {
+                content-visibility: auto;
+            }
+            .text-shadow {
+                text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            }
+            .gradient-red {
+                background: linear-gradient(90deg, #E31937 0%, rgba(227, 25, 55, 0) 100%);
+            }
+            .grid-bento {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+                gap: 1.5rem;
+            }
+            @media (min-width: 768px) {
+                .grid-bento {
+                    grid-template-columns: repeat(2, 1fr);
+                }
+            }
+            @media (min-width: 1200px) {
+                .grid-bento {
+                    grid-template-columns: repeat(3, 1fr);
+                }
+            }
+        }
+    </style>
+</head>
+<body class="bg-black text-white font-sans">
+    <!-- 顶部导航 -->
+    <header class="fixed top-0 left-0 right-0 z-50 bg-black/80 backdrop-blur-md border-b border-tesla/30">
+        <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+            <div class="text-tesla font-bold text-xl tracking-tight">9.3阅兵舆情分析</div>
+            <nav class="hidden md:flex space-x-8">
+                <a href="#domestic" class="text-gray-300 hover:text-tesla transition-colors">国内舆论</a>
+                <a href="#international" class="text-gray-300 hover:text-tesla transition-colors">国际反响</a>
+                <a href="#analysis" class="text-gray-300 hover:text-tesla transition-colors">舆情解读</a>
+                <a href="#data" class="text-gray-300 hover:text-tesla transition-colors">数据图表</a>
+            </nav>
+            <button class="md:hidden text-gray-300">
+                <i class="fa fa-bars text-xl"></i>
+            </button>
+        </div>
+    </header>
+
+    <!-- 英雄区域 -->
+    <section class="pt-32 pb-20 px-4 md:pt-40 md:pb-28 relative overflow-hidden">
+        <div class="absolute top-0 right-0 w-full h-full bg-gradient-to-br from-tesla/5 to-transparent opacity-50"></div>
+        <div class="container mx-auto relative z-10">
+            <div class="max-w-4xl mx-auto text-center">
+                <h1 class="text-[clamp(2rem,5vw,3.5rem)] font-bold leading-tight mb-6 tracking-tight">
+                    <span class="text-white">9.3阅兵舆情综述</span><br>
+                    <span class="text-tesla">国内外的多维观察与解读</span>
+                </h1>
+                <p class="text-gray-400 text-lg md:text-xl max-w-2xl mx-auto mb-10">
+                    全面分析阅兵事件引发的国内外舆论反应、媒体报道倾向及公众讨论焦点，深入解读背后的社会心理与国际认知差异。
+                </p>
+                <div class="flex flex-wrap justify-center gap-4">
+                    <a href="#domestic" class="px-8 py-3 bg-tesla hover:bg-tesla/90 text-white font-medium rounded-md transition-all duration-300 transform hover:-translate-y-1">
+                        查看分析报告
+                    </a>
+                    <a href="#data" class="px-8 py-3 bg-transparent border border-gray-600 hover:border-tesla text-white font-medium rounded-md transition-all duration-300">
+                        数据可视化
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 国内舆论部分 -->
+    <section id="domestic" class="py-20 px-4 bg-dark-gray">
+        <div class="container mx-auto">
+            <div class="mb-16 max-w-3xl mx-auto text-center">
+                <h2 class="text-[clamp(1.5rem,3vw,2.5rem)] font-bold mb-4">
+                    <span class="text-tesla">国内舆论</span>反应与主要观点
+                </h2>
+                <div class="w-24 h-1 bg-tesla mx-auto mb-8"></div>
+                <p class="text-gray-400 text-lg">
+                    分析国内主流媒体报道基调与社交媒体平台讨论热点，揭示公众对9.3阅兵事件的核心关注点与情感倾向。
+                </p>
+            </div>
+
+            <div class="grid-bento">
+                <!-- 主流媒体报道卡片 -->
+                <div class="bg-black/50 border border-gray-800 rounded-xl p-6 md:p-8 transform transition-all duration-500 hover:border-tesla/50 hover:shadow-[0_0_30px_rgba(227,25,55,0.1)]">
+                    <div class="motion-element">
+                        <div class="w-12 h-12 bg-tesla/10 rounded-lg flex items-center justify-center mb-6">
+                            <i class="fa fa-newspaper-o text-tesla text-xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-4 text-white">主流媒体报道基调与宣传重点</h3>
+                        <p class="text-gray-400 mb-6">
+                            央视、《人民日报》等官方媒体以正面宣传为主，重点突出阅兵的历史意义、国防现代化成就及和平发展理念。
+                        </p>
+                        <div class="space-y-4">
+                            <div class="flex items-start">
+                                <div class="mt-1 mr-4 text-tesla"><i class="fa fa-check-circle"></i></div>
+                                <p class="text-gray-300">强调铭记历史、缅怀先烈，弘扬爱国主义精神</p>
+                            </div>
+                            <div class="flex items-start">
+                                <div class="mt-1 mr-4 text-tesla"><i class="fa fa-check-circle"></i></div>
+                                <p class="text-gray-300">突出展示国防科技进步与军队现代化建设成果</p>
+                            </div>
+                            <div class="flex items-start">
+                                <div class="mt-1 mr-4 text-tesla"><i class="fa fa-check-circle"></i></div>
+                                <p class="text-gray-300">宣传"铭记历史、珍爱和平、开创未来"的核心主题</p>
+                            </div>
+                            <div class="flex items-start">
+                                <div class="mt-1 mr-4 text-tesla"><i class="fa fa-check-circle"></i></div>
+                                <p class="text-gray-300">强调中国坚持走和平发展道路的坚定立场</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 社交媒体卡片 -->
+                <div class="bg-black/50 border border-gray-800 rounded-xl p-6 md:p-8 transform transition-all duration-500 hover:border-tesla/50 hover:shadow-[0_0_30px_rgba(227,25,55,0.1)]">
+                    <div class="motion-element">
+                        <div class="w-12 h-12 bg-tesla/10 rounded-lg flex items-center justify-center mb-6">
+                            <i class="fa fa-comments text-tesla text-xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-4 text-white">社交媒体平台的热议话题</h3>
+                        <p class="text-gray-400 mb-6">
+                            微博、微信等社交平台上，网民讨论聚焦于阅兵式的多个维度，形成多话题并行的舆论格局。
+                        </p>
+                        <div class="space-y-4">
+                            <div class="flex items-start">
+                                <div class="mt-1 mr-4 text-tesla"><i class="fa fa-angle-right"></i></div>
+                                <div>
+                                    <p class="text-white font-medium">装备展示与国防实力</p>
+                                    <p class="text-gray-400 text-sm">新型武器装备成为讨论热点，相关话题阅读量超50亿次</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <div class="mt-1 mr-4 text-tesla"><i class="fa fa-angle-right"></i></div>
+                                <div>
+                                    <p class="text-white font-medium">历史纪念与民族情感</p>
+                                    <p class="text-gray-400 text-sm">抗战历史回顾与民族自豪感表达成为重要情感基调</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <div class="mt-1 mr-4 text-tesla"><i class="fa fa-angle-right"></i></div>
+                                <div>
+                                    <p class="text-white font-medium">直播细节与仪式感</p>
+                                    <p class="text-gray-400 text-sm">阅兵仪式流程、士兵风貌等细节引发广泛关注</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 舆论趋势图表 -->
+                <div class="bg-black/50 border border-gray-800 rounded-xl p-6 md:p-8 col-span-1 md:col-span-2">
+                    <div class="motion-element">
+                        <h3 class="text-xl font-bold mb-6 text-white">国内舆论热度趋势</h3>
+                        <div class="h-80">
+                            <canvas id="domesticTrendChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 媒体来源分布 -->
+                <div class="bg-black/50 border border-gray-800 rounded-xl p-6 md:p-8">
+                    <div class="motion-element">
+                        <h3 class="text-xl font-bold mb-6 text-white">国内舆论来源分布</h3>
+                        <div class="h-64">
+                            <canvas id="mediaSourceChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 情感倾向分析 -->
+                <div class="bg-black/50 border border-gray-800 rounded-xl p-6 md:p-8">
+                    <div class="motion-element">
+                        <h3 class="text-xl font-bold mb-6 text-white">国内舆论情感倾向</h3>
+                        <div class="h-64">
+                            <canvas id="sentimentAnalysisChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 国际社会反响部分 -->
+    <section id="international" class="py-20 px-4 bg-black">
+        <div class="container mx-auto">
+            <div class="mb-16 max-w-3xl mx-auto text-center">
+                <h2 class="text-[clamp(1.5rem,3vw,2.5rem)] font-bold mb-4">
+                    <span class="text-tesla">国际社会</span>反响与战略解读
+                </h2>
+                <div class="w-24 h-1 bg-tesla mx-auto mb-8"></div>
+                <p class="text-gray-400 text-lg">
+                    分析主要国家官方表态、国际媒体报道倾向及海外智库观点，解读不同视角下的战略认知差异。
+                </p>
+            </div>
+
+            <div class="grid-bento">
+                <!-- 主要国家官方表态 -->
+                <div class="bg-dark-gray/50 border border-gray-800 rounded-xl p-6 md:p-8">
+                    <div class="motion-element">
+                        <div class="w-12 h-12 bg-tesla/10 rounded-lg flex items-center justify-center mb-6">
+                            <i class="fa fa-globe text-tesla text-xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-4 text-white">主要国家的官方表态</h3>
+                        <div class="space-y-6">
+                            <div>
+                                <div class="flex justify-between items-center mb-2">
+                                    <span class="text-white font-medium">美国</span>
+                                    <span class="px-3 py-1 bg-gray-700 text-gray-300 text-xs rounded-full">谨慎关注</span>
+                                </div>
+                                <p class="text-gray-400 text-sm">对中国军力发展表示关注，强调"透明化"诉求，未派高级别官员出席</p>
+                            </div>
+                            <div>
+                                <div class="flex justify-between items-center mb-2">
+                                    <span class="text-white font-medium">俄罗斯</span>
+                                    <span class="px-3 py-1 bg-green-900/30 text-green-400 text-xs rounded-full">积极支持</span>
+                                </div>
+                                <p class="text-gray-400 text-sm">总统普京亲自出席，强调中俄战略协作，肯定阅兵的历史意义</p>
+                            </div>
+                            <div>
+                                <div class="flex justify-between items-center mb-2">
+                                    <span class="text-white font-medium">日本</span>
+                                    <span class="px-3 py-1 bg-yellow-900/30 text-yellow-400 text-xs rounded-full">复杂反应</span>
+                                </div>
+                                <p class="text-gray-400 text-sm">官方对阅兵表示"担忧"，媒体报道聚焦于历史认知与地区安全议题</p>
+                            </div>
+                            <div>
+                                <div class="flex justify-between items-center mb-2">
+                                    <span class="text-white font-medium">韩国</span>
+                                    <span class="px-3 py-1 bg-blue-900/30 text-blue-400 text-xs rounded-full">中立观察</span>
+                                </div>
+                                <p class="text-gray-400 text-sm">强调半岛和平重要性，对阅兵展示的军事技术表示关注</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 国际媒体报道分析 -->
+                <div class="bg-dark-gray/50 border border-gray-800 rounded-xl p-6 md:p-8">
+                    <div class="motion-element">
+                        <div class="w-12 h-12 bg-tesla/10 rounded-lg flex items-center justify-center mb-6">
+                            <i class="fa fa-newspaper-o text-tesla text-xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-4 text-white">国际媒体报道角度分析</h3>
+                        <p class="text-gray-400 mb-6">
+                            不同国家媒体基于自身立场，对阅兵事件采取了差异化的报道策略与叙事框架。
+                        </p>
+                        <div class="space-y-4">
+                            <div class="flex items-start">
+                                <div class="mt-1 mr-4 text-tesla"><i class="fa fa-quote-left"></i></div>
+                                <div>
+                                    <p class="text-gray-300 italic">"中国通过阅兵展示军事实力，同时传递和平发展信号"</p>
+                                    <p class="text-gray-500 text-sm mt-1">— 路透社报道核心观点</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <div class="mt-1 mr-4 text-tesla"><i class="fa fa-quote-left"></i></div>
+                                <div>
+                                    <p class="text-gray-300 italic">"阅兵式彰显中国崛起与历史自信，引发地区安全担忧"</p>
+                                    <p class="text-gray-500 text-sm mt-1">— 《华尔街日报》报道基调</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <div class="mt-1 mr-4 text-tesla"><i class="fa fa-quote-left"></i></div>
+                                <div>
+                                    <p class="text-gray-300 italic">"铭记历史是为了更好地维护和平，中国阅兵具有重要现实意义"</p>
+                                    <p class="text-gray-500 text-sm mt-1">— 俄罗斯卫星通讯社评论</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 国际舆论地图 -->
+                <div class="bg-dark-gray/50 border border-gray-800 rounded-xl p-6 md:p-8 col-span-1 md:col-span-2">
+                    <div class="motion-element">
+                        <h3 class="text-xl font-bold mb-6 text-white">国际舆论地域分布与情感倾向</h3>
+                        <div class="h-80">
+                            <canvas id="internationalSentimentChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 海外智库分析 -->
+                <div class="bg-dark-gray/50 border border-gray-800 rounded-xl p-6 md:p-8 col-span-1 md:col-span-3">
+                    <div class="motion-element">
+                        <div class="w-12 h-12 bg-tesla/10 rounded-lg flex items-center justify-center mb-6">
+                            <i class="fa fa-lightbulb-o text-tesla text-xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-4 text-white">海外智库与专家的分析视角</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                            <div>
+                                <h4 class="text-white font-medium mb-3">战略意图解读</h4>
+                                <p class="text-gray-400 text-sm">
+                                    多数智库认为，阅兵不仅是历史纪念，更是对中国国际地位和军事实力的展示，旨在提升国家认同感和国际话语权。
+                                </p>
+                            </div>
+                            <div>
+                                <h4 class="text-white font-medium mb-3">军事技术评估</h4>
+                                <p class="text-gray-400 text-sm">
+                                    军事专家指出，展示的新型装备表明中国国防科技取得显著进步，部分领域已达到世界先进水平。
+                                </p>
+                            </div>
+                            <div>
+                                <h4 class="text-white font-medium mb-3">地区安全影响</h4>
+                                <p class="text-gray-400 text-sm">
+                                    战略研究所分析认为，阅兵可能加剧亚太地区军备竞赛担忧，但也可能成为推动地区安全对话的契机。
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 舆情特征与解读部分 -->
+    <section id="analysis" class="py-20 px-4 bg-dark-gray">
+        <div class="container mx-auto">
+            <div class="mb-16 max-w-3xl mx-auto text-center">
+                <h2 class="text-[clamp(1.5rem,3vw,2.5rem)] font-bold mb-4">
+                    舆情特征与<span class="text-tesla">深层次解读</span>
+                </h2>
+                <div class="w-24 h-1 bg-tesla mx-auto mb-8"></div>
+                <p class="text-gray-400 text-lg">
+                    深入分析阅兵舆情背后反映的社会心理特征、集体记忆激活机制及国际认知差异的根源。
+                </p>
+            </div>
+
+            <div class="grid-bento">
+                <!-- 民族情绪与集体记忆 -->
+                <div class="bg-black/50 border border-gray-800 rounded-xl p-6 md:p-8 col-span-1 md:col-span-2">
+                    <div class="motion-element">
+                        <div class="w-12 h-12 bg-tesla/10 rounded-lg flex items-center justify-center mb-6">
+                            <i class="fa fa-heart text-tesla text-xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-4 text-white">民族情绪与集体记忆的共鸣现象</h3>
+                        <p class="text-gray-400 mb-6">
+                            阅兵事件有效激活了公众的历史记忆，引发强烈的民族情感共鸣，形成爱国主义表达的舆论高潮。
+                        </p>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                            <div>
+                                <h4 class="text-white font-medium mb-3">情感表达特征</h4>
+                                <ul class="space-y-3 text-gray-400">
+                                    <li class="flex items-start">
+                                        <i class="fa fa-check text-tesla mt-1 mr-3"></i>
+                                        <span>民族自豪感显著提升，相关话题讨论量激增300%</span>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <i class="fa fa-check text-tesla mt-1 mr-3"></i>
+                                        <span>历史悲情与现实成就交织，形成复杂情感体验</span>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <i class="fa fa-check text-tesla mt-1 mr-3"></i>
+                                        <span>代际差异明显：中老年更关注历史记忆，青年更关注国家实力展示</span>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h4 class="text-white font-medium mb-3">社会心理机制</h4>
+                                <ul class="space-y-3 text-gray-400">
+                                    <li class="flex items-start">
+                                        <i class="fa fa-check text-tesla mt-1 mr-3"></i>
+                                        <span>集体记忆重构：通过仪式化展演强化历史认知</span>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <i class="fa fa-check text-tesla mt-1 mr-3"></i>
+                                        <span>身份认同建构：强化"中华民族"共同体意识</span>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <i class="fa fa-check text-tesla mt-1 mr-3"></i>
+                                        <span>情绪传染效应：社交媒体加速情感共鸣与扩散</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 国际认知差异 -->
+                <div class="bg-black/50 border border-gray-800 rounded-xl p-6 md:p-8">
+                    <div class="motion-element">
+                        <div class="w-12 h-12 bg-tesla/10 rounded-lg flex items-center justify-center mb-6">
+                            <i class="fa fa-exchange text-tesla text-xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-4 text-white">国际舆论场的认知差异与分歧</h3>
+                        <p class="text-gray-400 mb-6">
+                            中外舆论场对阅兵事件的解读存在显著差异，反映出不同的价值观与话语体系。
+                        </p>
+                        <div class="space-y-4">
+                            <div class="p-4 bg-dark rounded-lg">
+                                <h5 class="text-white font-medium mb-2">核心分歧点</h5>
+                                <p class="text-gray-400 text-sm">历史认知差异、安全观念差异、国际秩序观差异</p>
+                            </div>
+                            <div class="p-4 bg-dark rounded-lg">
+                                <h5 class="text-white font-medium mb-2">话语体系差异</h5>
+                                <p class="text-gray-400 text-sm">中国强调"和平发展"与"历史正义"，西方更关注"军事透明度"与"地区安全"</p>
+                            </div>
+                            <div class="p-4 bg-dark rounded-lg">
+                                <h5 class="text-white font-medium mb-2">媒体框架差异</h5>
+                                <p class="text-gray-400 text-sm">国内媒体聚焦"历史记忆"与"和平承诺"，西方媒体多采用"实力展示"框架</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 舆论对比图表 -->
+                <div class="bg-black/50 border border-gray-800 rounded-xl p-6 md:p-8 col-span-1 md:col-span-3">
+                    <div class="motion-element">
+                        <h3 class="text-xl font-bold mb-6 text-white">国内外舆论焦点对比分析</h3>
+                        <div class="h-80">
+                            <canvas id="topicComparisonChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 数据可视化部分 -->
+    <section id="data" class="py-20 px-4 bg-black">
+        <div class="container mx-auto">
+            <div class="mb-16 max-w-3xl mx-auto text-center">
+                <h2 class="text-[clamp(1.5rem,3vw,2.5rem)] font-bold mb-4">
+                    <span class="text-tesla">数据</span>可视化分析
+                </h2>
+                <div class="w-24 h-1 bg-tesla mx-auto mb-8"></div>
+                <p class="text-gray-400 text-lg">
+                    通过多维度数据图表，直观展示阅兵舆情的传播特征、情感倾向与话题分布。
+                </p>
+            </div>
+
+            <div class="grid-bento">
+                <!-- 舆情传播趋势 -->
+                <div class="bg-dark-gray/50 border border-gray-800 rounded-xl p-6 md:p-8 col-span-1 md:col-span-3">
+                    <div class="motion-element">
+                        <h3 class="text-xl font-bold mb-6 text-white">阅兵舆情传播趋势与高峰分析</h3>
+                        <div class="h-80">
+                            <canvas id="spreadTrendChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 话题分布 -->
+                <div class="bg-dark-gray/50 border border-gray-800 rounded-xl p-6 md:p-8">
+                    <div class="motion-element">
+                        <h3 class="text-xl font-bold mb-6 text-white">国内舆论话题分布</h3>
+                        <div class="h-64">
+                            <canvas id="topicDistributionChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 信息来源渠道 -->
+                <div class="bg-dark-gray/50 border border-gray-800 rounded-xl p-6 md:p-8">
+                    <div class="motion-element">
+                        <h3 class="text-xl font-bold mb-6 text-white">信息获取渠道分析</h3>
+                        <div class="h-64">
+                            <canvas id="informationSourceChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 关键数据指标 -->
+                <div class="bg-dark-gray/50 border border-gray-800 rounded-xl p-6 md:p-8">
+                    <div class="motion-element">
+                        <h3 class="text-xl font-bold mb-6 text-white">舆情传播关键指标</h3>
+                        <div class="grid grid-cols-2 gap-4">
+                            <div class="text-center p-4 bg-black/50 rounded-lg">
+                                <p class="text-gray-400 text-sm mb-1">总讨论量</p>
+                                <p class="text-3xl font-bold text-white">1.2亿+</p>
+                            </div>
+                            <div class="text-center p-4 bg-black/50 rounded-lg">
+                                <p class="text-gray-400 text-sm mb-1">相关话题数</p>
+                                <p class="text-3xl font-bold text-white">237个</p>
+                            </div>
+                            <div class="text-center p-4 bg-black/50 rounded-lg">
+                                <p class="text-gray-400 text-sm mb-1">视频播放量</p>
+                                <p class="text-3xl font-bold text-white">85亿次</p>
+                            </div>
+                            <div class="text-center p-4 bg-black/50 rounded-lg">
+                                <p class="text-gray-400 text-sm mb-1">国际媒体报道</p>
+                                <p class="text-3xl font-bold text-white">1.2万篇</p>
+                            </div>
+                            <div class="text-center p-4 bg-black/50 rounded-lg">
+                                <p class="text-gray-400 text-sm mb-1">正面情感占比</p>
+                                <p class="text-3xl font-bold text-tesla">78%</p>
+                            </div>
+                            <div class="text-center p-4 bg-black/50 rounded-lg">
+                                <p class="text-gray-400 text-sm mb-1">负面情感占比</p>
+                                <p class="text-3xl font-bold text-gray-500">5%</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 结论与建议 -->
+    <section class="py-20 px-4 bg-dark-gray">
+        <div class="container mx-auto">
+            <div class="max-w-4xl mx-auto bg-black/50 border border-gray-800 rounded-xl p-8 md:p-12">
+                <div class="motion-element">
+                    <h2 class="text-2xl md:text-3xl font-bold mb-6 text-white">结论与建议</h2>
+                    <div class="w-16 h-1 bg-tesla mb-8"></div>
+                    
+                    <div class="space-y-6">
+                        <div>
+                            <h3 class="text-xl font-bold mb-3 text-tesla">舆情总体评估</h3>
+                            <p class="text-gray-300">
+                                9.3阅兵事件引发国内外高度关注，国内形成以爱国主义为基调的正面舆论氛围，国际舆论呈现多元解读态势。整体而言，舆情效应提升了国家凝聚力和国际关注度，达到了预期的宣传效果。
+                            </p>
+                        </div>
+                        
+                        <div>
+                            <h3 class="text-xl font-bold mb-3 text-tesla">核心发现</h3>
+                            <ul class="space-y-3 text-gray-300">
+                                <li class="flex items-start">
+                                    <i class="fa fa-angle-right text-tesla mt-1 mr-3"></i>
+                                    <span>阅兵式成功激活公众历史记忆，强化民族认同感，国内舆论正面率达78%</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fa fa-angle-right text-tesla mt-1 mr-3"></i>
+                                    <span>军事装备展示成为国内外共同关注点，提升了中国国防实力的国际认知</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fa fa-angle-right text-tesla mt-1 mr-3"></i>
+                                    <span>国际舆论存在明显地域差异，西方媒体更关注"中国威胁论"叙事</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fa fa-angle-right text-tesla mt-1 mr-3"></i>
+                                    <span>社交媒体成为舆情发酵主阵地，话题传播呈现裂变式特征</span>
+                                </li>
+                            </ul>
+                        </div>
+                        
+                        <div>
+                            <h3 class="text-xl font-bold mb-3 text-tesla">政策建议</h3>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div class="p-4 bg-black/50 rounded-lg">
+                                    <h4 class="text-white font-medium mb-2">对内传播优化</h4>
+                                    <p class="text-gray-400 text-sm">
+                                        继续发挥主流媒体引导作用，同时关注青年群体话语特点，创新爱国主义教育方式
+                                    </p>
+                                </div>
+                                <div class="p-4 bg-black/50 rounded-lg">
+                                    <h4 class="text-white font-medium mb-2">国际传播策略</h4>
+                                    <p class="text-gray-400 text-sm">
+                                        加强国际话语体系建设，针对不同国家制定差异化传播策略，提升和平发展理念的国际认同
+                                    </p>
+                                </div>
+                                <div class="p-4 bg-black/50 rounded-lg">
+                                    <h4 class="text-white font-medium mb-2">舆情管理机制</h4>
+                                    <p class="text-gray-400 text-sm">
+                                        建立健全重大事件舆情预警与引导机制，提升国际舆情应对能力
+                                    </p>
+                                </div>
+                                <div class="p-4 bg-black/50 rounded-lg">
+                                    <h4 class="text-white font-medium mb-2">历史教育强化</h4>
+                                    <p class="text-gray-400 text-sm">
+                                        将历史记忆传承与当代国家发展叙事相结合，构建更具凝聚力的国家认同
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 页脚 -->
+    <footer class="py-12 px-4 bg-black border-t border-gray-800">
+        <div class="container mx-auto">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
+                <div>
+                    <h3 class="text-xl font-bold text-white mb-4">9.3阅兵舆情分析</h3>
+                    <p class="text-gray-400 mb-6">
+                        本报告基于公开信息与专业舆情监测数据编制，旨在全面呈现阅兵事件引发的舆论反响与社会影响。
+                    </p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-500 hover:text-tesla transition-colors">
+                            <i class="fa fa-weibo text-xl"></i>
+                        </a>
+                        <a href="#" class="text-gray-500 hover:text-tesla transition-colors">
+                            <i class="fa fa-wechat text-xl"></i>
+                        </a>
+                        <a href="#" class="text-gray-500 hover:text-tesla transition-colors">
+                            <i class="fa fa-twitter text-xl"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div>
+                    <h4 class="text-white font-medium mb-4">数据来源</h4>
+                    <ul class="space-y-2 text-gray-400">
+                        <li class="flex items-center">
+                            <i class="fa fa-check text-tesla mr-2"></i>
+                            <span>主流媒体报道数据库</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fa fa-check text-tesla mr-2"></i>
+                            <span>社交媒体平台公开数据</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fa fa-check text-tesla mr-2"></i>
+                            <span>国际通讯社报道档案</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fa fa-check text-tesla mr-2"></i>
+                            <span>专业舆情监测机构数据</span>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="text-white font-medium mb-4">免责声明</h4>
+                    <p class="text-gray-400 text-sm">
+                        本报告仅供参考，不构成任何决策建议。数据采集与分析过程力求客观准确，但不保证完全无偏差。引用本报告内容请注明出处。
+                    </p>
+                    <p class="text-gray-500 text-xs mt-4">
+                        © 2023 舆情分析研究中心. 保留所有权利.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- 返回顶部按钮 -->
+    <button id="backToTop" class="fixed bottom-8 right-8 bg-tesla w-12 h-12 rounded-full flex items-center justify-center text-white opacity-0 invisible transition-all duration-300 z-50">
+        <i class="fa fa-arrow-up"></i>
+    </button>
+
+    <!-- JavaScript -->
+    <script>
+        // 图表初始化
+        document.addEventListener('DOMContentLoaded', function() {
+            // 初始化所有图表
+            initCharts();
+            
+            // 初始化滚动动画
+            initScrollAnimations();
+            
+            // 返回顶部按钮
+            const backToTopBtn = document.getElementById('backToTop');
+            
+            window.addEventListener('scroll', function() {
+                if (window.scrollY > 300) {
+                    backToTopBtn.classList.remove('opacity-0', 'invisible');
+                    backToTopBtn.classList.add('opacity-100', 'visible');
+                } else {
+                    backToTopBtn.classList.remove('opacity-100', 'visible');
+                    backToTopBtn.classList.add('opacity-0', 'invisible');
+                }
+            });
+            
+            backToTopBtn.addEventListener('click', function() {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
+        });
+        
+        // 图表初始化函数
+        function initCharts() {
+            // 国内舆论趋势图表
+            const domesticTrendCtx = document.getElementById('domesticTrendChart').getContext('2d');
+            new Chart(domesticTrendCtx, {
+                type: 'line',
+                data: {
+                    labels: ['8/25', '8/27', '8/29', '8/31', '9/2', '9/3', '9/4', '9/5', '9/7', '9/9'],
+                    datasets: [{
+                        label: '媒体报道量',
+                        data: [1200, 1800, 2500, 4200, 8500, 28000, 15000, 9800, 5200, 3100],
+                        borderColor: '#E31937',
+                        backgroundColor: 'rgba(227, 25, 55, 0.1)',
+                        tension: 0.4,
+                        fill: true
+                    }, {
+                        label: '社交媒体讨论量',
+                        data: [5000, 8500, 15000, 32000, 89000, 350000, 280000, 180000, 120000, 75000],
+                        borderColor: 'rgba(255, 255, 255, 0.7)',
+                        backgroundColor: 'rgba(255, 255, 255, 0.05)',
+                        tension: 0.4,
+                        fill: true
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'top',
+                            labels: {
+                                color: 'rgba(255, 255, 255, 0.7)'
+                            }
+                        }
+                    },
+                    scales: {
+                        x: {
+                            grid: {
+                                color: 'rgba(255, 255, 255, 0.05)'
+                            },
+                            ticks: {
+                                color: 'rgba(255, 255, 255, 0.5)'
+                            }
+                        },
+                        y: {
+                            grid: {
+                                color: 'rgba(255, 255, 255, 0.05)'
+                            },
+                            ticks: {
+                                color: 'rgba(255, 255, 255, 0.5)'
+                            }
+                        }
+                    }
+                }
+            });
+            
+            // 媒体来源分布图表
+            const mediaSourceCtx = document.getElementById('mediaSourceChart').getContext('2d');
+            new Chart(mediaSourceCtx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['中央媒体', '地方媒体', '商业门户', '专业媒体', '其他'],
+                    datasets: [{
+                        data: [35, 25, 20, 12, 8],
+                        backgroundColor: [
+                            '#E31937',
+                            'rgba(255, 255, 255, 0.7)',
+                            'rgba(255, 255, 255, 0.5)',
+                            'rgba(255, 255, 255, 0.3)',
+                            'rgba(255, 255, 255, 0.15)'
+                        ],
+                        borderWidth: 0
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'bottom',
+                            labels: {
+                                color: 'rgba(255, 255, 255, 0.7)',
+                                padding: 15
+                            }
+                        }
+                    },
+                    cutout: '65%'
+                }
+            });
+            
+            // 情感倾向分析图表
+            const sentimentAnalysisCtx = document.getElementById('sentimentAnalysisChart').getContext('2d');
+            new Chart(sentimentAnalysisCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['正面', '中性', '负面'],
+                    datasets: [{
+                        label: '国内舆论情感分布',
+                        data: [78, 17, 5],
+                        backgroundColor: [
+                            '#E31937',
+                            'rgba(255, 255, 255, 0.5)',
+                            'rgba(255, 255, 255, 0.2)'
+                        ],
+                        borderRadius: 4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            display: false
+                        }
+                    },
+                    scales: {
+                        x: {
+                            grid: {
+                                display: false
+                            },
+                            ticks: {
+                                color: 'rgba(255, 255, 255, 0.7)'
+                            }
+                        },
+                        y: {
+                            grid: {
+                                color: 'rgba(255, 255, 255, 0.05)'
+                            },
+                            ticks: {
+                                color: 'rgba(255, 255, 255, 0.5)',
+                                callback: function(value) {
+                                    return value + '%';
+                                }
+                            },
+                            max: 100
+                        }
+                    }
+                }
+            });
+            
+            // 国际舆论情感图表
+            const internationalSentimentCtx = document.getElementById('internationalSentimentChart').getContext('2d');
+            new Chart(internationalSentimentCtx, {
+                type: 'radar',
+                data: {
+                    labels: ['中国', '俄罗斯', '欧洲', '美国', '东南亚', '中东', '非洲', '拉美'],
+                    datasets: [{
+                        label: '正面情感指数',
+                        data: [92, 78, 55, 32, 65, 58, 62, 55],
+                        backgroundColor: 'rgba(227, 25, 55, 0.2)',
+                        borderColor: '#E31937',
+                        pointBackgroundColor: '#E31937',
+                        pointBorderColor: '#fff',
+                        pointHoverBackgroundColor: '#fff',
+                        pointHoverBorderColor: '#E31937'
+                    }, {
+                        label: '关注度指数',
+                        data: [98, 85, 72, 88, 60, 45, 38, 42],
+                        backgroundColor: 'rgba(255, 255, 255, 0.1)',
+                        borderColor: 'rgba(255, 255, 255, 0.7)',
+                        pointBackgroundColor: 'rgba(255, 255, 255, 0.7)',
+                        pointBorderColor: '#000',
+                        pointHoverBackgroundColor: '#000',
+                        pointHoverBorderColor: 'rgba(255, 255, 255, 0.7)'
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'top',
+                            labels: {
+                                color: 'rgba(255, 255, 255, 0.7)',
+                                padding: 15
+                            }
+                        }
+                    },
+                    scales: {
+                        r: {
+                            angleLines: {
+                                color: 'rgba(255, 255, 255, 0.1)'
+                            },
+                            grid: {
+                                color: 'rgba(255, 255, 255, 0.1)'
+                            },
+                            pointLabels: {
+                                color: 'rgba(255, 255, 255, 0.7)',
+                                font: {
+                                    size: 11
+                                }
+                            },
+                            ticks: {
+                                color: 'rgba(255, 255, 255, 0.5)',
+                                backdropColor: 'transparent'
+                            }
+                        }
+                    }
+                }
+            });
+            
+            // 国内外舆论焦点对比图表
+            const topicComparisonCtx = document.getElementById('topicComparisonChart').getContext('2d');
+            new Chart(topicComparisonCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['历史纪念', '军事装备', '国家实力', '和平承诺', '国际影响', '地区安全', '政治意义'],
+                    datasets: [{
+                        label: '国内关注指数',
+                        data: [85, 92, 88, 75, 65, 45, 70],
+                        backgroundColor: '#E31937',
+                        borderRadius: 4
+                    }, {
+                        label: '国际关注指数',
+                        data: [45, 90, 85, 40, 80, 75, 65],
+                        backgroundColor: 'rgba(255, 255, 255, 0.5)',
+                        borderRadius: 4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'top',
+                            labels: {
+                                color: 'rgba(255, 255, 255, 0.7)',
+                                padding: 15
+                            }
+                        }
+                    },
+                    scales: {
+                        x: {
+                            grid: {
+                                color: 'rgba(255, 255, 255, 0.05)'
+                            },
+                            ticks: {
+                                color: 'rgba(255, 255, 255, 0.7)'
+                            }
+                        },
+                        y: {
+                            grid: {
+                                color: 'rgba(255, 255, 255, 0.05)'
+                            },
+                            ticks: {
+                                color: 'rgba(255, 255, 255, 0.5)'
+                            },
+                            max: 100
+                        }
+                    }
+                }
+            });
+            
+            // 舆情传播趋势图表
+            const spreadTrendCtx = document.getElementById('spreadTrendChart').getContext('2d');
+            new Chart(spreadTrendCtx, {
+                type: 'line',
+                data: {
+                    labels: ['00:00', '03:00', '06:00', '09:00', '12:00', '15:00', '18:00', '21:00', '00:00'],
+                    datasets: [{
+                        label: '微博话题阅读量(百万)',
+                        data: [50, 65, 85, 150, 320, 580, 720, 850, 920],
+                        borderColor: '#E31937',
+                        backgroundColor: 'rgba(227, 25, 55, 0.1)',
+                        tension: 0.4,
+                        fill: true
+                    }, {
+                        label: '新闻报道数量',
+                        data: [1200, 1500, 1800, 3200, 8500, 15000, 22000, 28000, 32000],
+                        borderColor: 'rgba(255, 255, 255, 0.7)',
+                        backgroundColor: 'rgba(255, 255, 255, 0.05)',
+                        tension: 0.4,
+                        fill: true,
+                        yAxisID: 'y1'
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'top',
+                            labels: {
+                                color: 'rgba(255, 255, 255, 0.7)',
+                                padding: 15
+                            }
+                        },
+                        title: {
+                            display: true,
+                            text: '9月3日阅兵当天舆情传播趋势',
+                            color: 'rgba(255, 255, 255, 0.9)',
+                            font: {
+                                size: 14
+                            }
+                        }
+                    },
+                    scales: {
+                        x: {
+                            grid: {
+                                color: 'rgba(255, 255, 255, 0.05)'
+                            },
+                            ticks: {
+                                color: 'rgba(255, 255, 255, 0.7)'
+                            }
+                        },
+                        y: {
+                            type: 'linear',
+                            display: true,
+                            position: 'left',
+                            title: {
+                                display: true,
+                                text: '阅读量(百万)',
+                                color: 'rgba(255, 255, 255, 0.7)'
+                            },
+                            grid: {
+                                color: 'rgba(255, 255, 255, 0.05)'
+                            },
+                            ticks: {
+                                color: 'rgba(255, 255, 255, 0.7)'
+                            }
+                        },
+                        y1: {
+                            type: 'linear',
+                            display: true,
+                            position: 'right',
+                            title: {
+                                display: true,
+                                text: '报道数量',
+                                color: 'rgba(255, 255, 255, 0.7)'
+                            },
+                            grid: {
+                                drawOnChartArea: false
+                            },
+                            ticks: {
+                                color: 'rgba(255, 255, 255, 0.7)'
+                            }
+                        }
+                    }
+                }
+            });
+            
+            // 话题分布图表
+            const topicDistributionCtx = document.getElementById('topicDistributionChart').getContext('2d');
+            new Chart(topicDistributionCtx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['军事装备', '历史纪念', '国家形象', '士兵风貌', '仪式流程', '国际反响', '其他'],
+                    datasets: [{
+                        data: [35, 22, 15, 10, 8, 7, 3],
+                        backgroundColor: [
+                            '#E31937',
+                            'rgba(255, 255, 255, 0.7)',
+                            'rgba(255, 255, 255, 0.5)',
+                            'rgba(255, 255, 255, 0.4)',
+                            'rgba(255, 255, 255, 0.3)',
+                            'rgba(255, 255, 255, 0.2)',
+                            'rgba(255, 255, 255, 0.1)'
+                        ],
+                        borderWidth: 0
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'bottom',
+                            labels: {
+                                color: 'rgba(255, 255, 255, 0.7)',
+                                padding: 10,
+                                font: {
+                                    size: 11
+                                }
+                            }
+                        }
+                    },
+                    cutout: '65%'
+                }
+            });
+            
+            // 信息来源渠道图表
+            const informationSourceCtx = document.getElementById('informationSourceChart').getContext('2d');
+            new Chart(informationSourceCtx, {
+                type: 'pie',
+                data: {
+                    labels: ['电视直播', '社交媒体', '新闻网站', '短视频平台', '朋友推荐', '其他'],
+                    datasets: [{
+                        data: [35, 30, 15, 12, 5, 3],
+                        backgroundColor: [
+                            '#E31937',
+                            'rgba(255, 255, 255, 0.7)',
+                            'rgba(255, 255, 255, 0.5)',
+                            'rgba(255, 255, 255, 0.4)',
+                            'rgba(255, 255, 255, 0.3)',
+                            'rgba(255, 255, 255, 0.2)'
+                        ],
+                        borderWidth: 0
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'bottom',
+                            labels: {
+                                color: 'rgba(255, 255, 255, 0.7)',
+                                padding: 10,
+                                font: {
+                                    size: 11
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        }
+        
+        // 滚动动画初始化
+        function initScrollAnimations() {
+            // 获取所有需要动画的元素
+            const motionElements = document.querySelectorAll('.motion-element');
+            
+            // 创建观察器
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('animate-in');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, {
+                threshold: 0.1
+            });
+            
+            // 为元素添加初始样式和观察
+            motionElements.forEach(element => {
+                element.style.opacity = '0';
+                element.style.transform = 'translateY(20px)';
+                element.style.transition = 'opacity 0.6s ease-out, transform 0.6s ease-out';
+                
+                observer.observe(element);
+                
+                // 添加动画类的样式
+                const style = document.createElement('style');
+                style.textContent = `
+                    .animate-in {
+                        opacity: 1 !important;
+                        transform: translateY(0) !important;
+                    }
+                `;
+                document.head.appendChild(style);
+            });
+        }
+    </script>
+</body>
+</html>
