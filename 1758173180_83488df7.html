@@ -1,0 +1,1066 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>四川江油学生霸凌事件舆情分析报告</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Font Awesome CDN -->
+  <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  <!-- Framer Motion CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/framer-motion@10.16.4/dist/framer-motion.min.js"></script>
+  <!-- Chart.js CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.8/dist/chart.umd.min.js"></script>
+  
+  <!-- Tailwind 配置 -->
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            'tesla': '#E31937',
+            'dark': '#0A0A0A',
+            'darker': '#000000',
+            'gray-light': '#E5E5E5',
+            'gray-medium': '#9CA3AF',
+            'gray-dark': '#4B5563'
+          },
+          fontFamily: {
+            sans: ['Inter', 'system-ui', 'sans-serif'],
+          },
+        },
+      }
+    }
+  </script>
+  
+  <style type="text/tailwindcss">
+    @layer utilities {
+      .content-auto {
+        content-visibility: auto;
+      }
+      .text-shadow {
+        text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      }
+      .gradient-tesla {
+        background: linear-gradient(90deg, #E31937 0%, rgba(227, 25, 55, 0) 100%);
+      }
+      .gradient-tesla-reverse {
+        background: linear-gradient(90deg, rgba(227, 25, 55, 0) 0%, #E31937 100%);
+      }
+      .bento-card {
+        @apply bg-dark rounded-lg overflow-hidden border border-gray-dark/30 transition-all duration-300 hover:border-tesla/50 hover:shadow-[0_0_15px_rgba(227,25,55,0.2)];
+      }
+      .animate-float {
+        animation: float 6s ease-in-out infinite;
+      }
+      @keyframes float {
+        0% { transform: translateY(0px); }
+        50% { transform: translateY(-10px); }
+        100% { transform: translateY(0px); }
+      }
+    }
+  </style>
+</head>
+
+<body class="bg-darker text-white font-sans">
+  <!-- 导航栏 -->
+  <nav class="fixed top-0 left-0 right-0 z-50 bg-darker/80 backdrop-blur-md border-b border-gray-dark/30">
+    <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+      <div class="flex items-center space-x-2">
+        <div class="w-8 h-8 bg-tesla rounded-sm flex items-center justify-center">
+          <i class="fa fa-line-chart text-white"></i>
+        </div>
+        <span class="text-xl font-bold">舆情分析报告</span>
+      </div>
+      <div class="hidden md:flex space-x-8">
+        <a href="#overview" class="text-gray-medium hover:text-tesla transition-colors">事件概述</a>
+        <a href="#data" class="text-gray-medium hover:text-tesla transition-colors">数据分析</a>
+        <a href="#media" class="text-gray-medium hover:text-tesla transition-colors">媒体分析</a>
+        <a href="#sentiment" class="text-gray-medium hover:text-tesla transition-colors">舆情趋势</a>
+        <a href="#suggestions" class="text-gray-medium hover:text-tesla transition-colors">对策建议</a>
+      </div>
+      <button class="md:hidden text-gray-medium">
+        <i class="fa fa-bars text-xl"></i>
+      </button>
+    </div>
+  </nav>
+
+  <!-- 英雄区域 -->
+  <header class="pt-32 pb-20 px-4 md:pt-40 md:pb-32 relative overflow-hidden">
+    <div class="absolute top-0 right-0 w-full h-full bg-gradient-to-br from-dark to-darker z-0"></div>
+    <div class="absolute top-0 right-0 w-1/2 h-full gradient-tesla opacity-10 z-0"></div>
+    
+    <div class="container mx-auto relative z-10">
+      <div class="max-w-4xl mx-auto text-center">
+        <div class="inline-block mb-6 px-4 py-1 border border-tesla/30 rounded-full bg-tesla/5">
+          <span class="text-tesla text-sm font-medium">校园安全 · 舆情分析</span>
+        </div>
+        <h1 class="text-4xl md:text-6xl font-bold mb-6 leading-tight">
+          四川江油学生霸凌事件<br>
+          <span class="text-tesla">舆情综述</span>
+        </h1>
+        <p class="text-xl text-gray-medium mb-8 max-w-2xl mx-auto">
+          2023年3月中旬发生的校园霸凌事件引发社会广泛关注，本报告从事件概述、数据分析、媒体反应、舆情趋势及对策建议等维度进行全面剖析。
+        </p>
+        <div class="flex flex-wrap justify-center gap-4">
+          <a href="#overview" class="px-8 py-3 bg-tesla text-white rounded-sm hover:bg-tesla/90 transition-all transform hover:-translate-y-1">
+            查看详情 <i class="fa fa-arrow-right ml-2"></i>
+          </a>
+          <a href="#data" class="px-8 py-3 bg-transparent border border-gray-dark/50 text-white rounded-sm hover:border-tesla/50 transition-all transform hover:-translate-y-1">
+            数据可视化 <i class="fa fa-chart-bar ml-2"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+    
+    <div class="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-darker to-transparent z-10"></div>
+  </header>
+
+  <main class="container mx-auto px-4 pb-20">
+    <!-- 事件概述 -->
+    <section id="overview" class="mb-24">
+      <div class="flex items-center mb-12">
+        <div class="w-12 h-1 bg-tesla mr-4"></div>
+        <h2 class="text-3xl md:text-4xl font-bold">事件概述</h2>
+      </div>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
+        <!-- 事件卡片 -->
+        <div class="bento-card p-8 md:p-10 col-span-1 md:col-span-2 lg:col-span-1">
+          <motion.div class="space-y-6" initial="hidden" whileInView="visible" viewport={{ once: true }} transition={{ duration: 0.6 }}
+            variants={{
+              hidden: { opacity: 0, y: 20 },
+              visible: { opacity: 1, y: 0 }
+            }}>
+            <div class="flex items-center">
+              <div class="w-10 h-10 rounded-full bg-tesla/10 flex items-center justify-center mr-4">
+                <i class="fa fa-calendar text-tesla"></i>
+              </div>
+              <h3 class="text-2xl font-bold">事件基本信息</h3>
+            </div>
+            
+            <div class="space-y-4">
+              <div class="flex items-start">
+                <div class="text-gray-dark w-24 mt-1">事件时间</div>
+                <div>2023年3月中旬</div>
+              </div>
+              <div class="flex items-start">
+                <div class="text-gray-dark w-24 mt-1">事件地点</div>
+                <div>四川省江油市某中学</div>
+              </div>
+              <div class="flex items-start">
+                <div class="text-gray-dark w-24 mt-1">事件性质</div>
+                <div>校园霸凌事件，涉及多名学生对一名同学实施身体和心理伤害</div>
+              </div>
+              <div class="flex items-start">
+                <div class="text-gray-dark w-24 mt-1">涉及人员</div>
+                <div>包括施暴者和受害者在内的多名中学生</div>
+              </div>
+            </div>
+          </motion.div>
+        </div>
+        
+        <!-- 事件经过 -->
+        <div class="bento-card p-8 md:p-10 col-span-1 md:col-span-2 lg:col-span-1">
+          <motion.div class="space-y-6" initial="hidden" whileInView="visible" viewport={{ once: true }} transition={{ duration: 0.6, delay: 0.2 }}
+            variants={{
+              hidden: { opacity: 0, y: 20 },
+              visible: { opacity: 1, y: 0 }
+            }}>
+            <div class="flex items-center">
+              <div class="w-10 h-10 rounded-full bg-tesla/10 flex items-center justify-center mr-4">
+                <i class="fa fa-exclamation-triangle text-tesla"></i>
+              </div>
+              <h3 class="text-2xl font-bold">事件经过</h3>
+            </div>
+            
+            <p class="text-gray-light leading-relaxed">
+              据媒体报道和网络曝光，该事件涉及多名学生在一段时间内对一名同学实施包括殴打、辱骂、孤立等形式的霸凌行为。相关视频在网络传播后引发广泛关注，视频内容显示受害者遭受多人围堵和暴力对待，引发公众对校园安全和未成年人保护问题的强烈担忧。
+            </p>
+            
+            <div class="mt-6 p-4 bg-dark border border-gray-dark/50 rounded-lg">
+              <div class="flex items-center text-tesla mb-2">
+                <i class="fa fa-info-circle mr-2"></i>
+                <span class="font-medium">关键影响</span>
+              </div>
+              <p class="text-sm text-gray-medium">
+                事件曝光后迅速成为社会焦点话题，不仅引发对个案的关注，更触发了公众对校园霸凌现象普遍性、学校管理责任以及未成年人心理健康等深层次问题的讨论。
+              </p>
+            </div>
+          </motion.div>
+        </div>
+      </div>
+    </section>
+    
+    <!-- 数据分析 -->
+    <section id="data" class="mb-24">
+      <div class="flex items-center mb-12">
+        <div class="w-12 h-1 bg-tesla mr-4"></div>
+        <h2 class="text-3xl md:text-4xl font-bold">数据分析</h2>
+      </div>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8 mb-12">
+        <!-- 数据卡片 1 -->
+        <div class="bento-card p-6">
+          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} transition={{ duration: 0.5 }}
+            variants={{
+              hidden: { opacity: 0, y: 20 },
+              visible: { opacity: 1, y: 0 }
+            }}>
+            <div class="text-gray-dark mb-2">媒体报道量</div>
+            <div class="text-4xl md:text-5xl font-bold text-tesla mb-1">100+</div>
+            <div class="text-gray-medium text-sm">各级媒体参与报道</div>
+          </motion.div>
+        </div>
+        
+        <!-- 数据卡片 2 -->
+        <div class="bento-card p-6">
+          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} transition={{ duration: 0.5, delay: 0.1 }}
+            variants={{
+              hidden: { opacity: 0, y: 20 },
+              visible: { opacity: 1, y: 0 }
+            }}>
+            <div class="text-gray-dark mb-2">微博话题阅读量</div>
+            <div class="text-4xl md:text-5xl font-bold text-white mb-1">2亿+</div>
+            <div class="text-gray-medium text-sm">社交媒体广泛传播</div>
+          </motion.div>
+        </div>
+        
+        <!-- 数据卡片 3 -->
+        <div class="bento-card p-6">
+          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} transition={{ duration: 0.5, delay: 0.2 }}
+            variants={{
+              hidden: { opacity: 0, y: 20 },
+              visible: { opacity: 1, y: 0 }
+            }}>
+            <div class="text-gray-dark mb-2">讨论量</div>
+            <div class="text-4xl md:text-5xl font-bold text-white mb-1">50万+</div>
+            <div class="text-gray-medium text-sm">网民参与讨论</div>
+          </motion.div>
+        </div>
+        
+        <!-- 数据卡片 4 -->
+        <div class="bento-card p-6">
+          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} transition={{ duration: 0.5, delay: 0.3 }}
+            variants={{
+              hidden: { opacity: 0, y: 20 },
+              visible: { opacity: 1, y: 0 }
+            }}>
+            <div class="text-gray-dark mb-2">关注高峰期</div>
+            <div class="text-4xl md:text-5xl font-bold text-white mb-1">3月19日</div>
+            <div class="text-gray-medium text-sm">官方通报发布后</div>
+          </motion.div>
+        </div>
+      </div>
+      
+      <!-- 图表区域 -->
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        <!-- 舆情趋势图 -->
+        <div class="bento-card p-6 md:p-8">
+          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} transition={{ duration: 0.6 }}
+            variants={{
+              hidden: { opacity: 0, y: 20 },
+              visible: { opacity: 1, y: 0 }
+            }}>
+            <h3 class="text-xl font-bold mb-6">舆情热度时间趋势</h3>
+            <div class="h-80">
+              <canvas id="trendChart"></canvas>
+            </div>
+          </motion.div>
+        </div>
+        
+        <!-- 地域分布图 -->
+        <div class="bento-card p-6 md:p-8">
+          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} transition={{ duration: 0.6, delay: 0.2 }}
+            variants={{
+              hidden: { opacity: 0, y: 20 },
+              visible: { opacity: 1, y: 0 }
+            }}>
+            <h3 class="text-xl font-bold mb-6">地域关注度分布</h3>
+            <div class="h-80">
+              <canvas id="regionChart"></canvas>
+            </div>
+          </motion.div>
+        </div>
+        
+        <!-- 关键词云 -->
+        <div class="bento-card p-6 md:p-8 col-span-1 lg:col-span-2">
+          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} transition={{ duration: 0.6 }}
+            variants={{
+              hidden: { opacity: 0, y: 20 },
+              visible: { opacity: 1, y: 0 }
+            }}>
+            <h3 class="text-xl font-bold mb-6">关键词热度</h3>
+            <div class="h-64 flex items-center justify-center bg-dark p-8 rounded-lg">
+              <div class="flex flex-wrap justify-center gap-2 md:gap-4 text-center">
+                <span class="text-4xl md:text-5xl font-bold text-tesla">江油霸凌</span>
+                <span class="text-3xl md:text-4xl font-bold text-white">校园暴力</span>
+                <span class="text-3xl md:text-4xl font-bold text-white">未成年人保护</span>
+                <span class="text-xl md:text-2xl text-gray-light">学校责任</span>
+                <span class="text-xl md:text-2xl text-gray-light">心理健康</span>
+                <span class="text-lg md:text-xl text-gray-medium">校园安全</span>
+                <span class="text-lg md:text-xl text-gray-medium">教育缺失</span>
+                <span class="text-base md:text-lg text-gray-medium">暴力防治</span>
+                <span class="text-base md:text-lg text-gray-medium">法律制裁</span>
+                <span class="text-base md:text-lg text-gray-medium">家校共育</span>
+              </div>
+            </div>
+          </motion.div>
+        </div>
+      </div>
+    </section>
+    
+    <!-- 媒体分类分析 -->
+    <section id="media" class="mb-24">
+      <div class="flex items-center mb-12">
+        <div class="w-12 h-1 bg-tesla mr-4"></div>
+        <h2 class="text-3xl md:text-4xl font-bold">媒体分类分析</h2>
+      </div>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+        <!-- 主流媒体 -->
+        <div class="bento-card p-6">
+          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} transition={{ duration: 0.5 }}
+            variants={{
+              hidden: { opacity: 0, y: 20 },
+              visible: { opacity: 1, y: 0 }
+            }}>
+            <div class="flex items-center mb-4">
+              <div class="w-10 h-10 rounded-full bg-tesla/10 flex items-center justify-center mr-3">
+                <i class="fa fa-television text-tesla"></i>
+              </div>
+              <h3 class="text-xl font-bold">主流媒体</h3>
+            </div>
+            <p class="text-gray-light mb-4">
+              着重报道事件事实，强调依法处理和保护未成年人权益，如央视新闻的"零容忍"表态。
+            </p>
+            <div class="text-sm text-gray-medium">
+              <div class="mb-2">代表媒体：人民日报、央视新闻</div>
+              <div>核心观点：重视事件处理，强调制度建设</div>
+            </div>
+          </motion.div>
+        </div>
+        
+        <!-- 地方媒体 -->
+        <div class="bento-card p-6">
+          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} transition={{ duration: 0.5, delay: 0.1 }}
+            variants={{
+              hidden: { opacity: 0, y: 20 },
+              visible: { opacity: 1, y: 0 }
+            }}>
+            <div class="flex items-center mb-4">
+              <div class="w-10 h-10 rounded-full bg-tesla/10 flex items-center justify-center mr-3">
+                <i class="fa fa-newspaper-o text-tesla"></i>
+              </div>
+              <h3 class="text-xl font-bold">地方媒体</h3>
+            </div>
+            <p class="text-gray-light mb-4">
+              四川日报等聚焦当地教育部门回应和后续处理措施，关注本地教育系统的整改行动。
+            </p>
+            <div class="text-sm text-gray-medium">
+              <div class="mb-2">代表媒体：四川日报、成都商报</div>
+              <div>核心观点：跟踪本地处理进展，报道整改措施</div>
+            </div>
+          </motion.div>
+        </div>
+        
+        <!-- 网络媒体 -->
+        <div class="bento-card p-6">
+          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} transition={{ duration: 0.5, delay: 0.2 }}
+            variants={{
+              hidden: { opacity: 0, y: 20 },
+              visible: { opacity: 1, y: 0 }
+            }}>
+            <div class="flex items-center mb-4">
+              <div class="w-10 h-10 rounded-full bg-tesla/10 flex items-center justify-center mr-3">
+                <i class="fa fa-globe text-tesla"></i>
+              </div>
+              <h3 class="text-xl font-bold">网络媒体</h3>
+            </div>
+            <p class="text-gray-light mb-4">
+              腾讯、网易等门户网站多角度报道，包括专家访谈和背景分析，提供更全面的事件解读。
+            </p>
+            <div class="text-sm text-gray-medium">
+              <div class="mb-2">代表媒体：腾讯新闻、网易新闻</div>
+              <div>核心观点：深度分析，多角度解读事件背景</div>
+            </div>
+          </motion.div>
+        </div>
+        
+        <!-- 自媒体 -->
+        <div class="bento-card p-6">
+          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} transition={{ duration: 0.5 }}
+            variants={{
+              hidden: { opacity: 0, y: 20 },
+              visible: { opacity: 1, y: 0 }
+            }}>
+            <div class="flex items-center mb-4">
+              <div class="w-10 h-10 rounded-full bg-tesla/10 flex items-center justify-center mr-3">
+                <i class="fa fa-user-circle-o text-tesla"></i>
+              </div>
+              <h3 class="text-xl font-bold">自媒体</h3>
+            </div>
+            <p class="text-gray-light mb-4">
+              情感化表达较多，部分账号存在过度渲染现象，注重引发情感共鸣和社会情绪。
+            </p>
+            <div class="text-sm text-gray-medium">
+              <div class="mb-2">代表平台：微博大V、微信公众号</div>
+              <div>核心特点：情感驱动，观点鲜明，传播迅速</div>
+            </div>
+          </motion.div>
+        </div>
+        
+        <!-- 国际媒体 -->
+        <div class="bento-card p-6 md:col-span-2 lg:col-span-1">
+          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} transition={{ duration: 0.5, delay: 0.1 }}
+            variants={{
+              hidden: { opacity: 0, y: 20 },
+              visible: { opacity: 1, y: 0 }
+            }}>
+            <div class="flex items-center mb-4">
+              <div class="w-10 h-10 rounded-full bg-tesla/10 flex items-center justify-center mr-3">
+                <i class="fa fa-globe text-tesla"></i>
+              </div>
+              <h3 class="text-xl font-bold">国际媒体</h3>
+            </div>
+            <p class="text-gray-light mb-4">
+              路透社等外媒简要报道了中国校园霸凌事件及社会反响，将事件置于中国社会治理和教育体系背景下观察。
+            </p>
+            <div class="text-sm text-gray-medium">
+              <div class="mb-2">代表媒体：路透社、BBC中文网</div>
+              <div>核心视角：关注中国校园安全治理和社会反应</div>
+            </div>
+          </motion.div>
+        </div>
+        
+        <!-- 媒体分布图表 -->
+        <div class="bento-card p-6 md:col-span-2 lg:col-span-1">
+          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} transition={{ duration: 0.6 }}
+            variants={{
+              hidden: { opacity: 0, y: 20 },
+              visible: { opacity: 1, y: 0 }
+            }}>
+            <h3 class="text-xl font-bold mb-6">媒体报道来源分布</h3>
+            <div class="h-64">
+              <canvas id="mediaChart"></canvas>
+            </div>
+          </motion.div>
+        </div>
+      </div>
+    </section>
+    
+    <!-- 舆情起伏分析 -->
+    <section id="sentiment" class="mb-24">
+      <div class="flex items-center mb-12">
+        <div class="w-12 h-1 bg-tesla mr-4"></div>
+        <h2 class="text-3xl md:text-4xl font-bold">舆情起伏分析</h2>
+      </div>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8 mb-12">
+        <!-- 爆发期 -->
+        <div class="bento-card p-6">
+          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} transition={{ duration: 0.5 }}
+            variants={{
+              hidden: { opacity: 0, y: 20 },
+              visible: { opacity: 1, y: 0 }
+            }}>
+            <div class="text-tesla font-bold text-xl mb-2">爆发期</div>
+            <div class="text-gray-dark mb-4">3月15日</div>
+            <p class="text-sm text-gray-light">
+              霸凌视频在网络传播，引发公众愤怒，短时间内成为社交媒体热点话题。
+            </p>
+            <div class="mt-4 flex items-center text-xs text-gray-medium">
+              <i class="fa fa-arrow-right text-tesla mr-2"></i>
+              <span>视频传播 → 公众愤怒 → 话题升温</span>
+            </div>
+          </motion.div>
+        </div>
+        
+        <!-- 发酵期 -->
+        <div class="bento-card p-6">
+          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} transition={{ duration: 0.5, delay: 0.1 }}
+            variants={{
+              hidden: { opacity: 0, y: 20 },
+              visible: { opacity: 1, y: 0 }
+            }}>
+            <div class="text-tesla font-bold text-xl mb-2">发酵期</div>
+            <div class="text-gray-dark mb-4">3月16-18日</div>
+            <p class="text-sm text-gray-light">
+              更多细节被挖掘，教育部门介入调查，媒体开始深入报道事件背景。
+            </p>
+            <div class="mt-4 flex items-center text-xs text-gray-medium">
+              <i class="fa fa-arrow-right text-tesla mr-2"></i>
+              <span>细节曝光 → 官方介入 → 媒体深挖</span>
+            </div>
+          </motion.div>
+        </div>
+        
+        <!-- 高峰期 -->
+        <div class="bento-card p-6">
+          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} transition={{ duration: 0.5, delay: 0.2 }}
+            variants={{
+              hidden: { opacity: 0, y: 20 },
+              visible: { opacity: 1, y: 0 }
+            }}>
+            <div class="text-tesla font-bold text-xl mb-2">高峰期</div>
+            <div class="text-gray-dark mb-4">3月19日</div>
+            <p class="text-sm text-gray-light">
+              官方通报发布，各媒体集中报道，舆论关注度达到顶峰，讨论最为热烈。
+            </p>
+            <div class="mt-4 flex items-center text-xs text-gray-medium">
+              <i class="fa fa-arrow-right text-tesla mr-2"></i>
+              <span>官方通报 → 全面报道 → 舆论高峰</span>
+            </div>
+          </motion.div>
+        </div>
+        
+        <!-- 回落期 -->
+        <div class="bento-card p-6">
+          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} transition={{ duration: 0.5, delay: 0.3 }}
+            variants={{
+              hidden: { opacity: 0, y: 20 },
+              visible: { opacity: 1, y: 0 }
+            }}>
+            <div class="text-tesla font-bold text-xl mb-2">回落期</div>
+            <div class="text-gray-dark mb-4">3月20日后</div>
+            <p class="text-sm text-gray-light">
+              关注度自然下降，但相关讨论持续，开始转向制度建设和长效机制讨论。
+            </p>
+            <div class="mt-4 flex items-center text-xs text-gray-medium">
+              <i class="fa fa-arrow-right text-tesla mr-2"></i>
+              <span>关注下降 → 理性反思 → 制度讨论</span>
+            </div>
+          </motion.div>
+        </div>
+      </div>
+      
+      <!-- 网民观点分析 -->
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        <div class="bento-card p-6 md:p-8">
+          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} transition={{ duration: 0.6 }}
+            variants={{
+              hidden: { opacity: 0, y: 20 },
+              visible: { opacity: 1, y: 0 }
+            }}>
+            <h3 class="text-xl font-bold mb-6">网民观点分析</h3>
+            <div class="h-80">
+              <canvas id="opinionChart"></canvas>
+            </div>
+          </motion.div>
+        </div>
+        
+        <div class="bento-card p-6 md:p-8">
+          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} transition={{ duration: 0.6, delay: 0.2 }}
+            variants={{
+              hidden: { opacity: 0, y: 20 },
+              visible: { opacity: 1, y: 0 }
+            }}>
+            <h3 class="text-xl font-bold mb-6">主要观点摘要</h3>
+            
+            <div class="space-y-6">
+              <div>
+                <div class="flex items-center mb-2">
+                  <div class="w-2 h-2 rounded-full bg-tesla mr-2"></div>
+                  <span class="font-medium">支持方观点 (68%)</span>
+                </div>
+                <p class="text-sm text-gray-medium pl-4">强烈谴责霸凌行为，要求严惩施暴者，保护受害者权益，呼吁学校和教育部门承担起管理责任。</p>
+              </div>
+              
+              <div>
+                <div class="flex items-center mb-2">
+                  <div class="w-2 h-2 rounded-full bg-gray-dark mr-2"></div>
+                  <span class="font-medium">质疑方观点 (15%)</span>
+                </div>
+                <p class="text-sm text-gray-medium pl-4">质疑学校管理缺失，对前期未能及时发现和干预提出批评，追问事件为何持续一段时间才被曝光。</p>
+              </div>
+              
+              <div>
+                <div class="flex items-center mb-2">
+                  <div class="w-2 h-2 rounded-full bg-gray-dark mr-2"></div>
+                  <span class="font-medium">理性分析 (12%)</span>
+                </div>
+                <p class="text-sm text-gray-medium pl-4">建议完善防治机制，关注心理健康教育，从根本上预防校园霸凌，而非仅关注个案处理。</p>
+              </div>
+              
+              <div>
+                <div class="flex items-center mb-2">
+                  <div class="w-2 h-2 rounded-full bg-gray-dark mr-2"></div>
+                  <span class="font-medium">情绪化表达 (5%)</span>
+                </div>
+                <p class="text-sm text-gray-medium pl-4">包含极端言论要求"以暴制暴"等非理性声音，反映部分网民的愤怒情绪。</p>
+              </div>
+            </div>
+          </motion.div>
+        </div>
+      </div>
+    </section>
+    
+    <!-- 对策建议 -->
+    <section id="suggestions" class="mb-24">
+      <div class="flex items-center mb-12">
+        <div class="w-12 h-1 bg-tesla mr-4"></div>
+        <h2 class="text-3xl md:text-4xl font-bold">对策建议</h2>
+      </div>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+        <!-- 教育部门 -->
+        <div class="bento-card p-6 md:p-8">
+          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} transition={{ duration: 0.5 }}
+            variants={{
+              hidden: { opacity: 0, y: 20 },
+              visible: { opacity: 1, y: 0 }
+            }}>
+            <div class="flex items-center mb-6">
+              <div class="w-10 h-10 rounded-full bg-tesla/10 flex items-center justify-center mr-4">
+                <i class="fa fa-university text-tesla"></i>
+              </div>
+              <h3 class="text-xl font-bold">教育部门</h3>
+            </div>
+            
+            <ul class="space-y-4">
+              <li class="flex items-start">
+                <i class="fa fa-check text-tesla mt-1 mr-3"></i>
+                <span class="text-sm text-gray-light">开展校园安全专项检查，排查安全隐患</span>
+              </li>
+              <li class="flex items-start">
+                <i class="fa fa-check text-tesla mt-1 mr-3"></i>
+                <span class="text-sm text-gray-light">建立霸凌行为举报和快速响应机制</span>
+              </li>
+              <li class="flex items-start">
+                <i class="fa fa-check text-tesla mt-1 mr-3"></i>
+                <span class="text-sm text-gray-light">加强心理健康教育师资培训</span>
+              </li>
+              <li class="flex items-start">
+                <i class="fa fa-check text-tesla mt-1 mr-3"></i>
+                <span class="text-sm text-gray-light">建立校园安全问责制度，明确责任主体</span>
+              </li>
+            </ul>
+          </motion.div>
+        </div>
+        
+        <!-- 学校层面 -->
+        <div class="bento-card p-6 md:p-8">
+          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} transition={{ duration: 0.5, delay: 0.1 }}
+            variants={{
+              hidden: { opacity: 0, y: 20 },
+              visible: { opacity: 1, y: 0 }
+            }}>
+            <div class="flex items-center mb-6">
+              <div class="w-10 h-10 rounded-full bg-tesla/10 flex items-center justify-center mr-4">
+                <i class="fa fa-building text-tesla"></i>
+              </div>
+              <h3 class="text-xl font-bold">学校层面</h3>
+            </div>
+            
+            <ul class="space-y-4">
+              <li class="flex items-start">
+                <i class="fa fa-check text-tesla mt-1 mr-3"></i>
+                <span class="text-sm text-gray-light">完善校园监控和安全管理系统</span>
+              </li>
+              <li class="flex items-start">
+                <i class="fa fa-check text-tesla mt-1 mr-3"></i>
+                <span class="text-sm text-gray-light">建立学生心理健康档案，定期评估</span>
+              </li>
+              <li class="flex items-start">
+                <i class="fa fa-check text-tesla mt-1 mr-3"></i>
+                <span class="text-sm text-gray-light">开展反霸凌专题教育活动和培训</span>
+              </li>
+              <li class="flex items-start">
+                <i class="fa fa-check text-tesla mt-1 mr-3"></i>
+                <span class="text-sm text-gray-light">加强教师对霸凌行为的识别和干预能力</span>
+              </li>
+            </ul>
+          </motion.div>
+        </div>
+        
+        <!-- 家庭方面 -->
+        <div class="bento-card p-6 md:p-8">
+          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} transition={{ duration: 0.5, delay: 0.2 }}
+            variants={{
+              hidden: { opacity: 0, y: 20 },
+              visible: { opacity: 1, y: 0 }
+            }}>
+            <div class="flex items-center mb-6">
+              <div class="w-10 h-10 rounded-full bg-tesla/10 flex items-center justify-center mr-4">
+                <i class="fa fa-home text-tesla"></i>
+              </div>
+              <h3 class="text-xl font-bold">家庭方面</h3>
+            </div>
+            
+            <ul class="space-y-4">
+              <li class="flex items-start">
+                <i class="fa fa-check text-tesla mt-1 mr-3"></i>
+                <span class="text-sm text-gray-light">家长加强子女品格教育和价值观引导</span>
+              </li>
+              <li class="flex items-start">
+                <i class="fa fa-check text-tesla mt-1 mr-3"></i>
+                <span class="text-sm text-gray-light">建立良好的亲子沟通渠道，关注子女情绪变化</span>
+              </li>
+              <li class="flex items-start">
+                <i class="fa fa-check text-tesla mt-1 mr-3"></i>
+                <span class="text-sm text-gray-light">关注子女在校表现变化，及时发现异常</span>
+              </li>
+              <li class="flex items-start">
+                <i class="fa fa-check text-tesla mt-1 mr-3"></i>
+                <span class="text-sm text-gray-light">积极配合学校教育，形成家校共育合力</span>
+              </li>
+            </ul>
+          </motion.div>
+        </div>
+        
+        <!-- 社会层面 -->
+        <div class="bento-card p-6 md:p-8">
+          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} transition={{ duration: 0.5 }}
+            variants={{
+              hidden: { opacity: a0, y: 20 },
+              visible: { opacity: 1, y: 0 }
+            }}>
+            <div class="flex items-center mb-6">
+              <div class="w-10 h-10 rounded-full bg-tesla/10 flex items-center justify-center mr-4">
+                <i class="fa fa-users text-tesla"></i>
+              </div>
+              <h3 class="text-xl font-bold">社会层面</h3>
+            </div>
+            
+            <ul class="space-y-4">
+              <li class="flex items-start">
+                <i class="fa fa-check text-tesla mt-1 mr-3"></i>
+                <span class="text-sm text-gray-light">媒体负责任报道，避免二次伤害和过度渲染</span>
+              </li>
+              <li class="flex items-start">
+                <i class="fa fa-check text-tesla mt-1 mr-3"></i>
+                <span class="text-sm text-gray-light">社会组织提供专业心理辅导服务</span>
+              </li>
+              <li class="flex items-start">
+                <i class="fa fa-check text-tesla mt-1 mr-3"></i>
+                <span class="text-sm text-gray-light">社区开展相关宣教活动，营造反霸凌氛围</span>
+              </li>
+              <li class="flex items-start">
+                <i class="fa fa-check text-tesla mt-1 mr-3"></i>
+                <span class="text-sm text-gray-light">企业和公益组织支持反霸凌项目和研究</span>
+              </li>
+            </ul>
+          </motion.div>
+        </div>
+        
+        <!-- 法律层面 -->
+        <div class="bento-card p-6 md:p-8 md:col-span-2 lg:col-span-1">
+          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} transition={{ duration: 0.5, delay: 0.1 }}
+            variants={{
+              hidden: { opacity: 0, y: 20 },
+              visible: { opacity: 1, y: 0 }
+            }}>
+            <div class="flex items-center mb-6">
+              <div class="w-10 h-10 rounded-full bg-tesla/10 flex items-center justify-center mr-4">
+                <i class="fa fa-gavel text-tesla"></i>
+              </div>
+              <h3 class="text-xl font-bold">法律层面</h3>
+            </div>
+            
+            <ul class="space-y-4">
+              <li class="flex items-start">
+                <i class="fa fa-check text-tesla mt-1 mr-3"></i>
+                <span class="text-sm text-gray-light">依法处理严重霸凌行为，明确法律责任</span>
+              </li>
+              <li class="flex items-start">
+                <i class="fa fa-check text-tesla mt-1 mr-3"></i>
+                <span class="text-sm text-gray-light">完善未成年人保护相关法规，明确校园安全管理责任</span>
+              </li>
+              <li class="flex items-start">
+                <i class="fa fa-check text-tesla mt-1 mr-3"></i>
+                <span class="text-sm text-gray-light">建立校园霸凌案件的快速处理机制</span>
+              </li>
+              <li class="flex items-start">
+                <i class="fa fa-check text-tesla mt-1 mr-3"></i>
+                <span class="text-sm text-gray-light">加强对未成年人犯罪和受害问题的研究</span>
+              </li>
+              <li class="flex items-start">
+                <i class="fa fa-check text-tesla mt-1 mr-3"></i>
+                <span class="text-sm text-gray-light">平衡保护未成年人与惩戒霸凌行为的法律边界</span>
+              </li>
+            </ul>
+          </motion.div>
+        </div>
+        
+        <!-- 总结卡片 -->
+        <div class="bento-card p-6 md:p-8 md:col-span-2 lg:col-span-2">
+          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} transition={{ duration: 0.6 }}
+            variants={{
+              hidden: { opacity: 0, y: 20 },
+              visible: { opacity: 1, y: 0 }
+            }}>
+            <div class="flex items-center mb-6">
+              <div class="w-10 h-10 rounded-full bg-tesla/10 flex items-center justify-center mr-4">
+                <i class="fa fa-file-text-o text-tesla"></i>
+              </div>
+              <h3 class="text-xl font-bold">报告总结</h3>
+            </div>
+            
+            <p class="text-gray-light leading-relaxed mb-6">
+              四川江油学生霸凌事件不仅是一起个案，更反映出校园安全管理、未成年人保护和心理健康教育等系统性问题。事件引发的广泛舆情表明公众对校园安全的高度关注，以及对公平正义的强烈期待。
+            </p>
+            
+            <p class="text-gray-light leading-relaxed mb-6">
+              有效的校园霸凌防治需要教育部门、学校、家庭、社会和法律体系的协同努力，既要关注个案的公正处理，更要着眼于长效机制的建设，从根本上预防和减少校园霸凌事件的发生，为未成年人营造安全、健康的成长环境。
+            </p>
+            
+            <div class="p-4 bg-dark border border-gray-dark/50 rounded-lg">
+              <p class="text-sm text-gray-medium italic">
+                本报告基于可获得信息进行客观分析，建议相关部门持续关注舆情发展，及时透明地公布处理进展，同时重视构建校园安全长效机制。
+              </p>
+            </div>
+          </motion.div>
+        </div>
+      </div>
+    </section>
+  </main>
+  
+  <!-- 页脚 -->
+  <footer class="bg-dark border-t border-gray-dark/30 py-12 px-4">
+    <div class="container mx-auto">
+      <div class="flex flex-col md:flex-row justify-between items-center">
+        <div class="mb-6 md:mb-0">
+          <div class="flex items-center space-x-2 mb-2">
+            <div class="w-6 h-6 bg-tesla rounded-sm flex items-center justify-center">
+              <i class="fa fa-line-chart text-white text-xs"></i>
+            </div>
+            <span class="text-lg font-bold">舆情分析报告</span>
+          </div>
+          <p class="text-sm text-gray-dark">四川江油学生霸凌事件专题</p>
+        </div>
+        
+        <div class="flex space-x-6">
+          <a href="#" class="text-gray-dark hover:text-tesla transition-colors">
+            <i class="fa fa-twitter"></i>
+          </a>
+          <a href="#" class="text-gray-dark hover:text-tesla transition-colors">
+            <i class="fa fa-facebook"></i>
+          </a>
+          <a href="#" class="text-gray-dark hover:text-tesla transition-colors">
+            <i class="fa fa-linkedin"></i>
+          </a>
+          <a href="#" class="text-gray-dark hover:text-tesla transition-colors">
+            <i class="fa fa-envelope"></i>
+          </a>
+        </div>
+      </div>
+      
+      <div class="mt-8 pt-8 border-t border-gray-dark/30 text-center text-sm text-gray-dark">
+        <p>© 2023 舆情分析报告. 基于公开信息整理分析.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- 返回顶部按钮 -->
+  <button id="backToTop" class="fixed bottom-8 right-8 w-12 h-12 bg-tesla rounded-full flex items-center justify-center opacity-0 invisible transition-all duration-300 hover:bg-tesla/90">
+    <i class="fa fa-arrow-up text-white"></i>
+  </button>
+
+  <!-- JavaScript -->
+  <script>
+    // 返回顶部按钮
+    const backToTopButton = document.getElementById('backToTop');
+    
+    window.addEventListener('scroll', () => {
+      if (window.pageYOffset > 300) {
+        backToTopButton.classList.remove('opacity-0', 'invisible');
+        backToTopButton.classList.add('opacity-100', 'visible');
+      } else {
+        backToTopButton.classList.remove('opacity-100', 'visible');
+        backToTopButton.classList.add('opacity-0', 'invisible');
+      }
+    });
+    
+    backToTopButton.addEventListener('click', () => {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+    });
+    
+    // 平滑滚动
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        
+        document.querySelector(this.getAttribute('href')).scrollIntoView({
+          behavior: 'smooth'
+        });
+      });
+    });
+    
+    // 图表初始化
+    window.addEventListener('DOMContentLoaded', () => {
+      // 舆情趋势图
+      const trendCtx = document.getElementById('trendChart').getContext('2d');
+      new Chart(trendCtx, {
+        type: 'line',
+        data: {
+          labels: ['3/15', '3/16', '3/17', '3/18', '3/19', '3/20', '3/21', '3/22', '3/23'],
+          datasets: [{
+            label: '舆情热度',
+            data: [65, 80, 85, 90, 98, 82, 70, 60, 55],
+            borderColor: '#E31937',
+            backgroundColor: 'rgba(227, 25, 55, 0.1)',
+            tension: 0.4,
+            fill: true
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          scales: {
+            y: {
+              beginAtZero: true,
+              grid: {
+                color: 'rgba(255, 255, 255, 0.05)'
+              },
+              ticks: {
+                color: 'rgba(255, 255, 255, 0.5)'
+              }
+            },
+            x: {
+              grid: {
+                color: 'rgba(255, 255, 255, 0.05)'
+              },
+              ticks: {
+                color: 'rgba(255, 255, 255, 0.5)'
+              }
+            }
+          },
+          plugins: {
+            legend: {
+              labels: {
+                color: 'rgba(255, 255, 255, 0.7)'
+              }
+            }
+          }
+        }
+      });
+      
+      // 地域分布图
+      const regionCtx = document.getElementById('regionChart').getContext('2d');
+      new Chart(regionCtx, {
+        type: 'bar',
+        data: {
+          labels: ['四川', '北京', '上海', '广东', '江苏', '浙江', '湖北', '山东'],
+          datasets: [{
+            label: '关注度指数',
+            data: [95, 70, 65, 60, 50, 45, 40, 35],
+            backgroundColor: [
+              '#E31937',
+              'rgba(227, 25, 55, 0.8)',
+              'rgba(227, 25, 55, 0.7)',
+              'rgba(227, 25, 55, 0.6)',
+              'rgba(227, 25, 55, 0.5)',
+              'rgba(227, 25, 55, 0.4)',
+              'rgba(227, 25, 55, 0.3)',
+              'rgba(227, 25, 55, 0.2)'
+            ],
+            borderRadius: 4
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          scales: {
+            y: {
+              beginAtZero: true,
+              grid: {
+                color: 'rgba(255, 255, 255, 0.05)'
+              },
+              ticks: {
+                color: 'rgba(255, 255, 255, 0.5)'
+              }
+            },
+            x: {
+              grid: {
+                display: false
+              },
+              ticks: {
+                color: 'rgba(255, 255, 255, 0.5)'
+              }
+            }
+          },
+          plugins: {
+            legend: {
+              display: false
+            }
+          }
+        }
+      });
+      
+      // 媒体分布图表
+      const mediaCtx = document.getElementById('mediaChart').getContext('2d');
+      new Chart(mediaCtx, {
+        type: 'doughnut',
+        data: {
+          labels: ['主流媒体', '地方媒体', '网络媒体', '自媒体', '国际媒体'],
+          datasets: [{
+            data: [30, 20, 25, 15, 10],
+            backgroundColor: [
+              '#E31937',
+              'rgba(227, 25, 55, 0.8)',
+              'rgba(227, 25, 55, 0.6)',
+              'rgba(227, 25, 55, 0.4)',
+              'rgba(227, 25, 55, 0.2)'
+            ],
+            borderWidth: 0,
+            borderRadius: 4
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: {
+              position: 'bottom',
+              labels: {
+                color: 'rgba(255, 255, 255, 0.7)',
+                padding: 15,
+                boxWidth: 12
+              }
+            }
+          },
+          cutout: '70%'
+        }
+      });
+      
+      // 网民观点分析
+      const opinionCtx = document.getElementById('opinionChart').getContext('2d');
+      new Chart(opinionCtx, {
+        type: 'pie',
+        data: {
+          labels: ['支持方观点', '质疑方观点', '理性分析', '情绪化表达'],
+          datasets: [{
+            data: [68, 15, 12, 5],
+            backgroundColor: [
+              '#E31937',
+              'rgba(255, 255, 255, 0.7)',
+              'rgba(255, 255, 255, 0.5)',
+              'rgba(255, 255, 255, 0.3)'
+            ],
+            borderWidth: 0,
+            borderRadius: 4
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: {
+              position: 'bottom',
+              labels: {
+                color: 'rgba(255, 255, 255, 0.7)',
+                padding: 15,
+                boxWidth: 12
+              }
+            }
+          }
+        }
+      });
+    });
+  </script>
+</body>
+</html>
