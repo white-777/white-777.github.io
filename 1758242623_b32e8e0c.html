@@ -1,0 +1,1022 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>九一八事变历史记忆与当代舆情分析</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.8/dist/chart.umd.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/framer-motion@10.16.4/dist/framer-motion.min.js"></script>
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'tesla-red': '#E31937',
+                        'dark-gray': '#1A1A1A',
+                        'medium-gray': '#333333',
+                        'light-gray': '#666666',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .content-auto {
+                content-visibility: auto;
+            }
+            .text-shadow {
+                text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+            }
+            .gradient-red {
+                background: linear-gradient(90deg, rgba(227,25,55,1) 0%, rgba(227,25,55,0) 100%);
+            }
+            .gradient-red-reverse {
+                background: linear-gradient(90deg, rgba(227,25,55,0) 0%, rgba(227,25,55,1) 100%);
+            }
+            .card-hover {
+                transition: transform 0.3s ease, box-shadow 0.3s ease;
+            }
+            .card-hover:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 10px 25px -5px rgba(227,25,55,0.1), 0 10px 10px -5px rgba(227,25,55,0.04);
+            }
+        }
+    </style>
+</head>
+<body class="bg-black text-white font-sans">
+    <!-- 导航栏 -->
+    <nav class="fixed top-0 left-0 right-0 bg-black/80 backdrop-blur-md z-50 border-b border-tesla-red/30">
+        <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+            <div class="flex items-center space-x-2">
+                <div class="h-8 w-1 bg-tesla-red"></div>
+                <h1 class="text-xl font-bold tracking-tight">九一八事变舆情分析</h1>
+            </div>
+            <div class="hidden md:flex space-x-8">
+                <a href="#history" class="text-gray-300 hover:text-tesla-red transition-colors">历史事实</a>
+                <a href="#memory" class="text-gray-300 hover:text-tesla-red transition-colors">记忆传承</a>
+                <a href="#public-opinion" class="text-gray-300 hover:text-tesla-red transition-colors">舆情分析</a>
+                <a href="#international" class="text-gray-300 hover:text-tesla-red transition-colors">国际传播</a>
+            </div>
+            <button class="md:hidden text-gray-300">
+                <i class="fa fa-bars text-xl"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- 英雄区域 -->
+    <header class="pt-32 pb-20 px-4 relative overflow-hidden">
+        <div class="absolute top-0 right-0 w-full h-full bg-[url('https://picsum.photos/id/1015/1920/1080')] opacity-10 bg-cover bg-center"></div>
+        <div class="container mx-auto relative z-10">
+            <div class="max-w-4xl mx-auto text-center">
+                <div class="inline-block mb-6">
+                    <div class="h-px bg-gradient-to-r from-transparent via-tesla-red to-transparent w-24 mb-2"></div>
+                    <span class="text-tesla-red font-medium tracking-wider text-sm uppercase">历史记忆与当代舆情研究</span>
+                </div>
+                <h1 class="text-4xl md:text-6xl font-bold mb-6 leading-tight text-shadow">
+                    九一八事变历史记忆与<br class="hidden md:block">当代舆情分析
+                </h1>
+                <p class="text-xl text-gray-300 mb-8 max-w-2xl mx-auto">
+                    探索九一八事变历史记忆的建构与演变，分析其在当代社会中的舆情表现与影响
+                </p>
+                <div class="flex flex-col sm:flex-row justify-center gap-4">
+                    <a href="#history" class="px-8 py-3 bg-tesla-red hover:bg-tesla-red/90 text-white font-medium rounded-sm transition-colors">
+                        开始阅读 <i class="fa fa-arrow-right ml-2"></i>
+                    </a>
+                    <a href="#data-visualization" class="px-8 py-3 bg-transparent border border-gray-600 hover:border-tesla-red text-white font-medium rounded-sm transition-colors">
+                        查看数据分析
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-black to-transparent"></div>
+    </header>
+
+    <main class="container mx-auto px-4 pb-20">
+        <!-- 历史事实梳理 -->
+        <section id="history" class="mb-24">
+            <div class="max-w-5xl mx-auto">
+                <div class="flex items-center mb-12">
+                    <div class="h-px bg-gradient-to-r from-tesla-red to-transparent w-16 mr-4"></div>
+                    <h2 class="text-3xl font-bold">历史事实梳理</h2>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-12 gap-6">
+                    <!-- 左侧时间线 -->
+                    <div class="md:col-span-5">
+                        <div class="bg-dark-gray p-6 rounded-sm border-l-2 border-tesla-red card-hover">
+                            <h3 class="text-xl font-bold mb-4 text-tesla-red">九一八事变始末</h3>
+                            <div class="space-y-4">
+                                <div class="flex">
+                                    <div class="mr-4 text-tesla-red font-bold">1931年</div>
+                                    <div>
+                                        <p class="text-gray-300">9月18日夜，日本关东军炸毁沈阳柳条湖附近南满铁路路轨，嫁祸于中国军队</p>
+                                    </div>
+                                </div>
+                                <div class="flex">
+                                    <div class="mr-4 text-tesla-red font-bold">9月19日</div>
+                                    <div>
+                                        <p class="text-gray-300">日军以此为借口，进攻沈阳北大营，次日占领沈阳城</p>
+                                    </div>
+                                </div>
+                                <div class="flex">
+                                    <div class="mr-4 text-tesla-red font-bold">1932年</div>
+                                    <div>
+                                        <p class="text-gray-300">2月，东北全境沦陷，日本在中国东北建立伪满洲国傀儡政权</p>
+                                    </div>
+                                </div>
+                                <div class="flex">
+                                    <div class="mr-4 text-tesla-red font-bold">1945年</div>
+                                    <div>
+                                        <p class="text-gray-300">8月，日本宣布无条件投降，东北光复，九一八事变后长达14年的抗战结束</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 右侧历史暴行 -->
+                    <div class="md:col-span-7">
+                        <div class="bg-dark-gray p-6 rounded-sm card-hover">
+                            <h3 class="text-xl font-bold mb-4 text-tesla-red">日军侵华暴行</h3>
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
+                                <div class="flex">
+                                    <div class="text-tesla-red mr-3 mt-1"><i class="fa fa-exclamation-triangle text-xl"></i></div>
+                                    <div>
+                                        <h4 class="font-medium mb-1">军事侵略</h4>
+                                        <p class="text-gray-400 text-sm">占领中国东北三省，建立伪满洲国傀儡政权</p>
+                                    </div>
+                                </div>
+                                <div class="flex">
+                                    <div class="text-tesla-red mr-3 mt-1"><i class="fa fa-users text-xl"></i></div>
+                                    <div>
+                                        <h4 class="font-medium mb-1">平民屠杀</h4>
+                                        <p class="text-gray-400 text-sm">对中国平民进行大规模屠杀，制造多起惨案</p>
+                                    </div>
+                                </div>
+                                <div class="flex">
+                                    <div class="text-tesla-red mr-3 mt-1"><i class="fa fa-industry text-xl"></i></div>
+                                    <div>
+                                        <h4 class="font-medium mb-1">经济掠夺</h4>
+                                        <p class="text-gray-400 text-sm">疯狂掠夺中国资源，实施殖民经济政策</p>
+                                    </div>
+                                </div>
+                                <div class="flex">
+                                    <div class="text-tesla-red mr-3 mt-1"><i class="fa fa-book text-xl"></i></div>
+                                    <div>
+                                        <h4 class="font-medium mb-1">文化压迫</h4>
+                                        <p class="text-gray-400 text-sm">推行奴化教育，试图消除中国文化认同</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="p-4 bg-black/50 border-l-2 border-gray-700">
+                                <p class="text-gray-300 italic text-sm">
+                                    "九一八事变是日本帝国主义企图以武力征服中国的开始，也是世界反法西斯战争的起点，揭开了第二次世界大战东方战场的序幕。"
+                                </p>
+                                <p class="text-right text-gray-500 text-xs mt-2">— 中国第二历史档案馆</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 社会记忆的代际传承 -->
+        <section id="memory" class="mb-24">
+            <div class="max-w-5xl mx-auto">
+                <div class="flex items-center mb-12">
+                    <div class="h-px bg-gradient-to-r from-tesla-red to-transparent w-16 mr-4"></div>
+                    <h2 class="text-3xl font-bold">社会记忆的代际传承</h2>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
+                    <div class="bg-dark-gray p-6 rounded-sm card-hover">
+                        <div class="flex items-center mb-4">
+                            <div class="w-10 h-10 rounded-full bg-tesla-red/20 flex items-center justify-center text-tesla-red mr-4">
+                                <i class="fa fa-users"></i>
+                            </div>
+                            <h3 class="text-xl font-bold">代际认知差异</h3>
+                        </div>
+                        <p class="text-gray-300 mb-6">
+                            不同年龄群体对九一八事变的认知存在显著差异，这种差异受到历史教育、亲身经历、媒介环境等多种因素影响。
+                        </p>
+                        <div class="space-y-4">
+                            <div>
+                                <div class="flex justify-between mb-1">
+                                    <span class="text-sm text-gray-400">60岁以上群体</span>
+                                    <span class="text-sm font-medium">92% 了解详细历史</span>
+                                </div>
+                                <div class="h-2 bg-gray-800">
+                                    <div class="h-full bg-tesla-red" style="width: 92%"></div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="flex justify-between mb-1">
+                                    <span class="text-sm text-gray-400">40-59岁群体</span>
+                                    <span class="text-sm font-medium">78% 了解详细历史</span>
+                                </div>
+                                <div class="h-2 bg-gray-800">
+                                    <div class="h-full bg-tesla-red" style="width: 78%"></div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="flex justify-between mb-1">
+                                    <span class="text-sm text-gray-400">25-39岁群体</span>
+                                    <span class="text-sm font-medium">63% 了解详细历史</span>
+                                </div>
+                                <div class="h-2 bg-gray-800">
+                                    <div class="h-full bg-tesla-red" style="width: 63%"></div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="flex justify-between mb-1">
+                                    <span class="text-sm text-gray-400">18-24岁群体</span>
+                                    <span class="text-sm font-medium">45% 了解详细历史</span>
+                                </div>
+                                <div class="h-2 bg-gray-800">
+                                    <div class="h-full bg-tesla-red" style="width: 45%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-dark-gray p-6 rounded-sm card-hover">
+                        <div class="flex items-center mb-4">
+                            <div class="w-10 h-10 rounded-full bg-tesla-red/20 flex items-center justify-center text-tesla-red mr-4">
+                                <i class="fa fa-bullhorn"></i>
+                            </div>
+                            <h3 class="text-xl font-bold">媒介传播影响</h3>
+                        </div>
+                        <p class="text-gray-300 mb-6">
+                            媒介环境的变化深刻影响着历史记忆的传承方式和效果，从传统媒体到新媒体，传播渠道的演变带来了记忆建构的新特点。
+                        </p>
+                        <div class="space-y-4">
+                            <div class="flex items-start">
+                                <div class="mt-1 mr-3 text-tesla-red"><i class="fa fa-check-circle"></i></div>
+                                <div>
+                                    <h4 class="font-medium mb-1">官方纪念活动</h4>
+                                    <p class="text-gray-400 text-sm">政府主导的纪念仪式强化集体记忆，形成权威叙事</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <div class="mt-1 mr-3 text-tesla-red"><i class="fa fa-check-circle"></i></div>
+                                <div>
+                                    <h4 class="font-medium mb-1">历史教育体系</h4>
+                                    <p class="text-gray-400 text-sm">学校教育是历史知识传递的主渠道，影响深远</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <div class="mt-1 mr-3 text-tesla-red"><i class="fa fa-check-circle"></i></div>
+                                <div>
+                                    <h4 class="font-medium mb-1">传统媒体报道</h4>
+                                    <p class="text-gray-400 text-sm">报纸、电视等传统媒体在特定纪念日集中报道</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <div class="mt-1 mr-3 text-tesla-red"><i class="fa fa-check-circle"></i></div>
+                                <div>
+                                    <h4 class="font-medium mb-1">新媒体传播</h4>
+                                    <p class="text-gray-400 text-sm">社交媒体平台成为年轻一代获取历史信息的新途径</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 数据可视化区域 -->
+        <section id="data-visualization" class="mb-24">
+            <div class="max-w-5xl mx-auto">
+                <div class="flex items-center mb-12">
+                    <div class="h-px bg-gradient-to-r from-tesla-red to-transparent w-16 mr-4"></div>
+                    <h2 class="text-3xl font-bold">舆情数据分析</h2>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-12 gap-6">
+                    <!-- 舆情趋势图 -->
+                    <div class="md:col-span-8 bg-dark-gray p-6 rounded-sm card-hover">
+                        <h3 class="text-xl font-bold mb-6">近年九一八相关舆情趋势</h3>
+                        <div class="h-80">
+                            <canvas id="opinionTrendChart"></canvas>
+                        </div>
+                    </div>
+                    
+                    <!-- 舆情来源分布 -->
+                    <div class="md:col-span-4 bg-dark-gray p-6 rounded-sm card-hover">
+                        <h3 class="text-xl font-bold mb-6">舆情来源分布</h3>
+                        <div class="h-80 flex items-center justify-center">
+                            <canvas id="opinionSourceChart"></canvas>
+                        </div>
+                    </div>
+                    
+                    <!-- 情感倾向分析 -->
+                    <div class="md:col-span-6 bg-dark-gray p-6 rounded-sm card-hover">
+                        <h3 class="text-xl font-bold mb-6">九一八相关话题情感倾向</h3>
+                        <div class="h-72 flex items-center justify-center">
+                            <canvas id="sentimentAnalysisChart"></canvas>
+                        </div>
+                    </div>
+                    
+                    <!-- 关键词云 -->
+                    <div class="md:col-span-6 bg-dark-gray p-6 rounded-sm card-hover">
+                        <h3 class="text-xl font-bold mb-6">热门关键词分布</h3>
+                        <div class="h-72 flex flex-wrap items-center justify-center gap-2 p-4">
+                            <span class="text-3xl text-tesla-red font-bold px-2">九一八</span>
+                            <span class="text-2xl text-white px-2">历史</span>
+                            <span class="text-2xl text-white px-2">铭记</span>
+                            <span class="text-xl text-gray-300 px-2">国耻</span>
+                            <span class="text-2xl text-white px-2">纪念</span>
+                            <span class="text-xl text-gray-300 px-2">事变</span>
+                            <span class="text-3xl text-tesla-red font-bold px-2">勿忘</span>
+                            <span class="text-xl text-gray-300 px-2">警钟</span>
+                            <span class="text-2xl text-white px-2">抗争</span>
+                            <span class="text-xl text-gray-300 px-2">和平</span>
+                            <span class="text-xl text-gray-300 px-2">历史教育</span>
+                            <span class="text-2xl text-white px-2">爱国</span>
+                            <span class="text-xl text-gray-300 px-2">民族</span>
+                            <span class="text-xl text-gray-300 px-2">复兴</span>
+                            <span class="text-2xl text-white px-2">沈阳</span>
+                            <span class="text-xl text-gray-300 px-2">纪念馆</span>
+                            <span class="text-xl text-gray-300 px-2">警报</span>
+                            <span class="text-xl text-gray-300 px-2">反思</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 近年舆情热点事件分析 -->
+        <section id="public-opinion" class="mb-24">
+            <div class="max-w-5xl mx-auto">
+                <div class="flex items-center mb-12">
+                    <div class="h-px bg-gradient-to-r from-tesla-red to-transparent w-16 mr-4"></div>
+                    <h2 class="text-3xl font-bold">近年舆情热点事件分析</h2>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <!-- 纪念日舆论场 -->
+                    <div class="bg-dark-gray p-6 rounded-sm card-hover">
+                        <div class="flex items-center mb-4">
+                            <div class="w-10 h-10 rounded-full bg-tesla-red/20 flex items-center justify-center text-tesla-red mr-4">
+                                <i class="fa fa-calendar"></i>
+                            </div>
+                            <h3 class="text-xl font-bold">纪念日舆论场观察</h3>
+                        </div>
+                        
+                        <div class="mb-6">
+                            <h4 class="font-medium mb-3 text-gray-200">官方纪念活动表现形式</h4>
+                            <ul class="space-y-2 text-gray-300">
+                                <li class="flex items-start">
+                                    <i class="fa fa-circle text-tesla-red text-xs mt-1.5 mr-2"></i>
+                                    <span>沈阳等地举行撞钟鸣警仪式，勿忘国耻</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fa fa-circle text-tesla-red text-xs mt-1.5 mr-2"></i>
+                                    <span>国家领导人发表纪念讲话，强调历史启示</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fa fa-circle text-tesla-red text-xs mt-1.5 mr-2"></i>
+                                    <span>历史博物馆举办专题展览，回顾历史事实</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fa fa-circle text-tesla-red text-xs mt-1.5 mr-2"></i>
+                                    <span>学校组织主题教育活动，培养青少年历史认知</span>
+                                </li>
+                            </ul>
+                        </div>
+                        
+                        <div>
+                            <h4 class="font-medium mb-3 text-gray-200">民间自发纪念形式</h4>
+                            <ul class="space-y-2 text-gray-300">
+                                <li class="flex items-start">
+                                    <i class="fa fa-circle text-tesla-red text-xs mt-1.5 mr-2"></i>
+                                    <span>社交媒体自发传播历史图片与故事</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fa fa-circle text-tesla-red text-xs mt-1.5 mr-2"></i>
+                                    <span>网友参与#勿忘九一八#等相关话题讨论</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fa fa-circle text-tesla-red text-xs mt-1.5 mr-2"></i>
+                                    <span>民间团体组织纪念活动与历史讲座</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <!-- 涉日敏感事件 -->
+                    <div class="bg-dark-gray p-6 rounded-sm card-hover">
+                        <div class="flex items-center mb-4">
+                            <div class="w-10 h-10 rounded-full bg-tesla-red/20 flex items-center justify-center text-tesla-red mr-4">
+                                <i class="fa fa-exclamation-circle"></i>
+                            </div>
+                            <h3 class="text-xl font-bold">涉日敏感事件中的记忆唤起</h3>
+                        </div>
+                        
+                        <div class="space-y-6">
+                            <div class="p-4 bg-black/50 border-l-2 border-tesla-red">
+                                <h4 class="font-medium mb-2 text-gray-200">钓鱼岛争端中的九一八记忆</h4>
+                                <p class="text-gray-300 text-sm">
+                                    在钓鱼岛争端期间，九一八事变历史记忆被广泛提及，成为表达爱国情感和领土主权诉求的重要历史参照，相关话题在微博平台阅读量超过12亿次。
+                                </p>
+                            </div>
+                            
+                            <div class="p-4 bg-black/50 border-l-2 border-gray-700">
+                                <h4 class="font-medium mb-2 text-gray-200">日本教科书问题引发的舆情</h4>
+                                <p class="text-gray-300 text-sm">
+                                    日本右翼势力修改历史教科书，淡化或否认侵略历史的行为，常引发中国民众强烈反应，九一八事变作为重要历史证据被频繁引用，相关话题讨论量平均增长300%。
+                                </p>
+                            </div>
+                            
+                            <div class="p-4 bg-black/50 border-l-2 border-gray-700">
+                                <h4 class="font-medium mb-2 text-gray-200">靖国神社参拜相关舆情</h4>
+                                <p class="text-gray-300 text-sm">
+                                    日本政要参拜靖国神社事件，常导致九一八记忆在舆论场中被重新激活，形成强烈的情感共鸣，相关抗议活动在社交媒体获得广泛支持。
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 新媒体环境下的记忆传播 -->
+        <section id="new-media" class="mb-24">
+            <div class="max-w-5xl mx-auto">
+                <div class="flex items-center mb-12">
+                    <div class="h-px bg-gradient-to-r from-tesla-red to-transparent w-16 mr-4"></div>
+                    <h2 class="text-3xl font-bold">新媒体环境下的记忆传播</h2>
+                </div>
+                
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                    <div class="bg-dark-gray p-6 rounded-sm card-hover">
+                        <div class="flex items-center mb-6">
+                            <div class="w-10 h-10 rounded-full bg-tesla-red/20 flex items-center justify-center text-tesla-red mr-4">
+                                <i class="fa fa-video-camera"></i>
+                            </div>
+                            <h3 class="text-xl font-bold">短视频平台的记忆重构现象</h3>
+                        </div>
+                        
+                        <p class="text-gray-300 mb-6">
+                            在抖音、B站等短视频平台，年轻用户通过二次创作重构九一八历史记忆，形成了新的传播范式和接受方式。
+                        </p>
+                        
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
+                            <div class="bg-black/30 p-4">
+                                <h4 class="font-medium mb-2 text-gray-200">历史科普类内容</h4>
+                                <p class="text-gray-400 text-sm">
+                                    通过动画、解说等形式，将复杂历史事件简化，便于年轻群体理解
+                                </p>
+                            </div>
+                            <div class="bg-black/30 p-4">
+                                <h4 class="font-medium mb-2 text-gray-200">情感共鸣类内容</h4>
+                                <p class="text-gray-400 text-sm">
+                                    结合音乐、影像资料，激发爱国情感与历史反思
+                                </p>
+                            </div>
+                            <div class="bg-black/30 p-4">
+                                <h4 class="font-medium mb-2 text-gray-200">创意改编类内容</h4>
+                                <p class="text-gray-400 text-sm">
+                                    通过游戏、动漫等年轻人喜闻乐见的形式传播历史
+                                </p>
+                            </div>
+                            <div class="bg-black/30 p-4">
+                                <h4 class="font-medium mb-2 text-gray-200">互动参与类内容</h4>
+                                <p class="text-gray-400 text-sm">
+                                    发起话题挑战，鼓励用户主动参与历史记忆传播
+                                </p>
+                            </div>
+                        </div>
+                        
+                        <div class="p-4 bg-black/50">
+                            <div class="flex justify-between items-center mb-2">
+                                <span class="text-gray-300 text-sm">抖音#勿忘九一八#话题播放量</span>
+                                <span class="text-tesla-red font-bold">45.8亿次</span>
+                            </div>
+                            <div class="h-2 bg-gray-800">
+                                <div class="h-full bg-gradient-to-r from-tesla-red to-transparent" style="width: 85%"></div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-dark-gray p-6 rounded-sm card-hover">
+                        <div class="flex items-center mb-6">
+                            <div class="w-10 h-10 rounded-full bg-tesla-red/20 flex items-center justify-center text-tesla-red mr-4">
+                                <i class="fa fa-comments"></i>
+                            </div>
+                            <h3 class="text-xl font-bold">网络民族主义情绪的激化风险</h3>
+                        </div>
+                        
+                        <div class="mb-6">
+                            <h4 class="font-medium mb-3 text-gray-200">历史议题在社交媒体的极端化表达倾向</h4>
+                            <p class="text-gray-300 mb-4">
+                                九一八相关历史议题在社交媒体讨论中，存在一定程度的极端化表达倾向，主要表现为：
+                            </p>
+                            <ul class="space-y-3 text-gray-300">
+                                <li class="flex items-start">
+                                    <div class="w-6 h-6 rounded-full bg-tesla-red/20 flex items-center justify-center text-tesla-red text-xs mr-3 mt-0.5 flex-shrink-0">1</div>
+                                    <span>对日本的泛化仇恨情绪，缺乏理性历史认知</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <div class="w-6 h-6 rounded-full bg-tesla-red/20 flex items-center justify-center text-tesla-red text-xs mr-3 mt-0.5 flex-shrink-0">2</div>
+                                    <span>网络"愤青"现象，通过极端言论获取关注</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <div class="w-6 h-6 rounded-full bg-tesla-red/20 flex items-center justify-center text-tesla-red text-xs mr-3 mt-0.5 flex-shrink-0">3</div>
+                                    <span>历史虚无主义与极端民族主义的对立与冲突</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <div class="w-6 h-6 rounded-full bg-tesla-red/20 flex items-center justify-center text-tesla-red text-xs mr-3 mt-0.5 flex-shrink-0">4</div>
+                                    <span>对不同历史观点的不容忍，形成网络"猎巫"现象</span>
+                                </li>
+                            </ul>
+                        </div>
+                        
+                        <div class="p-4 bg-black/50 border-l-2 border-tesla-red">
+                            <h4 class="font-medium mb-2 text-gray-200">可能引发的舆论冲突</h4>
+                            <p class="text-gray-300 text-sm">
+                                历史议题的极端化表达可能导致国际关系复杂化、国内社会撕裂、网络暴力等问题，需要通过理性引导与教育疏导，培养健康的历史认知与民族情感。
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 国际传播与话语权博弈 -->
+        <section id="international" class="mb-24">
+            <div class="max-w-5xl mx-auto">
+                <div class="flex items-center mb-12">
+                    <div class="h-px bg-gradient-to-r from-tesla-red to-transparent w-16 mr-4"></div>
+                    <h2 class="text-3xl font-bold">国际传播与话语权博弈</h2>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-12 gap-8">
+                    <div class="md:col-span-7 bg-dark-gray p-6 rounded-sm card-hover">
+                        <h3 class="text-xl font-bold mb-6">中日韩三国历史表述差异</h3>
+                        
+                        <div class="overflow-x-auto mb-6">
+                            <table class="min-w-full">
+                                <thead>
+                                    <tr class="border-b border-gray-700">
+                                        <th class="text-left py-3 px-4 text-gray-400 font-medium">国家</th>
+                                        <th class="text-left py-3 px-4 text-gray-400 font-medium">历史表述重点</th>
+                                        <th class="text-left py-3 px-4 text-gray-400 font-medium">教育体系中的定位</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="border-b border-gray-800">
+                                        <td class="py-4 px-4 font-medium">中国</td>
+                                        <td class="py-4 px-4 text-gray-300">
+                                            强调日本侵略本质，将九一八事变视为日本侵华战争的开端，是中国抗日战争的起点
+                                        </td>
+                                        <td class="py-4 px-4 text-gray-300">
+                                            作为重要历史事件纳入必修课程，强调爱国主义教育
+                                        </td>
+                                    </tr>
+                                    <tr class="border-b border-gray-800">
+                                        <td class="py-4 px-4 font-medium">日本</td>
+                                        <td class="py-4 px-4 text-gray-300">
+                                            主流表述较为模糊，部分教科书淡化侵略性质，使用"满洲事变"等中性表述
+                                        </td>
+                                        <td class="py-4 px-4 text-gray-300">
+                                            历史教育中对侵略历史表述存在争议，右翼势力试图弱化侵略责任
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="py-4 px-4 font-medium">韩国</td>
+                                        <td class="py-4 px-4 text-gray-300">
+                                            将九一八事变视为日本帝国主义扩张的重要环节，与自身殖民历史相联系
+                                        </td>
+                                        <td class="py-4 px-4 text-gray-300">
+                                            作为反对日本殖民统治历史的一部分进行教育，强调民族独立精神
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        
+                        <div class="p-4 bg-black/50">
+                            <h4 class="font-medium mb-2 text-gray-200">国际舆论场中的认知战案例</h4>
+                            <p class="text-gray-300 text-sm">
+                                在国际社交媒体平台上，关于九一八事变的历史认知存在明显分歧。西方媒体报道相对中立但信息量有限，亚洲国家媒体则呈现明显的立场分化。中国通过国际广播、纪录片等形式积极传播历史真相，争取国际社会对历史事实的认同。
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <div class="md:col-span-5 bg-dark-gray p-6 rounded-sm card-hover">
+                        <h3 class="text-xl font-bold mb-6">"历史修正主义"的应对挑战</h3>
+                        
+                        <div class="mb-6">
+                            <h4 class="font-medium mb-3 text-gray-200">日本右翼势力否认侵略史实的最新动向</h4>
+                            <ul class="space-y-3 text-gray-300">
+                                <li class="flex items-start">
+                                    <i class="fa fa-angle-right text-tesla-red mr-2 mt-1"></i>
+                                    <span>修改历史教科书，淡化侵略行为</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fa fa-angle-right text-tesla-red mr-2 mt-1"></i>
+                                    <span>政要参拜靖国神社，美化战争罪犯</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fa fa-angle-right text-tesla-red mr-2 mt-1"></i>
+                                    <span>通过影视作品重塑"受害者"形象</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fa fa-angle-right text-tesla-red mr-2 mt-1"></i>
+                                    <span>在国际场合质疑"侵略"定性</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fa fa-angle-right text-tesla-red mr-2 mt-1"></i>
+                                    <span>网络水军散布历史修正主义言论</span>
+                                </li>
+                            </ul>
+                        </div>
+                        
+                        <div>
+                            <h4 class="font-medium mb-3 text-gray-200">中国在国际社会的反制策略</h4>
+                            <div class="space-y-3">
+                                <div class="flex items-center">
+                                    <div class="w-8 h-8 rounded-full bg-tesla-red/20 flex items-center justify-center text-tesla-red mr-3 flex-shrink-0">
+                                        <i class="fa fa-book"></i>
+                                    </div>
+                                    <span class="text-gray-300">出版权威历史研究著作，提供学术支持</span>
+                                </div>
+                                <div class="flex items-center">
+                                    <div class="w-8 h-8 rounded-full bg-tesla-red/20 flex items-center justify-center text-tesla-red mr-3 flex-shrink-0">
+                                        <i class="fa fa-film"></i>
+                                    </div>
+                                    <span class="text-gray-300">制作历史纪录片，通过视觉叙事传播真相</span>
+                                </div>
+                                <div class="flex items-center">
+                                    <div class="w-8 h-8 rounded-full bg-tesla-red/20 flex items-center justify-center text-tesla-red mr-3 flex-shrink-0">
+                                        <i class="fa fa-globe"></i>
+                                    </div>
+                                    <span class="text-gray-300">加强国际历史学界交流与合作</span>
+                                </div>
+                                <div class="flex items-center">
+                                    <div class="w-8 h-8 rounded-full bg-tesla-red/20 flex items-center justify-center text-tesla-red mr-3 flex-shrink-0">
+                                        <i class="fa fa-users"></i>
+                                    </div>
+                                    <span class="text-gray-300">支持民间历史记忆传承与国际传播</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 结论与建议 -->
+        <section id="conclusion" class="mb-24">
+            <div class="max-w-4xl mx-auto">
+                <div class="flex items-center mb-12">
+                    <div class="h-px bg-gradient-to-r from-tesla-red to-transparent w-16 mr-4"></div>
+                    <h2 class="text-3xl font-bold">结论与建议</h2>
+                </div>
+                
+                <div class="bg-dark-gray p-8 rounded-sm card-hover">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <div>
+                            <h3 class="text-xl font-bold mb-6 text-tesla-red">主要结论</h3>
+                            <ul class="space-y-4 text-gray-300">
+                                <li class="flex items-start">
+                                    <div class="w-6 h-6 rounded-full bg-tesla-red/20 flex items-center justify-center text-tesla-red text-xs mr-3 mt-0.5 flex-shrink-0">1</div>
+                                    <span>九一八事变历史记忆在当代社会仍具有重要影响力，但存在明显的代际认知差异</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <div class="w-6 h-6 rounded-full bg-tesla-red/20 flex items-center justify-center text-tesla-red text-xs mr-3 mt-0.5 flex-shrink-0">2</div>
+                                    <span>新媒体平台成为历史记忆传播的重要渠道，年轻用户通过二次创作重构历史认知</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <div class="w-6 h-6 rounded-full bg-tesla-red/20 flex items-center justify-center text-tesla-red text-xs mr-3 mt-0.5 flex-shrink-0">3</div>
+                                    <span>历史议题在社交媒体存在极端化表达风险，需警惕网络民族主义情绪失控</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <div class="w-6 h-6 rounded-full bg-tesla-red/20 flex items-center justify-center text-tesla-red text-xs mr-3 mt-0.5 flex-shrink-0">4</div>
+                                    <span>国际社会对九一八事变的历史认知存在分歧，历史话语权博弈持续进行</span>
+                                </li>
+                            </ul>
+                        </div>
+                        
+                        <div>
+                            <h3 class="text-xl font-bold mb-6 text-tesla-red">政策建议</h3>
+                            <ul class="space-y-4 text-gray-300">
+                                <li class="flex items-start">
+                                    <div class="w-6 h-6 rounded-full bg-tesla-red/20 flex items-center justify-center text-tesla-red text-xs mr-3 mt-0.5 flex-shrink-0">1</div>
+                                    <span>加强历史教育改革，创新教学方法，提高年轻一代历史认知水平</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <div class="w-6 h-6 rounded-full bg-tesla-red/20 flex items-center justify-center text-tesla-red text-xs mr-3 mt-0.5 flex-shrink-0">2</div>
+                                    <span>支持新媒体平台上的优质历史内容创作，引导理性历史讨论</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <div class="w-6 h-6 rounded-full bg-tesla-red/20 flex items-center justify-center text-tesla-red text-xs mr-3 mt-0.5 flex-shrink-0">3</div>
+                                    <span>建立历史舆情监测机制，及时发现并引导极端化言论</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <div class="w-6 h-6 rounded-full bg-tesla-red/20 flex items-center justify-center text-tesla-red text-xs mr-3 mt-0.5 flex-shrink-0">4</div>
+                                    <span>加强国际历史传播能力建设，提升中国历史叙事的国际影响力</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <div class="w-6 h-6 rounded-full bg-tesla-red/20 flex items-center justify-center text-tesla-red text-xs mr-3 mt-0.5 flex-shrink-0">5</div>
+                                    <span>促进中日韩三国历史学者对话，增进历史认知理解与共识</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-10 pt-6 border-t border-gray-800">
+                        <div class="p-4 bg-black/50 border-l-2 border-tesla-red">
+                            <p class="text-gray-300 italic">
+                                "历史是最好的教科书，也是最好的清醒剂。铭记历史不是为了延续仇恨，而是为了更好地开创未来。"
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- 页脚 -->
+    <footer class="bg-dark-gray border-t border-gray-800 py-12">
+        <div class="container mx-auto px-4">
+            <div class="max-w-5xl mx-auto">
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+                    <div class="md:col-span-2">
+                        <div class="flex items-center space-x-2 mb-4">
+                            <div class="h-6 w-1 bg-tesla-red"></div>
+                            <h3 class="text-lg font-bold">九一八事变历史记忆与当代舆情分析</h3>
+                        </div>
+                        <p class="text-gray-400 mb-4 max-w-md">
+                            本报告旨在分析九一八事变历史记忆的建构与演变，探讨其在当代社会中的舆情表现与影响，为历史教育与舆论引导提供参考。
+                        </p>
+                        <div class="flex space-x-4">
+                            <a href="#" class="text-gray-400 hover:text-tesla-red transition-colors">
+                                <i class="fa fa-weibo"></i>
+                            </a>
+                            <a href="#" class="text-gray-400 hover:text-tesla-red transition-colors">
+                                <i class="fa fa-wechat"></i>
+                            </a>
+                            <a href="#" class="text-gray-400 hover:text-tesla-red transition-colors">
+                                <i class="fa fa-twitter"></i>
+                            </a>
+                            <a href="#" class="text-gray-400 hover:text-tesla-red transition-colors">
+                                <i class="fa fa-youtube-play"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div>
+                        <h4 class="font-medium mb-4 text-gray-200">快速链接</h4>
+                        <ul class="space-y-2">
+                            <li><a href="#history" class="text-gray-400 hover:text-tesla-red transition-colors">历史事实</a></li>
+                            <li><a href="#memory" class="text-gray-400 hover:text-tesla-red transition-colors">记忆传承</a></li>
+                            <li><a href="#public-opinion" class="text-gray-400 hover:text-tesla-red transition-colors">舆情分析</a></li>
+                            <li><a href="#international" class="text-gray-400 hover:text-tesla-red transition-colors">国际传播</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 class="font-medium mb-4 text-gray-200">数据来源</h4>
+                        <ul class="space-y-2 text-sm text-gray-400">
+                            <li>中国社会科学院近代史研究所</li>
+                            <li>中国第二历史档案馆</li>
+                            <li>国家图书馆数字资源</li>
+                            <li>社交媒体平台公开数据</li>
+                            <li>权威新闻媒体报道</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="pt-8 border-t border-gray-800 text-center text-gray-500 text-sm">
+                    <p>© 2023 九一八事变历史记忆与当代舆情分析报告. 保留所有权利.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- 返回顶部按钮 -->
+    <button id="backToTop" class="fixed bottom-8 right-8 w-12 h-12 bg-tesla-red text-white rounded-full flex items-center justify-center opacity-0 invisible transition-all duration-300">
+        <i class="fa fa-arrow-up"></i>
+    </button>
+
+    <!-- JavaScript -->
+    <script>
+        // 等待DOM加载完成
+        document.addEventListener('DOMContentLoaded', function() {
+            // 返回顶部按钮
+            const backToTopButton = document.getElementById('backToTop');
+            
+            window.addEventListener('scroll', function() {
+                if (window.pageYOffset > 300) {
+                    backToTopButton.classList.remove('opacity-0', 'invisible');
+                    backToTopButton.classList.add('opacity-100', 'visible');
+                } else {
+                    backToTopButton.classList.remove('opacity-100', 'visible');
+                    backToTopButton.classList.add('opacity-0', 'invisible');
+                }
+            });
+            
+            backToTopButton.addEventListener('click', function() {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
+            
+            // 平滑滚动
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    
+                    const targetId = this.getAttribute('href');
+                    const targetElement = document.querySelector(targetId);
+                    
+                    if (targetElement) {
+                        const headerOffset = 80;
+                        const elementPosition = targetElement.getBoundingClientRect().top;
+                        const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+                        
+                        window.scrollTo({
+                            top: offsetPosition,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+            
+            // 图表初始化
+            initCharts();
+        });
+        
+        // 初始化图表
+        function initCharts() {
+            // 舆情趋势图
+            const opinionTrendCtx = document.getElementById('opinionTrendChart').getContext('2d');
+            const opinionTrendChart = new Chart(opinionTrendCtx, {
+                type: 'line',
+                data: {
+                    labels: ['2018', '2019', '2020', '2021', '2022', '2023'],
+                    datasets: [{
+                        label: '相关讨论量(万)',
+                        data: [125, 148, 182, 215, 256, 312],
+                        borderColor: '#E31937',
+                        backgroundColor: 'rgba(227, 25, 55, 0.1)',
+                        tension: 0.4,
+                        fill: true
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            display: false
+                        },
+                        tooltip: {
+                            backgroundColor: '#1A1A1A',
+                            titleColor: '#FFFFFF',
+                            bodyColor: '#CCCCCC',
+                            borderColor: '#E31937',
+                            borderWidth: 1,
+                            padding: 12,
+                            displayColors: false
+                        }
+                    },
+                    scales: {
+                        x: {
+                            grid: {
+                                display: false,
+                                drawBorder: false
+                            },
+                            ticks: {
+                                color: '#888888'
+                            }
+                        },
+                        y: {
+                            grid: {
+                                color: 'rgba(255, 255, 255, 0.05)',
+                                drawBorder: false
+                            },
+                            ticks: {
+                                color: '#888888',
+                                callback: function(value) {
+                                    return value + '万';
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+            
+            // 舆情来源分布图
+            const opinionSourceCtx = document.getElementById('opinionSourceChart').getContext('2d');
+            const opinionSourceChart = new Chart(opinionSourceCtx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['微博', '抖音', 'B站', '新闻网站', '其他'],
+                    datasets: [{
+                        data: [45, 25, 15, 10, 5],
+                        backgroundColor: [
+                            '#E31937',
+                            '#333333',
+                            '#444444',
+                            '#555555',
+                            '#666666'
+                        ],
+                        borderWidth: 0,
+                        hoverOffset: 4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    cutout: '70%',
+                    plugins: {
+                        legend: {
+                            position: 'bottom',
+                            labels: {
+                                color: '#CCCCCC',
+                                padding: 15,
+                                usePointStyle: true,
+                                pointStyle: 'circle'
+                            }
+                        }
+                    }
+                }
+            });
+            
+            // 情感倾向分析图
+            const sentimentAnalysisCtx = document.getElementById('sentimentAnalysisChart').getContext('2d');
+            const sentimentAnalysisChart = new Chart(sentimentAnalysisCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['爱国主义', '历史反思', '理性讨论', '民族主义', '负面情绪'],
+                    datasets: [{
+                        label: '占比(%)',
+                        data: [35, 25, 18, 12, 10],
+                        backgroundColor: [
+                            '#E31937',
+                            '#E3193780',
+                            '#E3193760',
+                            '#E3193740',
+                            '#E3193720'
+                        ],
+                        borderWidth: 0
+                    }]
+                },
+                options: {
+                    indexAxis: 'y',
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            display: false
+                        },
+                        tooltip: {
+                            backgroundColor: '#1A1A1A',
+                            titleColor: '#FFFFFF',
+                            bodyColor: '#CCCCCC',
+                            borderColor: '#E31937',
+                            borderWidth: 1,
+                            padding: 12,
+                            displayColors: false
+                        }
+                    },
+                    scales: {
+                        x: {
+                            grid: {
+                                display: false,
+                                drawBorder: false
+                            },
+                            ticks: {
+                                color: '#888888',
+                                callback: function(value) {
+                                    return value + '%';
+                                }
+                            },
+                            beginAtZero: true,
+                            max: 40
+                        },
+                        y: {
+                            grid: {
+                                display: false,
+                                drawBorder: false
+                            },
+                            ticks: {
+                                color: '#CCCCCC'
+                            }
+                        }
+                    }
+                }
+            });
+        }
+    </script>
+</body>
+</html>
